@@ -1,26 +1,26 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import { withRouter } from 'react-router-dom'
-import Webcam from 'react-webcam'
-import { loadModels, getFullFaceDescription } from './face'
+import React, {Component} from "react";
+import {Link} from "react-router-dom";
+import {withRouter} from "react-router-dom";
+import Webcam from "react-webcam";
+import {loadModels, getFullFaceDescription} from "./face";
 
 // Import face profile
 // const JSON_PROFILE = require('../descriptors/bnk48.json')
 
-const WIDTH = 420
-const HEIGHT = 420
-const inputSize = 160
-const neutralCat = require('../img/meh.jpg')
-const surprisedCat = require('../img/surprised.jpg')
-const happyCat = require('../img/happy.jpg')
-const angryCat = require('../img/angry.jpg')
-const sadCat = require('../img/sad.jpg')
-const home = require('../img/home.png')
+const WIDTH = 420;
+const HEIGHT = 420;
+const inputSize = 160;
+const neutralCat = require("../img/meh.jpg");
+const surprisedCat = require("../img/surprised.jpg");
+const happyCat = require("../img/happy.jpg");
+const angryCat = require("../img/angry.jpg");
+const sadCat = require("../img/sad.jpg");
+const home = require("../img/home.png");
 
 class VideoInput extends Component {
   constructor(props) {
-    super(props)
-    this.webcam = React.createRef()
+    super(props);
+    this.webcam = React.createRef();
     this.state = {
       fullDesc: null,
       // detections: null,
@@ -31,44 +31,44 @@ class VideoInput extends Component {
       surprised: 0,
       happy: 0,
       angry: 0,
-      sad: 0,
+      sad: 0
       // disgusted: 0,
-    }
+    };
   }
 
   componentWillMount = async () => {
-    await loadModels()
+    await loadModels();
     // this.setState({ faceMatcher: await createMatcher(JSON_PROFILE) })
-    this.setInputDevice()
-  }
+    this.setInputDevice();
+  };
 
   //===================CAMERA SETUP=================================
   setInputDevice = () => {
     navigator.mediaDevices.enumerateDevices().then(async devices => {
       let inputDevice = await devices.filter(
-        device => device.kind === 'videoinput'
-      )
+        device => device.kind === "videoinput"
+      );
       if (inputDevice.length < 2) {
         await this.setState({
-          facingMode: 'user',
-        })
+          facingMode: "user"
+        });
       } else {
         await this.setState({
-          facingMode: { exact: 'environment' },
-        })
+          facingMode: {exact: "environment"}
+        });
       }
-      this.startCapture()
-    })
-  }
+      this.startCapture();
+    });
+  };
 
   startCapture = () => {
     this.interval = setInterval(() => {
-      this.capture()
-    }, 150)
-  }
+      this.capture();
+    }, 150);
+  };
 
   componentWillUnmount() {
-    clearInterval(this.interval)
+    clearInterval(this.interval);
   }
 
   capture = async () => {
@@ -81,19 +81,19 @@ class VideoInput extends Component {
           if (!!fullDesc) {
             this.setState({
               detections: fullDesc.map(fd => fd.detection),
-              descriptors: fullDesc.map(fd => fd.descriptor),
-            })
+              descriptors: fullDesc.map(fd => fd.descriptor)
+            });
             this.setState({
               surprised: fullDesc[0].expressions.surprised + 0.05,
               happy: fullDesc[0].expressions.happy + 0.05,
               angry: fullDesc[0].expressions.angry + 0.05,
-              sad: fullDesc[0].expressions.sad + 0.05,
+              sad: fullDesc[0].expressions.sad + 0.05
 
               // disgusted: fullDesc[0].expressions.disgusted + 0.05,
-            })
-            console.log(fullDesc)
+            });
+            console.log(fullDesc);
           }
-        })
+        });
 
         // if (!!this.state.descriptors && !!this.state.faceMatcher) {
         //   let match = await this.state.descriptors.map(descriptor =>
@@ -103,51 +103,51 @@ class VideoInput extends Component {
         // }
       }
     } catch (error) {
-      console.error('womp, womp', error)
+      console.error("womp, womp", error);
     }
-  }
+  };
 
   //======================RENDER==============================
   render() {
-    const { detections, facingMode } = this.state
-    let videoConstraints = null
-    let camera = ''
-    let detected = ''
+    const {detections, facingMode} = this.state;
+    let videoConstraints = null;
+    let camera = "";
+    let detected = "";
 
     if (!!facingMode) {
       videoConstraints = {
         width: WIDTH,
         height: HEIGHT,
-        facingMode: facingMode,
-      }
-      if (facingMode === 'user') {
-        camera = 'Front'
+        facingMode: facingMode
+      };
+      if (facingMode === "user") {
+        camera = "Front";
       } else {
-        camera = 'Back'
+        camera = "Back";
       }
     }
 
     //===================GOT DETECTIONS=================================
-    let drawBox = null
+    let drawBox = null;
     if (!!detections) {
       drawBox = detections.map((detection, i) => {
-        let _H = detection.box.height
-        let _W = detection.box.width
-        let _X = detection.box._x
-        let _Y = detection.box._y
-        detected = 'detected'
+        let _H = detection.box.height;
+        let _W = detection.box.width;
+        let _X = detection.box._x;
+        let _Y = detection.box._y;
+        detected = "detected";
 
         return (
           <div key={i}>
             GOT DETECTIONS!
             <div
               style={{
-                position: 'absolute',
-                border: 'solid',
-                borderColor: 'blue',
+                position: "absolute",
+                border: "solid",
+                borderColor: "blue",
                 height: _H,
                 width: _W,
-                transform: `translate(${_X}px,${_Y}px)`,
+                transform: `translate(${_X}px,${_Y}px)`
               }}
             >
               {/* {!!match && !!match[i] ? (
@@ -167,8 +167,8 @@ class VideoInput extends Component {
               ) : null} */}
             </div>
           </div>
-        )
-      })
+        );
+      });
     }
 
     //===================SURPRISED=================================
@@ -179,17 +179,17 @@ class VideoInput extends Component {
           <ul className="go">
             <li>
               <Link to="/">
-                <img className={'emoji'} src={home} alt=""></img>
+                <img className={"emoji"} src={home} alt=""></img>
               </Link>
             </li>
           </ul>
           <div
             className="Camera"
             style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              backgroundColor: `yellow`,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              backgroundColor: `yellow`
             }}
           >
             <img
@@ -202,16 +202,16 @@ class VideoInput extends Component {
               style={{
                 width: WIDTH,
                 height: HEIGHT,
-                opacity: 0,
+                opacity: 0
               }}
             >
-              <div style={{ position: 'relative', width: WIDTH }}>
+              <div style={{position: "relative", width: WIDTH}}>
                 {!!videoConstraints ? (
                   <div>
                     <div
                       style={{
-                        position: 'absolute',
-                        backgroundColor: `yellow`,
+                        position: "absolute",
+                        backgroundColor: `yellow`
                       }}
                     >
                       <Webcam
@@ -230,7 +230,7 @@ class VideoInput extends Component {
             </div>
           </div>
         </div>
-      )
+      );
     }
 
     //===================ANGRY=================================
@@ -241,17 +241,17 @@ class VideoInput extends Component {
           <ul className="go">
             <li>
               <Link to="/">
-                <img className={'emoji'} src={home} alt=""></img>
+                <img className={"emoji"} src={home} alt=""></img>
               </Link>
             </li>
           </ul>
           <div
             className="Camera"
             style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              backgroundColor: `red`,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              backgroundColor: `red`
             }}
           >
             <img
@@ -264,15 +264,15 @@ class VideoInput extends Component {
               style={{
                 width: WIDTH,
                 height: HEIGHT,
-                opacity: 0,
+                opacity: 0
               }}
             >
-              <div style={{ position: 'relative', width: WIDTH }}>
+              <div style={{position: "relative", width: WIDTH}}>
                 {!!videoConstraints ? (
                   <div>
                     <div
                       style={{
-                        position: 'absolute',
+                        position: "absolute"
                       }}
                     >
                       <Webcam
@@ -291,7 +291,7 @@ class VideoInput extends Component {
             </div>
           </div>
         </div>
-      )
+      );
 
     //===================HAPPY=================================
     if (this.state.happy < 1.2 && this.state.happy > 0.4) {
@@ -301,17 +301,17 @@ class VideoInput extends Component {
           <ul className="go">
             <li>
               <Link to="/">
-                <img className={'emoji'} src={home} alt=""></img>
+                <img className={"emoji"} src={home} alt=""></img>
               </Link>
             </li>
           </ul>
           <div
             className="Camera"
             style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              backgroundColor: `cyan`,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              backgroundColor: `cyan`
             }}
           >
             <img
@@ -324,15 +324,15 @@ class VideoInput extends Component {
               style={{
                 width: WIDTH,
                 height: HEIGHT,
-                opacity: 0,
+                opacity: 0
               }}
             >
-              <div style={{ position: 'relative', width: WIDTH }}>
+              <div style={{position: "relative", width: WIDTH}}>
                 {!!videoConstraints ? (
                   <div>
                     <div
                       style={{
-                        position: 'absolute',
+                        position: "absolute"
                       }}
                     >
                       <Webcam
@@ -351,7 +351,7 @@ class VideoInput extends Component {
             </div>
           </div>
         </div>
-      )
+      );
     }
 
     //===================SAD=================================
@@ -362,17 +362,17 @@ class VideoInput extends Component {
           <ul className="go">
             <li>
               <Link to="/">
-                <img className={'emoji'} src={home} alt=""></img>
+                <img className={"emoji"} src={home} alt=""></img>
               </Link>
             </li>
           </ul>
           <div
             className="Camera"
             style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              backgroundColor: `DarkSlateGrey`,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              backgroundColor: `DarkSlateGrey`
             }}
           >
             <img
@@ -385,15 +385,15 @@ class VideoInput extends Component {
               style={{
                 width: WIDTH,
                 height: HEIGHT,
-                opacity: 0,
+                opacity: 0
               }}
             >
-              <div style={{ position: 'relative', width: WIDTH }}>
+              <div style={{position: "relative", width: WIDTH}}>
                 {!!videoConstraints ? (
                   <div>
                     <div
                       style={{
-                        position: 'absolute',
+                        position: "absolute"
                       }}
                     >
                       <Webcam
@@ -412,7 +412,7 @@ class VideoInput extends Component {
             </div>
           </div>
         </div>
-      )
+      );
     }
 
     //===================Meh=================================
@@ -422,17 +422,17 @@ class VideoInput extends Component {
         <ul className="go">
           <li>
             <Link to="/">
-              <img className={'emoji'} src={home} alt=""></img>
+              <img className={"emoji"} src={home} alt=""></img>
             </Link>
           </li>
         </ul>
         <div
           className="Camera"
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            backgroundColor: 'Linen',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            backgroundColor: "Linen"
           }}
         >
           <img
@@ -445,15 +445,15 @@ class VideoInput extends Component {
             style={{
               width: WIDTH,
               height: HEIGHT,
-              opacity: 0,
+              opacity: 0
             }}
           >
-            <div style={{ position: 'relative', width: WIDTH }}>
+            <div style={{position: "relative", width: WIDTH}}>
               {!!videoConstraints ? (
                 <div>
                   <div
                     style={{
-                      position: 'absolute',
+                      position: "absolute"
                     }}
                   >
                     <Webcam
@@ -472,8 +472,8 @@ class VideoInput extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default withRouter(VideoInput)
+export default withRouter(VideoInput);
