@@ -19,19 +19,20 @@ class Routes extends Component {
     const { isLoggedIn } = this.props;
 
     return (
-      <Switch>
+      //commented this out until we decide on the structure of our project.
+      // <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        {isLoggedIn && (
-          <Switch>
+        {/* <Route path="/login" component={Login} /> */}
+        {/* <Route path="/signup" component={Signup} /> */}
+        {/* {isLoggedIn && ( */}
+          {/* <Switch> */}
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={Home} />
-          </Switch>
-        )}
+            {/* <Route path="/home" component={Home} /> */}
+          {/* </Switch> */}
+        {/* )} */}
         {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
-      </Switch>
+        {/* <Route component={Login} /> */}
+      // </Switch>
     );
   }
 }
