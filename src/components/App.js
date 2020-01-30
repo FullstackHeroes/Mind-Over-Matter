@@ -7,9 +7,6 @@ function App() {
   return (
     <div className="App">
       <h1>Mind Over Matter</h1>
-      <NavBar />
-      {/* <Dashboard /> */}
-      <Routes />
     </div>
   );
 }
