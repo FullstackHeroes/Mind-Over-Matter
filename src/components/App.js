@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../images/logo.svg";
+import VideoInput from "./face/VideoInput";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         >
           Learn React
         </a>
+        <VideoInput />
       </header>
     </div>
   );
