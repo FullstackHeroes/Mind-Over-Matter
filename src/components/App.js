@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <h1>Mind Over Matter</h1>
       <NavBar />
-      <Dashboard />
+      {/* <Dashboard /> */}
       <Routes />
     </div>
   );

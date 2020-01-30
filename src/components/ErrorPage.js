@@ -6,7 +6,9 @@ const NotFound = () => (
     <center>
       <center>Oops! Page Not Found!</center>
       {/* <img src="/errorPage.jpg" /> will need this jpg file, commented out to prevent crashing*/}
-      <center><Link to="/">Return to Login Page</Link></center>
+      <center>
+        <Link to="/">Return to Login Page</Link>
+      </center>
     </center>
   </div>
 );

@@ -10,7 +10,7 @@ import store from "./store";
 ReactDOM.render(
   <Provider store={store}>
     {/* <Router history={history}> ~Should we choose to incorperate history this is what it looks like and where it goes.  */}
-    <Router >
+    <Router>
       <App />
     </Router>
   </Provider>,
