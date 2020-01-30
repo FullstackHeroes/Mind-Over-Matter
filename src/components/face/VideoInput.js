@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Webcam from "react-webcam";
-import {loadModels, getFullFaceDescription} from "../../utils/face";
+import {loadModels, getFaceDescr, sentimentAlgo} from "../../utils/face";
 
 const WIDTH = 420;
 const HEIGHT = 420;
@@ -60,23 +60,25 @@ class VideoInput extends Component {
   capture = async () => {
     try {
       if (!!this.webcam.current) {
-        await getFullFaceDescription(
-          this.webcam.current.getScreenshot(),
-          inputSize
-        ).then(fullDesc => {
-          if (!!fullDesc) {
-            this.setState({
-              detections: fullDesc.map(fd => fd.detection),
-              descriptors: fullDesc.map(fd => fd.descriptor),
-              surprised: fullDesc[0].expressions.surprised + 0.05,
-              happy: fullDesc[0].expressions.happy + 0.05,
-              angry: fullDesc[0].expressions.angry + 0.05,
-              sad: fullDesc[0].expressions.sad + 0.05
-            });
-            const desc = fullDesc[0];
-            console.log("FULL DESC -", this.state, desc, Object.keys(desc));
+        await getFaceDescr(this.webcam.current.getScreenshot(), inputSize).then(
+          fullDesc => {
+            if (!!fullDesc) {
+              this.setState({
+                detections: fullDesc.map(fd => fd.detection),
+                descriptors: fullDesc.map(fd => fd.descriptor),
+                surprised: fullDesc[0].expressions.surprised + 0.05,
+                happy: fullDesc[0].expressions.happy + 0.05,
+                angry: fullDesc[0].expressions.angry + 0.05,
+                sad: fullDesc[0].expressions.sad + 0.05
+              });
+              const desc = fullDesc[0],
+                screenScore = desc.detection._score,
+                expressions = desc.expressions,
+                fullScoreObj = sentimentAlgo(screenScore, expressions);
+              console.log("FINAL -", fullScoreObj);
+            }
           }
-        });
+        );
       }
     } catch (error) {
       console.error("WAHH --", error);
@@ -103,7 +105,7 @@ class VideoInput extends Component {
     //===================GOT DETECTIONS========================
     let drawBox = null;
     if (!!detections) {
-      drawBox = detections.map((detection, i) => {
+      drawBox = detections.map((detection, idx) => {
         let _H = detection.box.height;
         let _W = detection.box.width;
         let _X = detection.box._x;
@@ -111,7 +113,7 @@ class VideoInput extends Component {
         detected = "detected";
 
         return (
-          <div key={i}>
+          <div key={idx}>
             GOT DETECTIONS!
             <div
               style={{
@@ -129,13 +131,9 @@ class VideoInput extends Component {
     }
 
     //===================EMOTION===========================
-
     return (
       <div>
         <div className={detected}></div>
-        <ul className="go">
-          <li></li>
-        </ul>
         <div
           className="Camera"
           style={{
@@ -145,16 +143,11 @@ class VideoInput extends Component {
             backgroundColor: `yellow`
           }}
         >
-          <img
-            className="cat"
-            src="https://static3.depositphotos.com/1002188/167/i/450/depositphotos_1670284-stock-photo-smiley-face-on-ball.jpg"
-            alt=""
-          ></img>
           <div
             style={{
               width: WIDTH,
               height: HEIGHT,
-              opacity: 0
+              opacity: 10
             }}
           >
             <div style={{position: "relative", width: WIDTH}}>
