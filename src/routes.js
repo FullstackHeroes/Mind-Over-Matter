@@ -4,7 +4,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch } from "react-router-dom";
 import PropTypes from "prop-types";
-import { /*Login, Signup, */ Dashboard, Survey, Settings, Data } from "./components";
+import {
+  /*Login, Signup, */ Dashboard,
+  Survey,
+  Settings,
+  Data,
+  NotFound
+} from "./components";
 import { me } from "./store";
 // import Dashboard from "./components/Dashboard";
 
@@ -29,12 +35,13 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/mydata" component={Data} />
-            <Route path="/survey" component={Survey}  />
-            <Route path="/settings" component={Settings} /> 
+            <Route path="/survey" component={Survey} />
+            <Route path="/settings" component={Settings} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+        <Route exact path="/" component={Login} />
+        <Route path="*" component={NotFound} />
       </Switch>
     );
   }
