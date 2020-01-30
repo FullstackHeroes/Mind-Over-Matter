@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Data(props) {
+export default function CheckIn(props) {
   return (
     <div>
       <div></div>

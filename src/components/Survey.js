@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function survey(props) {
+export default function Survey(props) {
   return (
     <div>
       <div></div>
