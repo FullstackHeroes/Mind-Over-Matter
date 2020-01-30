@@ -4,8 +4,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch } from "react-router-dom";
 import PropTypes from "prop-types";
-import { /*Login, Signup, */ Home } from "./components";
+import { /*Login, Signup, */ Dashboard, Survey, Settings, Data } from "./components";
 import { me } from "./store";
+// import Dashboard from "./components/Dashboard";
 
 /**
  * COMPONENT
@@ -19,20 +20,22 @@ class Routes extends Component {
     const { isLoggedIn } = this.props;
 
     return (
-      //commented this out until we decide on the structure of our project.
-      // <Switch>
+      <Switch>
         {/* Routes placed here are available to all visitors */}
-        {/* <Route path="/login" component={Login} /> */}
-        {/* <Route path="/signup" component={Signup} /> */}
-        {/* {isLoggedIn && ( */}
-          {/* <Switch> */}
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        {isLoggedIn && (
+          <Switch>
             {/* Routes placed here are only available after logging in */}
-            {/* <Route path="/home" component={Home} /> */}
-          {/* </Switch> */}
-        {/* )} */}
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/mydata" component={Data} />
+            <Route path="/survey" component={Survey}  />
+            <Route path="/settings" component={Settings} /> 
+          </Switch>
+        )}
         {/* Displays our Login component as a fallback */}
-        {/* <Route component={Login} /> */}
-      // </Switch>
+        <Route component={Login} />
+      </Switch>
     );
   }
 }
