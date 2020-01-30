@@ -11,8 +11,11 @@ class VideoInput extends Component {
     super(props);
     this.webcam = React.createRef();
     this.state = {
+      timeInterval: 5000,
       fullDesc: null,
       facingMode: null,
+      detections: null,
+      descriptors: null,
       surprised: 0,
       happy: 0,
       angry: 0,
@@ -47,7 +50,7 @@ class VideoInput extends Component {
   startCapture = () => {
     this.interval = setInterval(() => {
       this.capture();
-    }, 10000);
+    }, this.state.timeInterval);
   };
 
   componentWillUnmount() {
@@ -64,15 +67,14 @@ class VideoInput extends Component {
           if (!!fullDesc) {
             this.setState({
               detections: fullDesc.map(fd => fd.detection),
-              descriptors: fullDesc.map(fd => fd.descriptor)
-            });
-            this.setState({
+              descriptors: fullDesc.map(fd => fd.descriptor),
               surprised: fullDesc[0].expressions.surprised + 0.05,
               happy: fullDesc[0].expressions.happy + 0.05,
               angry: fullDesc[0].expressions.angry + 0.05,
               sad: fullDesc[0].expressions.sad + 0.05
             });
-            // console.log("FULL DESC -", fullDesc);
+            const desc = fullDesc[0];
+            console.log("FULL DESC -", this.state, desc, Object.keys(desc));
           }
         });
       }
