@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "./NavBar";
-import Home from "./Home";
+import Dashboard from "./Dashboard";
 import Routes from "../routes";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <h1>Mind Over Matter</h1>
       <NavBar />
-      <Home />
+      <Dashboard />
       <Routes />
     </div>
   );
