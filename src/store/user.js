@@ -1,22 +1,21 @@
-import axios from 'axios'
-
+import axios from "axios";
 
 /**
  * ACTION TYPES
  */
-const GET_USER = 'GET_USER'
-const REMOVE_USER = 'REMOVE_USER'
+const GET_USER = "GET_USER";
+const REMOVE_USER = "REMOVE_USER";
 
 /**
  * INITIAL STATE
  */
-const defaultUser = {}
+const defaultUser = {};
 
 /**
  * ACTION CREATORS
  */
-const getUser = user => ({type: GET_USER, user})
-const removeUser = () => ({type: REMOVE_USER})
+const getUser = user => ({ type: GET_USER, user });
+const removeUser = () => ({ type: REMOVE_USER });
 
 /**
  * THUNK CREATORS
@@ -24,36 +23,35 @@ const removeUser = () => ({type: REMOVE_USER})
 export const me = () => async dispatch => {
   try {
     //going to need some async here
-    dispatch(getUser(res.data || defaultUser))
+    dispatch(getUser(res.data || defaultUser));
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
-}
+};
 
 export const auth = (email, password, method) => async dispatch => {
-  let res
+  let res;
   try {
-       //going to need some async here
+    //going to need some async here
   } catch (authError) {
-    return dispatch(getUser({error: authError}))
+    return dispatch(getUser({ error: authError }));
   }
 
   try {
-    dispatch(getUser(res.data))
+    dispatch(getUser(res.data));
   } catch (dispatchOrHistoryErr) {
-    console.error(dispatchOrHistoryErr) //this is just a fancy way to label the error 
+    console.error(dispatchOrHistoryErr); //this is just a fancy way to label the error
   }
-}
+};
 
 export const logout = () => async dispatch => {
   try {
     //going to need some async here
-    dispatch(removeUser())
-  
+    dispatch(removeUser());
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
-}
+};
 
 /**
  * REDUCER
@@ -61,10 +59,10 @@ export const logout = () => async dispatch => {
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
-      return action.user
+      return action.user;
     case REMOVE_USER:
-      return defaultUser
+      return defaultUser;
     default:
-      return state
+      return state;
   }
 }

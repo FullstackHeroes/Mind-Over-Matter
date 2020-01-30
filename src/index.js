@@ -4,11 +4,15 @@ import "./ast/style.css";
 import App from "./components/App";
 import * as serviceWorker from "./ast/serviceWorker";
 import { Provider } from "react-redux";
+import { Router } from "react-router-dom";
 import store from "./store";
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    {/* <Router history={history}> ~Should we choose to incorperate history this is what it looks like and where it goes.  */}
+    <Router >
+      <App />
+    </Router>
   </Provider>,
   document.getElementById("root")
 );
