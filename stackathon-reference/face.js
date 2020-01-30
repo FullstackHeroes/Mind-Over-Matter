@@ -1,4 +1,4 @@
-import * as faceapi from '../../node_modules/face-api.js'
+import * as faceapi from 'face-api.js'
 
 // Load models and weights
 export async function loadModels() {

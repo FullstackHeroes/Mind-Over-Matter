@@ -1,5 +1,7 @@
 import React from "react";
-import logo from "../images/logo.svg";
+import NavBar from "./NavBar";
+import Dashboard from "./Dashboard";
+import Routes from "../routes";
 
 function App() {
   return (
