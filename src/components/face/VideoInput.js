@@ -47,7 +47,7 @@ class VideoInput extends Component {
   startCapture = () => {
     this.interval = setInterval(() => {
       this.capture();
-    }, 10000);
+    }, 5000);
   };
 
   componentWillUnmount() {
@@ -72,7 +72,7 @@ class VideoInput extends Component {
               angry: fullDesc[0].expressions.angry + 0.05,
               sad: fullDesc[0].expressions.sad + 0.05
             });
-            // console.log("FULL DESC -", fullDesc);
+            console.log("FULL DESC -", fullDesc);
           }
         });
       }
