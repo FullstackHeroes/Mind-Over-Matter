@@ -102,6 +102,7 @@ class VideoInput extends Component {
 
     //===================GOT DETECTIONS========================
     let drawBox = null;
+    console.log("detect -", detections);
     if (!!detections) {
       drawBox = detections.map((detection, idx) => {
         let _H = detection.box.height;
