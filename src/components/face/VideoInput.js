@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Webcam from "react-webcam";
-import { loadModels, getFullFaceDescription } from "../../utils/face";
+import { loadModels, getFaceDescr, sentimentAlgo } from "../../utils/faceBase";
 
 const WIDTH = 420;
 const HEIGHT = 420;
@@ -15,11 +15,7 @@ class VideoInput extends Component {
       fullDesc: null,
       facingMode: null,
       detections: null,
-      descriptors: null,
-      surprised: 0,
-      happy: 0,
-      angry: 0,
-      sad: 0
+      descriptors: null
     };
   }
 
@@ -31,18 +27,11 @@ class VideoInput extends Component {
   //======================CAMERA SETUP==============================
   setInputDevice = () => {
     navigator.mediaDevices.enumerateDevices().then(async devices => {
-      let inputDevice = await devices.filter(
-        device => device.kind === "videoinput"
-      );
-      if (inputDevice.length < 2) {
-        await this.setState({
-          facingMode: "user"
-        });
-      } else {
-        await this.setState({
-          facingMode: { exact: "environment" }
-        });
-      }
+      const videoDevs = devices.filter(device => device.kind === "videoinput");
+
+      if (videoDevs.length < 2) this.setState({ facingMode: "user" });
+      else this.setState({ facingMode: { exact: "environment" } });
+
       this.startCapture();
     });
   };
@@ -53,41 +42,38 @@ class VideoInput extends Component {
     }, this.state.timeInterval);
   };
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  capture = async () => {
+  capture = () => {
     try {
       if (!!this.webcam.current) {
-        await getFullFaceDescription(
-          this.webcam.current.getScreenshot(),
-          inputSize
-        ).then(fullDesc => {
-          if (!!fullDesc) {
-            this.setState({
-              detections: fullDesc.map(fd => fd.detection),
-              descriptors: fullDesc.map(fd => fd.descriptor),
-              surprised: fullDesc[0].expressions.surprised + 0.05,
-              happy: fullDesc[0].expressions.happy + 0.05,
-              angry: fullDesc[0].expressions.angry + 0.05,
-              sad: fullDesc[0].expressions.sad + 0.05
-            });
-            const desc = fullDesc[0];
-            console.log("FULL DESC -", this.state, desc, Object.keys(desc));
+        getFaceDescr(this.webcam.current.getScreenshot(), inputSize).then(
+          fullDesc => {
+            if (!!fullDesc && fullDesc.length) {
+              this.setState({
+                detections: fullDesc.map(fd => fd.detection),
+                descriptors: fullDesc.map(fd => fd.descriptor)
+              });
+
+              const desc = fullDesc[0],
+                screenScore = desc.detection._score,
+                expressions = desc.expressions,
+                fullScoreObj = sentimentAlgo(screenScore, expressions);
+              console.log("FINAL -", fullScoreObj);
+            } else console.error("WAHH -- no current detection");
           }
-        });
+        );
       }
     } catch (error) {
       console.error("WAHH --", error);
     }
   };
 
-  //======================RENDER============================
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   render() {
     const { detections, facingMode } = this.state;
     let videoConstraints = null;
-    let camera = "";
     let detected = "";
 
     if (!!facingMode) {
@@ -96,17 +82,13 @@ class VideoInput extends Component {
         height: HEIGHT,
         facingMode: facingMode
       };
-      if (facingMode === "user") {
-        camera = "Front";
-      } else {
-        camera = "Back";
-      }
     }
 
-    //===================GOT DETECTIONS========================
+    // DETECTION BOX CODE (POSSIBLY OPTIONAL)
     let drawBox = null;
+    // if (!!detections && detections.length) {
     if (!!detections) {
-      drawBox = detections.map((detection, i) => {
+      drawBox = detections.map((detection, idx) => {
         let _H = detection.box.height;
         let _W = detection.box.width;
         let _X = detection.box._x;
@@ -114,7 +96,7 @@ class VideoInput extends Component {
         detected = "detected";
 
         return (
-          <div key={i}>
+          <div key={idx}>
             GOT DETECTIONS!
             <div
               style={{
@@ -125,20 +107,16 @@ class VideoInput extends Component {
                 width: _W,
                 transform: `translate(${_X}px,${_Y}px)`
               }}
-            ></div>
+            />
           </div>
         );
       });
     }
 
     //===================EMOTION===========================
-
     return (
-      <div>
+      <div className="cameraFullDiv">
         <div className={detected}></div>
-        <ul className="go">
-          <li></li>
-        </ul>
         <div
           className="Camera"
           style={{
@@ -146,38 +124,28 @@ class VideoInput extends Component {
             flexDirection: "column",
             alignItems: "center",
             backgroundColor: `yellow`
-          }}
-        >
-          <img
-            className="cat"
-            src="https://static3.depositphotos.com/1002188/167/i/450/depositphotos_1670284-stock-photo-smiley-face-on-ball.jpg"
-            alt=""
-          ></img>
+          }}>
           <div
             style={{
               width: WIDTH,
               height: HEIGHT,
-              opacity: 0
-            }}
-          >
+              opacity: 1
+            }}>
             <div style={{ position: "relative", width: WIDTH }}>
               {!!videoConstraints ? (
-                <div>
-                  <div
-                    style={{
-                      position: "absolute",
-                      backgroundColor: `yellow`
-                    }}
-                  >
-                    <Webcam
-                      audio={false}
-                      width={WIDTH}
-                      height={HEIGHT}
-                      ref={this.webcam}
-                      screenshotFormat="image/jpeg"
-                      videoConstraints={videoConstraints}
-                    />
-                  </div>
+                <div
+                  style={{
+                    position: "absolute",
+                    backgroundColor: `yellow`
+                  }}>
+                  <Webcam
+                    audio={false}
+                    width={WIDTH}
+                    height={HEIGHT}
+                    ref={this.webcam}
+                    screenshotFormat="image/jpeg"
+                    videoConstraints={videoConstraints}
+                  />
                 </div>
               ) : null}
               {!!drawBox ? drawBox : null}

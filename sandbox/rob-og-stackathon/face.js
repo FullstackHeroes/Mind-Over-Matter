@@ -28,6 +28,5 @@ export async function getFullFaceDescription(blob, inputSize = 512) {
     .withFaceLandmarks(useTinyModel)
     .withFaceDescriptors()
     .withFaceExpressions();
-
   return fullDesc;
 }
