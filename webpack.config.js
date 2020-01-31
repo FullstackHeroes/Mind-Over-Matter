@@ -1,16 +1,18 @@
 const isDev = process.env.NODE_ENV === "development";
+const { resolve } = require("path");
 
 module.exports = {
   mode: isDev ? "development" : "production",
   entry: ["@babel/polyfill", "./src/index.js"],
   output: {
-    path: __dirname,
-    filename: "./public/bundle.js"
+    filename: "bundle.js",
+    path: resolve(__dirname, "public")
   },
   resolve: {
     extensions: [".js", ".jsx"]
   },
   devtool: "source-map",
+  context: __dirname,
   watchOptions: {
     ignored: /node_modules/
   },
@@ -28,6 +30,10 @@ module.exports = {
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
+      },
+      {
+        test: /\.json$/,
+        use: ["json-loader"]
       }
     ]
   },

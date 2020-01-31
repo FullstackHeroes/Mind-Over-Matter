@@ -30,7 +30,7 @@ const createApp = () => {
 
   // REMAINING REQUESTS WITH EXTENSION (.js, .css, etc.) SEND 404
   app.use((req, res, next) => {
-    console.log("req path -", req.path);
+    console.log("req path -", path.extname(req.path), req.path);
     if (path.extname(req.path).length) {
       const err = new Error("Not found");
       err.status = 404;
