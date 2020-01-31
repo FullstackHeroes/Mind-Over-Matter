@@ -100,9 +100,8 @@ class VideoInput extends Component {
       else camera = "Back";
     }
 
-    //===================GOT DETECTIONS========================
+    // DETECTION BOX CODE (POSSIBLY OPTIONAL)
     let drawBox = null;
-    console.log("detect -", detections);
     if (!!detections) {
       drawBox = detections.map((detection, idx) => {
         let _H = detection.box.height;
@@ -128,10 +127,11 @@ class VideoInput extends Component {
         );
       });
     }
+    console.log("detect -", detections, drawBox);
 
     //===================EMOTION===========================
     return (
-      <div>
+      <div className="cameraFullDiv">
         <div className={detected}></div>
         <div
           className="Camera"
@@ -146,7 +146,7 @@ class VideoInput extends Component {
             style={{
               width: WIDTH,
               height: HEIGHT,
-              opacity: 10
+              opacity: 1
             }}
           >
             <div style={{position: "relative", width: WIDTH}}>

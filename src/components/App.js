@@ -1,25 +1,15 @@
 import React from "react";
 import VideoInput from "./face/VideoInput";
-
+import logo from "../images/logo.svg";
 
 function App() {
   return (
-    <div className="App">
-
-      <h1>Mind Over Matter</h1>
-      <header className="App-header">
-        <p>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <VideoInput />
-      </header>
+    <div className="appFullDiv">
+      <h1>
+        Mind Over Matter
+        <img src={logo} className="appLogo" alt="logo" />
+      </h1>
+      <VideoInput />
     </div>
   );
 }
