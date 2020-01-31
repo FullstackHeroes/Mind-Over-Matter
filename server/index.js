@@ -47,7 +47,7 @@ const createApp = () => {
 
   // ERROR HANDLING ENDWARE
   app.use((err, req, res, next) => {
-    console.error("OH NO SERVER --", err, err.stack);
+    console.error("OH NO SERVER --", err.stack);
     res.status(err.status || 500).send(err.message || "Server Error");
   });
 };
