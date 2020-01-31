@@ -68,7 +68,7 @@ class VideoInput extends Component {
                 expressions = desc.expressions,
                 fullScoreObj = sentimentAlgo(screenScore, expressions);
 
-              //======================LOCAL STORAGE MANAGEMENT==============================
+              //======================LOCAL STORAGE MANAGEMENT=============================
               localStorage.setItem("snapshot", JSON.stringify(fullScoreObj));
               let currSnapshot = JSON.parse(localStorage.getItem("snapshot"));
               currSnapshot.timeStamp = Date();
