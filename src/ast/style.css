@@ -13,7 +13,7 @@ code {
     monospace;
 }
 
-/* ------------------ APP ELEMENT ------------------ */
+/* ------------------ MAIN APP ELEMENT ------------------ */
 .appFullDiv {
   text-align: center;
   background-color: #282c34;
@@ -44,8 +44,4 @@ code {
   to {
     transform: rotate(360deg);
   }
-}
-
-.App-link {
-  color: #61dafb;
 }

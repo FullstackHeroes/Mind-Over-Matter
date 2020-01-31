@@ -11,7 +11,7 @@
           "min": -0.7125408074435067
         }
       },
-      {"name": "dense0/conv0/bias", "shape": [32], "dtype": "float32"},
+      { "name": "dense0/conv0/bias", "shape": [32], "dtype": "float32" },
       {
         "name": "dense0/conv1/depthwise_filter",
         "shape": [3, 3, 32, 1],
@@ -32,7 +32,7 @@
           "min": -1.408283629136927
         }
       },
-      {"name": "dense0/conv1/bias", "shape": [32], "dtype": "float32"},
+      { "name": "dense0/conv1/bias", "shape": [32], "dtype": "float32" },
       {
         "name": "dense0/conv2/depthwise_filter",
         "shape": [3, 3, 32, 1],
@@ -53,7 +53,7 @@
           "min": -1.1760330368490781
         }
       },
-      {"name": "dense0/conv2/bias", "shape": [32], "dtype": "float32"},
+      { "name": "dense0/conv2/bias", "shape": [32], "dtype": "float32" },
       {
         "name": "dense0/conv3/depthwise_filter",
         "shape": [3, 3, 32, 1],
@@ -74,7 +74,7 @@
           "min": -1.4658355236053466
         }
       },
-      {"name": "dense0/conv3/bias", "shape": [32], "dtype": "float32"},
+      { "name": "dense0/conv3/bias", "shape": [32], "dtype": "float32" },
       {
         "name": "dense1/conv0/depthwise_filter",
         "shape": [3, 3, 32, 1],
@@ -95,7 +95,7 @@
           "min": -1.1825207009035
         }
       },
-      {"name": "dense1/conv0/bias", "shape": [64], "dtype": "float32"},
+      { "name": "dense1/conv0/bias", "shape": [64], "dtype": "float32" },
       {
         "name": "dense1/conv1/depthwise_filter",
         "shape": [3, 3, 64, 1],
@@ -116,7 +116,7 @@
           "min": -1.3888743227603388
         }
       },
-      {"name": "dense1/conv1/bias", "shape": [64], "dtype": "float32"},
+      { "name": "dense1/conv1/bias", "shape": [64], "dtype": "float32" },
       {
         "name": "dense1/conv2/depthwise_filter",
         "shape": [3, 3, 64, 1],
@@ -137,7 +137,7 @@
           "min": -1.3809977185492421
         }
       },
-      {"name": "dense1/conv2/bias", "shape": [64], "dtype": "float32"},
+      { "name": "dense1/conv2/bias", "shape": [64], "dtype": "float32" },
       {
         "name": "dense1/conv3/depthwise_filter",
         "shape": [3, 3, 64, 1],
@@ -158,7 +158,7 @@
           "min": -1.2689350820055196
         }
       },
-      {"name": "dense1/conv3/bias", "shape": [64], "dtype": "float32"},
+      { "name": "dense1/conv3/bias", "shape": [64], "dtype": "float32" },
       {
         "name": "dense2/conv0/depthwise_filter",
         "shape": [3, 3, 64, 1],
@@ -179,7 +179,7 @@
           "min": -1.4382873053644218
         }
       },
-      {"name": "dense2/conv0/bias", "shape": [128], "dtype": "float32"},
+      { "name": "dense2/conv0/bias", "shape": [128], "dtype": "float32" },
       {
         "name": "dense2/conv1/depthwise_filter",
         "shape": [3, 3, 128, 1],
@@ -200,7 +200,7 @@
           "min": -1.3377028750438316
         }
       },
-      {"name": "dense2/conv1/bias", "shape": [128], "dtype": "float32"},
+      { "name": "dense2/conv1/bias", "shape": [128], "dtype": "float32" },
       {
         "name": "dense2/conv2/depthwise_filter",
         "shape": [3, 3, 128, 1],
@@ -221,7 +221,7 @@
           "min": -1.4524792311238306
         }
       },
-      {"name": "dense2/conv2/bias", "shape": [128], "dtype": "float32"},
+      { "name": "dense2/conv2/bias", "shape": [128], "dtype": "float32" },
       {
         "name": "dense2/conv3/depthwise_filter",
         "shape": [3, 3, 128, 1],
@@ -242,7 +242,7 @@
           "min": -1.642779421338848
         }
       },
-      {"name": "dense2/conv3/bias", "shape": [128], "dtype": "float32"},
+      { "name": "dense2/conv3/bias", "shape": [128], "dtype": "float32" },
       {
         "name": "dense3/conv0/depthwise_filter",
         "shape": [3, 3, 128, 1],
@@ -263,7 +263,7 @@
           "min": -1.3914075318504784
         }
       },
-      {"name": "dense3/conv0/bias", "shape": [256], "dtype": "float32"},
+      { "name": "dense3/conv0/bias", "shape": [256], "dtype": "float32" },
       {
         "name": "dense3/conv1/depthwise_filter",
         "shape": [3, 3, 256, 1],
@@ -284,7 +284,7 @@
           "min": -2.484975093018775
         }
       },
-      {"name": "dense3/conv1/bias", "shape": [256], "dtype": "float32"},
+      { "name": "dense3/conv1/bias", "shape": [256], "dtype": "float32" },
       {
         "name": "dense3/conv2/depthwise_filter",
         "shape": [3, 3, 256, 1],
@@ -305,7 +305,7 @@
           "min": -1.7062364914838006
         }
       },
-      {"name": "dense3/conv2/bias", "shape": [256], "dtype": "float32"},
+      { "name": "dense3/conv2/bias", "shape": [256], "dtype": "float32" },
       {
         "name": "dense3/conv3/depthwise_filter",
         "shape": [3, 3, 256, 1],
@@ -326,7 +326,7 @@
           "min": -1.9003422162112067
         }
       },
-      {"name": "dense3/conv3/bias", "shape": [256], "dtype": "float32"},
+      { "name": "dense3/conv3/bias", "shape": [256], "dtype": "float32" },
       {
         "name": "fc/weights",
         "shape": [256, 7],
@@ -337,7 +337,7 @@
           "min": -0.7203072066400565
         }
       },
-      {"name": "fc/bias", "shape": [7], "dtype": "float32"}
+      { "name": "fc/bias", "shape": [7], "dtype": "float32" }
     ],
     "paths": ["face_expression_model-shard1"]
   }

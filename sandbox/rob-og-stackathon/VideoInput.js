@@ -1,8 +1,8 @@
-import React, {Component} from "react";
-import {Link} from "react-router-dom";
-import {withRouter} from "react-router-dom";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import Webcam from "react-webcam";
-import {loadModels, getFullFaceDescription} from "./face";
+import { loadModels, getFullFaceDescription } from "./face";
 
 // Import face profile
 // const JSON_PROFILE = require('../descriptors/bnk48.json')
@@ -54,7 +54,7 @@ class VideoInput extends Component {
         });
       } else {
         await this.setState({
-          facingMode: {exact: "environment"}
+          facingMode: { exact: "environment" }
         });
       }
       this.startCapture();
@@ -109,7 +109,7 @@ class VideoInput extends Component {
 
   //======================RENDER==============================
   render() {
-    const {detections, facingMode} = this.state;
+    const { detections, facingMode } = this.state;
     let videoConstraints = null;
     let camera = "";
     let detected = "";
@@ -148,8 +148,7 @@ class VideoInput extends Component {
                 height: _H,
                 width: _W,
                 transform: `translate(${_X}px,${_Y}px)`
-              }}
-            >
+              }}>
               {/* {!!match && !!match[i] ? (
                 <p
                   style={{
@@ -190,8 +189,7 @@ class VideoInput extends Component {
               flexDirection: "column",
               alignItems: "center",
               backgroundColor: `yellow`
-            }}
-          >
+            }}>
             <img
               className="cat"
               src={surprisedCat}
@@ -203,17 +201,15 @@ class VideoInput extends Component {
                 width: WIDTH,
                 height: HEIGHT,
                 opacity: 0
-              }}
-            >
-              <div style={{position: "relative", width: WIDTH}}>
+              }}>
+              <div style={{ position: "relative", width: WIDTH }}>
                 {!!videoConstraints ? (
                   <div>
                     <div
                       style={{
                         position: "absolute",
                         backgroundColor: `yellow`
-                      }}
-                    >
+                      }}>
                       <Webcam
                         audio={false}
                         width={WIDTH}
@@ -252,8 +248,7 @@ class VideoInput extends Component {
               flexDirection: "column",
               alignItems: "center",
               backgroundColor: `red`
-            }}
-          >
+            }}>
             <img
               className="cat"
               src={angryCat}
@@ -265,16 +260,14 @@ class VideoInput extends Component {
                 width: WIDTH,
                 height: HEIGHT,
                 opacity: 0
-              }}
-            >
-              <div style={{position: "relative", width: WIDTH}}>
+              }}>
+              <div style={{ position: "relative", width: WIDTH }}>
                 {!!videoConstraints ? (
                   <div>
                     <div
                       style={{
                         position: "absolute"
-                      }}
-                    >
+                      }}>
                       <Webcam
                         audio={false}
                         width={WIDTH}
@@ -312,8 +305,7 @@ class VideoInput extends Component {
               flexDirection: "column",
               alignItems: "center",
               backgroundColor: `cyan`
-            }}
-          >
+            }}>
             <img
               className="cat"
               src={happyCat}
@@ -325,16 +317,14 @@ class VideoInput extends Component {
                 width: WIDTH,
                 height: HEIGHT,
                 opacity: 0
-              }}
-            >
-              <div style={{position: "relative", width: WIDTH}}>
+              }}>
+              <div style={{ position: "relative", width: WIDTH }}>
                 {!!videoConstraints ? (
                   <div>
                     <div
                       style={{
                         position: "absolute"
-                      }}
-                    >
+                      }}>
                       <Webcam
                         audio={false}
                         width={WIDTH}
@@ -373,8 +363,7 @@ class VideoInput extends Component {
               flexDirection: "column",
               alignItems: "center",
               backgroundColor: `DarkSlateGrey`
-            }}
-          >
+            }}>
             <img
               className="cat"
               src={sadCat}
@@ -386,16 +375,14 @@ class VideoInput extends Component {
                 width: WIDTH,
                 height: HEIGHT,
                 opacity: 0
-              }}
-            >
-              <div style={{position: "relative", width: WIDTH}}>
+              }}>
+              <div style={{ position: "relative", width: WIDTH }}>
                 {!!videoConstraints ? (
                   <div>
                     <div
                       style={{
                         position: "absolute"
-                      }}
-                    >
+                      }}>
                       <Webcam
                         audio={false}
                         width={WIDTH}
@@ -433,8 +420,7 @@ class VideoInput extends Component {
             flexDirection: "column",
             alignItems: "center",
             backgroundColor: "Linen"
-          }}
-        >
+          }}>
           <img
             className="cat"
             src={neutralCat}
@@ -446,16 +432,14 @@ class VideoInput extends Component {
               width: WIDTH,
               height: HEIGHT,
               opacity: 0
-            }}
-          >
-            <div style={{position: "relative", width: WIDTH}}>
+            }}>
+            <div style={{ position: "relative", width: WIDTH }}>
               {!!videoConstraints ? (
                 <div>
                   <div
                     style={{
                       position: "absolute"
-                    }}
-                  >
+                    }}>
                     <Webcam
                       audio={false}
                       width={WIDTH}

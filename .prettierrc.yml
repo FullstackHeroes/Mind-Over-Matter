@@ -4,6 +4,6 @@
 # semi: false # true
 singleQuote: false # true
 # trailingComma: none # none | es5 | all
-bracketSpacing: false # true
-# jsxBracketSameLine: false # false
+bracketSpacing: true # false
+jsxBracketSameLine: true # false
 # arrowParens: avoid # avoid | always

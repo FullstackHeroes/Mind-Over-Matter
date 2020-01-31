@@ -10,8 +10,8 @@ const GET_USER = "GET_USER";
 const REMOVE_USER = "REMOVE_USER";
 
 // ACTION CREATORS
-export const getUser = user => ({type: GET_USER, user});
-export const removeUser = () => ({type: REMOVE_USER});
+export const getUser = user => ({ type: GET_USER, user });
+export const removeUser = () => ({ type: REMOVE_USER });
 
 // THUNKY THUNKS
 export const me = () => async dispatch => {
@@ -28,7 +28,7 @@ export const auth = (email, password, method) => async dispatch => {
   try {
     // res = await axios.post(`/auth/${method}`, {email, password})
   } catch (authError) {
-    return dispatch(getUser({error: authError}));
+    return dispatch(getUser({ error: authError }));
   }
 
   try {

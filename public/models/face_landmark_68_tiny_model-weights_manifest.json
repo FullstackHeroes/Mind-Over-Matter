@@ -55,13 +55,13 @@
         "name": "dense0/conv2/depthwise_filter",
         "shape": [3, 3, 32, 1],
         "dtype": "float32",
-        "quantization": {"dtype": "uint8", "scale": 1, "min": 0}
+        "quantization": { "dtype": "uint8", "scale": 1, "min": 0 }
       },
       {
         "name": "dense0/conv2/pointwise_filter",
         "shape": [1, 1, 32, 32],
         "dtype": "float32",
-        "quantization": {"dtype": "uint8", "scale": 1, "min": 0}
+        "quantization": { "dtype": "uint8", "scale": 1, "min": 0 }
       },
       {
         "name": "dense0/conv2/bias",

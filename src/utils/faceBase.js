@@ -64,7 +64,7 @@ let sentimentSpectrum = {
 
 export const sentimentAlgo = (screenScore, expressions) => {
   let totalMultScore = 0;
-  const fullScoreObj = {trueScore: 0};
+  const fullScoreObj = { trueScore: 0 };
 
   // CALCULATING THE TOTAL MULTIPLER SCORE TO BE ABLE TO CALC WEIGHTED AVERAGE
   for (let sent in sentimentSpectrum) {
@@ -77,7 +77,7 @@ export const sentimentAlgo = (screenScore, expressions) => {
 
     // IGNORING ASSORTEDARRAY KEY FROM INITIAL EXPRESSIONS INPUT
     if (!isNaN(rawFaceScore)) {
-      // ADDING INDIVIDUAL SENTIMENT SCORE INTO FINAL OBJECT, NOT MULTIPLIER IMPACT
+      // ADDING INDIVIDUAL SENTIMENT SCORE INTO FINAL OBJECT, NO MULTIPLIER IMPACT
       rawFaceScore *= spectrumInput.spectrumScore;
       fullScoreObj[sent] = rawFaceScore;
 

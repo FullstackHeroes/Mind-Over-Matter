@@ -125,7 +125,7 @@
       {
         "dtype": "int32",
         "shape": [],
-        "quantization": {"scale": 1, "min": 3, "dtype": "uint8"},
+        "quantization": { "scale": 1, "min": 3, "dtype": "uint8" },
         "name": "Prediction/BoxPredictor_0/stack_1/2"
       },
       {
@@ -141,7 +141,7 @@
       {
         "dtype": "int32",
         "shape": [3],
-        "quantization": {"scale": 1, "min": -1, "dtype": "uint8"},
+        "quantization": { "scale": 1, "min": -1, "dtype": "uint8" },
         "name": "Postprocessor/Slice/size"
       },
       {
@@ -167,7 +167,7 @@
       {
         "dtype": "int32",
         "shape": [],
-        "quantization": {"scale": 1, "min": 3072, "dtype": "uint8"},
+        "quantization": { "scale": 1, "min": 3072, "dtype": "uint8" },
         "name": "Prediction/BoxPredictor_0/stack_1/1"
       },
       {
@@ -193,7 +193,7 @@
       {
         "dtype": "int32",
         "shape": [],
-        "quantization": {"scale": 1, "min": 1536, "dtype": "uint8"},
+        "quantization": { "scale": 1, "min": 1536, "dtype": "uint8" },
         "name": "Prediction/BoxPredictor_1/stack_1/1"
       },
       {
@@ -219,7 +219,7 @@
       {
         "dtype": "int32",
         "shape": [],
-        "quantization": {"scale": 1, "min": 384, "dtype": "uint8"},
+        "quantization": { "scale": 1, "min": 384, "dtype": "uint8" },
         "name": "Prediction/BoxPredictor_2/stack_1/1"
       },
       {
@@ -245,7 +245,7 @@
       {
         "dtype": "int32",
         "shape": [],
-        "quantization": {"scale": 1, "min": 96, "dtype": "uint8"},
+        "quantization": { "scale": 1, "min": 96, "dtype": "uint8" },
         "name": "Prediction/BoxPredictor_3/stack_1/1"
       },
       {
@@ -271,7 +271,7 @@
       {
         "dtype": "int32",
         "shape": [],
-        "quantization": {"scale": 1, "min": 24, "dtype": "uint8"},
+        "quantization": { "scale": 1, "min": 24, "dtype": "uint8" },
         "name": "Prediction/BoxPredictor_4/stack_1/1"
       },
       {
@@ -307,13 +307,13 @@
       {
         "dtype": "int32",
         "shape": [2],
-        "quantization": {"scale": 1, "min": 512, "dtype": "uint8"},
+        "quantization": { "scale": 1, "min": 512, "dtype": "uint8" },
         "name": "Preprocessor/ResizeImage/size"
       },
       {
         "dtype": "float32",
         "shape": [],
-        "quantization": {"scale": 1, "min": 1, "dtype": "uint8"},
+        "quantization": { "scale": 1, "min": 1, "dtype": "uint8" },
         "name": "Preprocessor/sub/y"
       },
       {
@@ -1409,40 +1409,40 @@
       {
         "dtype": "int32",
         "shape": [],
-        "quantization": {"scale": 1, "min": 6, "dtype": "uint8"},
+        "quantization": { "scale": 1, "min": 6, "dtype": "uint8" },
         "name": "Prediction/BoxPredictor_5/stack_1/1"
       },
       {
         "dtype": "int32",
         "shape": [],
-        "quantization": {"scale": 1, "min": 1, "dtype": "uint8"},
+        "quantization": { "scale": 1, "min": 1, "dtype": "uint8" },
         "name": "concat_1/axis"
       },
       {
         "dtype": "int32",
         "shape": [1],
-        "quantization": {"scale": 1, "min": 0, "dtype": "uint8"},
+        "quantization": { "scale": 1, "min": 0, "dtype": "uint8" },
         "name": "Prediction/BoxPredictor_0/strided_slice/stack"
       },
       {
         "dtype": "int32",
         "shape": [1],
-        "quantization": {"scale": 1, "min": 1, "dtype": "uint8"},
+        "quantization": { "scale": 1, "min": 1, "dtype": "uint8" },
         "name": "Prediction/BoxPredictor_0/strided_slice/stack_1"
       },
       {
         "dtype": "int32",
         "shape": [],
-        "quantization": {"scale": 1, "min": 5118, "dtype": "uint8"},
+        "quantization": { "scale": 1, "min": 5118, "dtype": "uint8" },
         "name": "Postprocessor/stack/1"
       },
       {
         "dtype": "int32",
         "shape": [],
-        "quantization": {"scale": 1, "min": 4, "dtype": "uint8"},
+        "quantization": { "scale": 1, "min": 4, "dtype": "uint8" },
         "name": "Prediction/BoxPredictor_0/stack/3"
       },
-      {"dtype": "float32", "shape": [1, 5118, 4], "name": "Output/extra_dim"}
+      { "dtype": "float32", "shape": [1, 5118, 4], "name": "Output/extra_dim" }
     ]
   }
 ]
