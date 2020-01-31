@@ -1,7 +1,8 @@
 const path = require("path");
 const compression = require("compression");
 const express = require("express");
-const volleyball = require("volleyball");
+// const volleyball = require("volleyball");
+const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const db = require("./db");
 const PORT = process.env.PORT || 3000;
@@ -11,7 +12,8 @@ module.exports = app;
 // SET UP OUR APPLICATION SERVER
 const createApp = () => {
   // LOGGING MIDDLEWARE
-  app.use(volleyball);
+  // app.use(volleyball);
+  app.use(morgan("dev"));
 
   // BODY PARSING
   app.use(express.json());
@@ -28,6 +30,7 @@ const createApp = () => {
 
   // REMAINING REQUESTS WITH EXTENSION (.js, .css, etc.) SEND 404
   app.use((req, res, next) => {
+    console.log("req path -", req.path);
     if (path.extname(req.path).length) {
       const err = new Error("Not found");
       err.status = 404;
@@ -38,13 +41,13 @@ const createApp = () => {
   });
 
   // SEND INDEX.HTML FILE FROM PUBLIC
-  app.get("*", (req, res) => {
+  app.use("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
   // ERROR HANDLING ENDWARE
   app.use((err, req, res, next) => {
-    console.error(err.stack);
+    console.error("OH NO SERVER --", err, err.stack);
     res.status(err.status || 500).send(err.message || "Server Error");
   });
 };
