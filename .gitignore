@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
+public/bundle.js
+public/bundle.js.map
 
 # testing
 /coverage
@@ -24,3 +26,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 face-api.min.js
+
+# /sandbox

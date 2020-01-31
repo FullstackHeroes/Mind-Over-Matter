@@ -1,0 +1,8 @@
+{
+  "root": true,
+  "extends": ["prettier", "prettier/react"],
+  "rules": {
+    "semi": 0
+  },
+  "parser": "babel-eslint"
+}
