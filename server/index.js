@@ -1,29 +1,71 @@
-const app = express();
 const path = require("path");
+const compression = require("compression");
 const express = require("express");
 const volleyball = require("volleyball");
 const bodyParser = require("body-parser");
-// const db = require('./db') //for when db is up
+const db = require("./db");
+const PORT = process.env.PORT || 3000;
+const app = express();
 module.exports = app;
 
-app.use(volleyball);
+// SET UP OUR APPLICATION SERVER
+const createApp = () => {
+  // LOGGING MIDDLEWARE
+  app.use(volleyball);
 
-app.use(express.json());
-app.use(bodyParser.json());
-app.use(
-  bodyParser.urlencoded({
-    extended: true
-  })
-);
-app.use(express.urlencoded({ extended: true }));
+  // BODY PARSING
+  // app.use(express.json());
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use("/api", require("./api"));
+  app.use(compression());
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
-});
+  // ROUTING
+  app.use("/api", require("./api"));
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(err.status || 500).send(err.message || "Server Error");
-});
+  // STATIC FILE-SERVING MIDDLEWARE
+  app.use(express.static(path.join(__dirname, "..", "public")));
+
+  // REMAINING REQUESTS WITH EXTENSION (.js, .css, etc.) SEND 404
+  app.use((req, res, next) => {
+    if (path.extname(req.path).length) {
+      const err = new Error("Not found");
+      err.status = 404;
+      next(err);
+    } else {
+      next();
+    }
+  });
+
+  // SEND INDEX.HTML FILE FROM PUBLIC
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
+  });
+
+  // ERROR HANDLING ENDWARE
+  app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(err.status || 500).send(err.message || "Server Error");
+  });
+};
+
+// FUNCTION TO LAUNCH SERVER
+const startListening = () => {
+  const server = app.listen(PORT, () =>
+    console.log(`Listening it up on port ${PORT}`)
+  );
+};
+
+// SYNCING DATABASE
+// const syncDB = () => db.sync()
+
+// TRIGGER THE START APP / DATABASE FUNCTION
+const startApp = async () => {
+  // await syncDB();
+  await createApp();
+  await startListening();
+};
+
+// ALLOWS RUNNING DIRECTLY FROM COMMAND LINE
+if (require.main === module) startApp();
+else createApp();
