@@ -1,7 +1,6 @@
 const path = require("path");
 const compression = require("compression");
 const express = require("express");
-// const volleyball = require("volleyball");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const db = require("./db");
@@ -12,7 +11,6 @@ module.exports = app;
 // SET UP OUR APPLICATION SERVER
 const createApp = () => {
   // LOGGING MIDDLEWARE
-  // app.use(volleyball);
   app.use(morgan("dev"));
 
   // BODY PARSING
@@ -20,6 +18,7 @@ const createApp = () => {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
 
+  // COMPRESSION MIDDLEWARE
   app.use(compression());
 
   // ROUTING
@@ -30,7 +29,8 @@ const createApp = () => {
 
   // REMAINING REQUESTS WITH EXTENSION (.js, .css, etc.) SEND 404
   app.use((req, res, next) => {
-    if (path.extname(req.path).length) {
+    const extension = path.extname(req.path);
+    if (extension.length && extension !== ".json") {
       console.log("req path NO GOOD -", path.extname(req.path), req.path);
       const err = new Error("Not found");
       err.status = 404;
