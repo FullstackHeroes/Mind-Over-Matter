@@ -26,12 +26,12 @@ const createApp = () => {
   app.use("/api", require("./api"));
 
   // STATIC FILE-SERVING MIDDLEWARE
-  app.use(express.static(path.join(__dirname, "..", "public")));
+  app.use(express.static(path.join(__dirname, "../public")));
 
   // REMAINING REQUESTS WITH EXTENSION (.js, .css, etc.) SEND 404
   app.use((req, res, next) => {
-    console.log("req path -", path.extname(req.path), req.path);
     if (path.extname(req.path).length) {
+      console.log("req path NO GOOD -", path.extname(req.path), req.path);
       const err = new Error("Not found");
       err.status = 404;
       next(err);

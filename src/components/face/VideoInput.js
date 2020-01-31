@@ -117,42 +117,42 @@ class VideoInput extends Component {
     return (
       <div className="cameraFullDiv">
         <div className={detected}></div>
-        <div
+        {/* <div
           className="Camera"
           style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             backgroundColor: `yellow`
+          }}> */}
+        <div
+          style={{
+            width: WIDTH,
+            height: HEIGHT,
+            opacity: 1
           }}>
-          <div
-            style={{
-              width: WIDTH,
-              height: HEIGHT,
-              opacity: 1
-            }}>
-            <div style={{ position: "relative", width: WIDTH }}>
-              {!!videoConstraints ? (
-                <div
-                  style={{
-                    position: "absolute",
-                    backgroundColor: `yellow`
-                  }}>
-                  <Webcam
-                    audio={false}
-                    width={WIDTH}
-                    height={HEIGHT}
-                    ref={this.webcam}
-                    screenshotFormat="image/jpeg"
-                    videoConstraints={videoConstraints}
-                  />
-                </div>
-              ) : null}
-              {!!drawBox ? drawBox : null}
-            </div>
+          <div style={{ position: "relative", width: WIDTH }}>
+            {!!videoConstraints ? (
+              <div
+                style={{
+                  position: "absolute",
+                  backgroundColor: `yellow`
+                }}>
+                <Webcam
+                  audio={false}
+                  width={WIDTH}
+                  height={HEIGHT}
+                  ref={this.webcam}
+                  screenshotFormat="image/jpeg"
+                  videoConstraints={videoConstraints}
+                />
+              </div>
+            ) : null}
+            {!!drawBox ? drawBox : null}
           </div>
         </div>
       </div>
+      // </div>
     );
   }
 }
