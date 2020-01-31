@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-module.exports = User
+module.exports = User;
 
 const User = Sequelize.define("User", {
   email: {
@@ -34,3 +34,5 @@ const User = Sequelize.define("User", {
     type: Sequelize.STRING
   }
 });
+
+//we are going to need password storage and salting below
