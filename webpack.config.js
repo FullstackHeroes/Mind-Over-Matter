@@ -25,15 +25,15 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|svg)$/,
-        use: ["file-loader"]
+        loader: ["file-loader"]
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        loader: ["style-loader", "css-loader"]
       },
       {
         test: /\.json$/,
-        use: ["json-loader"]
+        loader: "json-loader"
       }
     ]
   },
