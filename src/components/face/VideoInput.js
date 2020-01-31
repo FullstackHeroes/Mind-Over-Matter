@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Webcam from "react-webcam";
-import {loadModels, getFaceDescr, sentimentAlgo} from "../../utils/face";
+import {loadModels, getFaceDescr, sentimentAlgo} from "../../utils/faceBase";
 
 const WIDTH = 420;
 const HEIGHT = 420;
@@ -31,10 +31,8 @@ class VideoInput extends Component {
   //======================CAMERA SETUP==============================
   setInputDevice = () => {
     navigator.mediaDevices.enumerateDevices().then(async devices => {
-      let inputDevice = await devices.filter(
-        device => device.kind === "videoinput"
-      );
-      if (inputDevice.length < 2) {
+      const videoDevs = devices.filter(device => device.kind === "videoinput");
+      if (videoDevs.length < 2) {
         await this.setState({
           facingMode: "user"
         });
