@@ -57,6 +57,13 @@ class VideoInput extends Component {
                 screenScore = desc.detection._score,
                 expressions = desc.expressions,
                 fullScoreObj = sentimentAlgo(screenScore, expressions);
+
+              //======================LOCAL STORAGE MANAGEMENT==============================
+              localStorage.setItem("snapshot", JSON.stringify(fullScoreObj));
+              let currSnapshot = JSON.parse(localStorage.getItem("snapshot"));
+              currSnapshot.timeStamp = Date();
+              localStorage.setItem("snapshot", JSON.stringify(currSnapshot));
+
               console.log("FINAL -", fullScoreObj);
             } else console.error("WAHH -- no current detection");
           }
