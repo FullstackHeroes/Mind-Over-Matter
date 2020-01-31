@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import Webcam from "react-webcam";
-import { loadModels, getFullFaceDescription } from "../../utils/face";
+import React, {Component} from 'react';
+import Webcam from 'react-webcam';
+import {loadModels, getFullFaceDescription} from '../../utils/face';
 
 const WIDTH = 420;
 const HEIGHT = 420;
@@ -11,15 +11,13 @@ class VideoInput extends Component {
     super(props);
     this.webcam = React.createRef();
     this.state = {
-      timeInterval: 5000,
-      fullDesc: null,
-      facingMode: null,
-      detections: null,
+      timeInterval: 10000,
+      // fullDesc: null,
+      // facingMode: null,
+      // detections: null,
       descriptors: null,
-      surprised: 0,
-      happy: 0,
-      angry: 0,
-      sad: 0
+      expressions: null,
+      timeCaptured: null
     };
   }
 
@@ -28,19 +26,29 @@ class VideoInput extends Component {
     this.setInputDevice();
   };
 
+  //========================LOCAL STORAGE CONTROL====================
+  saveToLocalStorage(state) {
+    try {
+      const serializedState = JSON.stringify(state);
+      localStorage.setItem('state', serializedState);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   //======================CAMERA SETUP==============================
   setInputDevice = () => {
     navigator.mediaDevices.enumerateDevices().then(async devices => {
       let inputDevice = await devices.filter(
-        device => device.kind === "videoinput"
+        device => device.kind === 'videoinput'
       );
       if (inputDevice.length < 2) {
         await this.setState({
-          facingMode: "user"
+          facingMode: 'user'
         });
       } else {
         await this.setState({
-          facingMode: { exact: "environment" }
+          facingMode: {exact: 'environment'}
         });
       }
       this.startCapture();
@@ -68,27 +76,26 @@ class VideoInput extends Component {
             this.setState({
               detections: fullDesc.map(fd => fd.detection),
               descriptors: fullDesc.map(fd => fd.descriptor),
-              surprised: fullDesc[0].expressions.surprised + 0.05,
-              happy: fullDesc[0].expressions.happy + 0.05,
-              angry: fullDesc[0].expressions.angry + 0.05,
-              sad: fullDesc[0].expressions.sad + 0.05
+              expressions: fullDesc[0].expressions,
+              timeCaptured: new Date()
             });
             const desc = fullDesc[0];
-            console.log("FULL DESC -", this.state, desc, Object.keys(desc));
+            console.log(new Date());
+            this.saveToLocalStorage(this.state);
           }
         });
       }
     } catch (error) {
-      console.error("WAHH --", error);
+      console.error('WAHH --', error);
     }
   };
 
   //======================RENDER============================
   render() {
-    const { detections, facingMode } = this.state;
+    const {detections, facingMode} = this.state;
     let videoConstraints = null;
-    let camera = "";
-    let detected = "";
+    let camera = '';
+    let detected = '';
 
     if (!!facingMode) {
       videoConstraints = {
@@ -96,10 +103,10 @@ class VideoInput extends Component {
         height: HEIGHT,
         facingMode: facingMode
       };
-      if (facingMode === "user") {
-        camera = "Front";
+      if (facingMode === 'user') {
+        camera = 'Front';
       } else {
-        camera = "Back";
+        camera = 'Back';
       }
     }
 
@@ -111,16 +118,16 @@ class VideoInput extends Component {
         let _W = detection.box.width;
         let _X = detection.box._x;
         let _Y = detection.box._y;
-        detected = "detected";
+        detected = 'detected';
 
         return (
           <div key={i}>
             GOT DETECTIONS!
             <div
               style={{
-                position: "absolute",
-                border: "solid",
-                borderColor: "blue",
+                position: 'absolute',
+                border: 'solid',
+                borderColor: 'blue',
                 height: _H,
                 width: _W,
                 transform: `translate(${_X}px,${_Y}px)`
@@ -142,9 +149,9 @@ class VideoInput extends Component {
         <div
           className="Camera"
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
             backgroundColor: `yellow`
           }}
         >
@@ -160,12 +167,12 @@ class VideoInput extends Component {
               opacity: 0
             }}
           >
-            <div style={{ position: "relative", width: WIDTH }}>
+            <div style={{position: 'relative', width: WIDTH}}>
               {!!videoConstraints ? (
                 <div>
                   <div
                     style={{
-                      position: "absolute",
+                      position: 'absolute',
                       backgroundColor: `yellow`
                     }}
                   >
