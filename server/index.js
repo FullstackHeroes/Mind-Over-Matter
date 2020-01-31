@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const db = require("./db");
 const PORT = process.env.PORT || 3000;
 const app = express();
+
 module.exports = app;
 
 // SET UP OUR APPLICATION SERVER
@@ -30,8 +31,7 @@ const createApp = () => {
   // REMAINING REQUESTS WITH EXTENSION (.js, .css, etc.) SEND 404
   app.use((req, res, next) => {
     const extension = path.extname(req.path);
-    if (extension.length && extension !== ".json") {
-      console.log("req path NO GOOD -", path.extname(req.path), req.path);
+    if (extension.length) {
       const err = new Error("Not found");
       err.status = 404;
       next(err);
