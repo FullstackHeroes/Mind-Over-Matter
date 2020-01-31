@@ -4,7 +4,7 @@ module.exports = {
   mode: isDev ? "development" : "production",
   entry: [
     "@babel/polyfill", // enables async-await
-    "./client/index.js"
+    "./src/index.js"
   ],
   output: {
     path: __dirname,
@@ -23,6 +23,14 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: "babel-loader"
+      },
+      {
+        test: /\.(png|jpg|svg)$/,
+        use: ["file-loader"]
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"]
       }
     ]
   }
