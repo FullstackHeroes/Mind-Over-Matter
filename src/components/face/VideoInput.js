@@ -24,6 +24,16 @@ class VideoInput extends Component {
     this.setInputDevice();
   };
 
+  //========================LOCAL STORAGE CONTROL====================
+  saveToLocalStorage(state) {
+    try {
+      const serializedState = JSON.stringify(state);
+      localStorage.setItem("state", serializedState);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   //======================CAMERA SETUP==============================
   setInputDevice = () => {
     navigator.mediaDevices.enumerateDevices().then(async devices => {
