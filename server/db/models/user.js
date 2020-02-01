@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
-module.exports = User;
+const { db } = require("../db");
 
-const User = Sequelize.define("User", {
+const User = db.define("user", {
   email: {
     type: Sequelize.STRING,
     unique: true,
@@ -35,4 +35,5 @@ const User = Sequelize.define("User", {
   }
 });
 
+module.exports = User;
 //we are going to need password storage and salting below
