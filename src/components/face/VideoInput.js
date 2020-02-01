@@ -32,7 +32,6 @@ class VideoInput extends Component {
       currSnapshot.push(snapshot);
       localStorage.setItem("snapshots", JSON.stringify(currSnapshot));
     } else {
-      // snapshot = [snapshot];
       localStorage.setItem("snapshots", JSON.stringify([snapshot]));
     }
   };
