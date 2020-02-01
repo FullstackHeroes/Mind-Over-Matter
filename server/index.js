@@ -60,11 +60,11 @@ const startListening = () => {
 };
 
 // SYNCING DATABASE
-// const syncDB = () => db.sync()
+const syncDB = () => db.sync();
 
 // TRIGGER THE START APP / DATABASE FUNCTION
 const startApp = async () => {
-  // await syncDB();
+  await syncDB();
   await createApp();
   await startListening();
 };
