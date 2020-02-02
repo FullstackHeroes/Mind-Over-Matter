@@ -18,9 +18,9 @@ router.post("/", async function(req, res, next) {
       'INSERT INTO users (email,"firstName","lastName",password) VALUES($1,$2,$3,$4)',
       [req.body.email, req.body.firstName, req.body.lastName, req.body.password]
     );
-    return res.JSON(result.rows[0]);
+    res.JSON(result.rows[0]);
   } catch (err) {
-    return next(err);
+    next(err);
   }
 });
 
@@ -41,9 +41,9 @@ router.patch("/:id", async function(req, res, next) {
       'UPDATE users SET email=$1, "firstName"=$2, "lastName"=$3 WHERE id=$4 RETURNING *',
       [req.body.email, req.body.firstName, req.body.lastName, req.params.id]
     );
-    return res.json(result.rows[0]);
+    res.json(result.rows[0]);
   } catch (err) {
-    return next(err);
+    next(err);
   }
 });
 
@@ -55,7 +55,7 @@ router.delete("/:id", async function(req, res, next) {
     ]);
     res.JSON({ message: "Deleted" });
   } catch (err) {
-    return next(err);
+    next(err);
   }
 });
 
