@@ -11,7 +11,7 @@ class VideoInput extends Component {
     super(props);
     this.webcam = React.createRef();
     this.state = {
-      timeInterval: 5000,
+      timeInterval: 10000,
       fullDesc: null,
       facingMode: null,
       detections: null,
@@ -22,6 +22,18 @@ class VideoInput extends Component {
   componentWillMount = async () => {
     await loadModels();
     this.setInputDevice();
+  };
+
+  //======================LOCAL STORAGE MANAGER==============================
+  appendLocalStorage = snapshot => {
+    snapshot.timeStamp = Date();
+    if (localStorage.getItem("snapshots")) {
+      let currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
+      currSnapshot.push(snapshot);
+      localStorage.setItem("snapshots", JSON.stringify(currSnapshot));
+    } else {
+      localStorage.setItem("snapshots", JSON.stringify([snapshot]));
+    }
   };
 
   //======================CAMERA SETUP==============================
@@ -57,11 +69,9 @@ class VideoInput extends Component {
                 screenScore = desc.detection._score,
                 expressions = desc.expressions,
                 fullScoreObj = sentimentAlgo(screenScore, expressions);
-              //======================LOCAL STORAGE MANAGEMENT==============================
-              localStorage.setItem("snapshot", JSON.stringify(fullScoreObj));
-              let currSnapshot = JSON.parse(localStorage.getItem("snapshot"));
-              currSnapshot.timeStamp = Date();
-              localStorage.setItem("snapshot", JSON.stringify(currSnapshot));
+
+              //======================APPENDING LOCAL STORAGE==============================
+              this.appendLocalStorage(fullScoreObj);
 
               console.log("FINAL -", fullScoreObj);
             } else console.error("WAHH -- no current detection");
