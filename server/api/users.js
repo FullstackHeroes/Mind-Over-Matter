@@ -38,7 +38,7 @@ router.get("/:id", async (req, res, next) => {
 router.patch("/:id", async function(req, res, next) {
   try {
     const result = await db.query(
-      "UPDATE users SET email=$1, firstName=$2, lastName=$3 WHERE id=$4 RETURNING *",
+      'UPDATE users SET email=$1, "firstName"=$2, "lastName"=$3 WHERE id=$4 RETURNING *',
       [req.body.email, req.body.firstName, req.body.lastName, req.params.id]
     );
     return res.json(result.rows[0]);
