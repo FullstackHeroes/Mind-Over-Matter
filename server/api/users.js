@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const db = require("../db");
-const { User } = require("../db/models");
 
 //WHEN WE BULD IN SECURITY THIS WILL BE ADMIN ONLY.
 router.get("/", async (req, res, next) => {
@@ -12,6 +11,19 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.post("/", async function(req, res, next) {
+  try {
+    console.log(req.body);
+    const result = await db.query(
+      'INSERT INTO users (email,"firstName","lastName",password) VALUES($1,$2,$3,$4)',
+      [req.body.email, req.body.firstName, req.body.lastName, req.body.password]
+    );
+    return res.JSON(result.rows[0]);
+  } catch (err) {
+    return next(err);
+  }
+});
+
 //SECURITY ON THIS ROUTE WILL BE SELF OR ADMIN
 router.get("/:id", async (req, res, next) => {
   try {
@@ -20,24 +32,6 @@ router.get("/:id", async (req, res, next) => {
     res.JSON(user.rows[0]);
   } catch (error) {
     next(error);
-  }
-});
-
-router.post("/", async function(req, res, next) {
-  try {
-    const result = await db.query(
-      "INSERT INTO users (email,firstName,lastName,password) VALUES ($1,$2,$3,$4,$5) RETURNING *",
-      [
-        req.body.email,
-        req.body.firstName,
-        req.body.lastName,
-        req.body.password,
-        req.params.id
-      ]
-    );
-    return res.JSON(result.rows[0]);
-  } catch (err) {
-    return next(err);
   }
 });
 
