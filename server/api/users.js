@@ -13,15 +13,35 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", async function(req, res, next) {
   try {
-    const result = await db.query(
-      `INSERT INTO users (email, firstName, lastName, password), VALUES (${req.body.email}, ${req.body.firstName}, ${req.body.lastName}, ${req.body.password})`
-    );
     console.log(req.body);
+    console.log(new Date().getTime());
+    const result = await db.query(
+      `INSERT INTO users (email,"firstName","lastName",password, "createdAt") VALUES(${1},${2},${3},${4}, ${5})`,
+      [
+        req.body.email,
+        req.body.firstName,
+        req.body.lastName,
+        req.body.password,
+        new Date().getTime()
+      ]
+    );
     res.JSON(result.rows[0]);
   } catch (err) {
     next(err);
   }
 });
+
+// router.post("/", async function(req, res, next) {
+//   try {
+//     console.log(req.body);
+//     const result = await db.query(
+//       `INSERT INTO users (email, "firstName", "lastName", password), VALUES (${req.body.email}, ${req.body.firstName}, ${req.body.lastName}, ${req.body.password})`
+//     );
+//     res.JSON(result.rows[0]);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 //SECURITY ON THIS ROUTE WILL BE SELF OR ADMIN
 router.get("/:id", async (req, res, next) => {
