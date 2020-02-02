@@ -5,36 +5,47 @@ const { User } = require("../db/models");
 //WHEN WE BULD IN SECURITY THIS WILL BE ADMIN ONLY.
 router.get("/", async (req, res, next) => {
   try {
-    const users = await db.query("SELECT * FROM users WHERE id = $1", [id]);
-    res.send(users.rows[0]);
+    const users = await db.query("SELECT * FROM users");
+    res.JSON(users.rows[0]);
   } catch (error) {
     next(error);
   }
-});
-
-router.get("/:id", async (req, res) => {
-  const { id } = req.params;
-  const user = await db.query("SELECT * FROM users WHERE id = $1", [id]);
-  res.send(user.rows[0]);
 });
 
 //SECURITY ON THIS ROUTE WILL BE SELF OR ADMIN
 router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { rows } = await db.query("SELECT * FROM users WHERE id = $1", [id]);
-    res.send(rows[0]);
+    const user = await db.query("SELECT * FROM users WHERE id = $1", [id]);
+    res.JSON(user.rows[0]);
   } catch (error) {
     next(error);
   }
 });
 
-// router.delete("/:id", async (req, res, next) => {
-//   try {
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+router.post("/", async function(req, res, next) {
+  try {
+    const result = await db.query(
+      "INSERT INTO users (name,type) VALUES ($1,$2) RETURNING *",
+      [req.body.name, req.body.type]
+    );
+    return res.JSON(result.rows[0]);
+  } catch (err) {
+    return next(err);
+  }
+});
+
+//SECURITY ON THIS WILL BE SELF OR ADMIN
+router.delete("/:id", async function(req, res, next) {
+  try {
+    const user = await db.query("DELETE FROM users WHERE id=$1", [
+      req.params.id
+    ]);
+    res.JSON({ message: "Deleted" });
+  } catch (err) {
+    return next(err);
+  }
+});
 
 module.exports = router;
 
