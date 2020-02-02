@@ -2,33 +2,76 @@ const router = require("express").Router();
 const db = require("../db");
 const { User } = require("../db/models");
 
-app.get("/:id", (req, res, next) => {
-  db.query("SELECT * FROM users WHERE id = $1", [req.params.id], (err, res) => {
-    if (err) {
-      return next(err);
-    }
-    res.send(res.rows[0]);
-  });
-});
-
 //WHEN WE BULD IN SECURITY THIS WILL BE ADMIN ONLY.
 router.get("/", async (req, res, next) => {
   try {
-    const users = await User;
+    const users = await db.query("SELECT * FROM users WHERE id = $1", [id]);
+    res.send(users.rows[0]);
   } catch (error) {
     next(error);
   }
+});
+
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  const user = await db.query("SELECT * FROM users WHERE id = $1", [id]);
+  res.send(user.rows[0]);
 });
 
 //SECURITY ON THIS ROUTE WILL BE SELF OR ADMIN
-router.delete("/:id", async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
+    const { id } = req.params;
+    const { rows } = await db.query("SELECT * FROM users WHERE id = $1", [id]);
+    res.send(rows[0]);
   } catch (error) {
     next(error);
   }
 });
 
+// router.delete("/:id", async (req, res, next) => {
+//   try {
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
 module.exports = router;
+
+// router.post("/", async function(req, res, next) {
+//   try {
+//     const result = await db.query(
+//       "INSERT INTO fishes (name,type) VALUES ($1,$2) RETURNING *",
+//       [req.body.name, req.body.type]
+//     );
+//     return res.json(result.rows[0]);
+//   } catch (err) {
+//     return next(err);
+//   }
+// });
+
+// router.patch("/:id", async function(req, res, next) {
+//   try {
+//     const result = await db.query(
+//       "UPDATE fishes SET name=$1, type=$2 WHERE id=$3 RETURNING *",
+//       [req.body.name, req.body.type, req.params.id]
+//     );
+//     return res.json(result.rows[0]);
+//   } catch (err) {
+//     return next(err);
+//   }
+// });
+
+// router.delete("/:id", async function(req, res, next) {
+//   try {
+//     const result = await db.query("DELETE FROM fishes WHERE id=$1", [
+//       req.params.id
+//     ]);
+//     return res.json({ message: "Deleted" });
+//   } catch (err) {
+//     return next(err);
+//   }
+// });
 
 // const router = require('express').Router()
 // const {isAdmin, isSelfOrAdmin} = require('./routProtection')
