@@ -11,19 +11,11 @@ const User = db.define("user", {
       isEmail: true
     }
   },
-  firstName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+  first_name: {
+    type: Sequelize.STRING
   },
-  lastName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+  last_name: {
+    type: Sequelize.STRING
   },
   password: {
     type: Sequelize.STRING
