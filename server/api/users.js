@@ -15,8 +15,7 @@ router.post("/", async function(req, res, next) {
   try {
     const { email, firstName, lastName, password } = req.body;
     const result = await db.query(
-      `INSERT INTO users (email,first_name,last_name,password)` +
-        ` VALUES('${email}','${firstName}','${lastName}','${password}')`
+      `INSERT INTO users (email,first_name,last_name,password) VALUES('${email}','${firstName}','${lastName}','${password}')`
     );
     // res.JSON(result.rows[0]);
     console.log("result:", result);
