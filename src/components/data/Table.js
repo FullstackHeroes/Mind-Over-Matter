@@ -23,6 +23,7 @@ class Table extends Component {
         <table className="tableElement">
           <thead>
             <tr className="tableHeader">
+              <th className="tableHeaderRow">Normal Score</th>
               <th className="tableHeaderRow">True Score</th>
               <th className="tableHeaderRow">Screen Score</th>
               <th className="tableHeaderRow">Happy</th>
@@ -38,7 +39,7 @@ class Table extends Component {
           <tbody>
             {fullScoreObj
               ? fullScoreObj
-                  .slice(0, 10)
+                  .slice(-10)
                   .reverse()
                   .map((score, idx) => <TableRow key={idx} score={score} />)
               : null}
