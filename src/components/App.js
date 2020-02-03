@@ -1,15 +1,14 @@
 import React from "react";
+
+// IMPORTING COMPONENTS
 import VideoInput from "./face/VideoInput";
 import Table from "./data/Table";
-import logo from "../images/logo.svg";
+import NavBar from "./global/NavBar";
 
 function App() {
   return (
     <div className="appFullDiv">
-      <h1>
-        Mind Over Matter
-        <img src={logo} className="appLogo" alt="logo" />
-      </h1>
+      <NavBar />
       <div className="appInsideDiv">
         <VideoInput />
         <Table />
