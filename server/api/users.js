@@ -13,23 +13,40 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", async function(req, res, next) {
   try {
-    console.log(req.body);
-    console.log(new Date().getTime());
+    const { email, firstName, lastName, password } = req.body;
     const result = await db.query(
-      `INSERT INTO users (email,"firstName","lastName",password, "createdAt") VALUES(${1},${2},${3},${4}, ${5})`,
-      [
-        req.body.email,
-        req.body.firstName,
-        req.body.lastName,
-        req.body.password,
-        new Date().getTime()
-      ]
+      `INSERT INTO users (email,first_name,last_name,password)` +
+        ` VALUES('${email}','${firstName}','${lastName}','${password}')`
     );
-    res.JSON(result.rows[0]);
+    // res.JSON(result.rows[0]);
+    console.log("result:", result);
   } catch (err) {
     next(err);
   }
 });
+
+pool.query(
+  'INSERT INTO users (email,"firstName","lastName",password) VALUES ($1, $2, $3, $4)',
+  [req.body.email, req.body.firstName, req.body.lastName, req.body.password],
+  (error, results) => {
+    if (error) {
+      next(error);
+    }
+    response.status(201).send(`User added with ID: ${result.insertId}`);
+  }
+);
+//
+
+// pool.query(
+//   'INSERT INTO users (email,"firstName","lastName",password) VALUES ($1, $2)',
+//   [req.body.email, req.body.firstName, req.body.lastName, req.body.password],
+//   (error, results) => {
+//     if (error) {
+//       next(error);
+//     }
+//     response.status(201).send(`User added with ID: ${result.insertId}`);
+//   }
+// );
 
 // router.post("/", async function(req, res, next) {
 //   try {
@@ -47,7 +64,7 @@ router.post("/", async function(req, res, next) {
 router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const user = await db.query("SELECT * FROM users WHERE id = $1", [id]);
+    const user = await db.query(`SELECT * FROM users WHERE id = ${id}`);
     res.JSON(user.rows[0]);
   } catch (error) {
     next(error);
