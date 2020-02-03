@@ -14,18 +14,6 @@ code {
 }
 
 /* ------------------ MAIN APP ELEMENT ------------------ */
-.appFullDiv {
-  text-align: center;
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
 .appLogo {
   height: 7vmin;
   pointer-events: none;
@@ -44,4 +32,31 @@ code {
   to {
     transform: rotate(360deg);
   }
+}
+
+.appFullDiv {
+  text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.appInsideDiv {
+  display: flex;
+  justify-content: space-evenly;
+  width: 60%;
+}
+
+/* ------------------ TABLE ELEMENT ------------------ */
+.tableHeaderRow {
+  font-size: 17px;
+}
+
+.tableDataRow {
+  font-size: 17px;
 }

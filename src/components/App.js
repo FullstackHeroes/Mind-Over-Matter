@@ -1,5 +1,6 @@
 import React from "react";
 import VideoInput from "./face/VideoInput";
+import Table from "./data/Table";
 import logo from "../images/logo.svg";
 
 function App() {
@@ -9,7 +10,10 @@ function App() {
         Mind Over Matter
         <img src={logo} className="appLogo" alt="logo" />
       </h1>
-      <VideoInput />
+      <div className="appInsideDiv">
+        <VideoInput />
+        <Table />
+      </div>
     </div>
   );
 }
