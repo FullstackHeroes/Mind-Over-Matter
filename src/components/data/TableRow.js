@@ -3,16 +3,19 @@ import { connect } from "react-redux";
 
 class TableRow extends Component {
   render() {
+    const { score } = this.props,
+      decimal = 3;
+
     return (
-      <tr>
-        <td className="tableDataRow">One</td>
-        <td className="tableDataRow">Two</td>
-        <td className="tableDataRow">Three</td>
-        <td className="tableDataRow">Four</td>
-        <td className="tableDataRow">Five</td>
-        <td className="tableDataRow">Six</td>
-        <td className="tableDataRow">Seven</td>
-        <td className="tableDataRow">Eight</td>
+      <tr className="tableData">
+        <td className="tableDataRow">{score.trueScore.toFixed(decimal)}</td>
+        <td className="tableDataRow">{score.happy.toFixed(decimal)}</td>
+        <td className="tableDataRow">{score.surprised.toFixed(decimal)}</td>
+        <td className="tableDataRow">{score.neutral.toFixed(decimal)}</td>
+        <td className="tableDataRow">{score.disgusted.toFixed(decimal)}</td>
+        <td className="tableDataRow">{score.fearful.toFixed(decimal)}</td>
+        <td className="tableDataRow">{score.angry.toFixed(decimal)}</td>
+        <td className="tableDataRow">{score.sad.toFixed(decimal)}</td>
       </tr>
     );
   }

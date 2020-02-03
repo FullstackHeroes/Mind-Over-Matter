@@ -53,10 +53,37 @@ code {
 }
 
 /* ------------------ TABLE ELEMENT ------------------ */
+.tableFullDiv {
+  display: flex;
+  justify-content: space-evenly;
+  width: 80%;
+  padding: 0 15px;
+}
+
+.tableHeader {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .tableHeaderRow {
   font-size: 17px;
+  background-color: white;
+  border-style: solid;
+  border-color: black;
+  color: black;
+  border-width: 1px;
+  width: 100px;
+}
+
+.tableData {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .tableDataRow {
   font-size: 17px;
+  width: 100px;
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;
 }

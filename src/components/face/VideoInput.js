@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Webcam from "react-webcam";
 import { loadModels, getFaceDescr, sentimentAlgo } from "../../utils/faceBase";
+import { getLSScoreObj } from "../../store";
 
 const WIDTH = 420;
 const HEIGHT = 420;
@@ -11,7 +13,7 @@ class VideoInput extends Component {
     super(props);
     this.webcam = React.createRef();
     this.state = {
-      timeInterval: 10000,
+      timeInterval: 5000,
       fullDesc: null,
       facingMode: null,
       detections: null,
@@ -24,19 +26,21 @@ class VideoInput extends Component {
     this.setInputDevice();
   };
 
-  //======================LOCAL STORAGE MANAGER==============================
+  //===================LOCAL STORAGE MANAGER======================
   appendLocalStorage = snapshot => {
     snapshot.timeStamp = Date();
     if (localStorage.getItem("snapshots")) {
-      let currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
+      const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
       currSnapshot.push(snapshot);
       localStorage.setItem("snapshots", JSON.stringify(currSnapshot));
+      this.props.getLSScoreObj(currSnapshot);
     } else {
       localStorage.setItem("snapshots", JSON.stringify([snapshot]));
+      this.props.getLSScoreObj([snapshot]);
     }
   };
 
-  //======================CAMERA SETUP==============================
+  //======================CAMERA SETUP============================
   setInputDevice = () => {
     navigator.mediaDevices.enumerateDevices().then(async devices => {
       const videoDevs = devices.filter(device => device.kind === "videoinput");
@@ -72,8 +76,6 @@ class VideoInput extends Component {
 
               //======================APPENDING LOCAL STORAGE==============================
               this.appendLocalStorage(fullScoreObj);
-
-              console.log("FINAL -", fullScoreObj);
             } else console.error("WAHH -- no current detection");
           }
         );
@@ -173,4 +175,10 @@ class VideoInput extends Component {
   }
 }
 
-export default VideoInput;
+const mapDispatchToProps = dispatch => {
+  return {
+    getLSScoreObj: LSData => dispatch(getLSScoreObj(LSData))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(VideoInput);

@@ -1,11 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { getLSScoreObj } from "../../store";
 import TableRow from "./TableRow";
 
 class Table extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.getLSScoreObj();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { fullScoreObj } = this.props;
+    if (fullScoreObj.length !== prevProps.fullScoreObj.length) {
+      this.props.getLSScoreObj();
+    }
+  }
 
   render() {
+    const { fullScoreObj } = this.props;
+
     return (
       <div className="tableFullDiv">
         <table className="tableElement">
@@ -23,7 +35,11 @@ class Table extends Component {
           </thead>
 
           <tbody>
-            <TableRow />
+            {fullScoreObj
+              ? fullScoreObj
+                  .slice(0, 10)
+                  .map((score, idx) => <TableRow key={idx} score={score} />)
+              : null}
           </tbody>
         </table>
       </div>
@@ -31,4 +47,16 @@ class Table extends Component {
   }
 }
 
-export default connect()(Table);
+const mapStateToProps = state => {
+  return {
+    fullScoreObj: state.score.fullScoreObj
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getLSScoreObj: () => dispatch(getLSScoreObj())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Table);

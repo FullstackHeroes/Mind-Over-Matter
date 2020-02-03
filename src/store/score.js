@@ -1,6 +1,6 @@
 // INITIAL STATE
 const initialState = {
-  fullScoreObj: {}
+  fullScoreObj: []
 };
 
 // ACTION TYPES
@@ -15,9 +15,14 @@ export const getFullScoreObj = fullScoreObj => {
 };
 
 // THUNKY THUNKS
-export const getLSScoreObj = () => {
+export const getLSScoreObj = LSData => {
   return dispatch => {
     try {
+      const LSDataExtract = JSON.parse(localStorage.getItem("snapshots"));
+      if (LSData) dispatch(getFullScoreObj(LSData));
+      else if (LSDataExtract && LSDataExtract.length) {
+        dispatch(getFullScoreObj(LSDataExtract));
+      }
     } catch (error) {
       console.error(error);
     }
@@ -28,7 +33,7 @@ export const getLSScoreObj = () => {
 const scoreReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_FULL_SCORE_OBJ:
-      return {};
+      return { ...state, fullScoreObj: action.fullScoreObj };
     default:
       return state;
   }
