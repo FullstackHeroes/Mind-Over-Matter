@@ -15,3 +15,23 @@ export const getFullScoreObj = fullScoreObj => {
 };
 
 // THUNKY THUNKS
+export const getFullScoreObjLS = () => {
+  return dispatch => {
+    try {
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+// REDUCER
+const scoreReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case GET_FULL_SCORE_OBJ:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export default scoreReducer;
