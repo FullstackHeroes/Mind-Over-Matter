@@ -141,7 +141,7 @@ class VideoInput extends Component {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            backgroundColor: `yellow`
+            backgroundColor: "black"
           }}>
           <div
             style={{
@@ -154,7 +154,7 @@ class VideoInput extends Component {
                 <div
                   style={{
                     position: "absolute",
-                    backgroundColor: `yellow`
+                    backgroundColor: "black"
                   }}>
                   <Webcam
                     audio={false}

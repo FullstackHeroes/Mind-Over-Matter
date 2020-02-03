@@ -64,27 +64,38 @@ let sentimentSpectrum = {
 };
 
 export const sentimentAlgo = (screenScore, expressions) => {
-  let totalMultScore = 0;
-  const fullScoreObj = { trueScore: 0 };
+  let totalMultScore = 0,
+    totalExpressionScore = 0;
+  const fullScoreObj = { trueScore: 0, screenScore };
 
   // CALCULATING THE TOTAL MULTIPLER SCORE TO BE ABLE TO CALC WEIGHTED AVERAGE
   for (let sent in sentimentSpectrum) {
     totalMultScore += sentimentSpectrum[sent].multiplier;
   }
 
+  // CALCULATING TOTAL GIVEN SCORE FOR PRO-RATA CALC
   for (let sent in expressions) {
-    let rawFaceScore = expressions[sent],
+    const rawFaceScore = expressions[sent];
+    if (!isNaN(rawFaceScore)) {
+      const spectrumMult = sentimentSpectrum[sent].multiplier;
+      totalExpressionScore += rawFaceScore * (spectrumMult / totalMultScore);
+    }
+  }
+
+  for (let sent in expressions) {
+    const rawFaceScore = expressions[sent],
       spectrumInput = sentimentSpectrum[sent];
 
     // IGNORING ASSORTEDARRAY KEY FROM INITIAL EXPRESSIONS INPUT
     if (!isNaN(rawFaceScore)) {
-      // ADDING INDIVIDUAL SENTIMENT SCORE INTO FINAL OBJECT, NO MULTIPLIER IMPACT
-      rawFaceScore *= spectrumInput.spectrumScore;
-      fullScoreObj[sent] = rawFaceScore;
+      // ADDING INDIVIDUAL SENTIMENT SCORE INTO FINAL OBJECT (%)
+      const multiplierEffect = spectrumInput.multiplier / totalMultScore,
+        rawScorePercent =
+          (rawFaceScore * multiplierEffect) / totalExpressionScore;
+      fullScoreObj[sent] = rawScorePercent;
 
       // IMPACTING TRUE SCORE AFTER WEIGHTING EACH SENTIMENT SCORE
-      rawFaceScore *= spectrumInput.multiplier / totalMultScore;
-      fullScoreObj.trueScore += rawFaceScore * screenScore;
+      fullScoreObj.trueScore += rawScorePercent * spectrumInput.spectrumScore;
     }
   }
 

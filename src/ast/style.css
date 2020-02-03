@@ -49,7 +49,7 @@ code {
 .appInsideDiv {
   display: flex;
   justify-content: space-evenly;
-  width: 60%;
+  width: 80%;
 }
 
 /* ------------------ TABLE ELEMENT ------------------ */
@@ -61,6 +61,7 @@ code {
 }
 
 .tableHeader {
+  border-spacing: 0;
   display: flex;
   justify-content: space-evenly;
 }
@@ -72,7 +73,7 @@ code {
   border-color: black;
   color: black;
   border-width: 1px;
-  width: 100px;
+  width: 120px;
 }
 
 .tableData {
@@ -82,7 +83,7 @@ code {
 
 .tableDataRow {
   font-size: 17px;
-  width: 100px;
+  width: 120px;
   border-style: solid;
   border-color: white;
   border-width: 1px;
