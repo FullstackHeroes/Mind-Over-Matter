@@ -7,7 +7,7 @@ const { User, Hour } = require("../db/models");
 
 router.get("/", async (req, res, next) => {
   try {
-    const hours = await hours.findAll({
+    const hours = await Hour.findAll({
       include: [{ model: User, as: "user" }]
     });
     res.json(hours);
