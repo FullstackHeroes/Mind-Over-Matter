@@ -1,7 +1,7 @@
 const router = require("express").Router();
 module.exports = router;
 
-router.use("/users", require("./users"));
+// router.use("/users", require("./users"));
 router.use("/hours", require("./hours"));
 router.use("/days", require("./days"));
 router.use("/weeks", require("./weeks"));

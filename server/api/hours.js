@@ -1,12 +1,15 @@
 const router = require("express").Router();
 const db = require("../db");
 const { isAdmin } = require("./routeProtectors");
+const { User, Hour } = require("../db/models");
 
 //=======GET ALL HOURS==========
 
 router.get("/", isAdmin, async (req, res, next) => {
   try {
-    const hours = await db.query("SELECT * FROM hours");
+    const hours = await hours.findAll({
+      include: [{ model: User, as: "user" }]
+    });
     res.json(hours);
   } catch (error) {
     next(error);
@@ -16,24 +19,35 @@ router.get("/", isAdmin, async (req, res, next) => {
 //=======POST HOURS============
 
 router.post("/", async function(req, res, next) {
+  console.log(req.body);
+  console.log(new Date().getTime());
+  const {
+    trueScore,
+    userId,
+    happy,
+    surprised,
+    neutral,
+    disgusted,
+    fearful,
+    angry,
+    sad,
+    timeStamp
+  } = req.body;
+
   try {
-    console.log(req.body);
-    console.log(new Date().getTime());
-    const {
+    const newHour = await Hour.create({
       trueScore,
       userId,
-      neutral,
       happy,
-      sad,
-      angry,
+      surprised,
+      neutral,
       disgusted,
       fearful,
-      surprised
-    } = req.body;
-    const result = await db.query(
-      `INSERT INTO users (happy, sad, angry, disgusted, fearful, surprised) VALUES(${userId}, ${neutral}, ${happy}, ${sad}, ${angry}, ${disgusted}, ${fearful}, ${surprised}, ${trueScore})`
-    );
-    res.JSON(result);
+      angry,
+      sad,
+      timeStamp
+    });
+    res.json(newHour);
   } catch (err) {
     next(err);
   }
@@ -42,9 +56,11 @@ router.post("/", async function(req, res, next) {
 //=======GET HOURS BY USER ID==========
 
 router.get("/:userId", async (req, res, next) => {
-  const userHours = await db.query(
-    `SELECT * FROM hours WHERE userId = ${req.params.userId}`
-  );
+  const userHours = await Hour.findAll({
+    where: {
+      userId: req.params.userId
+    }
+  });
   res.json(userHours);
 });
 
