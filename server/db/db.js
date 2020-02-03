@@ -10,6 +10,10 @@ const db = new Sequelize(
   process.env.DATABASE_URL || `postgres://localhost:5432/${databaseName}`,
   {
     logging: false
+    //the below is only needed to remove default timestamp insertions by sequilize. Only reinstate if we make the transition back to raw sql
+    // define: {
+    //   timestamps: false
+    // }
   }
 );
 
