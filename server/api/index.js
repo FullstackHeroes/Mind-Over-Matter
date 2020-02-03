@@ -1,7 +1,9 @@
 const router = require("express").Router();
 const users = require("./users");
+const hours = require("./hours");
 // const scores = require("./scores")
 
+router.use("/hours", hours);
 router.use("/users", users);
 // router.use("/scores", scores); //uncomment when score routes are up.
 
