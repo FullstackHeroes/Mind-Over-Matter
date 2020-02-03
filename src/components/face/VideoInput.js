@@ -26,7 +26,7 @@ class VideoInput extends Component {
     this.setInputDevice();
   };
 
-  //===================LOCAL STORAGE MANAGER======================
+  // LOCAL STORAGE MANAGER
   appendLocalStorage = snapshot => {
     snapshot.timeStamp = Date();
     if (localStorage.getItem("snapshots")) {
@@ -40,7 +40,7 @@ class VideoInput extends Component {
     }
   };
 
-  //======================CAMERA SETUP============================
+  // CAMERA SETUP
   setInputDevice = () => {
     navigator.mediaDevices.enumerateDevices().then(async devices => {
       const videoDevs = devices.filter(device => device.kind === "videoinput");
@@ -104,7 +104,6 @@ class VideoInput extends Component {
 
     // DETECTION BOX CODE (POSSIBLY OPTIONAL)
     let drawBox = null;
-    // if (!!detections && detections.length) {
     if (!!detections) {
       drawBox = detections.map((detection, idx) => {
         let _H = detection.box.height;
@@ -131,12 +130,11 @@ class VideoInput extends Component {
       });
     }
 
-    //===================EMOTION===========================
     return (
       <div className="cameraFullDiv">
         <div className={detected}></div>
         <div
-          className="Camera"
+          className="camera"
           style={{
             display: "flex",
             flexDirection: "column",
@@ -175,10 +173,16 @@ class VideoInput extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     getLSScoreObj: LSData => dispatch(getLSScoreObj(LSData))
   };
 };
 
-export default connect(null, mapDispatchToProps)(VideoInput);
+export default connect(mapStateToProps, mapDispatchToProps)(VideoInput);
