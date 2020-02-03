@@ -15,7 +15,7 @@ export const getFullScoreObj = fullScoreObj => {
 };
 
 // THUNKY THUNKS
-export const getFullScoreObjLS = () => {
+export const getLSScoreObj = () => {
   return dispatch => {
     try {
     } catch (error) {
