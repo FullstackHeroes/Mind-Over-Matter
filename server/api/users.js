@@ -24,17 +24,6 @@ router.post("/", async function(req, res, next) {
   }
 });
 
-pool.query(
-  'INSERT INTO users (email,"firstName","lastName",password) VALUES ($1, $2, $3, $4)',
-  [req.body.email, req.body.firstName, req.body.lastName, req.body.password],
-  (error, results) => {
-    if (error) {
-      next(error);
-    }
-    response.status(201).send(`User added with ID: ${result.insertId}`);
-  }
-);
-
 //SECURITY ON THIS ROUTE WILL BE SELF OR ADMIN
 router.get("/:id", async (req, res, next) => {
   try {
