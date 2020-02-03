@@ -5,7 +5,7 @@ const { User, Hour } = require("../db/models");
 
 //=======GET ALL HOURS==========
 
-router.get("/", isAdmin, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const hours = await hours.findAll({
       include: [{ model: User, as: "user" }]
