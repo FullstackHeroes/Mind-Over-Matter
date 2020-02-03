@@ -54,10 +54,10 @@ export const calcNormalizedScore = userId => {
 
       dbScoreObj.push(condensedLSObj);
 
-      const shortenFullScore = dbScoreObj.slice(-normalizedLen);
-      // totalScreenScore = shortenFullScore.reduce((acm, val) => {
-      //   return (acm += val.screenScore);
-      // }, 0);
+      const shortenFullScore = dbScoreObj.slice(-normalizedLen),
+        totalScreenScore = shortenFullScore.reduce((acm, val) => {
+          return (acm += val.screenScore);
+        }, 0);
       let calcNormalScore = 0;
       for (let val of shortenFullScore) {
         calcNormalScore += val.trueScore * (val.screenScore / totalScreenScore);

@@ -81,7 +81,8 @@ export const condenseScoreObj = (targetScoreObj, userId) => {
       fearful: 0,
       disgusted: 0,
       surprised: 0,
-      timeStamp: Date()
+      timeStamp: Date(),
+      count: targetScoreObj.length
     },
     totalScreenScore = targetScoreObj.reduce((acm, val) => {
       return (acm += val.screenScore);
