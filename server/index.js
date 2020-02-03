@@ -6,6 +6,10 @@ const bodyParser = require("body-parser");
 const db = require("./db");
 const PORT = process.env.PORT || 3000;
 const app = express();
+const session = require("express-session");
+const passport = require("passport");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const sessionStore = new SequelizeStore({ db });
 
 module.exports = app;
 
@@ -22,7 +26,18 @@ const createApp = () => {
   // COMPRESSION MIDDLEWARE
   app.use(compression());
 
-  // ROUTING
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET || "my best friend is Cody",
+      store: sessionStore,
+      resave: false,
+      saveUninitialized: true
+    })
+  );
+  app.use(passport.initialize());
+  app.use(passport.session());
+  // auth and api routes
+  app.use("/auth", require("./auth"));
   app.use("/api", require("./api"));
 
   // STATIC FILE-SERVING MIDDLEWARE
