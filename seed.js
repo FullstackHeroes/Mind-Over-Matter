@@ -89,7 +89,7 @@ const seed = async () => {
     });
     Hour.create({
       userId: 1,
-      trueScore: 7,
+      trueScore: 8,
       happy: 0.04,
       surprised: 0.07,
       neutral: 0.25,
