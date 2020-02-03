@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // VARIABLE
 const normalizedLen = 3000;
 
@@ -19,10 +21,10 @@ export const getFullScoreObj = fullScoreObj => {
   };
 };
 
-export const getNormalizedScore = normalizeScore => {
+export const getNormalizedScore = normalizedScore => {
   return {
     type: GET_NORMALIZED_SCORE,
-    normalizeScore
+    normalizedScore
   };
 };
 
@@ -41,13 +43,22 @@ export const getLSScoreObj = LSData => {
   };
 };
 
-export const calcNormalizedScore = fullScoreObj => {
-  return dispatch => {
+export const calcNormalizedScore = userId => {
+  return async dispatch => {
     try {
-      const shortenFullScore = fullScoreObj.slice(0, normalizedLen);
+      // RETRIEVE BOTH LS AND DB DATAPOINTS BEFORE CALCULATING BASIS
+      const LSScoreObj = JSON.parse(localStorage.getItem("snapshots")),
+        dbScoreObj = await axios.get(`/api/hours/${userId}`);
 
+      const shortenFullScore = fullScoreObj.slice(0, normalizedLen),
+        totalScreenScore = shortenFullScore.reduce((acm, val) => {
+          return (acm += val.screenScore);
+        }, 0);
+      let calcNormalScore = 0;
       for (let val of shortenFullScore) {
+        calcNormalScore += val.trueScore * (val.screenScore / totalScreenScore);
       }
+      dispatch(getNormalizedScore(calcNormalScore / shortenFullScore.length));
     } catch (error) {
       console.error(error);
     }
@@ -59,6 +70,8 @@ const scoreReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_FULL_SCORE_OBJ:
       return { ...state, fullScoreObj: action.fullScoreObj };
+    case GET_NORMALIZED_SCORE:
+      return { ...state, normalizedScore: action.normalizedScore };
     default:
       return state;
   }
