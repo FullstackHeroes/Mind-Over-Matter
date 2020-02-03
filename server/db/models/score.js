@@ -28,6 +28,12 @@ const Hour = db.define("hour", {
   },
   timeStamp: {
     type: Sequelize.STRING
+  },
+  count: {
+    type: Sequelize.DECIMAL
+  },
+  screenScore: {
+    type: Sequelize.DECIMAL
   }
 });
 
