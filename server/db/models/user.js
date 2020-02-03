@@ -30,6 +30,9 @@ const User = db.define("user", {
     // Making `.password` act like a func hides it when serializing to JSON.
     // This is a hack to get around Sequelize's lack of a "private" option.
   },
+  normalized_score: {
+    type: Sequelize.DECIMAL
+  },
   googleId: {
     type: Sequelize.STRING
   }
