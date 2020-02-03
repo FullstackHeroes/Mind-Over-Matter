@@ -34,30 +34,6 @@ pool.query(
     response.status(201).send(`User added with ID: ${result.insertId}`);
   }
 );
-//
-
-// pool.query(
-//   'INSERT INTO users (email,"firstName","lastName",password) VALUES ($1, $2)',
-//   [req.body.email, req.body.firstName, req.body.lastName, req.body.password],
-//   (error, results) => {
-//     if (error) {
-//       next(error);
-//     }
-//     response.status(201).send(`User added with ID: ${result.insertId}`);
-//   }
-// );
-
-// router.post("/", async function(req, res, next) {
-//   try {
-//     console.log(req.body);
-//     const result = await db.query(
-//       `INSERT INTO users (email, "firstName", "lastName", password), VALUES (${req.body.email}, ${req.body.firstName}, ${req.body.lastName}, ${req.body.password})`
-//     );
-//     res.JSON(result.rows[0]);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
 
 //SECURITY ON THIS ROUTE WILL BE SELF OR ADMIN
 router.get("/:id", async (req, res, next) => {
