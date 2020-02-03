@@ -19,7 +19,7 @@ class VideoInput extends Component {
     };
   }
 
-  componentWillMount = async () => {
+  componentDidMount = async () => {
     await loadModels();
     this.setInputDevice();
   };
