@@ -13,7 +13,7 @@ class VideoInput extends Component {
     super(props);
     this.webcam = React.createRef();
     this.state = {
-      timeInterval: 5000,
+      timeInterval: 3000,
       fullDesc: null,
       facingMode: null,
       detections: null,
@@ -74,7 +74,7 @@ class VideoInput extends Component {
                 expressions = desc.expressions,
                 fullScoreObj = sentimentAlgo(screenScore, expressions);
 
-              //======================APPENDING LOCAL STORAGE==============================
+              // APPENDING LOCAL STORAGE
               this.appendLocalStorage(fullScoreObj);
             } else console.error("WAHH -- no current detection");
           }

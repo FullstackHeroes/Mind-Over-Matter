@@ -38,7 +38,7 @@ class Table extends Component {
           <tbody>
             {fullScoreObj
               ? fullScoreObj
-                  .slice(0, 10)
+                  .slice(-10)
                   .reverse()
                   .map((score, idx) => <TableRow key={idx} score={score} />)
               : null}
