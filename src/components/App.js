@@ -1,15 +1,19 @@
 import React from "react";
+
+// IMPORTING COMPONENTS
+import Routes from "./Routes";
 import VideoInput from "./face/VideoInput";
-import logo from "../images/logo.svg";
+import Table from "./data/Table";
+import NavBar from "./global/NavBar";
 
 function App() {
   return (
     <div className="appFullDiv">
-      <h1>
-        Mind Over Matter
-        <img src={logo} className="appLogo" alt="logo" />
-      </h1>
-      <VideoInput />
+      <NavBar />
+      <div className="appInsideDiv">
+        <VideoInput />
+        <Routes />
+      </div>
     </div>
   );
 }

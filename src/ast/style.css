@@ -13,19 +13,44 @@ code {
     monospace;
 }
 
-/* ------------------ MAIN APP ELEMENT ------------------ */
-.appFullDiv {
-  text-align: center;
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.linkText {
+  text-decoration: none;
+  color: black;
 }
 
+.linkText:hover {
+  text-decoration: underline;
+  color: blue;
+}
+
+/* ------------------ NAVBAR ELEMENT ------------------ */
+.navBarFullDiv {
+  position: fixed;
+  z-index: 2;
+  width: 100vw;
+  height: 10vh;
+  background-color: rgba(234, 234, 234, 1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: black;
+}
+
+.navBarLeft {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.navBarRight {
+  width: 33%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 15px;
+}
+
+/* ------------------ MAIN APP ELEMENT ------------------ */
 .appLogo {
   height: 7vmin;
   pointer-events: none;
@@ -44,4 +69,58 @@ code {
   to {
     transform: rotate(360deg);
   }
+}
+
+.appFullDiv {
+  background-color: #282c34;
+  display: flex;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.appInsideDiv {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100vw;
+  min-height: 100vh;
+  padding-top: 15vh;
+}
+
+/* ------------------ TABLE ELEMENT ------------------ */
+.tableFullDiv {
+  display: flex;
+  justify-content: space-evenly;
+  width: 60%;
+  padding: 0 15px;
+  text-align: center;
+}
+
+.tableHeader {
+  border-spacing: 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.tableHeaderRow {
+  font-size: 17px;
+  background-color: white;
+  border-style: solid;
+  border-color: black;
+  color: black;
+  border-width: 1px;
+  width: 120px;
+}
+
+.tableData {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.tableDataRow {
+  font-size: 17px;
+  width: 120px;
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;
 }
