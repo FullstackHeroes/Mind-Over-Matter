@@ -7,31 +7,20 @@ const User = db.define("user", {
     unique: true,
     allowNull: false,
     validate: {
-      notEmpty: true
-      // isEmail: true
+      notEmpty: true,
+      isEmail: true
     }
   },
   first_name: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
   },
   last_name: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
   },
   password: {
     type: Sequelize.STRING
     // Making `.password` act like a func hides it when serializing to JSON.
     // This is a hack to get around Sequelize's lack of a "private" option.
-  },
-  normalized_score: {
-    type: Sequelize.DECIMAL
   },
   googleId: {
     type: Sequelize.STRING
