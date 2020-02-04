@@ -60,6 +60,7 @@ export const postLSScoreObj = userId => {
       const newWtdScore = await axios.post("/api/hours", adjLSDataObj);
       console.log("POST THUNK 2 -", newWtdScore.data);
       dispatch(getFullScoreObj(newWtdScore.data));
+      localStorage.clear();
     } catch (error) {
       console.error(error);
     }

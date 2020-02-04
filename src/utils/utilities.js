@@ -83,28 +83,48 @@ export const condenseScoreObj = (targetScoreObj, userId) => {
       fearful: 0,
       disgusted: 0,
       surprised: 0,
-      timeStamp: Date(),
+      timeStamp: new Date(),
       count: targetScoreObj.length
     },
     totalScreenScore = targetScoreObj.reduce((acm, val) => {
       return (acm += val.screenScore);
-    }, 0);
+    }, 0),
+    decimal = 6;
 
   // WEIGHTED AVERAGE CALCS FOR EACH SENTIMENT SCORE
   targetScoreObj.forEach(snap => {
-    condensedLSObj.trueScore +=
-      snap.trueScore * (snap.screenScore / totalScreenScore);
-    condensedLSObj.neutral +=
-      snap.neutral * (snap.screenScore / totalScreenScore);
-    condensedLSObj.happy += snap.happy * (snap.screenScore / totalScreenScore);
-    condensedLSObj.sad += snap.sad * (snap.screenScore / totalScreenScore);
-    condensedLSObj.angry += snap.angry * (snap.screenScore / totalScreenScore);
-    condensedLSObj.fearful +=
-      snap.fearful * (snap.screenScore / totalScreenScore);
-    condensedLSObj.disgusted +=
-      snap.disgusted * (snap.screenScore / totalScreenScore);
-    condensedLSObj.surprised +=
-      snap.surprised * (snap.screenScore / totalScreenScore);
+    condensedLSObj.trueScore += (
+      snap.trueScore *
+      (snap.screenScore / totalScreenScore)
+    ).toFixed(decimal);
+    condensedLSObj.neutral += (
+      snap.neutral *
+      (snap.screenScore / totalScreenScore)
+    ).toFixed(decimal);
+    condensedLSObj.happy += (
+      snap.happy *
+      (snap.screenScore / totalScreenScore)
+    ).toFixed(decimal);
+    condensedLSObj.sad += (
+      snap.sad *
+      (snap.screenScore / totalScreenScore)
+    ).toFixed(decimal);
+    condensedLSObj.angry += (
+      snap.angry *
+      (snap.screenScore / totalScreenScore)
+    ).toFixed(decimal);
+    condensedLSObj.fearful += (
+      snap.fearful *
+      (snap.screenScore / totalScreenScore)
+    ).toFixed(decimal);
+    condensedLSObj.disgusted += (
+      snap.disgusted *
+      (snap.screenScore / totalScreenScore)
+    ).toFixed(decimal);
+    condensedLSObj.surprised += (
+      snap.surprised *
+      (snap.screenScore / totalScreenScore)
+    ).toFixed(decimal);
   });
 
   // AVERAGE SCREENSCORE CALC
