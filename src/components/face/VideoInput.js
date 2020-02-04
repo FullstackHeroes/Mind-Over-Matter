@@ -15,10 +15,9 @@ class VideoInput extends Component {
     this.webcam = React.createRef();
     this.state = {
       snapInterval: 3000,
-      fullDesc: null,
+      dbInterval: 15 * 60 * 1000, // 15 MINUTES
       facingMode: "user",
-      detections: null,
-      descriptors: null
+      detections: null
     };
   }
 
@@ -49,6 +48,7 @@ class VideoInput extends Component {
     }, this.state.snapInterval);
   };
 
+  // CAPTURING SNAPSHOT AND APPENDING LOCAL STORAGE
   capture = () => {
     try {
       if (!!this.webcam.current) {
@@ -56,8 +56,7 @@ class VideoInput extends Component {
           fullDesc => {
             if (!!fullDesc && fullDesc.length) {
               this.setState({
-                detections: fullDesc.map(fd => fd.detection),
-                descriptors: fullDesc.map(fd => fd.descriptor)
+                detections: fullDesc.map(fd => fd.detection)
               });
 
               const desc = fullDesc[0],
@@ -75,6 +74,15 @@ class VideoInput extends Component {
       console.error("WAHH --", error);
     }
   };
+
+  // TIME INTERVAL FOR NORMALIZED SCORE AND DB INTERACTION
+  startDatabase = () => {
+    this.interval = setInterval(() => {
+      this.pushToDatabase();
+    }, this.state.dbInterval);
+  };
+
+  pushToDatabase = () => {};
 
   componentWillUnmount() {
     clearInterval(this.interval);

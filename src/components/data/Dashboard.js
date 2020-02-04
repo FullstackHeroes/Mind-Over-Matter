@@ -6,13 +6,13 @@ class Dashboard extends Component {
     return (
       <div className="dashboardFullDiv">
         <div className="dashboardRowOne dashboardRow">
-          <div className="dashboardTable">One</div>
-          <div className="dashboardTable">Two</div>
+          <div className="dashboardTable">Time Session</div>
+          <div className="dashboardTable">Total Time Duration</div>
         </div>
 
         <div className="dashboardRowTwo dashboardRow">
-          <div className="dashboardTable">Three</div>
-          <div className="dashboardTable">Four</div>
+          <div className="dashboardTable">Normalized Score</div>
+          <div className="dashboardTable">Running True Score</div>
         </div>
       </div>
     );
