@@ -66589,8 +66589,9 @@ function () {
                   blendedWtdAvg = screenWtdAvg + countWtdAvg;
               return acm += data.trueScore * blendedWtdAvg;
             }, 0);
+            return _context2.abrupt("return", calcNormalScore / shortOrderArr.length);
 
-          case 11:
+          case 12:
           case "end":
             return _context2.stop();
         }

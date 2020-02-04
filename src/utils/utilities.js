@@ -192,6 +192,7 @@ export const calcWeightedTrueScore = async userId => {
         blendedWtdAvg = screenWtdAvg + countWtdAvg;
       return (acm += data.trueScore * blendedWtdAvg);
     }, 0);
+  return calcNormalScore / shortOrderArr.length;
 };
 
 // //CALCULATE CURRENT MENTAL STATE FROM normScore AND trueScore
