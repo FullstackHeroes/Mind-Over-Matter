@@ -65153,8 +65153,6 @@ function (_Component) {
         className: "tableHeader"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
         className: "tableHeaderRow"
-      }, "Normal Score"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-        className: "tableHeaderRow"
       }, "True Score"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
         className: "tableHeaderRow"
       }, "Screen Score"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
