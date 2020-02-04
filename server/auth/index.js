@@ -39,7 +39,6 @@ router.post("/signup", async (req, res, next) => {
 });
 
 router.post("/logout", async (req, res) => {
-  console.log("HMM -", req.body);
   const {
       trueScore,
       userId,

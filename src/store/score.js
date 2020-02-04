@@ -1,8 +1,5 @@
 import axios from "axios";
-import { condenseScoreObj, calcNormalizeUtility } from "../utils/utilities";
-
-// VARIABLE
-const normalizedLen = 3000;
+import { calcNormalizeUtility } from "../utils/utilities";
 
 // INITIAL STATE
 const initialState = {
@@ -63,8 +60,12 @@ export const calcNormalizedScore = userId => {
       // for (let val of shortenFullScore) {
       //   calcNormalScore += val.trueScore * (val.screenScore / totalScreenScore);
       // }
-      const normalizedScore = calcNormalizeUtility(userId);
-      dispatch(getNormalizedScore(normalizedScore));
+      const normalizeScore = calcNormalizeUtility(userId);
+      await axios.post(`/api/normalizeScore`, {
+        normalizeScore,
+        timeStamp: new Date()
+      });
+      dispatch(getNormalizedScore(normalizeScore));
     } catch (error) {
       console.error(error);
     }
