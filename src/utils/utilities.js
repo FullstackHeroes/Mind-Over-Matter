@@ -134,7 +134,6 @@ export const calcNormalizeUtility = async userId => {
     totalCount += val.count;
   }
 
-  console.log("total -", totalScreenScore, totalCount);
   const screenWeight = 0.5,
     countWeight = 1 - screenWeight,
     calcNormalScore = shortenFullScore.reduce((acm, val) => {
@@ -144,17 +143,34 @@ export const calcNormalizeUtility = async userId => {
       return (acm += val.trueScore * blendedWtdAvg);
     }, 0);
 
-  console.log(
-    "normalize 2 -",
-    calcNormalScore,
-    shortenFullScore.length,
-    shortenFullScore,
-    totalScreenScore
-  );
-
   // CALCULATING AVERAGED (WEIGHTED) NORMALIZE SCORE
   return calcNormalScore / shortenFullScore.length;
 };
+
+//CALCULATE CURRENT MENTAL STATE FROM normScore AND trueScore
+export const checkMental = (normScore, trueScore) => {
+  let timesDeviated = 0;
+  timesDeviated += adjustScore(normScore, trueScore);
+  switch (timesDeviated) {
+    case 25: //IF THE trueScore DEVIATES FROM THE normScore 25 TIMES (negatively)
+      return 1; //EACH RESPONSE OF 1, 2 AND 0 HAVE AN ASSIGNED ALERT TO THEM
+    case 50: //IF THE trueScore DEVIATES FROM THE normScore 50 TIMES (negatively)
+      timesDeviated = 0;
+      return 2;
+    default:
+      return 0;
+  }
+};
+
+//HELPER FUNCTION FOR checkMental
+function adjustScore(normScore, trueScore) {
+  let difference = normScore - trueScore;
+  if (difference < trueScore - 2) {
+    return 1;
+  } else if (diffence > trueScore + 2) {
+    return -1;
+  }
+}
 
 //  CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
 export const calcScreenTime = (length, interval) => {
