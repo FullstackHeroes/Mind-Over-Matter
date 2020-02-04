@@ -65136,10 +65136,12 @@ function (_Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      var fullScoreObj = this.props.fullScoreObj;
+      var _this$props = this.props,
+          fullScoreObj = _this$props.fullScoreObj,
+          user = _this$props.user;
 
       if (fullScoreObj.length !== prevProps.fullScoreObj.length) {
-        this.props.setFullScoreObj();
+        this.props.setFullScoreObj(user.id);
       }
     }
   }, {
@@ -65984,28 +65986,30 @@ var getNormalizedScore = function getNormalizedScore(normalizedScore) {
   };
 }; // THUNKY THUNKS
 
-var setFullScoreObj = function setFullScoreObj() {
+var setFullScoreObj = function setFullScoreObj(userId) {
   return (
     /*#__PURE__*/
     function () {
       var _ref = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(dispatch) {
-        var LSDataExtract, _ref2, dbScoreObj, adjFullScoreObj;
+        var LSDataExtract, targetLSDataObj, _ref2, dbScoreObj, adjFullScoreObj;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                LSDataExtract = JSON.parse(localStorage.getItem("snapshots"));
+                LSDataExtract = JSON.parse(localStorage.getItem("snapshots")), targetLSDataObj = LSDataExtract && LSDataExtract.length ? LSDataExtract.filter(function (snap) {
+                  return snap.userId === userId;
+                }) : [];
                 _context.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/hours/".concat(userId));
 
               case 4:
                 _ref2 = _context.sent;
                 dbScoreObj = _ref2.data;
-                adjFullScoreObj = dbScoreObj.concat(LSDataExtract);
+                adjFullScoreObj = dbScoreObj.concat(targetLSDataObj);
                 if (adjFullScoreObj.length) dispatch(getFullScoreObj(adjFullScoreObj));else dispatch(getFullScoreObj([]));
                 _context.next = 13;
                 break;

@@ -10,9 +10,9 @@ class Table extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { fullScoreObj } = this.props;
+    const { fullScoreObj, user } = this.props;
     if (fullScoreObj.length !== prevProps.fullScoreObj.length) {
-      this.props.setFullScoreObj();
+      this.props.setFullScoreObj(user.id);
     }
   }
 
