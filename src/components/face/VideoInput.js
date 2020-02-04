@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Webcam from "react-webcam";
 import { loadModels, getFaceDescr } from "../../utils/faceBase";
-import { sentimentAlgo } from "../../utils/utilities";
-import { getLSScoreObj } from "../../store";
+import { sentimentAlgo } from "../../utils/utilities"; //import mentalCheck algo here
+import {
+  setFullScoreObj,
+  calcNormalizedScore,
+  postLSScoreObj,
+  getTimeInterval
+} from "../../store";
 
 const WIDTH = 420;
 const HEIGHT = 420;
@@ -14,8 +19,6 @@ class VideoInput extends Component {
     super(props);
     this.webcam = React.createRef();
     this.state = {
-      snapInterval: 3000,
-      dbInterval: (15 * 60 * 1000) / 30, // 15 MINUTES
       facingMode: "user",
       detections: null
     };
@@ -23,21 +26,34 @@ class VideoInput extends Component {
 
   componentDidMount = async () => {
     await loadModels();
-    this.startCapture();
+    this.props.getTimeInterval();
+    // this.startCapture();
+    // this.startDatabase();
   };
 
+  componentDidUpdate(prevProps) {
+    const { snapInterval, dbInterval } = this.props;
+    if (
+      snapInterval !== prevProps.snapInterval ||
+      dbInterval !== prevProps.dbInterval
+    ) {
+      this.startCapture();
+      this.startDatabase();
+    }
+  }
+
   // LOCAL STORAGE MANAGER
-  appendLocalStorage = (snapshot, userId = 1) => {
+  appendLocalStorage = (snapshot, userId) => {
     snapshot.timeStamp = new Date();
-    snapshot.userId = userId; // TEMP HARDCODE !!
+    snapshot.userId = userId;
     if (localStorage.getItem("snapshots")) {
       const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
       currSnapshot.push(snapshot);
       localStorage.setItem("snapshots", JSON.stringify(currSnapshot));
-      this.props.getLSScoreObj(currSnapshot);
+      this.props.setFullScoreObj(userId);
     } else {
       localStorage.setItem("snapshots", JSON.stringify([snapshot]));
-      this.props.getLSScoreObj([snapshot]);
+      this.props.setFullScoreObj(userId);
     }
   };
 
@@ -45,17 +61,17 @@ class VideoInput extends Component {
   startCapture = () => {
     const { user } = this.props;
     if (user && user.id) {
-      this.interval = setInterval(() => {
-        this.capture();
-      }, this.state.snapInterval);
+      this.intervalSnap = setInterval(() => {
+        this.capture(user.id);
+      }, this.props.snapInterval);
     }
   };
 
   // CAPTURING SNAPSHOT AND APPENDING LOCAL STORAGE
-  capture = () => {
+  capture = async userId => {
     try {
       if (!!this.webcam.current) {
-        getFaceDescr(this.webcam.current.getScreenshot(), inputSize).then(
+        await getFaceDescr(this.webcam.current.getScreenshot(), inputSize).then(
           fullDesc => {
             if (!!fullDesc && fullDesc.length) {
               this.setState({
@@ -68,7 +84,7 @@ class VideoInput extends Component {
                 fullScoreObj = sentimentAlgo(screenScore, expressions);
 
               // APPENDING LOCAL STORAGE
-              this.appendLocalStorage(fullScoreObj);
+              this.appendLocalStorage(fullScoreObj, userId);
             } else console.error("WAHH -- no current detection");
           }
         );
@@ -80,18 +96,32 @@ class VideoInput extends Component {
 
   // TIME INTERVAL FOR NORMALIZED SCORE AND DB INTERACTION
   startDatabase = () => {
-    this.interval = setInterval(() => {
-      this.pushToDatabase();
-    }, this.state.dbInterval);
+    const { user } = this.props;
+    if (user && user.id) {
+      this.intervalDB = setInterval(() => {
+        this.pushToDatabase(user.id);
+      }, this.props.dbInterval);
+    }
   };
 
-  pushToDatabase = () => {
-    console.log("VIDEO DATABASE !!");
+  pushToDatabase = userId => {
+    try {
+      console.log("VIDEO DATABASE !!");
+      const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
+      if (currSnapshot && currSnapshot.length) {
+        console.log("INSIDE VIDEO DATABASE !!");
+        this.props.calcNormalizedScore(userId);
+        this.props.postLSScoreObj(userId);
+      }
+    } catch (error) {
+      console.error("WAHH --", error);
+    }
   };
 
-  // componentWillUnmount() {
-  //   clearInterval(this.interval);
-  // }
+  componentWillUnmount() {
+    clearInterval(this.intervalSnap);
+    clearInterval(this.intervalDB);
+  }
 
   render() {
     const { detections, facingMode } = this.state;
@@ -179,13 +209,19 @@ class VideoInput extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    snapInterval: state.score.snapInterval,
+    dbInterval: state.score.dbInterval
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getLSScoreObj: LSData => dispatch(getLSScoreObj(LSData))
+    setFullScoreObj: userId => dispatch(setFullScoreObj(userId)),
+    calcNormalizedScore: userId => dispatch(calcNormalizedScore(userId)),
+    postLSScoreObj: userId => dispatch(postLSScoreObj(userId)),
+    getTimeInterval: (snapInterval, dbInterval) =>
+      dispatch(getTimeInterval(snapInterval, dbInterval))
   };
 };
 

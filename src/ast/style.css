@@ -40,6 +40,7 @@ h3 {
   margin: 20px auto;
   width: 35vw;
   height: 50vh;
+  min-height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -177,13 +178,13 @@ h3 {
 }
 
 .tableHeaderRow {
-  font-size: 17px;
+  font-size: 14px;
   background-color: white;
   border-style: solid;
   border-color: black;
   color: black;
   border-width: 1px;
-  width: 120px;
+  width: 80px;
 }
 
 .tableData {
@@ -192,8 +193,8 @@ h3 {
 }
 
 .tableDataRow {
-  font-size: 17px;
-  width: 120px;
+  font-size: 14px;
+  width: 80px;
   border-style: solid;
   border-color: white;
   border-width: 1px;
