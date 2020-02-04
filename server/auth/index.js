@@ -51,7 +51,8 @@ router.post("/logout", async (req, res) => {
     sad,
     timeStamp,
     count,
-    screenScore
+    screenScore,
+    screenTime
   } = req.body;
   await Hour.create({
     trueScore,
@@ -65,7 +66,8 @@ router.post("/logout", async (req, res) => {
     sad,
     timeStamp,
     count,
-    screenScore
+    screenScore,
+    screenTime
   });
   req.logout();
   req.session.destroy();

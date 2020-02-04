@@ -66597,7 +66597,9 @@ var sentimentAlgo = function sentimentAlgo(screenScore, expressions) {
   }
 
   return fullScoreObj;
-};
+}; // DECIMAL ROUNDING
+
+var rounding = Math.pow(10, 5);
 var condenseScoreObj = function condenseScoreObj(targetScoreObj, userId) {
   if (targetScoreObj.length) {
     var condensedLSObj = {
@@ -66618,18 +66620,17 @@ var condenseScoreObj = function condenseScoreObj(targetScoreObj, userId) {
         totalScreenScore = targetScoreObj.reduce(function (acm, val) {
       return acm += val.screenScore;
     }, 0),
-        decimal = 5,
         snapInterval = _store__WEBPACK_IMPORTED_MODULE_1__["default"].getState().score.snapInterval; // WEIGHTED AVERAGE CALCS FOR EACH SENTIMENT SCORE
 
     targetScoreObj.forEach(function (snap) {
-      condensedLSObj.trueScore += Number((snap.trueScore * (snap.screenScore / totalScreenScore)).toFixed(decimal));
-      condensedLSObj.neutral += Number((snap.neutral * (snap.screenScore / totalScreenScore)).toFixed(decimal));
-      condensedLSObj.happy += Number((snap.happy * (snap.screenScore / totalScreenScore)).toFixed(decimal));
-      condensedLSObj.sad += Number((snap.sad * (snap.screenScore / totalScreenScore)).toFixed(decimal));
-      condensedLSObj.angry += Number((snap.angry * (snap.screenScore / totalScreenScore)).toFixed(decimal));
-      condensedLSObj.fearful += Number((snap.fearful * (snap.screenScore / totalScreenScore)).toFixed(decimal));
-      condensedLSObj.disgusted += Number((snap.disgusted * (snap.screenScore / totalScreenScore)).toFixed(decimal));
-      condensedLSObj.surprised += Number((snap.surprised * (snap.screenScore / totalScreenScore)).toFixed(decimal));
+      condensedLSObj.trueScore += Math.round(snap.trueScore * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.neutral += Math.round(snap.neutral * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.happy += Math.round(snap.happy * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.sad += Math.round(snap.sad * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.angry += Math.round(snap.angry * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.fearful += Math.round(snap.fearful * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.disgusted += Math.round(snap.disgusted * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.surprised += Math.round(snap.surprised * (snap.screenScore / totalScreenScore) * rounding) / rounding;
     }); // AVERAGE SCREENSCORE CALC && TIME
 
     condensedLSObj.screenScore = totalScreenScore / targetScoreObj.length;
@@ -66716,7 +66717,7 @@ function () {
               return acm += val.trueScore * blendedWtdAvg;
             }, 0); // CALCULATING AVERAGED (WEIGHTED) NORMALIZE SCORE
 
-            return _context.abrupt("return", calcNormalScore);
+            return _context.abrupt("return", Math.round(calcNormalScore * rounding) / rounding);
 
           case 30:
           case "end":

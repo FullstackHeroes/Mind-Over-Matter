@@ -30,7 +30,8 @@ router.post("/", async function(req, res, next) {
       sad,
       timeStamp,
       count,
-      screenScore
+      screenScore,
+      screenTime
     } = req.body;
     await Hour.create({
       trueScore,
@@ -44,7 +45,8 @@ router.post("/", async function(req, res, next) {
       sad,
       timeStamp,
       count,
-      screenScore
+      screenScore,
+      screenTime
     });
     const newFullScoreObj = await Hour.findAll({
       where: {
