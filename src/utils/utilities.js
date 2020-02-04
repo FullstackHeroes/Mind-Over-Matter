@@ -131,7 +131,10 @@ function adjustScore(normScore, trueScore) {
     return -1;
   }
 }
-//  CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
+//CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
 export const calcSecondsScreenTime = (length, interval) => {
   return (interval * length) / 1000;
 };
+
+//AVERAGE 15 MINS OF SNAPSHOTS
+export const averageLocalStorageSnaps = snaps => {};
