@@ -108,6 +108,7 @@ export const condenseScoreObj = (targetScoreObj, userId) => {
 };
 
 //1 bad 10 good
+//CALCULATE CURRENT MENTAL STATE FROM normScore AND trueScore
 export const checkMental = (normScore, trueScore) => {
   let timesDeviated = 0;
   timesDeviated += adjustScore(normScore, trueScore);
@@ -121,7 +122,7 @@ export const checkMental = (normScore, trueScore) => {
       return 0;
   }
 };
-
+//HELPER FUNCTION FOR checkMental
 function adjustScore(normScore, trueScore) {
   let difference = normScore - trueScore;
   if (difference < trueScore - 2) {
@@ -130,3 +131,7 @@ function adjustScore(normScore, trueScore) {
     return -1;
   }
 }
+//  CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
+export const calcScreenTime = (length, interval) => {
+  return (interval * length) / 1000;
+};
