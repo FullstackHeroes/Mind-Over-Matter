@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // SCORING FROM 1-10 (BAD - GOOD) AND MULTIPLIER WILL BE DONE PRO-RATA
 let sentimentSpectrum = {
   happy: {
@@ -109,4 +111,8 @@ export const condenseScoreObj = (targetScoreObj, userId) => {
   condensedLSObj.screenScore = totalScreenScore / targetScoreObj.length;
 
   return condensedLSObj;
+};
+
+export const calcNormalizeUtility = async userId => {
+  return {};
 };
