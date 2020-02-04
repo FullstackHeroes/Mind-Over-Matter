@@ -93,7 +93,7 @@ const mapSignup = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    auth: () => dispatch(auth())
+    auth: userObj => dispatch(auth(userObj))
   };
 };
 

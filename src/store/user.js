@@ -22,10 +22,11 @@ export const me = () => async dispatch => {
   }
 };
 
-export const auth = (email, password, method) => async dispatch => {
+export const auth = userObj => async dispatch => {
   let res;
   try {
-    res = await axios.post(`/auth/${method}`, { email, password });
+    const { formName } = userObj;
+    res = await axios.post(`/auth/${formName}`, userObj);
   } catch (authError) {
     return dispatch(getUser({ error: authError }));
   }
