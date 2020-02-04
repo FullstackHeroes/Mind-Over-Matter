@@ -97,4 +97,10 @@ const Week = db.define("week", {
   }
 });
 
-module.exports = { Hour, Day, Week };
+const NormalizeScore = db.define("normalizeScore", {
+  normalizeScore: {
+    type: Sequelize.DECIMAL
+  }
+});
+
+module.exports = { Hour, Day, Week, NormalizeScore };

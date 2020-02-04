@@ -1,5 +1,5 @@
 const db = require("../server/db");
-const { User, Hour, Day, Week } = require("../server/db/models");
+const { User, Hour, NormalizeScore } = require("../server/db/models");
 
 const userSeed = [
   {
@@ -159,6 +159,37 @@ const hourSeed = [
   }
 ];
 
+const normalizeScoreSeed = [
+  {
+    userId: 1,
+    normalizeScore: 6
+  },
+  {
+    userId: 1,
+    normalizeScore: 7
+  },
+  {
+    userId: 1,
+    normalizeScore: 6
+  },
+  {
+    userId: 1,
+    normalizeScore: 7
+  },
+  {
+    userId: 1,
+    normalizeScore: 5
+  },
+  {
+    userId: 1,
+    normalizeScore: 3
+  },
+  {
+    userId: 1,
+    normalizeScore: 3
+  }
+];
+
 const seed = async () => {
   // await db.sync();
   await db.sync({ force: true });
@@ -166,6 +197,7 @@ const seed = async () => {
 
   await User.bulkCreate(userSeed);
   await Hour.bulkCreate(hourSeed);
+  await NormalizeScore.bulkCreate(normalizeScoreSeed);
 
   console.log(`seeded successfully`);
 };

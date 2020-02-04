@@ -13,6 +13,10 @@ class NavBar extends Component {
         </div>
 
         <div className="navBarRight">
+          <Link to="/Dashboard" className="linkText">
+            Dashboard
+          </Link>
+
           <Link to="/Table" className="linkText">
             Table
           </Link>

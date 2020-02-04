@@ -14,9 +14,9 @@ class VideoInput extends Component {
     super(props);
     this.webcam = React.createRef();
     this.state = {
-      timeInterval: 3000,
+      snapInterval: 3000,
       fullDesc: null,
-      facingMode: null,
+      facingMode: "user",
       detections: null,
       descriptors: null
     };
@@ -24,7 +24,7 @@ class VideoInput extends Component {
 
   componentDidMount = async () => {
     await loadModels();
-    this.setInputDevice();
+    this.startCapture();
   };
 
   // LOCAL STORAGE MANAGER
@@ -42,22 +42,11 @@ class VideoInput extends Component {
     }
   };
 
-  // CAMERA SETUP
-  setInputDevice = () => {
-    navigator.mediaDevices.enumerateDevices().then(async devices => {
-      const videoDevs = devices.filter(device => device.kind === "videoinput");
-
-      if (videoDevs.length < 2) this.setState({ facingMode: "user" });
-      else this.setState({ facingMode: { exact: "environment" } });
-
-      this.startCapture();
-    });
-  };
-
+  // TIME INTERVAL FOR CAPTURING SNAPSHOTS
   startCapture = () => {
     this.interval = setInterval(() => {
       this.capture();
-    }, this.state.timeInterval);
+    }, this.state.snapInterval);
   };
 
   capture = () => {
