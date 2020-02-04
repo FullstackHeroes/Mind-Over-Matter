@@ -44,10 +44,11 @@ code {
 }
 
 .navBarRight {
-  width: 33%;
+  width: 15%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-around;
   padding: 0 15px;
+  font-size: 25px;
 }
 
 /* ------------------ MAIN APP ELEMENT ------------------ */
@@ -123,4 +124,30 @@ code {
   border-style: solid;
   border-color: white;
   border-width: 1px;
+}
+
+/* ------------------ DASHBOARD ELEMENT ------------------ */
+.dashboardFullDiv {
+  background-color: lightgray;
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  height: 60vh;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.dashboardRow {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 45%;
+  margin: 5px 0;
+}
+
+.dashboardTable {
+  background-color: #282c34;
+  margin: 10px;
+  width: 30%;
+  height: 95%;
 }

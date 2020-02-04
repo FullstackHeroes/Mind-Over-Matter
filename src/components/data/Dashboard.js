@@ -5,14 +5,14 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="dashboardFullDiv">
-        <div className="dashboardRowOne">
-          <div>One</div>
-          <div>Two</div>
+        <div className="dashboardRowOne dashboardRow">
+          <div className="dashboardTable">One</div>
+          <div className="dashboardTable">Two</div>
         </div>
 
-        <div className="dashboardRowTwo">
-          <div>Three</div>
-          <div>Four</div>
+        <div className="dashboardRowTwo dashboardRow">
+          <div className="dashboardTable">Three</div>
+          <div className="dashboardTable">Four</div>
         </div>
       </div>
     );
