@@ -17169,7 +17169,6 @@ var env = {
 initialize();
 //# sourceMappingURL=index.js.map
 
-
 /***/ }),
 
 /***/ "./node_modules/face-api.js/build/es6/env/isBrowser.js":
@@ -66509,7 +66508,7 @@ function () {
 /*!********************************!*\
   !*** ./src/utils/utilities.js ***!
   \********************************/
-/*! exports provided: sentimentAlgo, condenseScoreObj, normalizedLen, calcNormalizeUtility, checkMental, calcScreenTime */
+/*! exports provided: sentimentAlgo, condenseScoreObj, normalizedLen, calcNormalizeUtility, calcScreenTime, calcWeightedTrueScore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -66518,11 +66517,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "condenseScoreObj", function() { return condenseScoreObj; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "normalizedLen", function() { return normalizedLen; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calcNormalizeUtility", function() { return calcNormalizeUtility; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkMental", function() { return checkMental; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calcScreenTime", function() { return calcScreenTime; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calcWeightedTrueScore", function() { return calcWeightedTrueScore; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -66602,7 +66609,7 @@ var sentimentAlgo = function sentimentAlgo(screenScore, expressions) {
 var rounding = Math.pow(10, 5);
 var condenseScoreObj = function condenseScoreObj(targetScoreObj, userId) {
   if (targetScoreObj.length) {
-    var condensedLSObj = {
+    var _condensedLSObj = {
       userId: userId,
       trueScore: 0,
       screenScore: 0,
@@ -66623,19 +66630,19 @@ var condenseScoreObj = function condenseScoreObj(targetScoreObj, userId) {
         snapInterval = _store__WEBPACK_IMPORTED_MODULE_1__["default"].getState().score.snapInterval; // WEIGHTED AVERAGE CALCS FOR EACH SENTIMENT SCORE
 
     targetScoreObj.forEach(function (snap) {
-      condensedLSObj.trueScore += Math.round(snap.trueScore * (snap.screenScore / totalScreenScore) * rounding) / rounding;
-      condensedLSObj.neutral += Math.round(snap.neutral * (snap.screenScore / totalScreenScore) * rounding) / rounding;
-      condensedLSObj.happy += Math.round(snap.happy * (snap.screenScore / totalScreenScore) * rounding) / rounding;
-      condensedLSObj.sad += Math.round(snap.sad * (snap.screenScore / totalScreenScore) * rounding) / rounding;
-      condensedLSObj.angry += Math.round(snap.angry * (snap.screenScore / totalScreenScore) * rounding) / rounding;
-      condensedLSObj.fearful += Math.round(snap.fearful * (snap.screenScore / totalScreenScore) * rounding) / rounding;
-      condensedLSObj.disgusted += Math.round(snap.disgusted * (snap.screenScore / totalScreenScore) * rounding) / rounding;
-      condensedLSObj.surprised += Math.round(snap.surprised * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      _condensedLSObj.trueScore += Math.round(snap.trueScore * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      _condensedLSObj.neutral += Math.round(snap.neutral * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      _condensedLSObj.happy += Math.round(snap.happy * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      _condensedLSObj.sad += Math.round(snap.sad * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      _condensedLSObj.angry += Math.round(snap.angry * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      _condensedLSObj.fearful += Math.round(snap.fearful * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      _condensedLSObj.disgusted += Math.round(snap.disgusted * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      _condensedLSObj.surprised += Math.round(snap.surprised * (snap.screenScore / totalScreenScore) * rounding) / rounding;
     }); // AVERAGE SCREENSCORE CALC && TIME
 
-    condensedLSObj.screenScore = totalScreenScore / targetScoreObj.length;
-    condensedLSObj.screenTime = calcScreenTime(condensedLSObj.count, snapInterval);
-    return condensedLSObj;
+    _condensedLSObj.screenScore = totalScreenScore / targetScoreObj.length;
+    _condensedLSObj.screenTime = calcScreenTime(_condensedLSObj.count, snapInterval);
+    return _condensedLSObj;
   } else return {};
 }; // VARIABLE DETERMINING LENGHT OF MATERIALS FOR NORMALIZED CALC
 
@@ -66730,42 +66737,70 @@ function () {
   return function calcNormalizeUtility(_x) {
     return _ref.apply(this, arguments);
   };
-}(); //CALCULATE CURRENT MENTAL STATE FROM normScore AND trueScore
-
-var checkMental = function checkMental(normScore, trueScore) {
-  var timesDeviated = 0;
-  timesDeviated += adjustScore(normScore, trueScore);
-
-  switch (timesDeviated) {
-    case 25:
-      //IF THE trueScore DEVIATES FROM THE normScore 25 TIMES (negatively)
-      return 1;
-    //EACH RESPONSE OF 1, 2 AND 0 HAVE AN ASSIGNED ALERT TO THEM
-
-    case 50:
-      //IF THE trueScore DEVIATES FROM THE normScore 50 TIMES (negatively)
-      timesDeviated = 0;
-      return 2;
-
-    default:
-      return 0;
-  }
-}; //HELPER FUNCTION FOR checkMental
-
-function adjustScore(normScore, trueScore) {
-  var difference = normScore - trueScore;
-
-  if (difference < trueScore - 2) {
-    return 1;
-  } else if (diffence > trueScore + 2) {
-    return -1;
-  }
-} //  CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
-
+}(); //  CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
 
 var calcScreenTime = function calcScreenTime(length, interval) {
   return interval * length / 1000;
-};
+}; // WEIGHTED AVERAGE COUNT LIMIT
+
+var wtdAvgCount = 3000; //CALCULATE CURRENT MENTAL STATE USING AXIOS REQUESTS AND STORAGE DATA
+
+var calcWeightedTrueScore =
+/*#__PURE__*/
+function () {
+  var _ref3 = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee2(userId) {
+    var userLocalData, condensedUserLocalData, userDbData, aggUserDataObjArr, orderArr, totalScreenScore, count, i, obj, shortOrderArr, screenWeight, countWeight, calcNormalScore;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            //RETRIEVE LS DATA AND DB SCORE OBJECTS AND CONDENSE LS DATA INTO SINGLE OBJ
+            userLocalData = JSON.parse(localStorage.getItem("snapshots"));
+            condensedUserLocalData = condensedLSObj(userLocalData, userId);
+            _context2.next = 4;
+            return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/hours/".concat(userId));
+
+          case 4:
+            userDbData = _context2.sent;
+            // APPEND LS DATA TO DB SCORE OBJ
+            aggUserDataObjArr = [].concat(_toConsumableArray(userDbData), _toConsumableArray(condensedUserLocalData)); //ORDER aggUserDataObjArr FROM NEW TO OLD
+
+            orderArr = aggUserDataObjArr.reverse(); //BASE DATA FOR WEIGHTED AVG CALC
+
+            totalScreenScore = 0, count = 0, i = 0;
+
+            while (count < wtdAvgCount) {
+              obj = orderArr[i];
+              count += obj.count;
+              totalScreenScore += obj.screenScore;
+              i++;
+            } //SHORTEN OBJ ARR INTO RELEVANT SIZE (wtdAvgCount)
+
+
+            shortOrderArr = orderArr.slice(0, i); //BEGIN WEIGHTED CALCULATIONS
+
+            screenWeight = 0.5, countWeight = 1 - screenWeight, calcNormalScore = shortOrderArr.reduce(function (acm, data) {
+              var screenWtdAvg = data.screenScore / totalScreenScore * screenWeight,
+                  countWtdAvg = data.count / count * countWeight,
+                  blendedWtdAvg = screenWtdAvg + countWtdAvg;
+              return acm += data.trueScore * blendedWtdAvg;
+            }, 0);
+            return _context2.abrupt("return", Math.floor(calcNormalScore * rounding / rounding));
+
+          case 12:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+
+  return function calcWeightedTrueScore(_x2) {
+    return _ref3.apply(this, arguments);
+  };
+}();
 
 /***/ }),
 
