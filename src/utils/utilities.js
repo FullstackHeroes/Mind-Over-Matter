@@ -113,6 +113,27 @@ export const condenseScoreObj = (targetScoreObj, userId) => {
   return condensedLSObj;
 };
 
+// VARIABLE DETERMINING LENGHT OF MATERIALS FOR NORMALIZED CALC
+export const normalizedLen = 3000;
+
 export const calcNormalizeUtility = async userId => {
-  return {};
+  // RETRIEVE BOTH LS AND DB DATAPOINTS AND CONDENSING LS BASE
+  const LSScoreObj = JSON.parse(localStorage.getItem("snapshots")),
+    dbScoreObj = await axios.get(`/api/hours/${userId}`),
+    condensedLSObj = condenseScoreObj(LSScoreObj, userId);
+
+  // APPEND LS DATA TO DB SCORE OBJ
+  dbScoreObj.push(condensedLSObj);
+
+  // GETTING BASIS FOR WEIGHTED AVERAGE CALC
+  const shortenFullScore = dbScoreObj.slice(-normalizedLen),
+    totalScreenScore = shortenFullScore.reduce((acm, val) => {
+      return (acm += val.screenScore);
+    }, 0),
+    calcNormalScore = shortenFullScore.reduce((acm, val) => {
+      return (acm += val.trueScore * (val.screenScore / totalScreenScore));
+    }, 0);
+
+  // CALCULATING AVERAGED (WEIGHTED) NORMALIZE SCORE
+  return calcNormalScore / shortenFullScore.length;
 };

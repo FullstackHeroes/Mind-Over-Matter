@@ -1,5 +1,5 @@
 import axios from "axios";
-import { condenseScoreObj } from "../utils/utilities";
+import { condenseScoreObj, calcNormalizeUtility } from "../utils/utilities";
 
 // VARIABLE
 const normalizedLen = 3000;
@@ -48,23 +48,23 @@ export const calcNormalizedScore = userId => {
   return async dispatch => {
     try {
       // RETRIEVE BOTH LS AND DB DATAPOINTS BEFORE CALCULATING BASIS
-      const LSScoreObj = JSON.parse(localStorage.getItem("snapshots")),
-        dbScoreObj = await axios.get(`/api/hours/${userId}`),
-        condensedLSObj = condenseScoreObj(LSScoreObj, userId);
+      // const LSScoreObj = JSON.parse(localStorage.getItem("snapshots")),
+      //   dbScoreObj = await axios.get(`/api/hours/${userId}`),
+      //   condensedLSObj = condenseScoreObj(LSScoreObj, userId);
 
-      dbScoreObj.push(condensedLSObj);
+      // dbScoreObj.push(condensedLSObj);
 
-      const shortenFullScore = dbScoreObj.slice(-normalizedLen),
-        totalScreenScore = shortenFullScore.reduce((acm, val) => {
-          return (acm += val.screenScore);
-        }, 0);
+      // const shortenFullScore = dbScoreObj.slice(-normalizedLen),
+      //   totalScreenScore = shortenFullScore.reduce((acm, val) => {
+      //     return (acm += val.screenScore);
+      //   }, 0);
 
-      let calcNormalScore = 0;
-      for (let val of shortenFullScore) {
-        calcNormalScore += val.trueScore * (val.screenScore / totalScreenScore);
-      }
-
-      dispatch(getNormalizedScore(calcNormalScore / shortenFullScore.length));
+      // let calcNormalScore = 0;
+      // for (let val of shortenFullScore) {
+      //   calcNormalScore += val.trueScore * (val.screenScore / totalScreenScore);
+      // }
+      const normalizedScore = calcNormalizeUtility(userId);
+      dispatch(getNormalizedScore(normalizedScore));
     } catch (error) {
       console.error(error);
     }
