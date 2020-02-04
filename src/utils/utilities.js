@@ -166,23 +166,32 @@ export const calcWeightedTrueScore = async userId => {
   const aggUserDataObjArr = [...userDbData, ...condensedUserLocalData];
 
   //ORDER aggUserDataObjArr FROM NEW TO OLD
-  const reverseArr = aggUserDataObjArr.reverse();
+  const orderArr = aggUserDataObjArr.reverse();
 
-  //SHORTEN OBJ ARR INTO RELEVANT SIZE (wtdAvgCount)
-  let count = 0,
+  //BASE DATA FOR WEIGHTED AVG CALC
+  let totalScreenScore = 0,
+    count = 0,
     i = 0;
 
   while (count < wtdAvgCount) {
-    count += reverseArr[i].count;
+    let obj = orderArr[i];
+    count += obj.count;
+    totalScreenScore += obj.screenScore;
     i++;
   }
 
-  const targetArr = reverseArr.slice(0, i);
+  //SHORTEN OBJ ARR INTO RELEVANT SIZE (wtdAvgCount)
+  const shortOrderArr = orderArr.slice(0, i);
 
-  const sumTrueScore = targetArr.reduce((acm, data) => {
-    return (acm += data.trueScore);
-  });
-  return { weightedTrueScore: sumTrueScore / i };
+  const screenWeight = 0.5,
+    countWeight = 1 - screenWeight,
+    calcNormalScore = shortOrderArr;
+
+  //SIMPLE AVG W/O WEIGHT
+  // const sumTrueScore = targetArr.reduce((acm, data) => {
+  //   return (acm += data.trueScore);
+  // });
+  // return { weightedTrueScore: sumTrueScore / i };
 };
 
 // //CALCULATE CURRENT MENTAL STATE FROM normScore AND trueScore

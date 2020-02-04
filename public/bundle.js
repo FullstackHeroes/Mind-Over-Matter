@@ -66553,7 +66553,7 @@ function () {
   var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(userId) {
-    var userLocalData, condensedUserLocalData, userDbData, aggUserDataObjArr, reverseArr, count, i, targetArr, sumTrueScore;
+    var userLocalData, condensedUserLocalData, userDbData, aggUserDataObjArr, orderArr, totalScreenScore, count, i, obj, shortOrderArr, screenWeight, countWeight, calcNormalScore;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
@@ -66569,24 +66569,26 @@ function () {
             // APPEND LS DATA TO DB SCORE OBJ
             aggUserDataObjArr = [].concat(_toConsumableArray(userDbData), _toConsumableArray(condensedUserLocalData)); //ORDER aggUserDataObjArr FROM NEW TO OLD
 
-            reverseArr = aggUserDataObjArr.reverse(); //SHORTEN OBJ ARR INTO RELEVANT SIZE (wtdAvgCount)
+            orderArr = aggUserDataObjArr.reverse(); //BASE DATA FOR WEIGHTED AVG CALC
 
-            count = 0, i = 0;
+            totalScreenScore = 0, count = 0, i = 0;
 
             while (count < wtdAvgCount) {
-              count += reverseArr[i].count;
+              obj = orderArr[i];
+              count += obj.count;
+              totalScreenScore += obj.screenScore;
               i++;
-            }
+            } //SHORTEN OBJ ARR INTO RELEVANT SIZE (wtdAvgCount)
 
-            targetArr = reverseArr.slice(0, i);
-            sumTrueScore = targetArr.reduce(function (acm, data) {
-              return acm += data.trueScore;
-            });
-            return _context2.abrupt("return", {
-              weightedTrueScore: sumTrueScore / i
-            });
 
-          case 12:
+            shortOrderArr = orderArr.slice(0, i);
+            screenWeight = 0.5, countWeight = 1 - screenWeight, calcNormalScore = shortOrderArr; //SIMPLE AVG W/O WEIGHT
+            // const sumTrueScore = targetArr.reduce((acm, data) => {
+            //   return (acm += data.trueScore);
+            // });
+            // return { weightedTrueScore: sumTrueScore / i };
+
+          case 11:
           case "end":
             return _context2.stop();
         }
