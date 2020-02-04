@@ -1,5 +1,5 @@
 import axios from "axios";
-import { calcNormalizeUtility } from "../utils/utilities";
+import { condenseScoreObj, calcNormalizeUtility } from "../utils/utilities";
 
 // INITIAL STATE
 const initialState = {
@@ -35,6 +35,23 @@ export const getLSScoreObj = LSData => {
       else if (LSDataExtract && LSDataExtract.length) {
         dispatch(getFullScoreObj(LSDataExtract));
       }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const postLSScoreObj = userId => {
+  return async dispatch => {
+    try {
+      // ADJUSTING LS SCORE OBJ FOR BACKEND DIGESTION
+      const LSDataObj = JSON.parse(localStorage.getItem("snapshots")),
+        targetLSDataObj = LSDataObj.filter(snap => snap.userId === userId),
+        adjLSDataObj = condenseScoreObj(targetLSDataObj, userId);
+
+      // INTERACT WITH DATABASE
+      const newWtdScore = await axios.post("/api/hours", adjLSDataObj);
+      dispatch(getFullScoreObj(newWtdScore.data));
     } catch (error) {
       console.error(error);
     }

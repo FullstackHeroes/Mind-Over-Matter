@@ -65367,7 +65367,9 @@ function (_Component) {
             case 2:
               _this.startCapture();
 
-            case 3:
+              _this.startDatabase();
+
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -65375,10 +65377,9 @@ function (_Component) {
       }, _callee);
     })));
 
-    _defineProperty(_assertThisInitialized(_this), "appendLocalStorage", function (snapshot) {
-      var userId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+    _defineProperty(_assertThisInitialized(_this), "appendLocalStorage", function (snapshot, userId) {
       snapshot.timeStamp = new Date();
-      snapshot.userId = userId; // TEMP HARDCODE !!
+      snapshot.userId = userId;
 
       if (localStorage.getItem("snapshots")) {
         var currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
@@ -65398,12 +65399,12 @@ function (_Component) {
 
       if (user && user.id) {
         _this.interval = setInterval(function () {
-          _this.capture();
+          _this.capture(user.id);
         }, _this.state.snapInterval);
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "capture", function () {
+    _defineProperty(_assertThisInitialized(_this), "capture", function (userId) {
       try {
         if (!!_this.webcam.current) {
           Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_3__["getFaceDescr"])(_this.webcam.current.getScreenshot(), inputSize).then(function (fullDesc) {
@@ -65419,7 +65420,7 @@ function (_Component) {
                   expressions = desc.expressions,
                   fullScoreObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["sentimentAlgo"])(screenScore, expressions); // APPENDING LOCAL STORAGE
 
-              _this.appendLocalStorage(fullScoreObj);
+              _this.appendLocalStorage(fullScoreObj, userId);
             } else console.error("WAHH -- no current detection");
           });
         }
@@ -65429,13 +65430,21 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "startDatabase", function () {
-      _this.interval = setInterval(function () {
-        _this.pushToDatabase();
-      }, _this.state.dbInterval);
+      var user = _this.props.user;
+
+      if (user && user.id) {
+        _this.interval = setInterval(function () {
+          _this.pushToDatabase(user.id);
+        }, _this.state.dbInterval);
+      }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "pushToDatabase", function () {
+    _defineProperty(_assertThisInitialized(_this), "pushToDatabase", function (userId) {
       console.log("VIDEO DATABASE !!");
+
+      _this.props.calcNormalizedScore(userId);
+
+      _this.props.postLSScoreObj(userId);
     });
 
     _this.webcam = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
@@ -65546,6 +65555,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     getLSScoreObj: function getLSScoreObj(LSData) {
       return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["getLSScoreObj"])(LSData));
+    },
+    calcNormalizedScore: function calcNormalizedScore(userId) {
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["calcNormalizedScore"])(userId));
+    },
+    postLSScoreObj: function postLSScoreObj(userId) {
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["postLSScoreObj"])(userId));
     }
   };
 };
@@ -65817,7 +65832,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 /*!****************************!*\
   !*** ./src/store/index.js ***!
   \****************************/
-/*! exports provided: default, getUser, removeUser, me, auth, logout, getFullScoreObj, getNormalizedScore, getLSScoreObj, calcNormalizedScore */
+/*! exports provided: default, getUser, removeUser, me, auth, logout, getFullScoreObj, getNormalizedScore, getLSScoreObj, postLSScoreObj, calcNormalizedScore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65846,6 +65861,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getLSScoreObj", function() { return _score__WEBPACK_IMPORTED_MODULE_5__["getLSScoreObj"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postLSScoreObj", function() { return _score__WEBPACK_IMPORTED_MODULE_5__["postLSScoreObj"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "calcNormalizedScore", function() { return _score__WEBPACK_IMPORTED_MODULE_5__["calcNormalizedScore"]; });
 
 
@@ -65873,7 +65890,7 @@ var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, m
 /*!****************************!*\
   !*** ./src/store/score.js ***!
   \****************************/
-/*! exports provided: getFullScoreObj, getNormalizedScore, getLSScoreObj, calcNormalizedScore, default */
+/*! exports provided: getFullScoreObj, getNormalizedScore, getLSScoreObj, postLSScoreObj, calcNormalizedScore, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65881,6 +65898,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFullScoreObj", function() { return getFullScoreObj; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNormalizedScore", function() { return getNormalizedScore; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLSScoreObj", function() { return getLSScoreObj; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postLSScoreObj", function() { return postLSScoreObj; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calcNormalizedScore", function() { return calcNormalizedScore; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
@@ -65931,25 +65949,71 @@ var getLSScoreObj = function getLSScoreObj(LSData) {
     }
   };
 };
-var calcNormalizedScore = function calcNormalizedScore(userId) {
+var postLSScoreObj = function postLSScoreObj(userId) {
   return (
     /*#__PURE__*/
     function () {
       var _ref = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(dispatch) {
-        var normalizeScore, normalizeDBObj;
+        var LSDataObj, targetLSDataObj, adjLSDataObj, newWtdScore;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                _context.next = 3;
+                // ADJUSTING LS SCORE OBJ FOR BACKEND DIGESTION
+                LSDataObj = JSON.parse(localStorage.getItem("snapshots")), targetLSDataObj = LSDataObj.filter(function (snap) {
+                  return snap.userId === userId;
+                }), adjLSDataObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_1__["condenseScoreObj"])(targetLSDataObj, userId); // INTERACT WITH DATABASE
+
+                _context.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/hours", adjLSDataObj);
+
+              case 4:
+                newWtdScore = _context.sent;
+                dispatch(getFullScoreObj(newWtdScore.data));
+                _context.next = 11;
+                break;
+
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
+                console.error(_context.t0);
+
+              case 11:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 8]]);
+      }));
+
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }()
+  );
+};
+var calcNormalizedScore = function calcNormalizedScore(userId) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref2 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(dispatch) {
+        var normalizeScore, normalizeDBObj;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
                 return Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_1__["calcNormalizeUtility"])(userId);
 
               case 3:
-                normalizeScore = _context.sent;
-                _context.next = 6;
+                normalizeScore = _context2.sent;
+                _context2.next = 6;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/normalizeScore", {
                   userId: userId,
                   normalizeScore: normalizeScore,
@@ -65957,26 +66021,26 @@ var calcNormalizedScore = function calcNormalizedScore(userId) {
                 });
 
               case 6:
-                normalizeDBObj = _context.sent;
+                normalizeDBObj = _context2.sent;
                 dispatch(getNormalizedScore(normalizeScore));
-                _context.next = 13;
+                _context2.next = 13;
                 break;
 
               case 10:
-                _context.prev = 10;
-                _context.t0 = _context["catch"](0);
-                console.error(_context.t0);
+                _context2.prev = 10;
+                _context2.t0 = _context2["catch"](0);
+                console.error(_context2.t0);
 
               case 13:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, null, [[0, 10]]);
+        }, _callee2, null, [[0, 10]]);
       }));
 
-      return function (_x) {
-        return _ref.apply(this, arguments);
+      return function (_x2) {
+        return _ref2.apply(this, arguments);
       };
     }()
   );

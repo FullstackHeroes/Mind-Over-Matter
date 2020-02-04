@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 import Webcam from "react-webcam";
 import { loadModels, getFaceDescr } from "../../utils/faceBase";
 import { sentimentAlgo } from "../../utils/utilities"; //import mentalCheck algo here
-import { getLSScoreObj } from "../../store";
+import {
+  getLSScoreObj,
+  calcNormalizedScore,
+  postLSScoreObj
+} from "../../store";
 
 const WIDTH = 420;
 const HEIGHT = 420;
@@ -24,12 +28,13 @@ class VideoInput extends Component {
   componentDidMount = async () => {
     await loadModels();
     this.startCapture();
+    this.startDatabase();
   };
 
   // LOCAL STORAGE MANAGER
-  appendLocalStorage = (snapshot, userId = 1) => {
+  appendLocalStorage = (snapshot, userId) => {
     snapshot.timeStamp = new Date();
-    snapshot.userId = userId; // TEMP HARDCODE !!
+    snapshot.userId = userId;
     if (localStorage.getItem("snapshots")) {
       const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
       currSnapshot.push(snapshot);
@@ -46,13 +51,13 @@ class VideoInput extends Component {
     const { user } = this.props;
     if (user && user.id) {
       this.interval = setInterval(() => {
-        this.capture();
+        this.capture(user.id);
       }, this.state.snapInterval);
     }
   };
 
   // CAPTURING SNAPSHOT AND APPENDING LOCAL STORAGE
-  capture = () => {
+  capture = userId => {
     try {
       if (!!this.webcam.current) {
         getFaceDescr(this.webcam.current.getScreenshot(), inputSize).then(
@@ -68,7 +73,7 @@ class VideoInput extends Component {
                 fullScoreObj = sentimentAlgo(screenScore, expressions);
 
               // APPENDING LOCAL STORAGE
-              this.appendLocalStorage(fullScoreObj);
+              this.appendLocalStorage(fullScoreObj, userId);
             } else console.error("WAHH -- no current detection");
           }
         );
@@ -80,13 +85,18 @@ class VideoInput extends Component {
 
   // TIME INTERVAL FOR NORMALIZED SCORE AND DB INTERACTION
   startDatabase = () => {
-    this.interval = setInterval(() => {
-      this.pushToDatabase();
-    }, this.state.dbInterval);
+    const { user } = this.props;
+    if (user && user.id) {
+      this.interval = setInterval(() => {
+        this.pushToDatabase(user.id);
+      }, this.state.dbInterval);
+    }
   };
 
-  pushToDatabase = () => {
+  pushToDatabase = userId => {
     console.log("VIDEO DATABASE !!");
+    this.props.calcNormalizedScore(userId);
+    this.props.postLSScoreObj(userId);
   };
 
   // componentWillUnmount() {
@@ -185,7 +195,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getLSScoreObj: LSData => dispatch(getLSScoreObj(LSData))
+    getLSScoreObj: LSData => dispatch(getLSScoreObj(LSData)),
+    calcNormalizedScore: userId => dispatch(calcNormalizedScore(userId)),
+    postLSScoreObj: userId => dispatch(postLSScoreObj(userId))
   };
 };
 
