@@ -65442,9 +65442,7 @@ function (_Component) {
       dbInterval: 15 * 60 * 1000 / 30,
       // 15 MINUTES
       facingMode: "user",
-      detections: null,
-      timesDeviated: 0,
-      actionNum: 0
+      detections: null
     };
     return _this;
   }
@@ -66321,7 +66319,7 @@ function () {
 /*!********************************!*\
   !*** ./src/utils/utilities.js ***!
   \********************************/
-/*! exports provided: sentimentAlgo, condenseScoreObj, normalizedLen, calcNormalizeUtility, checkMental, calcScreenTime */
+/*! exports provided: sentimentAlgo, condenseScoreObj, normalizedLen, calcNormalizeUtility, calcScreenTime, calcWeightedTrueScore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -66330,10 +66328,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "condenseScoreObj", function() { return condenseScoreObj; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "normalizedLen", function() { return normalizedLen; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calcNormalizeUtility", function() { return calcNormalizeUtility; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkMental", function() { return checkMental; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calcScreenTime", function() { return calcScreenTime; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calcWeightedTrueScore", function() { return calcWeightedTrueScore; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -66420,7 +66426,7 @@ var condenseScoreObj = function condenseScoreObj(targetScoreObj, userId) {
     fearful: 0,
     disgusted: 0,
     surprised: 0,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: targetScoreObj.length
   },
       totalScreenScore = targetScoreObj.reduce(function (acm, val) {
@@ -66533,42 +66539,73 @@ function () {
   return function calcNormalizeUtility(_x) {
     return _ref.apply(this, arguments);
   };
-}(); //CALCULATE CURRENT MENTAL STATE FROM normScore AND trueScore
-
-var checkMental = function checkMental(normScore, trueScore) {
-  var timesDeviated = 0;
-  timesDeviated += adjustScore(normScore, trueScore);
-
-  switch (timesDeviated) {
-    case 25:
-      //IF THE trueScore DEVIATES FROM THE normScore 25 TIMES (negatively)
-      return 1;
-    //EACH RESPONSE OF 1, 2 AND 0 HAVE AN ASSIGNED ALERT TO THEM
-
-    case 50:
-      //IF THE trueScore DEVIATES FROM THE normScore 50 TIMES (negatively)
-      timesDeviated = 0;
-      return 2;
-
-    default:
-      return 0;
-  }
-}; //HELPER FUNCTION FOR checkMental
-
-function adjustScore(normScore, trueScore) {
-  var difference = normScore - trueScore;
-
-  if (difference < trueScore - 2) {
-    return 1;
-  } else if (diffence > trueScore + 2) {
-    return -1;
-  }
-} //  CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
-
+}(); //  CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
 
 var calcScreenTime = function calcScreenTime(length, interval) {
   return interval * length / 1000;
-};
+}; //CALCULATE CURRENT MENTAL STATE USING AXIOS REQUESTS AND STORAGE DATA
+
+var calcWeightedTrueScore =
+/*#__PURE__*/
+function () {
+  var _ref3 = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee2(userId) {
+    var weightedTrueScore, userLocalData, condensedUserLocalData, userDbData, aggUserDataObjArr, sumTrueScore;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            weightedTrueScore = 0;
+            userLocalData = JSON.parse(localStorage.getItem("snapshots"));
+            condensedUserLocalData = condensedLSObj(userLocalData, userId);
+            _context2.next = 5;
+            return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/hours/".concat(userId));
+
+          case 5:
+            userDbData = _context2.sent;
+            aggUserDataObjArr = [].concat(_toConsumableArray(condensedUserLocalData), _toConsumableArray(userDbData));
+            sumTrueScore = aggUserDataObjArr.reduce(function (acm, data) {
+              return acm += data.trueScore;
+            });
+            return _context2.abrupt("return", {
+              weightedTrueScore: sumTrueScore / aggUserDataObjArr.length
+            });
+
+          case 9:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+
+  return function calcWeightedTrueScore(_x2) {
+    return _ref3.apply(this, arguments);
+  };
+}(); // //CALCULATE CURRENT MENTAL STATE FROM normScore AND trueScore
+// export const checkMental = (normScore, trueScore) => {
+//   let timesDeviated = 0;
+//   timesDeviated += adjustScore(normScore, trueScore);
+//   switch (timesDeviated) {
+//     case 25: //IF THE trueScore DEVIATES FROM THE normScore 25 TIMES (negatively)
+//       return 1; //EACH RESPONSE OF 1, 2 AND 0 HAVE AN ASSIGNED ALERT TO THEM
+//     case 50: //IF THE trueScore DEVIATES FROM THE normScore 50 TIMES (negatively)
+//       timesDeviated = 0;
+//       return 2;
+//     default:
+//       return 0;
+//   }
+// };
+// //HELPER FUNCTION FOR checkMental
+// function adjustScore(normScore, trueScore) {
+//   let difference = normScore - trueScore;
+//   if (difference < trueScore - 2) {
+//     return 1;
+//   } else if (diffence > trueScore + 2) {
+//     return -1;
+//   }
+// }
 
 /***/ }),
 
