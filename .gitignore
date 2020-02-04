@@ -28,3 +28,18 @@ yarn-error.log*
 face-api.min.js
 
 # /sandbox
+
+.babelrc 2 
+.editorconfig 2
+.eslintrc 2.json
+.prettierignore 2 
+.travis 2.yml
+package-lock.json
+package.json
+public/5d5d9eefa31e5e13a6610d9fa7a283bb 2.svg
+public/faceModels
+sandbox/oldPackage 2.json
+script/deploy 2
+script/encrypt-heroku-auth-token 2.js
+script/seed 2.js
+webpack.config 2.js
