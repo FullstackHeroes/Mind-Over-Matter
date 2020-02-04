@@ -17,7 +17,9 @@ class VideoInput extends Component {
       snapInterval: 3000,
       dbInterval: 15 * 60 * 1000, // 15 MINUTES
       facingMode: "user",
-      detections: null
+      detections: null,
+      timesDeviated: 0,
+      actionNum: 0
     };
   }
 
