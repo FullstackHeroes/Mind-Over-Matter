@@ -49,8 +49,10 @@ export const postLSScoreObj = userId => {
         targetLSDataObj = LSDataObj.filter(snap => snap.userId === userId),
         adjLSDataObj = condenseScoreObj(targetLSDataObj, userId);
 
+      console.log("POST THUNK 1 -", adjLSDataObj);
       // INTERACT WITH DATABASE
       const newWtdScore = await axios.post("/api/hours", adjLSDataObj);
+      console.log("POST THUNK 2 -", newWtdScore.data);
       dispatch(getFullScoreObj(newWtdScore.data));
     } catch (error) {
       console.error(error);
@@ -67,6 +69,7 @@ export const calcNormalizedScore = userId => {
           normalizeScore,
           timeStamp: new Date()
         });
+      console.log("NORMALIZE THUNK -", normalizeDBObj.data);
       dispatch(getNormalizedScore(normalizeScore));
     } catch (error) {
       console.error(error);

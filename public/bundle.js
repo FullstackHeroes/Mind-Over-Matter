@@ -65398,59 +65398,99 @@ function (_Component) {
       var user = _this.props.user;
 
       if (user && user.id) {
-        _this.interval = setInterval(function () {
+        _this.intervalSnap = setInterval(function () {
           _this.capture(user.id);
         }, _this.state.snapInterval);
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "capture", function (userId) {
-      try {
-        if (!!_this.webcam.current) {
-          Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_3__["getFaceDescr"])(_this.webcam.current.getScreenshot(), inputSize).then(function (fullDesc) {
-            if (!!fullDesc && fullDesc.length) {
-              _this.setState({
-                detections: fullDesc.map(function (fd) {
-                  return fd.detection;
-                })
-              });
+    _defineProperty(_assertThisInitialized(_this), "capture",
+    /*#__PURE__*/
+    function () {
+      var _ref2 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(userId) {
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
 
-              var desc = fullDesc[0],
-                  screenScore = desc.detection._score,
-                  expressions = desc.expressions,
-                  fullScoreObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["sentimentAlgo"])(screenScore, expressions); // APPENDING LOCAL STORAGE
+                if (!_this.webcam.current) {
+                  _context2.next = 4;
+                  break;
+                }
 
-              _this.appendLocalStorage(fullScoreObj, userId);
-            } else console.error("WAHH -- no current detection");
-          });
-        }
-      } catch (error) {
-        console.error("WAHH --", error);
-      }
-    });
+                _context2.next = 4;
+                return Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_3__["getFaceDescr"])(_this.webcam.current.getScreenshot(), inputSize).then(function (fullDesc) {
+                  if (!!fullDesc && fullDesc.length) {
+                    _this.setState({
+                      detections: fullDesc.map(function (fd) {
+                        return fd.detection;
+                      })
+                    });
+
+                    var desc = fullDesc[0],
+                        screenScore = desc.detection._score,
+                        expressions = desc.expressions,
+                        fullScoreObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["sentimentAlgo"])(screenScore, expressions); // APPENDING LOCAL STORAGE
+
+                    _this.appendLocalStorage(fullScoreObj, userId);
+                  } else console.error("WAHH -- no current detection");
+                });
+
+              case 4:
+                _context2.next = 9;
+                break;
+
+              case 6:
+                _context2.prev = 6;
+                _context2.t0 = _context2["catch"](0);
+                console.error("WAHH --", _context2.t0);
+
+              case 9:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 6]]);
+      }));
+
+      return function (_x) {
+        return _ref2.apply(this, arguments);
+      };
+    }());
 
     _defineProperty(_assertThisInitialized(_this), "startDatabase", function () {
       var user = _this.props.user;
 
       if (user && user.id) {
-        _this.interval = setInterval(function () {
+        _this.intervalDB = setInterval(function () {
           _this.pushToDatabase(user.id);
         }, _this.state.dbInterval);
       }
     });
 
     _defineProperty(_assertThisInitialized(_this), "pushToDatabase", function (userId) {
-      console.log("VIDEO DATABASE !!");
+      try {
+        console.log("VIDEO DATABASE !!");
+        var currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
 
-      _this.props.calcNormalizedScore(userId);
+        if (currSnapshot && currSnapshot.length) {
+          _this.props.calcNormalizedScore(userId);
 
-      _this.props.postLSScoreObj(userId);
+          _this.props.postLSScoreObj(userId);
+        }
+      } catch (error) {
+        console.error("WAHH --", error);
+      }
     });
 
     _this.webcam = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     _this.state = {
       snapInterval: 3000,
-      dbInterval: 15 * 60 * 1000 / 30,
+      // dbInterval: 15 * 60 * 1000, // 15 MINUTES
+      dbInterval: 9000,
       // 15 MINUTES
       facingMode: "user",
       detections: null
@@ -65459,10 +65499,13 @@ function (_Component) {
   }
 
   _createClass(VideoInput, [{
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      clearInterval(this.intervalSnap);
+      clearInterval(this.intervalDB);
+    }
+  }, {
     key: "render",
-    // componentWillUnmount() {
-    //   clearInterval(this.interval);
-    // }
     value: function render() {
       var _this$state = this.state,
           detections = _this$state.detections,
@@ -65965,28 +66008,30 @@ var postLSScoreObj = function postLSScoreObj(userId) {
                 // ADJUSTING LS SCORE OBJ FOR BACKEND DIGESTION
                 LSDataObj = JSON.parse(localStorage.getItem("snapshots")), targetLSDataObj = LSDataObj.filter(function (snap) {
                   return snap.userId === userId;
-                }), adjLSDataObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_1__["condenseScoreObj"])(targetLSDataObj, userId); // INTERACT WITH DATABASE
+                }), adjLSDataObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_1__["condenseScoreObj"])(targetLSDataObj, userId);
+                console.log("POST THUNK 1 -", adjLSDataObj); // INTERACT WITH DATABASE
 
-                _context.next = 4;
+                _context.next = 5;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/hours", adjLSDataObj);
 
-              case 4:
+              case 5:
                 newWtdScore = _context.sent;
+                console.log("POST THUNK 2 -", newWtdScore.data);
                 dispatch(getFullScoreObj(newWtdScore.data));
-                _context.next = 11;
+                _context.next = 13;
                 break;
 
-              case 8:
-                _context.prev = 8;
+              case 10:
+                _context.prev = 10;
                 _context.t0 = _context["catch"](0);
                 console.error(_context.t0);
 
-              case 11:
+              case 13:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 8]]);
+        }, _callee, null, [[0, 10]]);
       }));
 
       return function (_x) {
@@ -66022,21 +66067,22 @@ var calcNormalizedScore = function calcNormalizedScore(userId) {
 
               case 6:
                 normalizeDBObj = _context2.sent;
+                console.log("NORMALIZE THUNK -", normalizeDBObj.data);
                 dispatch(getNormalizedScore(normalizeScore));
-                _context2.next = 13;
+                _context2.next = 14;
                 break;
 
-              case 10:
-                _context2.prev = 10;
+              case 11:
+                _context2.prev = 11;
                 _context2.t0 = _context2["catch"](0);
                 console.error(_context2.t0);
 
-              case 13:
+              case 14:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 10]]);
+        }, _callee2, null, [[0, 11]]);
       }));
 
       return function (_x2) {

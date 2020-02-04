@@ -19,7 +19,8 @@ class VideoInput extends Component {
     this.webcam = React.createRef();
     this.state = {
       snapInterval: 3000,
-      dbInterval: (15 * 60 * 1000) / 30, // 15 MINUTES
+      // dbInterval: 15 * 60 * 1000, // 15 MINUTES
+      dbInterval: 9000, // 15 MINUTES
       facingMode: "user",
       detections: null
     };
@@ -50,17 +51,17 @@ class VideoInput extends Component {
   startCapture = () => {
     const { user } = this.props;
     if (user && user.id) {
-      this.interval = setInterval(() => {
+      this.intervalSnap = setInterval(() => {
         this.capture(user.id);
       }, this.state.snapInterval);
     }
   };
 
   // CAPTURING SNAPSHOT AND APPENDING LOCAL STORAGE
-  capture = userId => {
+  capture = async userId => {
     try {
       if (!!this.webcam.current) {
-        getFaceDescr(this.webcam.current.getScreenshot(), inputSize).then(
+        await getFaceDescr(this.webcam.current.getScreenshot(), inputSize).then(
           fullDesc => {
             if (!!fullDesc && fullDesc.length) {
               this.setState({
@@ -87,21 +88,29 @@ class VideoInput extends Component {
   startDatabase = () => {
     const { user } = this.props;
     if (user && user.id) {
-      this.interval = setInterval(() => {
+      this.intervalDB = setInterval(() => {
         this.pushToDatabase(user.id);
       }, this.state.dbInterval);
     }
   };
 
   pushToDatabase = userId => {
-    console.log("VIDEO DATABASE !!");
-    this.props.calcNormalizedScore(userId);
-    this.props.postLSScoreObj(userId);
+    try {
+      console.log("VIDEO DATABASE !!");
+      const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
+      if (currSnapshot && currSnapshot.length) {
+        this.props.calcNormalizedScore(userId);
+        this.props.postLSScoreObj(userId);
+      }
+    } catch (error) {
+      console.error("WAHH --", error);
+    }
   };
 
-  // componentWillUnmount() {
-  //   clearInterval(this.interval);
-  // }
+  componentWillUnmount() {
+    clearInterval(this.intervalSnap);
+    clearInterval(this.intervalDB);
+  }
 
   render() {
     const { detections, facingMode } = this.state;
