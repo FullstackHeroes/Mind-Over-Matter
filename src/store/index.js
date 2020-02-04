@@ -10,7 +10,6 @@ const reducer = combineReducers({ user, score });
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
-  // applyMiddleware(thunkMiddleware)
 );
 
 const store = createStore(reducer, middleware);

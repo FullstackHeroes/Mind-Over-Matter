@@ -16,14 +16,12 @@ const AuthForm = props => {
             <small>Email</small>
           </label>
           <input name="email" type="text" />
-          <small>(required)</small>
         </div>
         <div>
           <label htmlFor="password">
             <small>Password</small>
           </label>
           <input name="password" type="password" />
-          <small>(required)</small>
         </div>
         {name === "signup" ? (
           <div>
@@ -32,14 +30,12 @@ const AuthForm = props => {
                 <small>First Name</small>
               </label>
               <input name="firstName" type="text" />
-              <small>(required)</small>
             </div>
             <div>
               <label htmlFor="lastName">
                 <small>Last Name</small>
               </label>
               <input name="lastName" type="text" />
-              <small>(required)</small>
             </div>
           </div>
         ) : (
@@ -87,11 +83,12 @@ const mapDispatch = dispatch => {
         };
       } else
         userObj = {
-          first_name: evt.target.first_name.value,
-          last_name: evt.target.last_name.value,
+          first_name: evt.target.firstName.value,
+          last_name: evt.target.lastName.value,
           email: evt.target.email.value,
           password: evt.target.password.value
         };
+      console.log("FORMNAMEEEEEEEEEEEEEE", formName);
       dispatch(auth(userObj, formName));
     }
   };
