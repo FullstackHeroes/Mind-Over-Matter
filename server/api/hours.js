@@ -4,7 +4,6 @@ const { isAdmin } = require("./routeProtectors");
 const { User, Hour } = require("../db/models");
 
 //=======GET ALL HOURS==========
-
 router.get("/", async (req, res, next) => {
   try {
     const hours = await Hour.findAll({
@@ -17,10 +16,7 @@ router.get("/", async (req, res, next) => {
 });
 
 //=======POST HOURS============
-
 router.post("/", async function(req, res, next) {
-  console.log(req.body);
-  console.log(new Date().getTime());
   const {
     trueScore,
     userId,
@@ -54,7 +50,6 @@ router.post("/", async function(req, res, next) {
 });
 
 //=======GET HOURS BY USER ID==========
-
 router.get("/:userId", async (req, res, next) => {
   const userHours = await Hour.findAll({
     where: {
