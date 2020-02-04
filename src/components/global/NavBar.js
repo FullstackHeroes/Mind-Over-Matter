@@ -11,16 +11,16 @@ class NavBar extends Component {
     return (
       <div className="navBarFullDiv">
         <div className="navBarLeft">
-          <h1>Mind Over Matter</h1>
+          <h1 className="navBarHeader">Mind Over Matter</h1>
           <img src={logo} className="appLogo" alt="logo" />
         </div>
 
         <div className="navBarRight">
-          <Link to="/Dashboard" className="linkText">
+          <Link to="/Dashboard" className="linkText navBarLink">
             Dashboard
           </Link>
 
-          <Link to="/Table" className="linkText">
+          <Link to="/Table" className="linkText navBarLink">
             Table
           </Link>
 
@@ -28,11 +28,11 @@ class NavBar extends Component {
             <a
               href="#"
               onClick={() => this.props.logout()}
-              className="linkText">
+              className="linkText navBarLink">
               Logout
             </a>
           ) : (
-            <Link to="/SignIn" className="linkText sign-in">
+            <Link to="/SignIn" className="linkText navBarLink">
               Sign In
             </Link>
           )}

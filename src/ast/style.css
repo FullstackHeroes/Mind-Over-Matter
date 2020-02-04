@@ -107,11 +107,19 @@ h3 {
 }
 
 .navBarRight {
-  width: 25%;
+  width: 20%;
   display: flex;
   justify-content: space-around;
   padding: 0 15px;
-  font-size: 25px;
+}
+
+.navBarHeader {
+  font-size: 35px;
+}
+
+.navBarLink {
+  font-size: 20px;
+  font-weight: bold;
 }
 
 /* ------------------ MAIN APP ELEMENT ------------------ */
