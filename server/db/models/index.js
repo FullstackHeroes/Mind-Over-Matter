@@ -11,7 +11,7 @@ module.exports = {
   db,
   User,
   Hour,
-  Day,
-  Week,
+  // Day,
+  // Week,
   NormalizeScore
 };

@@ -38,10 +38,38 @@ router.post("/signup", async (req, res, next) => {
   }
 });
 
-router.post("/logout", (req, res) => {
+router.post("/logout", async (req, res) => {
+  const {
+      trueScore,
+      userId,
+      happy,
+      surprised,
+      neutral,
+      disgusted,
+      fearful,
+      angry,
+      sad,
+      timeStamp,
+      count,
+      screenScore
+    } = req.body,
+    newScoreObj = await Hour.create({
+      trueScore,
+      userId,
+      happy,
+      surprised,
+      neutral,
+      disgusted,
+      fearful,
+      angry,
+      sad,
+      timeStamp,
+      count,
+      screenScore
+    });
   req.logout();
   req.session.destroy();
-  res.redirect("/SignIn");
+  res.redirect("/SignIn").json(newScoreObj);
 });
 
 router.get("/me", (req, res) => {

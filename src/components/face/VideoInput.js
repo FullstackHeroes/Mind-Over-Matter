@@ -15,7 +15,7 @@ class VideoInput extends Component {
     this.webcam = React.createRef();
     this.state = {
       snapInterval: 3000,
-      dbInterval: 15 * 60 * 1000, // 15 MINUTES
+      dbInterval: (15 * 60 * 1000) / 30, // 15 MINUTES
       facingMode: "user",
       detections: null
     };
@@ -28,7 +28,7 @@ class VideoInput extends Component {
 
   // LOCAL STORAGE MANAGER
   appendLocalStorage = (snapshot, userId = 1) => {
-    snapshot.timeStamp = Date();
+    snapshot.timeStamp = new Date();
     snapshot.userId = userId; // TEMP HARDCODE !!
     if (localStorage.getItem("snapshots")) {
       const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
@@ -85,11 +85,13 @@ class VideoInput extends Component {
     }, this.state.dbInterval);
   };
 
-  pushToDatabase = () => {};
+  pushToDatabase = () => {
+    console.log("VIDEO DATABASE !!");
+  };
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
+  // componentWillUnmount() {
+  //   clearInterval(this.interval);
+  // }
 
   render() {
     const { detections, facingMode } = this.state;

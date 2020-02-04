@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // SCORING FROM 1-10 (BAD - GOOD) AND MULTIPLIER WILL BE DONE PRO-RATA
 let sentimentSpectrum = {
   happy: {
@@ -88,6 +90,7 @@ export const condenseScoreObj = (targetScoreObj, userId) => {
       return (acm += val.screenScore);
     }, 0);
 
+  // WEIGHTED AVERAGE CALCS FOR EACH SENTIMENT SCORE
   targetScoreObj.forEach(snap => {
     condensedLSObj.trueScore +=
       snap.trueScore * (snap.screenScore / totalScreenScore);
@@ -104,10 +107,46 @@ export const condenseScoreObj = (targetScoreObj, userId) => {
       snap.surprised * (snap.screenScore / totalScreenScore);
   });
 
+  // AVERAGE SCREENSCORE CALC
+  condensedLSObj.screenScore = totalScreenScore / targetScoreObj.length;
+
   return condensedLSObj;
 };
 
-//1 bad 10 good
+// VARIABLE DETERMINING LENGHT OF MATERIALS FOR NORMALIZED CALC
+export const normalizedLen = 3000;
+
+export const calcNormalizeUtility = async userId => {
+  // RETRIEVE BOTH LS AND DB DATAPOINTS AND CONDENSING LS BASE
+  const LSScoreObj = JSON.parse(localStorage.getItem("snapshots")),
+    { data: dbScoreObj } = await axios.get(`/api/hours/${userId}`),
+    condensedLSObj = condenseScoreObj(LSScoreObj, userId);
+
+  // APPEND LS DATA TO DB SCORE OBJ
+  dbScoreObj.push(condensedLSObj);
+
+  // GETTING BASIS FOR WEIGHTED AVERAGE CALC
+  const shortenFullScore = dbScoreObj.slice(-normalizedLen);
+  let totalScreenScore = 0,
+    totalCount = 0;
+  for (let val of shortenFullScore) {
+    totalScreenScore += val.screenScore;
+    totalCount += val.count;
+  }
+
+  const screenWeight = 0.5,
+    countWeight = 1 - screenWeight,
+    calcNormalScore = shortenFullScore.reduce((acm, val) => {
+      const screenWtdAvg = (val.screenScore / totalScreenScore) * screenWeight,
+        countWtdAvg = (val.count / totalCount) * countWeight,
+        blendedWtdAvg = screenWtdAvg + countWtdAvg;
+      return (acm += val.trueScore * blendedWtdAvg);
+    }, 0);
+
+  // CALCULATING AVERAGED (WEIGHTED) NORMALIZE SCORE
+  return calcNormalScore / shortenFullScore.length;
+};
+
 //CALCULATE CURRENT MENTAL STATE FROM normScore AND trueScore
 export const checkMental = (normScore, trueScore) => {
   let timesDeviated = 0;
@@ -122,6 +161,7 @@ export const checkMental = (normScore, trueScore) => {
       return 0;
   }
 };
+
 //HELPER FUNCTION FOR checkMental
 function adjustScore(normScore, trueScore) {
   let difference = normScore - trueScore;
@@ -131,8 +171,9 @@ function adjustScore(normScore, trueScore) {
     return -1;
   }
 }
-//CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
-export const calcSecondsScreenTime = (length, interval) => {
+
+//  CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
+export const calcScreenTime = (length, interval) => {
   return (interval * length) / 1000;
 };
 

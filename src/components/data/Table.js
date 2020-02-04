@@ -23,7 +23,6 @@ class Table extends Component {
         <table className="tableElement">
           <thead>
             <tr className="tableHeader">
-              <th className="tableHeaderRow">Normal Score</th>
               <th className="tableHeaderRow">True Score</th>
               <th className="tableHeaderRow">Screen Score</th>
               <th className="tableHeaderRow">Happy</th>
