@@ -5,6 +5,10 @@ import { Dashboard, Table, Login, Signup } from "./index";
 import { me } from "../store";
 
 class Routes extends Component {
+  componentDidMount() {
+    this.props.loadInitial();
+  }
+
   render() {
     return (
       <Switch>

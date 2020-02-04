@@ -33,6 +33,7 @@ export const auth = userObj => async dispatch => {
 
   try {
     dispatch(getUser(res.data));
+    history.push("/Dashboard");
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr);
   }
