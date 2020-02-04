@@ -152,18 +152,37 @@ export const calcScreenTime = (length, interval) => {
   return (interval * length) / 1000;
 };
 
-//CALCULATE CURRENT MENTAL STATE USING AXIOS REQUESTS AND STORAGE DATA
+// WEIGHTED AVERAGE COUNT LIMIT
+const wtdAvgCount = 3000;
 
+//CALCULATE CURRENT MENTAL STATE USING AXIOS REQUESTS AND STORAGE DATA
 export const calcWeightedTrueScore = async userId => {
-  let weightedTrueScore = 0;
+  //RETRIEVE LS DATA AND DB SCORE OBJECTS AND CONDENSE LS DATA INTO SINGLE OBJ
   const userLocalData = JSON.parse(localStorage.getItem("snapshots"));
   const condensedUserLocalData = condensedLSObj(userLocalData, userId);
   const userDbData = await axios.get(`api/hours/${userId}`);
-  const aggUserDataObjArr = [...condensedUserLocalData, ...userDbData];
-  const sumTrueScore = aggUserDataObjArr.reduce((acm, data) => {
+
+  // APPEND LS DATA TO DB SCORE OBJ
+  const aggUserDataObjArr = [...userDbData, ...condensedUserLocalData];
+
+  //ORDER aggUserDataObjArr FROM NEW TO OLD
+  const reverseArr = aggUserDataObjArr.reverse();
+
+  //SHORTEN OBJ ARR INTO RELEVANT SIZE (wtdAvgCount)
+  let count = 0,
+    i = 0;
+
+  while (count < wtdAvgCount) {
+    count += reverseArr[i].count;
+    i++;
+  }
+
+  const targetArr = reverseArr.slice(0, i);
+
+  const sumTrueScore = targetArr.reduce((acm, data) => {
     return (acm += data.trueScore);
   });
-  return { weightedTrueScore: sumTrueScore / aggUserDataObjArr.length };
+  return { weightedTrueScore: sumTrueScore / i };
 };
 
 // //CALCULATE CURRENT MENTAL STATE FROM normScore AND trueScore

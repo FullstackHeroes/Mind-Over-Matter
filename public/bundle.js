@@ -66543,7 +66543,9 @@ function () {
 
 var calcScreenTime = function calcScreenTime(length, interval) {
   return interval * length / 1000;
-}; //CALCULATE CURRENT MENTAL STATE USING AXIOS REQUESTS AND STORAGE DATA
+}; // WEIGHTED AVERAGE COUNT LIMIT
+
+var wtdAvgCount = 3000; //CALCULATE CURRENT MENTAL STATE USING AXIOS REQUESTS AND STORAGE DATA
 
 var calcWeightedTrueScore =
 /*#__PURE__*/
@@ -66551,28 +66553,40 @@ function () {
   var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(userId) {
-    var weightedTrueScore, userLocalData, condensedUserLocalData, userDbData, aggUserDataObjArr, sumTrueScore;
+    var userLocalData, condensedUserLocalData, userDbData, aggUserDataObjArr, reverseArr, count, i, targetArr, sumTrueScore;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            weightedTrueScore = 0;
+            //RETRIEVE LS DATA AND DB SCORE OBJECTS AND CONDENSE LS DATA INTO SINGLE OBJ
             userLocalData = JSON.parse(localStorage.getItem("snapshots"));
             condensedUserLocalData = condensedLSObj(userLocalData, userId);
-            _context2.next = 5;
+            _context2.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/hours/".concat(userId));
 
-          case 5:
+          case 4:
             userDbData = _context2.sent;
-            aggUserDataObjArr = [].concat(_toConsumableArray(condensedUserLocalData), _toConsumableArray(userDbData));
-            sumTrueScore = aggUserDataObjArr.reduce(function (acm, data) {
+            // APPEND LS DATA TO DB SCORE OBJ
+            aggUserDataObjArr = [].concat(_toConsumableArray(userDbData), _toConsumableArray(condensedUserLocalData)); //ORDER aggUserDataObjArr FROM NEW TO OLD
+
+            reverseArr = aggUserDataObjArr.reverse(); //SHORTEN OBJ ARR INTO RELEVANT SIZE (wtdAvgCount)
+
+            count = 0, i = 0;
+
+            while (count < wtdAvgCount) {
+              count += reverseArr[i].count;
+              i++;
+            }
+
+            targetArr = reverseArr.slice(0, i);
+            sumTrueScore = targetArr.reduce(function (acm, data) {
               return acm += data.trueScore;
             });
             return _context2.abrupt("return", {
-              weightedTrueScore: sumTrueScore / aggUserDataObjArr.length
+              weightedTrueScore: sumTrueScore / i
             });
 
-          case 9:
+          case 12:
           case "end":
             return _context2.stop();
         }
