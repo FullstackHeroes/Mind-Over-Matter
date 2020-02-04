@@ -28,8 +28,9 @@ class VideoInput extends Component {
   };
 
   // LOCAL STORAGE MANAGER
-  appendLocalStorage = snapshot => {
+  appendLocalStorage = (snapshot, userId = 1) => {
     snapshot.timeStamp = Date();
+    snapshot.userId = userId; // TEMP HARDCODE !!
     if (localStorage.getItem("snapshots")) {
       const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
       currSnapshot.push(snapshot);

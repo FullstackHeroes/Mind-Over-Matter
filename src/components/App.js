@@ -1,20 +1,22 @@
-import React from "react";
+import React, { Component } from "react";
 
 // IMPORTING COMPONENTS
 import Routes from "./Routes";
 import VideoInput from "./face/VideoInput";
 import NavBar from "./global/NavBar";
 
-function App() {
-  return (
-    <div className="appFullDiv">
-      <NavBar />
-      <div className="appInsideDiv">
-        <VideoInput />
-        <Routes />
+class App extends Component {
+  render() {
+    return (
+      <div className="appFullDiv">
+        <NavBar />
+        <div className="appInsideDiv">
+          <VideoInput />
+          <Routes />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
