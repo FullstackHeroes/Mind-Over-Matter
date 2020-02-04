@@ -106,3 +106,27 @@ export const condenseScoreObj = (targetScoreObj, userId) => {
 
   return condensedLSObj;
 };
+
+//1 bad 10 good
+export const checkMental = (normScore, trueScore) => {
+  let timesDeviated = 0;
+  timesDeviated += adjustScore(normScore, trueScore);
+  switch (timesDeviated) {
+    case 25: //IF THE trueScore DEVIATES FROM THE normScore 25 TIMES (negatively)
+      return 1; //EACH RESPONSE OF 1, 2 AND 0 HAVE AN ASSIGNED ALERT TO THEM
+    case 50: //IF THE trueScore DEVIATES FROM THE normScore 50 TIMES (negatively)
+      timesDeviated = 0;
+      return 2;
+    default:
+      return 0;
+  }
+};
+
+function adjustScore(normScore, trueScore) {
+  let difference = normScore - trueScore;
+  if (difference < trueScore - 2) {
+    return 1;
+  } else if (diffence > trueScore + 2) {
+    return -1;
+  }
+}
