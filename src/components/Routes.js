@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch } from "react-router-dom";
 import { Dashboard, Table, Login, Signup, Homepage } from "./index";
-// import { Dashboard, Table, Login, Signup  } from "./index";
 import { me } from "../store";
 
 class Routes extends Component {
