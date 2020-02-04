@@ -13,6 +13,10 @@ code {
     monospace;
 }
 
+h2 {
+  margin: 0;
+}
+
 .linkText {
   text-decoration: none;
   color: black;
@@ -51,10 +55,34 @@ code {
 }
 
 .authSignInBtn {
-  font-size: 13px;
+  font-size: 15px;
   border-radius: 5px;
-  width: 90px;
-  height: 20px;
+  width: 100px;
+  height: 25px;
+}
+
+.authForm {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.authInputDiv {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.authFormLabel {
+  width: 150px;
+}
+
+.authInputBox {
+  width: 150px;
+  height: 25px;
+  padding: 0;
 }
 
 /* ------------------ NAVBAR ELEMENT ------------------ */

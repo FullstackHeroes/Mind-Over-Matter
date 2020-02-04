@@ -30,33 +30,33 @@ class AuthForm extends Component {
     return (
       <div className={`${formName}-authFormDiv authFormDiv`}>
         <h2>{displayName}</h2>
-        <form onSubmit={this.handleSignIn} name={formName}>
-          <div>
-            <label htmlFor="email">
-              <small>Email:</small>
+        <form onSubmit={this.handleSignIn} name={formName} className="authForm">
+          <div className="authInputDiv">
+            <label htmlFor="email" className="authFormLabel">
+              Email:
             </label>
-            <input name="email" type="email" />
+            <input name="email" type="email" className="authInputBox" />
           </div>
 
           {formName === "signup" ? (
-            <div>
-              <label htmlFor="userName">
-                <small>Name:</small>
+            <div className="authInputDiv">
+              <label htmlFor="userName" className="authFormLabel">
+                Name:
               </label>
-              <input name="userName" type="userName" />
+              <input name="userName" type="userName" className="authInputBox" />
             </div>
           ) : (
             ""
           )}
 
-          <div>
-            <label htmlFor="password">
-              <small>Password:</small>
+          <div className="authInputDiv">
+            <label htmlFor="password" className="authFormLabel">
+              Password:
             </label>
-            <input name="password" type="password" />
+            <input name="password" type="password" className="authInputBox" />
           </div>
 
-          <div>
+          <div className="authBtnDiv">
             <button type="submit" className="authSignInBtn">
               {displayName}
             </button>
