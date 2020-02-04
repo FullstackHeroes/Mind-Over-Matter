@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import history from "../../history";
 
 class Dashboard extends Component {
   render() {
+    const { user } = this.props;
+
     return (
       <div className="dashboardFullDiv">
+        <h3 className="dashboardHeader">Hi, {user.name}!</h3>
         <div className="dashboardRowOne dashboardRow">
           <div className="dashboardTable">Time Session</div>
           <div className="dashboardTable">Total Time Duration</div>
@@ -20,7 +24,9 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    user: state.user
+  };
 };
 
 const mapDispatchToProps = dispatch => {

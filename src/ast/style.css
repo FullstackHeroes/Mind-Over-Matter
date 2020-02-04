@@ -6,7 +6,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+h1 {
+  margin: 0;
+}
+
 h2 {
+  margin: 0;
+}
+
+h3 {
   margin: 0;
 }
 
@@ -190,6 +198,11 @@ h2 {
   height: 60vh;
   padding: 15px;
   border-radius: 5px;
+}
+
+.dashboardHeader {
+  text-align: center;
+  color: black;
 }
 
 .dashboardRow {

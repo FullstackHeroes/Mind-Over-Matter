@@ -9,6 +9,10 @@ class AuthForm extends Component {
     this.handleSignIn = this.handleSignIn.bind(this);
   }
 
+  componentDidUpdate() {
+    if (this.props.user.id) this.props.history.push("/Dashboard");
+  }
+
   handleSignIn(evt) {
     evt.preventDefault();
     const userObj = {
