@@ -1,5 +1,6 @@
 import axios from "axios";
 import history from "../history";
+import { condenseScoreObj } from "../utils/utilities";
 
 // INITIAL STATE
 const defaultUser = {};
@@ -39,10 +40,15 @@ export const auth = userObj => async dispatch => {
   }
 };
 
-export const logout = () => async dispatch => {
+export const logout = userId => async dispatch => {
   try {
-    await axios.post("/auth/logout");
+    const LSDataObj = JSON.parse(localStorage.getItem("snapshots")),
+      targetLSDataObj = LSDataObj.filter(snap => snap.userId === userId),
+      adjLSDataObj = condenseScoreObj(targetLSDataObj, userId);
+
+    await axios.post("/auth/logout", adjLSDataObj);
     dispatch(removeUser());
+    localStorage.clear();
     history.push("/SignIn");
   } catch (err) {
     console.error(err);

@@ -15,7 +15,7 @@ class VideoInput extends Component {
     this.webcam = React.createRef();
     this.state = {
       snapInterval: 3000,
-      dbInterval: 15 * 60 * 1000, // 15 MINUTES
+      dbInterval: (15 * 60 * 1000) / 30, // 15 MINUTES
       facingMode: "user",
       detections: null
     };
@@ -85,7 +85,9 @@ class VideoInput extends Component {
     }, this.state.dbInterval);
   };
 
-  pushToDatabase = () => {};
+  pushToDatabase = () => {
+    console.log("VIDEO DATABSE !!");
+  };
 
   componentWillUnmount() {
     clearInterval(this.interval);

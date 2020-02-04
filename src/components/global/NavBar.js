@@ -5,8 +5,13 @@ import logo from "../../images/logo.svg";
 import { logout } from "../../store";
 
 class NavBar extends Component {
+  loggingOut = () => {
+    const userId = this.props.user.id;
+    this.props.logout(userId);
+  };
+
   render() {
-    const { user } = this.props;
+    const userId = this.props.user.id;
 
     return (
       <div className="navBarFullDiv">
@@ -15,7 +20,7 @@ class NavBar extends Component {
           <img src={logo} className="appLogo" alt="logo" />
         </div>
 
-        {user && user.id ? (
+        {userId ? (
           <div className="navBarRight">
             <Link to="/Dashboard" className="linkText navBarLink">
               Dashboard
@@ -27,7 +32,7 @@ class NavBar extends Component {
 
             <a
               href="#"
-              onClick={() => this.props.logout()}
+              onClick={this.loggingOut}
               className="linkText navBarLink">
               Logout
             </a>
@@ -52,7 +57,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    logout: () => dispatch(logout())
+    logout: userId => dispatch(logout(userId))
   };
 };
 

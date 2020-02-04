@@ -88,6 +88,7 @@ export const condenseScoreObj = (targetScoreObj, userId) => {
       return (acm += val.screenScore);
     }, 0);
 
+  // WEIGHTED AVERAGE CALCS FOR EACH SENTIMENT SCORE
   targetScoreObj.forEach(snap => {
     condensedLSObj.trueScore +=
       snap.trueScore * (snap.screenScore / totalScreenScore);
@@ -103,6 +104,9 @@ export const condenseScoreObj = (targetScoreObj, userId) => {
     condensedLSObj.surprised +=
       snap.surprised * (snap.screenScore / totalScreenScore);
   });
+
+  // AVERAGE SCREENSCORE CALC
+  condensedLSObj.screenScore = totalScreenScore / targetScoreObj.length;
 
   return condensedLSObj;
 };
