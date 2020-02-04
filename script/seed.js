@@ -25,7 +25,7 @@ const hourSeed = [
     fearful: 0.0,
     angry: 0.05,
     sad: 0.07,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 335,
     screenScore: 0.85
   },
@@ -39,7 +39,7 @@ const hourSeed = [
     fearful: 0.12,
     angry: 0.07,
     sad: 0.05,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 310,
     screenScore: 0.99
   },
@@ -53,7 +53,7 @@ const hourSeed = [
     fearful: 0.1,
     angry: 0.1,
     sad: 0.01,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 320,
     screenScore: 0.88
   },
@@ -67,7 +67,7 @@ const hourSeed = [
     fearful: 0.29,
     angry: 0.24,
     sad: 0.11,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 280,
     screenScore: 0.98
   },
@@ -81,7 +81,7 @@ const hourSeed = [
     fearful: 0.22,
     angry: 0.28,
     sad: 0.04,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 290,
     screenScore: 0.77
   },
@@ -95,7 +95,7 @@ const hourSeed = [
     fearful: 0.15,
     angry: 0.31,
     sad: 0.08,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 330,
     screenScore: 0.78
   },
@@ -109,7 +109,7 @@ const hourSeed = [
     fearful: 0.21,
     angry: 0.02,
     sad: 0.12,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 290,
     screenScore: 0.95
   },
@@ -123,7 +123,7 @@ const hourSeed = [
     fearful: 0.02,
     angry: 0.17,
     sad: 0.31,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 275,
     screenScore: 0.78
   },
@@ -137,7 +137,7 @@ const hourSeed = [
     fearful: 0.21,
     angry: 0.02,
     sad: 0.28,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 310,
     screenScore: 0.98
   },
@@ -151,7 +151,7 @@ const hourSeed = [
     fearful: 0.06,
     angry: 0.17,
     sad: 0.01,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 250,
     screenScore: 0.78
   }
@@ -160,31 +160,38 @@ const hourSeed = [
 const normalizeScoreSeed = [
   {
     userId: 1,
-    normalizeScore: 6
+    normalizeScore: 6,
+    timeStamp: new Date("1/1/20")
   },
   {
     userId: 1,
-    normalizeScore: 7
+    normalizeScore: 7,
+    timeStamp: new Date("1/2/20")
   },
   {
     userId: 1,
-    normalizeScore: 6
+    normalizeScore: 6,
+    timeStamp: new Date("1/3/20")
   },
   {
     userId: 1,
-    normalizeScore: 7
+    normalizeScore: 7,
+    timeStamp: new Date("1/4/20")
   },
   {
     userId: 1,
-    normalizeScore: 5
+    normalizeScore: 5,
+    timeStamp: new Date("1/5/20")
   },
   {
     userId: 1,
-    normalizeScore: 3
+    normalizeScore: 3,
+    timeStamp: new Date("1/6/20")
   },
   {
     userId: 1,
-    normalizeScore: 3
+    normalizeScore: 3,
+    timeStamp: new Date("1/7/20")
   }
 ];
 

@@ -100,6 +100,9 @@ const Week = db.define("week", {
 const NormalizeScore = db.define("normalizeScore", {
   normalizeScore: {
     type: Sequelize.DECIMAL
+  },
+  timeStamp: {
+    type: Sequelize.STRING
   }
 });
 
