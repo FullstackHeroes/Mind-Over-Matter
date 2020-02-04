@@ -69,4 +69,13 @@ router.get("/:userId", async (req, res, next) => {
   res.json(userHours);
 });
 
+router.get("/:userId", async (req, res, next) => {
+  const text = `SELECT hours."timeStamp" --SUM(hours."screenTime")
+  FROM hours
+  WHERE date(hours."timeStamp") = CURRENT_DATE;`;
+  const userHours = await db.query();
+
+  res.json(userHours);
+});
+
 module.exports = router;
