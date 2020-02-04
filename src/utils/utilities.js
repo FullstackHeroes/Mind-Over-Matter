@@ -1,4 +1,5 @@
 import axios from "axios";
+import store from "../store";
 
 // SCORING FROM 1-10 (BAD - GOOD) AND MULTIPLIER WILL BE DONE PRO-RATA
 let sentimentSpectrum = {
@@ -71,46 +72,76 @@ export const sentimentAlgo = (screenScore, expressions) => {
   return fullScoreObj;
 };
 
+// DECIMAL ROUNDING
+const rounding = 10 ** 5;
+
 export const condenseScoreObj = (targetScoreObj, userId) => {
-  const condensedLSObj = {
-      userId,
-      trueScore: 0,
-      screenScore: 0,
-      neutral: 0,
-      happy: 0,
-      sad: 0,
-      angry: 0,
-      fearful: 0,
-      disgusted: 0,
-      surprised: 0,
-      timeStamp: Date(),
-      count: targetScoreObj.length
-    },
-    totalScreenScore = targetScoreObj.reduce((acm, val) => {
-      return (acm += val.screenScore);
-    }, 0);
+  if (targetScoreObj.length) {
+    const condensedLSObj = {
+        userId,
+        trueScore: 0,
+        screenScore: 0,
+        neutral: 0,
+        happy: 0,
+        sad: 0,
+        angry: 0,
+        fearful: 0,
+        disgusted: 0,
+        surprised: 0,
+        timeStamp: new Date(),
+        count: targetScoreObj.length,
+        screenTime: 0
+      },
+      totalScreenScore = targetScoreObj.reduce((acm, val) => {
+        return (acm += val.screenScore);
+      }, 0),
+      { snapInterval } = store.getState().score;
 
-  // WEIGHTED AVERAGE CALCS FOR EACH SENTIMENT SCORE
-  targetScoreObj.forEach(snap => {
-    condensedLSObj.trueScore +=
-      snap.trueScore * (snap.screenScore / totalScreenScore);
-    condensedLSObj.neutral +=
-      snap.neutral * (snap.screenScore / totalScreenScore);
-    condensedLSObj.happy += snap.happy * (snap.screenScore / totalScreenScore);
-    condensedLSObj.sad += snap.sad * (snap.screenScore / totalScreenScore);
-    condensedLSObj.angry += snap.angry * (snap.screenScore / totalScreenScore);
-    condensedLSObj.fearful +=
-      snap.fearful * (snap.screenScore / totalScreenScore);
-    condensedLSObj.disgusted +=
-      snap.disgusted * (snap.screenScore / totalScreenScore);
-    condensedLSObj.surprised +=
-      snap.surprised * (snap.screenScore / totalScreenScore);
-  });
+    // WEIGHTED AVERAGE CALCS FOR EACH SENTIMENT SCORE
+    targetScoreObj.forEach(snap => {
+      condensedLSObj.trueScore +=
+        Math.round(
+          snap.trueScore * (snap.screenScore / totalScreenScore) * rounding
+        ) / rounding;
+      condensedLSObj.neutral +=
+        Math.round(
+          snap.neutral * (snap.screenScore / totalScreenScore) * rounding
+        ) / rounding;
+      condensedLSObj.happy +=
+        Math.round(
+          snap.happy * (snap.screenScore / totalScreenScore) * rounding
+        ) / rounding;
+      condensedLSObj.sad +=
+        Math.round(
+          snap.sad * (snap.screenScore / totalScreenScore) * rounding
+        ) / rounding;
+      condensedLSObj.angry +=
+        Math.round(
+          snap.angry * (snap.screenScore / totalScreenScore) * rounding
+        ) / rounding;
+      condensedLSObj.fearful +=
+        Math.round(
+          snap.fearful * (snap.screenScore / totalScreenScore) * rounding
+        ) / rounding;
+      condensedLSObj.disgusted +=
+        Math.round(
+          snap.disgusted * (snap.screenScore / totalScreenScore) * rounding
+        ) / rounding;
+      condensedLSObj.surprised +=
+        Math.round(
+          snap.surprised * (snap.screenScore / totalScreenScore) * rounding
+        ) / rounding;
+    });
 
-  // AVERAGE SCREENSCORE CALC
-  condensedLSObj.screenScore = totalScreenScore / targetScoreObj.length;
+    // AVERAGE SCREENSCORE CALC && TIME
+    condensedLSObj.screenScore = totalScreenScore / targetScoreObj.length;
+    condensedLSObj.screenTime = calcScreenTime(
+      condensedLSObj.count,
+      snapInterval
+    );
 
-  return condensedLSObj;
+    return condensedLSObj;
+  } else return {};
 };
 
 // VARIABLE DETERMINING LENGHT OF MATERIALS FOR NORMALIZED CALC
@@ -144,7 +175,7 @@ export const calcNormalizeUtility = async userId => {
     }, 0);
 
   // CALCULATING AVERAGED (WEIGHTED) NORMALIZE SCORE
-  return calcNormalScore / shortenFullScore.length;
+  return Math.round(calcNormalScore * rounding) / rounding;
 };
 
 //CALCULATE CURRENT MENTAL STATE FROM normScore AND trueScore

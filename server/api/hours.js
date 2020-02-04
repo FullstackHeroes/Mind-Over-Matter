@@ -17,21 +17,8 @@ router.get("/", async (req, res, next) => {
 
 //=======POST HOURS============
 router.post("/", async function(req, res, next) {
-  const {
-    trueScore,
-    userId,
-    happy,
-    surprised,
-    neutral,
-    disgusted,
-    fearful,
-    angry,
-    sad,
-    timeStamp
-  } = req.body;
-
   try {
-    const newHour = await Hour.create({
+    const {
       trueScore,
       userId,
       happy,
@@ -41,9 +28,32 @@ router.post("/", async function(req, res, next) {
       fearful,
       angry,
       sad,
-      timeStamp
+      timeStamp,
+      count,
+      screenScore,
+      screenTime
+    } = req.body;
+    await Hour.create({
+      trueScore,
+      userId,
+      happy,
+      surprised,
+      neutral,
+      disgusted,
+      fearful,
+      angry,
+      sad,
+      timeStamp,
+      count,
+      screenScore,
+      screenTime
     });
-    res.json(newHour);
+    const newFullScoreObj = await Hour.findAll({
+      where: {
+        userId: userId
+      }
+    });
+    res.json(newFullScoreObj);
   } catch (err) {
     next(err);
   }

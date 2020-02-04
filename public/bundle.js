@@ -13699,7 +13699,7 @@ function isnan (val) {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "/* ------------------ GLOBAL ELEMENTS ------------------ */\nbody {\n  margin: 0;\n  font-family: sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\nh1 {\n  margin: 0;\n}\n\nh2 {\n  margin: 0;\n}\n\nh3 {\n  margin: 0;\n}\n\n.linkText {\n  text-decoration: none;\n  color: black;\n}\n\n.linkText:hover {\n  text-decoration: underline;\n  color: purple;\n}\n\n/* ----------------- AUTH FORM ELEMENT ----------------- */\n.signInFullDiv {\n  display: flex;\n  justify-content: space-between;\n  width: 80%;\n  color: black;\n}\n\n.authFormDiv {\n  margin: 20px auto;\n  width: 35vw;\n  height: 50vh;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-evenly;\n  align-items: center;\n  border-radius: 10px;\n}\n\n.login-authFormDiv {\n  background-color: orange;\n}\n\n.signup-authFormDiv {\n  background-color: lightskyblue;\n}\n\n.authSignInBtn {\n  font-size: 15px;\n  border-radius: 5px;\n  width: 100px;\n  height: 25px;\n}\n\n.authForm {\n  width: 90%;\n  height: 70%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-evenly;\n  align-items: center;\n}\n\n.authInputDiv {\n  width: 80%;\n  display: flex;\n  align-items: center;\n  margin: 5px 0;\n}\n\n.authFormLabel {\n  width: 150px;\n}\n\n.authInputBox {\n  width: 150px;\n  height: 25px;\n  padding: 0;\n}\n\n/* ------------------ NAVBAR ELEMENT ------------------ */\n.navBarFullDiv {\n  position: fixed;\n  z-index: 2;\n  width: 100vw;\n  height: 10vh;\n  background-color: rgba(234, 234, 234, 1);\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  color: black;\n}\n\n.navBarLeft {\n  width: 40%;\n  display: flex;\n  align-items: center;\n  padding: 0 15px;\n}\n\n.navBarRight {\n  width: 20%;\n  display: flex;\n  justify-content: space-around;\n  padding: 0 15px;\n}\n\n.navBarHeader {\n  font-size: 35px;\n}\n\n.navBarLink {\n  font-size: 20px;\n  font-weight: bold;\n}\n\n/* ------------------ MAIN APP ELEMENT ------------------ */\n.appLogo {\n  height: 7vmin;\n  pointer-events: none;\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  .appLogo {\n    animation: appLogo-spin infinite 20s linear;\n  }\n}\n\n@keyframes appLogo-spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n.appFullDiv {\n  background-color: #282c34;\n  display: flex;\n  justify-content: center;\n  font-size: calc(10px + 2vmin);\n  color: white;\n}\n\n.appInsideDiv {\n  display: flex;\n  justify-content: space-evenly;\n  width: 100vw;\n  min-height: 100vh;\n  padding-top: 15vh;\n}\n\n/* ------------------ TABLE ELEMENT ------------------ */\n.tableFullDiv {\n  display: flex;\n  justify-content: space-evenly;\n  width: 60%;\n  padding: 0 15px;\n  text-align: center;\n}\n\n.tableHeader {\n  border-spacing: 0;\n  display: flex;\n  justify-content: space-evenly;\n}\n\n.tableHeaderRow {\n  font-size: 17px;\n  background-color: white;\n  border-style: solid;\n  border-color: black;\n  color: black;\n  border-width: 1px;\n  width: 120px;\n}\n\n.tableData {\n  display: flex;\n  justify-content: space-evenly;\n}\n\n.tableDataRow {\n  font-size: 17px;\n  width: 120px;\n  border-style: solid;\n  border-color: white;\n  border-width: 1px;\n}\n\n/* ------------------ DASHBOARD ELEMENT ------------------ */\n.dashboardFullDiv {\n  background-color: lightgray;\n  display: flex;\n  flex-direction: column;\n  width: 50vw;\n  height: 60vh;\n  padding: 15px;\n  border-radius: 5px;\n}\n\n.dashboardHeader {\n  text-align: center;\n  color: black;\n}\n\n.dashboardRow {\n  display: flex;\n  justify-content: space-evenly;\n  width: 100%;\n  height: 45%;\n  margin: 5px 0;\n}\n\n.dashboardTable {\n  background-color: #282c34;\n  margin: 10px;\n  width: 40%;\n  height: 95%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n", ""]);
+exports.push([module.i, "/* ------------------ GLOBAL ELEMENTS ------------------ */\nbody {\n  margin: 0;\n  font-family: sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\nh1 {\n  margin: 0;\n}\n\nh2 {\n  margin: 0;\n}\n\nh3 {\n  margin: 0;\n}\n\n.linkText {\n  text-decoration: none;\n  color: black;\n}\n\n.linkText:hover {\n  text-decoration: underline;\n  color: purple;\n}\n\n/* ----------------- AUTH FORM ELEMENT ----------------- */\n.signInFullDiv {\n  display: flex;\n  justify-content: space-between;\n  width: 80%;\n  color: black;\n}\n\n.authFormDiv {\n  margin: 20px auto;\n  width: 35vw;\n  height: 50vh;\n  min-height: 300px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-evenly;\n  align-items: center;\n  border-radius: 10px;\n}\n\n.login-authFormDiv {\n  background-color: orange;\n}\n\n.signup-authFormDiv {\n  background-color: lightskyblue;\n}\n\n.authSignInBtn {\n  font-size: 15px;\n  border-radius: 5px;\n  width: 100px;\n  height: 25px;\n}\n\n.authForm {\n  width: 90%;\n  height: 70%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-evenly;\n  align-items: center;\n}\n\n.authInputDiv {\n  width: 80%;\n  display: flex;\n  align-items: center;\n  margin: 5px 0;\n}\n\n.authFormLabel {\n  width: 150px;\n}\n\n.authInputBox {\n  width: 150px;\n  height: 25px;\n  padding: 0;\n}\n\n/* ------------------ NAVBAR ELEMENT ------------------ */\n.navBarFullDiv {\n  position: fixed;\n  z-index: 2;\n  width: 100vw;\n  height: 10vh;\n  background-color: rgba(234, 234, 234, 1);\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  color: black;\n}\n\n.navBarLeft {\n  width: 40%;\n  display: flex;\n  align-items: center;\n  padding: 0 15px;\n}\n\n.navBarRight {\n  width: 20%;\n  display: flex;\n  justify-content: space-around;\n  padding: 0 15px;\n}\n\n.navBarHeader {\n  font-size: 35px;\n}\n\n.navBarLink {\n  font-size: 20px;\n  font-weight: bold;\n}\n\n/* ------------------ MAIN APP ELEMENT ------------------ */\n.appLogo {\n  height: 7vmin;\n  pointer-events: none;\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  .appLogo {\n    animation: appLogo-spin infinite 20s linear;\n  }\n}\n\n@keyframes appLogo-spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n.appFullDiv {\n  background-color: #282c34;\n  display: flex;\n  justify-content: center;\n  font-size: calc(10px + 2vmin);\n  color: white;\n}\n\n.appInsideDiv {\n  display: flex;\n  justify-content: space-evenly;\n  width: 100vw;\n  min-height: 100vh;\n  padding-top: 15vh;\n}\n\n/* ------------------ TABLE ELEMENT ------------------ */\n.tableFullDiv {\n  display: flex;\n  justify-content: space-evenly;\n  width: 60%;\n  padding: 0 15px;\n  text-align: center;\n}\n\n.tableHeader {\n  border-spacing: 0;\n  display: flex;\n  justify-content: space-evenly;\n}\n\n.tableHeaderRow {\n  font-size: 14px;\n  background-color: white;\n  border-style: solid;\n  border-color: black;\n  color: black;\n  border-width: 1px;\n  width: 80px;\n}\n\n.tableData {\n  display: flex;\n  justify-content: space-evenly;\n}\n\n.tableDataRow {\n  font-size: 14px;\n  width: 80px;\n  border-style: solid;\n  border-color: white;\n  border-width: 1px;\n}\n\n/* ------------------ DASHBOARD ELEMENT ------------------ */\n.dashboardFullDiv {\n  background-color: lightgray;\n  display: flex;\n  flex-direction: column;\n  width: 50vw;\n  height: 60vh;\n  padding: 15px;\n  border-radius: 5px;\n}\n\n.dashboardHeader {\n  text-align: center;\n  color: black;\n}\n\n.dashboardRow {\n  display: flex;\n  justify-content: space-evenly;\n  width: 100%;\n  height: 45%;\n  margin: 5px 0;\n}\n\n.dashboardTable {\n  background-color: #282c34;\n  margin: 10px;\n  width: 40%;\n  height: 95%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -65130,15 +65130,18 @@ function (_Component) {
   _createClass(Table, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.getLSScoreObj();
+      var user = this.props.user;
+      if (user && user.id) this.props.setFullScoreObj(user.id);
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      var fullScoreObj = this.props.fullScoreObj;
+      var _this$props = this.props,
+          fullScoreObj = _this$props.fullScoreObj,
+          user = _this$props.user;
 
       if (fullScoreObj.length !== prevProps.fullScoreObj.length) {
-        this.props.getLSScoreObj();
+        this.props.setFullScoreObj(user.id);
       }
     }
   }, {
@@ -65183,14 +65186,15 @@ function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
+    user: state.user,
     fullScoreObj: state.score.fullScoreObj
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    getLSScoreObj: function getLSScoreObj() {
-      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_2__["getLSScoreObj"])());
+    setFullScoreObj: function setFullScoreObj(userId) {
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_2__["setFullScoreObj"])(userId));
     }
   };
 };
@@ -65365,7 +65369,9 @@ function (_Component) {
               return Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_3__["loadModels"])();
 
             case 2:
-              _this.startCapture();
+              _this.props.getTimeInterval(); // this.startCapture();
+              // this.startDatabase();
+
 
             case 3:
             case "end":
@@ -65375,21 +65381,20 @@ function (_Component) {
       }, _callee);
     })));
 
-    _defineProperty(_assertThisInitialized(_this), "appendLocalStorage", function (snapshot) {
-      var userId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+    _defineProperty(_assertThisInitialized(_this), "appendLocalStorage", function (snapshot, userId) {
       snapshot.timeStamp = new Date();
-      snapshot.userId = userId; // TEMP HARDCODE !!
+      snapshot.userId = userId;
 
       if (localStorage.getItem("snapshots")) {
         var currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
         currSnapshot.push(snapshot);
         localStorage.setItem("snapshots", JSON.stringify(currSnapshot));
 
-        _this.props.getLSScoreObj(currSnapshot);
+        _this.props.setFullScoreObj(userId);
       } else {
         localStorage.setItem("snapshots", JSON.stringify([snapshot]));
 
-        _this.props.getLSScoreObj([snapshot]);
+        _this.props.setFullScoreObj(userId);
       }
     });
 
@@ -65397,52 +65402,98 @@ function (_Component) {
       var user = _this.props.user;
 
       if (user && user.id) {
-        _this.interval = setInterval(function () {
-          _this.capture();
-        }, _this.state.snapInterval);
+        _this.intervalSnap = setInterval(function () {
+          _this.capture(user.id);
+        }, _this.props.snapInterval);
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "capture", function () {
+    _defineProperty(_assertThisInitialized(_this), "capture",
+    /*#__PURE__*/
+    function () {
+      var _ref2 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(userId) {
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+
+                if (!_this.webcam.current) {
+                  _context2.next = 4;
+                  break;
+                }
+
+                _context2.next = 4;
+                return Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_3__["getFaceDescr"])(_this.webcam.current.getScreenshot(), inputSize).then(function (fullDesc) {
+                  if (!!fullDesc && fullDesc.length) {
+                    _this.setState({
+                      detections: fullDesc.map(function (fd) {
+                        return fd.detection;
+                      })
+                    });
+
+                    var desc = fullDesc[0],
+                        screenScore = desc.detection._score,
+                        expressions = desc.expressions,
+                        fullScoreObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["sentimentAlgo"])(screenScore, expressions); // APPENDING LOCAL STORAGE
+
+                    _this.appendLocalStorage(fullScoreObj, userId);
+                  } else console.error("WAHH -- no current detection");
+                });
+
+              case 4:
+                _context2.next = 9;
+                break;
+
+              case 6:
+                _context2.prev = 6;
+                _context2.t0 = _context2["catch"](0);
+                console.error("WAHH --", _context2.t0);
+
+              case 9:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 6]]);
+      }));
+
+      return function (_x) {
+        return _ref2.apply(this, arguments);
+      };
+    }());
+
+    _defineProperty(_assertThisInitialized(_this), "startDatabase", function () {
+      var user = _this.props.user;
+
+      if (user && user.id) {
+        _this.intervalDB = setInterval(function () {
+          _this.pushToDatabase(user.id);
+        }, _this.props.dbInterval);
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "pushToDatabase", function (userId) {
       try {
-        if (!!_this.webcam.current) {
-          Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_3__["getFaceDescr"])(_this.webcam.current.getScreenshot(), inputSize).then(function (fullDesc) {
-            if (!!fullDesc && fullDesc.length) {
-              _this.setState({
-                detections: fullDesc.map(function (fd) {
-                  return fd.detection;
-                })
-              });
+        console.log("VIDEO DATABASE !!");
+        var currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
 
-              var desc = fullDesc[0],
-                  screenScore = desc.detection._score,
-                  expressions = desc.expressions,
-                  fullScoreObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["sentimentAlgo"])(screenScore, expressions); // APPENDING LOCAL STORAGE
+        if (currSnapshot && currSnapshot.length) {
+          console.log("INSIDE VIDEO DATABASE !!");
 
-              _this.appendLocalStorage(fullScoreObj);
-            } else console.error("WAHH -- no current detection");
-          });
+          _this.props.calcNormalizedScore(userId);
+
+          _this.props.postLSScoreObj(userId);
         }
       } catch (error) {
         console.error("WAHH --", error);
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "startDatabase", function () {
-      _this.interval = setInterval(function () {
-        _this.pushToDatabase();
-      }, _this.state.dbInterval);
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "pushToDatabase", function () {
-      console.log("VIDEO DATABASE !!");
-    });
-
     _this.webcam = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     _this.state = {
-      snapInterval: 3000,
-      dbInterval: 15 * 60 * 1000 / 30,
-      // 15 MINUTES
       facingMode: "user",
       detections: null
     };
@@ -65450,10 +65501,26 @@ function (_Component) {
   }
 
   _createClass(VideoInput, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var _this$props = this.props,
+          snapInterval = _this$props.snapInterval,
+          dbInterval = _this$props.dbInterval;
+
+      if (snapInterval !== prevProps.snapInterval || dbInterval !== prevProps.dbInterval) {
+        this.startCapture();
+        this.startDatabase();
+      }
+    } // LOCAL STORAGE MANAGER
+
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      clearInterval(this.intervalSnap);
+      clearInterval(this.intervalDB);
+    }
+  }, {
     key: "render",
-    // componentWillUnmount() {
-    //   clearInterval(this.interval);
-    // }
     value: function render() {
       var _this$state = this.state,
           detections = _this$state.detections,
@@ -65538,14 +65605,25 @@ function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user,
+    snapInterval: state.score.snapInterval,
+    dbInterval: state.score.dbInterval
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    getLSScoreObj: function getLSScoreObj(LSData) {
-      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["getLSScoreObj"])(LSData));
+    setFullScoreObj: function setFullScoreObj(userId) {
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["setFullScoreObj"])(userId));
+    },
+    calcNormalizedScore: function calcNormalizedScore(userId) {
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["calcNormalizedScore"])(userId));
+    },
+    postLSScoreObj: function postLSScoreObj(userId) {
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["postLSScoreObj"])(userId));
+    },
+    getTimeInterval: function getTimeInterval(snapInterval, dbInterval) {
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["getTimeInterval"])(snapInterval, dbInterval));
     }
   };
 };
@@ -65817,7 +65895,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 /*!****************************!*\
   !*** ./src/store/index.js ***!
   \****************************/
-/*! exports provided: default, getUser, removeUser, me, auth, logout, getFullScoreObj, getNormalizedScore, getLSScoreObj, calcNormalizedScore */
+/*! exports provided: default, getUser, removeUser, me, auth, logout, getTimeInterval, getFullScoreObj, getNormalizedScore, setFullScoreObj, postLSScoreObj, calcNormalizedScore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65840,11 +65918,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return _user__WEBPACK_IMPORTED_MODULE_4__["logout"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getTimeInterval", function() { return _score__WEBPACK_IMPORTED_MODULE_5__["getTimeInterval"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getFullScoreObj", function() { return _score__WEBPACK_IMPORTED_MODULE_5__["getFullScoreObj"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getNormalizedScore", function() { return _score__WEBPACK_IMPORTED_MODULE_5__["getNormalizedScore"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getLSScoreObj", function() { return _score__WEBPACK_IMPORTED_MODULE_5__["getLSScoreObj"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "setFullScoreObj", function() { return _score__WEBPACK_IMPORTED_MODULE_5__["setFullScoreObj"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postLSScoreObj", function() { return _score__WEBPACK_IMPORTED_MODULE_5__["postLSScoreObj"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "calcNormalizedScore", function() { return _score__WEBPACK_IMPORTED_MODULE_5__["calcNormalizedScore"]; });
 
@@ -65873,14 +65955,16 @@ var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, m
 /*!****************************!*\
   !*** ./src/store/score.js ***!
   \****************************/
-/*! exports provided: getFullScoreObj, getNormalizedScore, getLSScoreObj, calcNormalizedScore, default */
+/*! exports provided: getTimeInterval, getFullScoreObj, getNormalizedScore, setFullScoreObj, postLSScoreObj, calcNormalizedScore, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTimeInterval", function() { return getTimeInterval; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFullScoreObj", function() { return getFullScoreObj; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNormalizedScore", function() { return getNormalizedScore; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLSScoreObj", function() { return getLSScoreObj; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setFullScoreObj", function() { return setFullScoreObj; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postLSScoreObj", function() { return postLSScoreObj; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calcNormalizedScore", function() { return calcNormalizedScore; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
@@ -65899,13 +65983,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  // INITIAL STATE
 
 var initialState = {
+  snapInterval: 0,
+  // dbInterval: 15 * 60 * 1000, // 15 MINUTES
+  dbInterval: 0,
   fullScoreObj: [],
   normalizedScore: 0
 }; // ACTION TYPES
 
+var GET_TIME_INTERVAL = "GET_TIME_INTERVAL";
 var GET_FULL_SCORE_OBJ = "GET_FULL_SCORE_OBJ";
 var GET_NORMALIZED_SCORE = "GET_NORMALIZED_SCORE"; // ACTION CREATORS
 
+var getTimeInterval = function getTimeInterval() {
+  var snapInterval = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 3000;
+  var dbInterval = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 9000;
+  return {
+    type: GET_TIME_INTERVAL,
+    snapInterval: snapInterval,
+    dbInterval: dbInterval
+  };
+};
 var getFullScoreObj = function getFullScoreObj(fullScoreObj) {
   return {
     type: GET_FULL_SCORE_OBJ,
@@ -65919,46 +66016,31 @@ var getNormalizedScore = function getNormalizedScore(normalizedScore) {
   };
 }; // THUNKY THUNKS
 
-var getLSScoreObj = function getLSScoreObj(LSData) {
-  return function (dispatch) {
-    try {
-      var LSDataExtract = JSON.parse(localStorage.getItem("snapshots"));
-      if (LSData) dispatch(getFullScoreObj(LSData));else if (LSDataExtract && LSDataExtract.length) {
-        dispatch(getFullScoreObj(LSDataExtract));
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-};
-var calcNormalizedScore = function calcNormalizedScore(userId) {
+var setFullScoreObj = function setFullScoreObj(userId) {
   return (
     /*#__PURE__*/
     function () {
       var _ref = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(dispatch) {
-        var normalizeScore, normalizeDBObj;
+        var LSDataExtract, targetLSDataObj, _ref2, dbScoreObj, adjFullScoreObj;
+
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                _context.next = 3;
-                return Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_1__["calcNormalizeUtility"])(userId);
+                LSDataExtract = JSON.parse(localStorage.getItem("snapshots")), targetLSDataObj = LSDataExtract && LSDataExtract.length ? LSDataExtract.filter(function (snap) {
+                  return snap.userId === userId;
+                }) : [];
+                _context.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/hours/".concat(userId));
 
-              case 3:
-                normalizeScore = _context.sent;
-                _context.next = 6;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/normalizeScore", {
-                  userId: userId,
-                  normalizeScore: normalizeScore,
-                  timeStamp: new Date()
-                });
-
-              case 6:
-                normalizeDBObj = _context.sent;
-                dispatch(getNormalizedScore(normalizeScore));
+              case 4:
+                _ref2 = _context.sent;
+                dbScoreObj = _ref2.data;
+                adjFullScoreObj = dbScoreObj.concat(targetLSDataObj);
+                if (adjFullScoreObj.length) dispatch(getFullScoreObj(adjFullScoreObj));else dispatch(getFullScoreObj([]));
                 _context.next = 13;
                 break;
 
@@ -65980,6 +66062,106 @@ var calcNormalizedScore = function calcNormalizedScore(userId) {
       };
     }()
   );
+};
+var postLSScoreObj = function postLSScoreObj(userId) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref3 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(dispatch) {
+        var LSDataObj, targetLSDataObj, adjLSDataObj, newWtdScore;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                // ADJUSTING LS SCORE OBJ FOR BACKEND DIGESTION
+                LSDataObj = JSON.parse(localStorage.getItem("snapshots")), targetLSDataObj = LSDataObj.filter(function (snap) {
+                  return snap.userId === userId;
+                }), adjLSDataObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_1__["condenseScoreObj"])(targetLSDataObj, userId);
+                console.log("POST THUNK 1 -", adjLSDataObj); // INTERACT WITH DATABASE
+
+                _context2.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/hours", adjLSDataObj);
+
+              case 5:
+                newWtdScore = _context2.sent;
+                console.log("POST THUNK 2 -", newWtdScore.data);
+                dispatch(getFullScoreObj(newWtdScore.data));
+                localStorage.clear();
+                _context2.next = 14;
+                break;
+
+              case 11:
+                _context2.prev = 11;
+                _context2.t0 = _context2["catch"](0);
+                console.error(_context2.t0);
+
+              case 14:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 11]]);
+      }));
+
+      return function (_x2) {
+        return _ref3.apply(this, arguments);
+      };
+    }()
+  );
+};
+var calcNormalizedScore = function calcNormalizedScore(userId) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref4 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee3(dispatch) {
+        var normalizeScore, normalizeDBObj;
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
+                return Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_1__["calcNormalizeUtility"])(userId);
+
+              case 3:
+                normalizeScore = _context3.sent;
+                _context3.next = 6;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/normalizeScore", {
+                  userId: userId,
+                  normalizeScore: normalizeScore,
+                  timeStamp: new Date()
+                });
+
+              case 6:
+                normalizeDBObj = _context3.sent;
+                console.log("NORMALIZE THUNK -", normalizeDBObj.data);
+                dispatch(getNormalizedScore(normalizeScore));
+                _context3.next = 14;
+                break;
+
+              case 11:
+                _context3.prev = 11;
+                _context3.t0 = _context3["catch"](0);
+                console.error(_context3.t0);
+
+              case 14:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[0, 11]]);
+      }));
+
+      return function (_x3) {
+        return _ref4.apply(this, arguments);
+      };
+    }()
+  );
 }; // REDUCER
 
 var scoreReducer = function scoreReducer() {
@@ -65987,6 +66169,12 @@ var scoreReducer = function scoreReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
+    case GET_TIME_INTERVAL:
+      return _objectSpread({}, state, {
+        snapInterval: action.snapInterval,
+        dbInterval: action.dbInterval
+      });
+
     case GET_FULL_SCORE_OBJ:
       return _objectSpread({}, state, {
         fullScoreObj: action.fullScoreObj
@@ -66334,9 +66522,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calcScreenTime", function() { return calcScreenTime; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
  // SCORING FROM 1-10 (BAD - GOOD) AND MULTIPLIER WILL BE DONE PRO-RATA
 
@@ -66407,39 +66597,46 @@ var sentimentAlgo = function sentimentAlgo(screenScore, expressions) {
   }
 
   return fullScoreObj;
-};
+}; // DECIMAL ROUNDING
+
+var rounding = Math.pow(10, 5);
 var condenseScoreObj = function condenseScoreObj(targetScoreObj, userId) {
-  var condensedLSObj = {
-    userId: userId,
-    trueScore: 0,
-    screenScore: 0,
-    neutral: 0,
-    happy: 0,
-    sad: 0,
-    angry: 0,
-    fearful: 0,
-    disgusted: 0,
-    surprised: 0,
-    timeStamp: Date(),
-    count: targetScoreObj.length
-  },
-      totalScreenScore = targetScoreObj.reduce(function (acm, val) {
-    return acm += val.screenScore;
-  }, 0); // WEIGHTED AVERAGE CALCS FOR EACH SENTIMENT SCORE
+  if (targetScoreObj.length) {
+    var condensedLSObj = {
+      userId: userId,
+      trueScore: 0,
+      screenScore: 0,
+      neutral: 0,
+      happy: 0,
+      sad: 0,
+      angry: 0,
+      fearful: 0,
+      disgusted: 0,
+      surprised: 0,
+      timeStamp: new Date(),
+      count: targetScoreObj.length,
+      screenTime: 0
+    },
+        totalScreenScore = targetScoreObj.reduce(function (acm, val) {
+      return acm += val.screenScore;
+    }, 0),
+        snapInterval = _store__WEBPACK_IMPORTED_MODULE_1__["default"].getState().score.snapInterval; // WEIGHTED AVERAGE CALCS FOR EACH SENTIMENT SCORE
 
-  targetScoreObj.forEach(function (snap) {
-    condensedLSObj.trueScore += snap.trueScore * (snap.screenScore / totalScreenScore);
-    condensedLSObj.neutral += snap.neutral * (snap.screenScore / totalScreenScore);
-    condensedLSObj.happy += snap.happy * (snap.screenScore / totalScreenScore);
-    condensedLSObj.sad += snap.sad * (snap.screenScore / totalScreenScore);
-    condensedLSObj.angry += snap.angry * (snap.screenScore / totalScreenScore);
-    condensedLSObj.fearful += snap.fearful * (snap.screenScore / totalScreenScore);
-    condensedLSObj.disgusted += snap.disgusted * (snap.screenScore / totalScreenScore);
-    condensedLSObj.surprised += snap.surprised * (snap.screenScore / totalScreenScore);
-  }); // AVERAGE SCREENSCORE CALC
+    targetScoreObj.forEach(function (snap) {
+      condensedLSObj.trueScore += Math.round(snap.trueScore * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.neutral += Math.round(snap.neutral * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.happy += Math.round(snap.happy * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.sad += Math.round(snap.sad * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.angry += Math.round(snap.angry * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.fearful += Math.round(snap.fearful * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.disgusted += Math.round(snap.disgusted * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.surprised += Math.round(snap.surprised * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+    }); // AVERAGE SCREENSCORE CALC && TIME
 
-  condensedLSObj.screenScore = totalScreenScore / targetScoreObj.length;
-  return condensedLSObj;
+    condensedLSObj.screenScore = totalScreenScore / targetScoreObj.length;
+    condensedLSObj.screenTime = calcScreenTime(condensedLSObj.count, snapInterval);
+    return condensedLSObj;
+  } else return {};
 }; // VARIABLE DETERMINING LENGHT OF MATERIALS FOR NORMALIZED CALC
 
 var normalizedLen = 3000;
@@ -66520,7 +66717,7 @@ function () {
               return acm += val.trueScore * blendedWtdAvg;
             }, 0); // CALCULATING AVERAGED (WEIGHTED) NORMALIZE SCORE
 
-            return _context.abrupt("return", calcNormalScore / shortenFullScore.length);
+            return _context.abrupt("return", Math.round(calcNormalScore * rounding) / rounding);
 
           case 30:
           case "end":
