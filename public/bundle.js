@@ -17169,7 +17169,6 @@ var env = {
 initialize();
 //# sourceMappingURL=index.js.map
 
-
 /***/ }),
 
 /***/ "./node_modules/face-api.js/build/es6/env/isBrowser.js":
@@ -65333,7 +65332,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
- //import mentalCheck algo here
 
 
 var WIDTH = 420;
@@ -65444,7 +65442,9 @@ function (_Component) {
       dbInterval: 15 * 60 * 1000 / 30,
       // 15 MINUTES
       facingMode: "user",
-      detections: null
+      detections: null,
+      timesDeviated: 0,
+      actionNum: 0
     };
     return _this;
   }
