@@ -72,65 +72,65 @@ export const sentimentAlgo = (screenScore, expressions) => {
 };
 
 export const condenseScoreObj = (targetScoreObj, userId) => {
-  const condensedLSObj = {
-      userId,
-      trueScore: 0,
-      screenScore: 0,
-      neutral: 0,
-      happy: 0,
-      sad: 0,
-      angry: 0,
-      fearful: 0,
-      disgusted: 0,
-      surprised: 0,
-      timeStamp: new Date(),
-      count: targetScoreObj.length
-    },
-    totalScreenScore = targetScoreObj.reduce((acm, val) => {
-      return (acm += val.screenScore);
-    }, 0),
-    decimal = 6;
+  if (targetScoreObj.length) {
+    const condensedLSObj = {
+        userId,
+        trueScore: 0,
+        screenScore: 0,
+        neutral: 0,
+        happy: 0,
+        sad: 0,
+        angry: 0,
+        fearful: 0,
+        disgusted: 0,
+        surprised: 0,
+        timeStamp: new Date(),
+        count: targetScoreObj.length
+      },
+      totalScreenScore = targetScoreObj.reduce((acm, val) => {
+        return (acm += val.screenScore);
+      }, 0),
+      decimal = 5;
 
-  // WEIGHTED AVERAGE CALCS FOR EACH SENTIMENT SCORE
-  targetScoreObj.forEach(snap => {
-    condensedLSObj.trueScore += (
-      snap.trueScore *
-      (snap.screenScore / totalScreenScore)
-    ).toFixed(decimal);
-    condensedLSObj.neutral += (
-      snap.neutral *
-      (snap.screenScore / totalScreenScore)
-    ).toFixed(decimal);
-    condensedLSObj.happy += (
-      snap.happy *
-      (snap.screenScore / totalScreenScore)
-    ).toFixed(decimal);
-    condensedLSObj.sad += (
-      snap.sad *
-      (snap.screenScore / totalScreenScore)
-    ).toFixed(decimal);
-    condensedLSObj.angry += (
-      snap.angry *
-      (snap.screenScore / totalScreenScore)
-    ).toFixed(decimal);
-    condensedLSObj.fearful += (
-      snap.fearful *
-      (snap.screenScore / totalScreenScore)
-    ).toFixed(decimal);
-    condensedLSObj.disgusted += (
-      snap.disgusted *
-      (snap.screenScore / totalScreenScore)
-    ).toFixed(decimal);
-    condensedLSObj.surprised += (
-      snap.surprised *
-      (snap.screenScore / totalScreenScore)
-    ).toFixed(decimal);
-  });
+    // WEIGHTED AVERAGE CALCS FOR EACH SENTIMENT SCORE
+    targetScoreObj.forEach(snap => {
+      condensedLSObj.trueScore += Number(
+        (snap.trueScore * (snap.screenScore / totalScreenScore)).toFixed(
+          decimal
+        )
+      );
+      condensedLSObj.neutral += Number(
+        (snap.neutral * (snap.screenScore / totalScreenScore)).toFixed(decimal)
+      );
+      condensedLSObj.happy += Number(
+        (snap.happy * (snap.screenScore / totalScreenScore)).toFixed(decimal)
+      );
+      condensedLSObj.sad += Number(
+        (snap.sad * (snap.screenScore / totalScreenScore)).toFixed(decimal)
+      );
+      condensedLSObj.angry += Number(
+        (snap.angry * (snap.screenScore / totalScreenScore)).toFixed(decimal)
+      );
+      condensedLSObj.fearful += Number(
+        (snap.fearful * (snap.screenScore / totalScreenScore)).toFixed(decimal)
+      );
+      condensedLSObj.disgusted += Number(
+        (snap.disgusted * (snap.screenScore / totalScreenScore)).toFixed(
+          decimal
+        )
+      );
+      condensedLSObj.surprised += Number(
+        (snap.surprised * (snap.screenScore / totalScreenScore)).toFixed(
+          decimal
+        )
+      );
+    });
 
-  // AVERAGE SCREENSCORE CALC
-  condensedLSObj.screenScore = totalScreenScore / targetScoreObj.length;
+    // AVERAGE SCREENSCORE CALC
+    condensedLSObj.screenScore = totalScreenScore / targetScoreObj.length;
 
-  return condensedLSObj;
+    return condensedLSObj;
+  } else return {};
 };
 
 // VARIABLE DETERMINING LENGHT OF MATERIALS FOR NORMALIZED CALC
@@ -164,7 +164,7 @@ export const calcNormalizeUtility = async userId => {
     }, 0);
 
   // CALCULATING AVERAGED (WEIGHTED) NORMALIZE SCORE
-  return calcNormalScore / shortenFullScore.length;
+  return calcNormalScore;
 };
 
 //CALCULATE CURRENT MENTAL STATE FROM normScore AND trueScore

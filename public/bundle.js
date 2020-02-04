@@ -66561,38 +66561,40 @@ var sentimentAlgo = function sentimentAlgo(screenScore, expressions) {
   return fullScoreObj;
 };
 var condenseScoreObj = function condenseScoreObj(targetScoreObj, userId) {
-  var condensedLSObj = {
-    userId: userId,
-    trueScore: 0,
-    screenScore: 0,
-    neutral: 0,
-    happy: 0,
-    sad: 0,
-    angry: 0,
-    fearful: 0,
-    disgusted: 0,
-    surprised: 0,
-    timeStamp: new Date(),
-    count: targetScoreObj.length
-  },
-      totalScreenScore = targetScoreObj.reduce(function (acm, val) {
-    return acm += val.screenScore;
-  }, 0),
-      decimal = 6; // WEIGHTED AVERAGE CALCS FOR EACH SENTIMENT SCORE
+  if (targetScoreObj.length) {
+    var condensedLSObj = {
+      userId: userId,
+      trueScore: 0,
+      screenScore: 0,
+      neutral: 0,
+      happy: 0,
+      sad: 0,
+      angry: 0,
+      fearful: 0,
+      disgusted: 0,
+      surprised: 0,
+      timeStamp: new Date(),
+      count: targetScoreObj.length
+    },
+        totalScreenScore = targetScoreObj.reduce(function (acm, val) {
+      return acm += val.screenScore;
+    }, 0),
+        decimal = 5; // WEIGHTED AVERAGE CALCS FOR EACH SENTIMENT SCORE
 
-  targetScoreObj.forEach(function (snap) {
-    condensedLSObj.trueScore += (snap.trueScore * (snap.screenScore / totalScreenScore)).toFixed(decimal);
-    condensedLSObj.neutral += (snap.neutral * (snap.screenScore / totalScreenScore)).toFixed(decimal);
-    condensedLSObj.happy += (snap.happy * (snap.screenScore / totalScreenScore)).toFixed(decimal);
-    condensedLSObj.sad += (snap.sad * (snap.screenScore / totalScreenScore)).toFixed(decimal);
-    condensedLSObj.angry += (snap.angry * (snap.screenScore / totalScreenScore)).toFixed(decimal);
-    condensedLSObj.fearful += (snap.fearful * (snap.screenScore / totalScreenScore)).toFixed(decimal);
-    condensedLSObj.disgusted += (snap.disgusted * (snap.screenScore / totalScreenScore)).toFixed(decimal);
-    condensedLSObj.surprised += (snap.surprised * (snap.screenScore / totalScreenScore)).toFixed(decimal);
-  }); // AVERAGE SCREENSCORE CALC
+    targetScoreObj.forEach(function (snap) {
+      condensedLSObj.trueScore += Number((snap.trueScore * (snap.screenScore / totalScreenScore)).toFixed(decimal));
+      condensedLSObj.neutral += Number((snap.neutral * (snap.screenScore / totalScreenScore)).toFixed(decimal));
+      condensedLSObj.happy += Number((snap.happy * (snap.screenScore / totalScreenScore)).toFixed(decimal));
+      condensedLSObj.sad += Number((snap.sad * (snap.screenScore / totalScreenScore)).toFixed(decimal));
+      condensedLSObj.angry += Number((snap.angry * (snap.screenScore / totalScreenScore)).toFixed(decimal));
+      condensedLSObj.fearful += Number((snap.fearful * (snap.screenScore / totalScreenScore)).toFixed(decimal));
+      condensedLSObj.disgusted += Number((snap.disgusted * (snap.screenScore / totalScreenScore)).toFixed(decimal));
+      condensedLSObj.surprised += Number((snap.surprised * (snap.screenScore / totalScreenScore)).toFixed(decimal));
+    }); // AVERAGE SCREENSCORE CALC
 
-  condensedLSObj.screenScore = totalScreenScore / targetScoreObj.length;
-  return condensedLSObj;
+    condensedLSObj.screenScore = totalScreenScore / targetScoreObj.length;
+    return condensedLSObj;
+  } else return {};
 }; // VARIABLE DETERMINING LENGHT OF MATERIALS FOR NORMALIZED CALC
 
 var normalizedLen = 3000;
@@ -66673,7 +66675,7 @@ function () {
               return acm += val.trueScore * blendedWtdAvg;
             }, 0); // CALCULATING AVERAGED (WEIGHTED) NORMALIZE SCORE
 
-            return _context.abrupt("return", calcNormalScore / shortenFullScore.length);
+            return _context.abrupt("return", calcNormalScore);
 
           case 30:
           case "end":
