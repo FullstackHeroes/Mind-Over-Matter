@@ -86,7 +86,7 @@ class VideoInput extends Component {
   };
 
   pushToDatabase = () => {
-    console.log("VIDEO DATABSE !!");
+    console.log("VIDEO DATABASE !!");
   };
 
   componentWillUnmount() {
