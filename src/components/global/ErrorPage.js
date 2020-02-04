@@ -12,4 +12,5 @@ const NotFound = () => (
     </center>
   </div>
 );
+
 export default NotFound;

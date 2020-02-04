@@ -14,22 +14,22 @@ class VideoInput extends Component {
     super(props);
     this.webcam = React.createRef();
     this.state = {
-      timeInterval: 3000,
-      fullDesc: null,
-      facingMode: null,
-      detections: null,
-      descriptors: null
+      snapInterval: 3000,
+      dbInterval: 15 * 60 * 1000, // 15 MINUTES
+      facingMode: "user",
+      detections: null
     };
   }
 
   componentDidMount = async () => {
     await loadModels();
-    this.setInputDevice();
+    this.startCapture();
   };
 
   // LOCAL STORAGE MANAGER
-  appendLocalStorage = snapshot => {
+  appendLocalStorage = (snapshot, userId = 1) => {
     snapshot.timeStamp = Date();
+    snapshot.userId = userId; // TEMP HARDCODE !!
     if (localStorage.getItem("snapshots")) {
       const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
       currSnapshot.push(snapshot);
@@ -41,24 +41,17 @@ class VideoInput extends Component {
     }
   };
 
-  // CAMERA SETUP
-  setInputDevice = () => {
-    navigator.mediaDevices.enumerateDevices().then(async devices => {
-      const videoDevs = devices.filter(device => device.kind === "videoinput");
-
-      if (videoDevs.length < 2) this.setState({ facingMode: "user" });
-      else this.setState({ facingMode: { exact: "environment" } });
-
-      this.startCapture();
-    });
-  };
-
+  // TIME INTERVAL FOR CAPTURING SNAPSHOTS
   startCapture = () => {
-    this.interval = setInterval(() => {
-      this.capture();
-    }, this.state.timeInterval);
+    const { user } = this.props;
+    if (user && user.id) {
+      this.interval = setInterval(() => {
+        this.capture();
+      }, this.state.snapInterval);
+    }
   };
 
+  // CAPTURING SNAPSHOT AND APPENDING LOCAL STORAGE
   capture = () => {
     try {
       if (!!this.webcam.current) {
@@ -66,8 +59,7 @@ class VideoInput extends Component {
           fullDesc => {
             if (!!fullDesc && fullDesc.length) {
               this.setState({
-                detections: fullDesc.map(fd => fd.detection),
-                descriptors: fullDesc.map(fd => fd.descriptor)
+                detections: fullDesc.map(fd => fd.detection)
               });
 
               const desc = fullDesc[0],
@@ -85,6 +77,15 @@ class VideoInput extends Component {
       console.error("WAHH --", error);
     }
   };
+
+  // TIME INTERVAL FOR NORMALIZED SCORE AND DB INTERACTION
+  startDatabase = () => {
+    this.interval = setInterval(() => {
+      this.pushToDatabase();
+    }, this.state.dbInterval);
+  };
+
+  pushToDatabase = () => {};
 
   componentWillUnmount() {
     clearInterval(this.interval);

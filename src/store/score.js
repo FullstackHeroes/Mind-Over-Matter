@@ -58,10 +58,12 @@ export const calcNormalizedScore = userId => {
         totalScreenScore = shortenFullScore.reduce((acm, val) => {
           return (acm += val.screenScore);
         }, 0);
+
       let calcNormalScore = 0;
       for (let val of shortenFullScore) {
         calcNormalScore += val.trueScore * (val.screenScore / totalScreenScore);
       }
+
       dispatch(getNormalizedScore(calcNormalScore / shortenFullScore.length));
     } catch (error) {
       console.error(error);

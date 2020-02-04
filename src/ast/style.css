@@ -1,16 +1,21 @@
 /* ------------------ GLOBAL ELEMENTS ------------------ */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+h1 {
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
+}
+
+h3 {
+  margin: 0;
 }
 
 .linkText {
@@ -20,7 +25,65 @@ code {
 
 .linkText:hover {
   text-decoration: underline;
-  color: blue;
+  color: purple;
+}
+
+/* ----------------- AUTH FORM ELEMENT ----------------- */
+.signInFullDiv {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  color: black;
+}
+
+.authFormDiv {
+  margin: 20px auto;
+  width: 25vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.login-authFormDiv {
+  background-color: orange;
+}
+
+.signup-authFormDiv {
+  background-color: lightskyblue;
+}
+
+.authSignInBtn {
+  font-size: 15px;
+  border-radius: 5px;
+  width: 100px;
+  height: 25px;
+}
+
+.authForm {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.authInputDiv {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.authFormLabel {
+  width: 150px;
+}
+
+.authInputBox {
+  width: 150px;
+  height: 25px;
+  padding: 0;
 }
 
 /* ------------------ NAVBAR ELEMENT ------------------ */
@@ -44,10 +107,19 @@ code {
 }
 
 .navBarRight {
-  width: 33%;
+  width: 20%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-around;
   padding: 0 15px;
+}
+
+.navBarHeader {
+  font-size: 35px;
+}
+
+.navBarLink {
+  font-size: 20px;
+  font-weight: bold;
 }
 
 /* ------------------ MAIN APP ELEMENT ------------------ */
@@ -123,4 +195,38 @@ code {
   border-style: solid;
   border-color: white;
   border-width: 1px;
+}
+
+/* ------------------ DASHBOARD ELEMENT ------------------ */
+.dashboardFullDiv {
+  background-color: lightgray;
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  height: 60vh;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.dashboardHeader {
+  text-align: center;
+  color: black;
+}
+
+.dashboardRow {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 45%;
+  margin: 5px 0;
+}
+
+.dashboardTable {
+  background-color: #282c34;
+  margin: 10px;
+  width: 40%;
+  height: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

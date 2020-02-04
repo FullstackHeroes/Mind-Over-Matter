@@ -1,9 +1,8 @@
-// import axios from 'axios'
+import axios from "axios";
+import history from "../history";
 
 // INITIAL STATE
-const initialState = {
-  name: ""
-};
+const defaultUser = {};
 
 // ACTION TYPES
 const GET_USER = "GET_USER";
@@ -16,23 +15,25 @@ export const removeUser = () => ({ type: REMOVE_USER });
 // THUNKY THUNKS
 export const me = () => async dispatch => {
   try {
-    // const res = await axios.get('/auth/me')
-    // dispatch(getUser(res.data || defaultUser))
+    const res = await axios.get("/auth/me");
+    dispatch(getUser(res.data || defaultUser));
   } catch (err) {
     console.error(err);
   }
 };
 
-export const auth = (email, password, method) => async dispatch => {
-  // let res;
+export const auth = userObj => async dispatch => {
+  let res;
   try {
-    // res = await axios.post(`/auth/${method}`, {email, password})
+    const { formName } = userObj;
+    res = await axios.post(`/auth/${formName}`, userObj);
   } catch (authError) {
     return dispatch(getUser({ error: authError }));
   }
 
   try {
-    // dispatch(getUser(res.data))
+    dispatch(getUser(res.data));
+    history.push("/Dashboard");
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr);
   }
@@ -40,20 +41,21 @@ export const auth = (email, password, method) => async dispatch => {
 
 export const logout = () => async dispatch => {
   try {
-    // await axios.post('/auth/logout')
-    // dispatch(removeUser())
+    await axios.post("/auth/logout");
+    dispatch(removeUser());
+    history.push("/SignIn");
   } catch (err) {
     console.error(err);
   }
 };
 
 // REDUCER
-const userReducer = (state = initialState, action) => {
+const userReducer = (state = defaultUser, action) => {
   switch (action.type) {
     case GET_USER:
       return action.user;
     case REMOVE_USER:
-      return {};
+      return defaultUser;
     default:
       return state;
   }
