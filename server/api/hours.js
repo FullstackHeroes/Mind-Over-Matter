@@ -4,7 +4,6 @@ const { isAdmin } = require("./routeProtectors");
 const { User, Hour } = require("../db/models");
 
 //=======GET ALL HOURS==========
-
 router.get("/", async (req, res, next) => {
   try {
     const hours = await Hour.findAll({
@@ -17,25 +16,9 @@ router.get("/", async (req, res, next) => {
 });
 
 //=======POST HOURS============
-
 router.post("/", async function(req, res, next) {
-  console.log(req.body);
-  console.log(new Date().getTime());
-  const {
-    trueScore,
-    userId,
-    happy,
-    surprised,
-    neutral,
-    disgusted,
-    fearful,
-    angry,
-    sad,
-    timeStamp
-  } = req.body;
-
   try {
-    const newHour = await Hour.create({
+    const {
       trueScore,
       userId,
       happy,
@@ -45,16 +28,38 @@ router.post("/", async function(req, res, next) {
       fearful,
       angry,
       sad,
-      timeStamp
+      timeStamp,
+      count,
+      screenScore,
+      screenTime
+    } = req.body;
+    await Hour.create({
+      trueScore,
+      userId,
+      happy,
+      surprised,
+      neutral,
+      disgusted,
+      fearful,
+      angry,
+      sad,
+      timeStamp,
+      count,
+      screenScore,
+      screenTime
     });
-    res.json(newHour);
+    const newFullScoreObj = await Hour.findAll({
+      where: {
+        userId: userId
+      }
+    });
+    res.json(newFullScoreObj);
   } catch (err) {
     next(err);
   }
 });
 
 //=======GET HOURS BY USER ID==========
-
 router.get("/:userId", async (req, res, next) => {
   const userHours = await Hour.findAll({
     where: {

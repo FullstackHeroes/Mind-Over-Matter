@@ -1,3 +1,6 @@
+import axios from "axios";
+import store from "../store";
+
 // SCORING FROM 1-10 (BAD - GOOD) AND MULTIPLIER WILL BE DONE PRO-RATA
 let sentimentSpectrum = {
   happy: {
@@ -69,40 +72,156 @@ export const sentimentAlgo = (screenScore, expressions) => {
   return fullScoreObj;
 };
 
+// DECIMAL ROUNDING
+const rounding = 10 ** 5;
+
 export const condenseScoreObj = (targetScoreObj, userId) => {
-  const condensedLSObj = {
-      userId,
-      trueScore: 0,
-      screenScore: 0,
-      neutral: 0,
-      happy: 0,
-      sad: 0,
-      angry: 0,
-      fearful: 0,
-      disgusted: 0,
-      surprised: 0,
-      timeStamp: Date(),
-      count: targetScoreObj.length
-    },
-    totalScreenScore = targetScoreObj.reduce((acm, val) => {
-      return (acm += val.screenScore);
+  if (targetScoreObj.length) {
+    const condensedLSObj = {
+        userId,
+        trueScore: 0,
+        screenScore: 0,
+        neutral: 0,
+        happy: 0,
+        sad: 0,
+        angry: 0,
+        fearful: 0,
+        disgusted: 0,
+        surprised: 0,
+        timeStamp: new Date(),
+        count: targetScoreObj.length,
+        screenTime: 0
+      },
+      totalScreenScore = targetScoreObj.reduce((acm, val) => {
+        return (acm += val.screenScore);
+      }, 0),
+      { snapInterval } = store.getState().score;
+
+    // WEIGHTED AVERAGE CALCS FOR EACH SENTIMENT SCORE
+    targetScoreObj.forEach(snap => {
+      condensedLSObj.trueScore +=
+        Math.round(
+          snap.trueScore * (snap.screenScore / totalScreenScore) * rounding
+        ) / rounding;
+      condensedLSObj.neutral +=
+        Math.round(
+          snap.neutral * (snap.screenScore / totalScreenScore) * rounding
+        ) / rounding;
+      condensedLSObj.happy +=
+        Math.round(
+          snap.happy * (snap.screenScore / totalScreenScore) * rounding
+        ) / rounding;
+      condensedLSObj.sad +=
+        Math.round(
+          snap.sad * (snap.screenScore / totalScreenScore) * rounding
+        ) / rounding;
+      condensedLSObj.angry +=
+        Math.round(
+          snap.angry * (snap.screenScore / totalScreenScore) * rounding
+        ) / rounding;
+      condensedLSObj.fearful +=
+        Math.round(
+          snap.fearful * (snap.screenScore / totalScreenScore) * rounding
+        ) / rounding;
+      condensedLSObj.disgusted +=
+        Math.round(
+          snap.disgusted * (snap.screenScore / totalScreenScore) * rounding
+        ) / rounding;
+      condensedLSObj.surprised +=
+        Math.round(
+          snap.surprised * (snap.screenScore / totalScreenScore) * rounding
+        ) / rounding;
+    });
+
+    // AVERAGE SCREENSCORE CALC && TIME
+    condensedLSObj.screenScore = totalScreenScore / targetScoreObj.length;
+    condensedLSObj.screenTime = calcScreenTime(
+      condensedLSObj.count,
+      snapInterval
+    );
+
+    return condensedLSObj;
+  } else return {};
+};
+
+// VARIABLE DETERMINING LENGHT OF MATERIALS FOR NORMALIZED CALC
+export const normalizedLen = 3000;
+
+export const calcNormalizeUtility = async userId => {
+  // RETRIEVE BOTH LS AND DB DATAPOINTS AND CONDENSING LS BASE
+  const LSScoreObj = JSON.parse(localStorage.getItem("snapshots")),
+    { data: dbScoreObj } = await axios.get(`/api/hours/${userId}`),
+    condensedLSObj = condenseScoreObj(LSScoreObj, userId);
+
+  // APPEND LS DATA TO DB SCORE OBJ
+  dbScoreObj.push(condensedLSObj);
+
+  // GETTING BASIS FOR WEIGHTED AVERAGE CALC
+  const shortenFullScore = dbScoreObj.slice(-normalizedLen);
+  let totalScreenScore = 0,
+    totalCount = 0;
+  for (let val of shortenFullScore) {
+    totalScreenScore += val.screenScore;
+    totalCount += val.count;
+  }
+
+  const screenWeight = 0.5,
+    countWeight = 1 - screenWeight,
+    calcNormalScore = shortenFullScore.reduce((acm, val) => {
+      const screenWtdAvg = (val.screenScore / totalScreenScore) * screenWeight,
+        countWtdAvg = (val.count / totalCount) * countWeight,
+        blendedWtdAvg = screenWtdAvg + countWtdAvg;
+      return (acm += val.trueScore * blendedWtdAvg);
     }, 0);
 
-  targetScoreObj.forEach(snap => {
-    condensedLSObj.trueScore +=
-      snap.trueScore * (snap.screenScore / totalScreenScore);
-    condensedLSObj.neutral +=
-      snap.neutral * (snap.screenScore / totalScreenScore);
-    condensedLSObj.happy += snap.happy * (snap.screenScore / totalScreenScore);
-    condensedLSObj.sad += snap.sad * (snap.screenScore / totalScreenScore);
-    condensedLSObj.angry += snap.angry * (snap.screenScore / totalScreenScore);
-    condensedLSObj.fearful +=
-      snap.fearful * (snap.screenScore / totalScreenScore);
-    condensedLSObj.disgusted +=
-      snap.disgusted * (snap.screenScore / totalScreenScore);
-    condensedLSObj.surprised +=
-      snap.surprised * (snap.screenScore / totalScreenScore);
-  });
+  // CALCULATING AVERAGED (WEIGHTED) NORMALIZE SCORE
+  return Math.round(calcNormalScore * rounding) / rounding;
+};
 
-  return condensedLSObj;
+//  CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
+export const calcScreenTime = (length, interval) => {
+  return (interval * length) / 1000;
+};
+
+// WEIGHTED AVERAGE COUNT LIMIT
+const wtdAvgCount = 3000;
+
+//CALCULATE CURRENT MENTAL STATE USING AXIOS REQUESTS AND STORAGE DATA
+export const calcWeightedTrueScore = async userId => {
+  //RETRIEVE LS DATA AND DB SCORE OBJECTS AND CONDENSE LS DATA INTO SINGLE OBJ
+  const userLocalData = JSON.parse(localStorage.getItem("snapshots"));
+  const condensedUserLocalData = condensedLSObj(userLocalData, userId);
+  const userDbData = await axios.get(`api/hours/${userId}`);
+
+  // APPEND LS DATA TO DB SCORE OBJ
+  const aggUserDataObjArr = [...userDbData, ...condensedUserLocalData];
+
+  //ORDER aggUserDataObjArr FROM NEW TO OLD
+  const orderArr = aggUserDataObjArr.reverse();
+
+  //BASE DATA FOR WEIGHTED AVG CALC
+  let totalScreenScore = 0,
+    count = 0,
+    i = 0;
+
+  while (count < wtdAvgCount) {
+    let obj = orderArr[i];
+    count += obj.count;
+    totalScreenScore += obj.screenScore;
+    i++;
+  }
+
+  //SHORTEN OBJ ARR INTO RELEVANT SIZE (wtdAvgCount)
+  const shortOrderArr = orderArr.slice(0, i);
+
+  //BEGIN WEIGHTED CALCULATIONS
+  const screenWeight = 0.5,
+    countWeight = 1 - screenWeight,
+    calcNormalScore = shortOrderArr.reduce((acm, data) => {
+      const screenWtdAvg = (data.screenScore / totalScreenScore) * screenWeight,
+        countWtdAvg = (data.count / count) * countWeight,
+        blendedWtdAvg = screenWtdAvg + countWtdAvg;
+      return (acm += data.trueScore * blendedWtdAvg);
+    }, 0);
+  return Math.floor((calcNormalScore * rounding) / rounding);
 };
