@@ -1,4 +1,5 @@
 import axios from "axios";
+import store from "../store";
 
 // SCORING FROM 1-10 (BAD - GOOD) AND MULTIPLIER WILL BE DONE PRO-RATA
 let sentimentSpectrum = {
@@ -85,12 +86,14 @@ export const condenseScoreObj = (targetScoreObj, userId) => {
         disgusted: 0,
         surprised: 0,
         timeStamp: new Date(),
-        count: targetScoreObj.length
+        count: targetScoreObj.length,
+        screenTime: 0
       },
       totalScreenScore = targetScoreObj.reduce((acm, val) => {
         return (acm += val.screenScore);
       }, 0),
-      decimal = 5;
+      decimal = 5,
+      { snapInterval } = store.getState().score;
 
     // WEIGHTED AVERAGE CALCS FOR EACH SENTIMENT SCORE
     targetScoreObj.forEach(snap => {
@@ -126,8 +129,12 @@ export const condenseScoreObj = (targetScoreObj, userId) => {
       );
     });
 
-    // AVERAGE SCREENSCORE CALC
+    // AVERAGE SCREENSCORE CALC && TIME
     condensedLSObj.screenScore = totalScreenScore / targetScoreObj.length;
+    condensedLSObj.screenTime = calcScreenTime(
+      condensedLSObj.count,
+      snapInterval
+    );
 
     return condensedLSObj;
   } else return {};

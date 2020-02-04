@@ -6,7 +6,8 @@ import { sentimentAlgo } from "../../utils/utilities"; //import mentalCheck algo
 import {
   setFullScoreObj,
   calcNormalizedScore,
-  postLSScoreObj
+  postLSScoreObj,
+  getTimeInterval
 } from "../../store";
 
 const WIDTH = 420;
@@ -18,9 +19,6 @@ class VideoInput extends Component {
     super(props);
     this.webcam = React.createRef();
     this.state = {
-      snapInterval: 3000,
-      // dbInterval: 15 * 60 * 1000, // 15 MINUTES
-      dbInterval: 9000, // 15 MINUTES
       facingMode: "user",
       detections: null
     };
@@ -28,9 +26,21 @@ class VideoInput extends Component {
 
   componentDidMount = async () => {
     await loadModels();
-    this.startCapture();
-    this.startDatabase();
+    this.props.getTimeInterval();
+    // this.startCapture();
+    // this.startDatabase();
   };
+
+  componentDidUpdate(prevProps) {
+    const { snapInterval, dbInterval } = this.props;
+    if (
+      snapInterval !== prevProps.snapInterval ||
+      dbInterval !== prevProps.dbInterval
+    ) {
+      this.startCapture();
+      this.startDatabase();
+    }
+  }
 
   // LOCAL STORAGE MANAGER
   appendLocalStorage = (snapshot, userId) => {
@@ -53,7 +63,7 @@ class VideoInput extends Component {
     if (user && user.id) {
       this.intervalSnap = setInterval(() => {
         this.capture(user.id);
-      }, this.state.snapInterval);
+      }, this.props.snapInterval);
     }
   };
 
@@ -90,7 +100,7 @@ class VideoInput extends Component {
     if (user && user.id) {
       this.intervalDB = setInterval(() => {
         this.pushToDatabase(user.id);
-      }, this.state.dbInterval);
+      }, this.props.dbInterval);
     }
   };
 
@@ -199,7 +209,9 @@ class VideoInput extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    snapInterval: state.score.snapInterval,
+    dbInterval: state.score.dbInterval
   };
 };
 
@@ -207,7 +219,9 @@ const mapDispatchToProps = dispatch => {
   return {
     setFullScoreObj: userId => dispatch(setFullScoreObj(userId)),
     calcNormalizedScore: userId => dispatch(calcNormalizedScore(userId)),
-    postLSScoreObj: userId => dispatch(postLSScoreObj(userId))
+    postLSScoreObj: userId => dispatch(postLSScoreObj(userId)),
+    getTimeInterval: (snapInterval, dbInterval) =>
+      dispatch(getTimeInterval(snapInterval, dbInterval))
   };
 };
 

@@ -3,15 +3,27 @@ import { condenseScoreObj, calcNormalizeUtility } from "../utils/utilities";
 
 // INITIAL STATE
 const initialState = {
+  snapInterval: 0,
+  // dbInterval: 15 * 60 * 1000, // 15 MINUTES
+  dbInterval: 0,
   fullScoreObj: [],
   normalizedScore: 0
 };
 
 // ACTION TYPES
+const GET_TIME_INTERVAL = "GET_TIME_INTERVAL";
 const GET_FULL_SCORE_OBJ = "GET_FULL_SCORE_OBJ";
 const GET_NORMALIZED_SCORE = "GET_NORMALIZED_SCORE";
 
 // ACTION CREATORS
+export const getTimeInterval = (snapInterval = 3000, dbInterval = 9000) => {
+  return {
+    type: GET_TIME_INTERVAL,
+    snapInterval,
+    dbInterval
+  };
+};
+
 export const getFullScoreObj = fullScoreObj => {
   return {
     type: GET_FULL_SCORE_OBJ,
@@ -87,6 +99,12 @@ export const calcNormalizedScore = userId => {
 // REDUCER
 const scoreReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_TIME_INTERVAL:
+      return {
+        ...state,
+        snapInterval: action.snapInterval,
+        dbInterval: action.dbInterval
+      };
     case GET_FULL_SCORE_OBJ:
       return { ...state, fullScoreObj: action.fullScoreObj };
     case GET_NORMALIZED_SCORE:

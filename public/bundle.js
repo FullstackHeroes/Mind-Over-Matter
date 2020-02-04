@@ -65369,11 +65369,11 @@ function (_Component) {
               return Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_3__["loadModels"])();
 
             case 2:
-              _this.startCapture();
+              _this.props.getTimeInterval(); // this.startCapture();
+              // this.startDatabase();
 
-              _this.startDatabase();
 
-            case 4:
+            case 3:
             case "end":
               return _context.stop();
           }
@@ -65404,7 +65404,7 @@ function (_Component) {
       if (user && user.id) {
         _this.intervalSnap = setInterval(function () {
           _this.capture(user.id);
-        }, _this.state.snapInterval);
+        }, _this.props.snapInterval);
       }
     });
 
@@ -65471,7 +65471,7 @@ function (_Component) {
       if (user && user.id) {
         _this.intervalDB = setInterval(function () {
           _this.pushToDatabase(user.id);
-        }, _this.state.dbInterval);
+        }, _this.props.dbInterval);
       }
     });
 
@@ -65494,10 +65494,6 @@ function (_Component) {
 
     _this.webcam = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     _this.state = {
-      snapInterval: 3000,
-      // dbInterval: 15 * 60 * 1000, // 15 MINUTES
-      dbInterval: 9000,
-      // 15 MINUTES
       facingMode: "user",
       detections: null
     };
@@ -65505,6 +65501,19 @@ function (_Component) {
   }
 
   _createClass(VideoInput, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var _this$props = this.props,
+          snapInterval = _this$props.snapInterval,
+          dbInterval = _this$props.dbInterval;
+
+      if (snapInterval !== prevProps.snapInterval || dbInterval !== prevProps.dbInterval) {
+        this.startCapture();
+        this.startDatabase();
+      }
+    } // LOCAL STORAGE MANAGER
+
+  }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       clearInterval(this.intervalSnap);
@@ -65596,7 +65605,9 @@ function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user,
+    snapInterval: state.score.snapInterval,
+    dbInterval: state.score.dbInterval
   };
 };
 
@@ -65610,6 +65621,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     postLSScoreObj: function postLSScoreObj(userId) {
       return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["postLSScoreObj"])(userId));
+    },
+    getTimeInterval: function getTimeInterval(snapInterval, dbInterval) {
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["getTimeInterval"])(snapInterval, dbInterval));
     }
   };
 };
@@ -65881,7 +65895,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 /*!****************************!*\
   !*** ./src/store/index.js ***!
   \****************************/
-/*! exports provided: default, getUser, removeUser, me, auth, logout, getFullScoreObj, getNormalizedScore, setFullScoreObj, postLSScoreObj, calcNormalizedScore */
+/*! exports provided: default, getUser, removeUser, me, auth, logout, getTimeInterval, getFullScoreObj, getNormalizedScore, setFullScoreObj, postLSScoreObj, calcNormalizedScore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65903,6 +65917,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "auth", function() { return _user__WEBPACK_IMPORTED_MODULE_4__["auth"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return _user__WEBPACK_IMPORTED_MODULE_4__["logout"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getTimeInterval", function() { return _score__WEBPACK_IMPORTED_MODULE_5__["getTimeInterval"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getFullScoreObj", function() { return _score__WEBPACK_IMPORTED_MODULE_5__["getFullScoreObj"]; });
 
@@ -65939,11 +65955,12 @@ var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, m
 /*!****************************!*\
   !*** ./src/store/score.js ***!
   \****************************/
-/*! exports provided: getFullScoreObj, getNormalizedScore, setFullScoreObj, postLSScoreObj, calcNormalizedScore, default */
+/*! exports provided: getTimeInterval, getFullScoreObj, getNormalizedScore, setFullScoreObj, postLSScoreObj, calcNormalizedScore, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTimeInterval", function() { return getTimeInterval; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFullScoreObj", function() { return getFullScoreObj; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNormalizedScore", function() { return getNormalizedScore; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setFullScoreObj", function() { return setFullScoreObj; });
@@ -65966,13 +65983,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  // INITIAL STATE
 
 var initialState = {
+  snapInterval: 0,
+  // dbInterval: 15 * 60 * 1000, // 15 MINUTES
+  dbInterval: 0,
   fullScoreObj: [],
   normalizedScore: 0
 }; // ACTION TYPES
 
+var GET_TIME_INTERVAL = "GET_TIME_INTERVAL";
 var GET_FULL_SCORE_OBJ = "GET_FULL_SCORE_OBJ";
 var GET_NORMALIZED_SCORE = "GET_NORMALIZED_SCORE"; // ACTION CREATORS
 
+var getTimeInterval = function getTimeInterval() {
+  var snapInterval = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 3000;
+  var dbInterval = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 9000;
+  return {
+    type: GET_TIME_INTERVAL,
+    snapInterval: snapInterval,
+    dbInterval: dbInterval
+  };
+};
 var getFullScoreObj = function getFullScoreObj(fullScoreObj) {
   return {
     type: GET_FULL_SCORE_OBJ,
@@ -66139,6 +66169,12 @@ var scoreReducer = function scoreReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
+    case GET_TIME_INTERVAL:
+      return _objectSpread({}, state, {
+        snapInterval: action.snapInterval,
+        dbInterval: action.dbInterval
+      });
+
     case GET_FULL_SCORE_OBJ:
       return _objectSpread({}, state, {
         fullScoreObj: action.fullScoreObj
@@ -66486,9 +66522,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calcScreenTime", function() { return calcScreenTime; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
  // SCORING FROM 1-10 (BAD - GOOD) AND MULTIPLIER WILL BE DONE PRO-RATA
 
@@ -66574,12 +66612,14 @@ var condenseScoreObj = function condenseScoreObj(targetScoreObj, userId) {
       disgusted: 0,
       surprised: 0,
       timeStamp: new Date(),
-      count: targetScoreObj.length
+      count: targetScoreObj.length,
+      screenTime: 0
     },
         totalScreenScore = targetScoreObj.reduce(function (acm, val) {
       return acm += val.screenScore;
     }, 0),
-        decimal = 5; // WEIGHTED AVERAGE CALCS FOR EACH SENTIMENT SCORE
+        decimal = 5,
+        snapInterval = _store__WEBPACK_IMPORTED_MODULE_1__["default"].getState().score.snapInterval; // WEIGHTED AVERAGE CALCS FOR EACH SENTIMENT SCORE
 
     targetScoreObj.forEach(function (snap) {
       condensedLSObj.trueScore += Number((snap.trueScore * (snap.screenScore / totalScreenScore)).toFixed(decimal));
@@ -66590,9 +66630,10 @@ var condenseScoreObj = function condenseScoreObj(targetScoreObj, userId) {
       condensedLSObj.fearful += Number((snap.fearful * (snap.screenScore / totalScreenScore)).toFixed(decimal));
       condensedLSObj.disgusted += Number((snap.disgusted * (snap.screenScore / totalScreenScore)).toFixed(decimal));
       condensedLSObj.surprised += Number((snap.surprised * (snap.screenScore / totalScreenScore)).toFixed(decimal));
-    }); // AVERAGE SCREENSCORE CALC
+    }); // AVERAGE SCREENSCORE CALC && TIME
 
     condensedLSObj.screenScore = totalScreenScore / targetScoreObj.length;
+    condensedLSObj.screenTime = calcScreenTime(condensedLSObj.count, snapInterval);
     return condensedLSObj;
   } else return {};
 }; // VARIABLE DETERMINING LENGHT OF MATERIALS FOR NORMALIZED CALC
