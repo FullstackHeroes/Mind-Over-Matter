@@ -43,9 +43,12 @@ class VideoInput extends Component {
 
   // TIME INTERVAL FOR CAPTURING SNAPSHOTS
   startCapture = () => {
-    this.interval = setInterval(() => {
-      this.capture();
-    }, this.state.snapInterval);
+    const { user } = this.props;
+    if (user && user.id) {
+      this.interval = setInterval(() => {
+        this.capture();
+      }, this.state.snapInterval);
+    }
   };
 
   // CAPTURING SNAPSHOT AND APPENDING LOCAL STORAGE

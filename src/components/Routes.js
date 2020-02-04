@@ -11,7 +11,7 @@ class Routes extends Component {
         <Route path="/Dashboard" component={Dashboard} />
         <Route path="/Table" component={Table} />
         <Route
-          path="/signIn"
+          path="/SignIn"
           render={() => (
             <div className="signInFullDiv">
               <Login />

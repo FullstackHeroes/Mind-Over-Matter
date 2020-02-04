@@ -23,6 +23,40 @@ code {
   color: purple;
 }
 
+/* ----------------- AUTH FORM ELEMENT ----------------- */
+.signInFullDiv {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  color: black;
+}
+
+.authFormDiv {
+  margin: 20px auto;
+  width: 25vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.login-authFormDiv {
+  background-color: orange;
+}
+
+.signup-authFormDiv {
+  background-color: lightskyblue;
+}
+
+.authSignInBtn {
+  font-size: 13px;
+  border-radius: 5px;
+  width: 90px;
+  height: 20px;
+}
+
 /* ------------------ NAVBAR ELEMENT ------------------ */
 .navBarFullDiv {
   position: fixed;

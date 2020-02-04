@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { auth } from "../../store";
 
 class AuthForm extends Component {
   constructor() {
@@ -19,13 +20,7 @@ class AuthForm extends Component {
     if (evt.target.name === "signup") {
       const name = evt.target.userName.value;
       userObj.name = name;
-      if (evt.target.email.value.toLowerCase().startsWith("guest")) {
-        alert("Please use another email");
-        evt.target.email.value = "";
-      } else if (name.toLowerCase() === "guest") {
-        alert("Please use another name");
-        evt.target.userName.value = "";
-      } else this.props.auth(userObj);
+      this.props.auth(userObj);
     } else this.props.auth(userObj);
   }
 
@@ -70,9 +65,9 @@ class AuthForm extends Component {
           {error && error.response && <div> {error.response.data} </div>}
         </form>
 
-        <a href="/auth/google" className="linkText">
+        {/* <a href="/auth/google" className="linkText">
           {displayName} with Google
-        </a>
+        </a> */}
       </div>
     );
   }
@@ -83,7 +78,6 @@ const mapLogin = state => {
     formName: "login",
     displayName: "Login",
     user: state.user,
-    cartDetail: state.cartProduct,
     error: state.user.error
   };
 };
@@ -93,17 +87,13 @@ const mapSignup = state => {
     formName: "signup",
     displayName: "Sign Up",
     user: state.user,
-    cartDetail: state.cartProduct,
     error: state.user.error
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    emptyCartItems() {
-      dispatch(emptyCartItems());
-    },
-    auth: userObj => dispatch(auth(userObj))
+    auth: () => dispatch(auth())
   };
 };
 
