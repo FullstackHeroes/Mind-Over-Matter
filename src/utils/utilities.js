@@ -183,15 +183,15 @@ export const calcWeightedTrueScore = async userId => {
   //SHORTEN OBJ ARR INTO RELEVANT SIZE (wtdAvgCount)
   const shortOrderArr = orderArr.slice(0, i);
 
+  //BEGIN WEIGHTED CALCULATIONS
   const screenWeight = 0.5,
     countWeight = 1 - screenWeight,
-    calcNormalScore = shortOrderArr;
-
-  //SIMPLE AVG W/O WEIGHT
-  // const sumTrueScore = targetArr.reduce((acm, data) => {
-  //   return (acm += data.trueScore);
-  // });
-  // return { weightedTrueScore: sumTrueScore / i };
+    calcNormalScore = shortOrderArr.reduce((acm, data) => {
+      const screenWtdAvg = (data.screenScore / totalScreenScore) * screenWeight,
+        countWtdAvg = (data.count / count) * countWeight,
+        blendedWtdAvg = screenWtdAvg + countWtdAvg;
+      return (acm += data.trueScore * blendedWtdAvg);
+    }, 0);
 };
 
 // //CALCULATE CURRENT MENTAL STATE FROM normScore AND trueScore

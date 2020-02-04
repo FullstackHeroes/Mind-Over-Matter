@@ -66581,12 +66581,14 @@ function () {
             } //SHORTEN OBJ ARR INTO RELEVANT SIZE (wtdAvgCount)
 
 
-            shortOrderArr = orderArr.slice(0, i);
-            screenWeight = 0.5, countWeight = 1 - screenWeight, calcNormalScore = shortOrderArr; //SIMPLE AVG W/O WEIGHT
-            // const sumTrueScore = targetArr.reduce((acm, data) => {
-            //   return (acm += data.trueScore);
-            // });
-            // return { weightedTrueScore: sumTrueScore / i };
+            shortOrderArr = orderArr.slice(0, i); //BEGIN WEIGHTED CALCULATIONS
+
+            screenWeight = 0.5, countWeight = 1 - screenWeight, calcNormalScore = shortOrderArr.reduce(function (acm, data) {
+              var screenWtdAvg = data.screenScore / totalScreenScore * screenWeight,
+                  countWtdAvg = data.count / count * countWeight,
+                  blendedWtdAvg = screenWtdAvg + countWtdAvg;
+              return acm += data.trueScore * blendedWtdAvg;
+            }, 0);
 
           case 11:
           case "end":
