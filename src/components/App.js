@@ -28,12 +28,10 @@ class App extends Component {
       <div className="appFullDiv">
         <NavBar />
 
-        {user && user.id ? (
-          <div className="appInsideDiv">
-            <VideoInput />
-            <Routes />
-          </div>
-        ) : null}
+        <div className="appInsideDiv">
+          {user && user.id ? <VideoInput /> : null}
+          <Routes />
+        </div>
       </div>
     );
   }
