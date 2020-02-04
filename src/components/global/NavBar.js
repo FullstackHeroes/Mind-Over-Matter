@@ -20,10 +20,26 @@ class NavBar extends Component {
           <Link to="/Table" className="linkText">
             Table
           </Link>
+
+          {isLoggedIn ? (
+            <a href="#" onClick={handleClick} className="linkText">
+              Logout
+            </a>
+          ) : (
+            <Link to="/signIn" className="linkText sign-in">
+              Sign In
+            </Link>
+          )}
         </div>
       </div>
     );
   }
 }
 
-export default connect()(NavBar);
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+export default connect(mapStateToProps)(NavBar);

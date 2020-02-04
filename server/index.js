@@ -1,13 +1,28 @@
 const path = require("path");
 const compression = require("compression");
 const express = require("express");
+const session = require("express-session");
+const passport = require("passport");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const db = require("./db");
+const sessionStore = new SequelizeStore({ db });
 const PORT = process.env.PORT || 3000;
 const app = express();
 
 module.exports = app;
+
+passport.serializeUser((user, done) => done(null, user.id));
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await db.models.user.findByPk(id);
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
+});
 
 // SET UP OUR APPLICATION SERVER
 const createApp = () => {
@@ -22,8 +37,21 @@ const createApp = () => {
   // COMPRESSION MIDDLEWARE
   app.use(compression());
 
+  // SESSION MIDDLEWARE WITH PASSPORT
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET || "my best friend is Cody",
+      store: sessionStore,
+      resave: false,
+      saveUninitialized: false
+    })
+  );
+  app.use(passport.initialize());
+  app.use(passport.session());
+
   // ROUTING
   app.use("/api", require("./api"));
+  app.use("/auth", require("./auth"));
 
   // STATIC FILE-SERVING MIDDLEWARE
   app.use(express.static(path.join(__dirname, "../public")));
