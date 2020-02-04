@@ -4,7 +4,7 @@ import Webcam from "react-webcam";
 import { loadModels, getFaceDescr } from "../../utils/faceBase";
 import { sentimentAlgo } from "../../utils/utilities"; //import mentalCheck algo here
 import {
-  getLSScoreObj,
+  setFullScoreObj,
   calcNormalizedScore,
   postLSScoreObj
 } from "../../store";
@@ -40,10 +40,10 @@ class VideoInput extends Component {
       const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
       currSnapshot.push(snapshot);
       localStorage.setItem("snapshots", JSON.stringify(currSnapshot));
-      this.props.getLSScoreObj(currSnapshot);
+      this.props.setFullScoreObj(userId);
     } else {
       localStorage.setItem("snapshots", JSON.stringify([snapshot]));
-      this.props.getLSScoreObj([snapshot]);
+      this.props.setFullScoreObj(userId);
     }
   };
 
@@ -99,6 +99,7 @@ class VideoInput extends Component {
       console.log("VIDEO DATABASE !!");
       const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
       if (currSnapshot && currSnapshot.length) {
+        console.log("INSIDE VIDEO DATABASE !!");
         this.props.calcNormalizedScore(userId);
         this.props.postLSScoreObj(userId);
       }
@@ -204,7 +205,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getLSScoreObj: LSData => dispatch(getLSScoreObj(LSData)),
+    setFullScoreObj: userId => dispatch(setFullScoreObj(userId)),
     calcNormalizedScore: userId => dispatch(calcNormalizedScore(userId)),
     postLSScoreObj: userId => dispatch(postLSScoreObj(userId))
   };

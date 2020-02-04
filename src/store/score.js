@@ -27,14 +27,15 @@ export const getNormalizedScore = normalizedScore => {
 };
 
 // THUNKY THUNKS
-export const getLSScoreObj = LSData => {
-  return dispatch => {
+export const setFullScoreObj = () => {
+  return async dispatch => {
     try {
-      const LSDataExtract = JSON.parse(localStorage.getItem("snapshots"));
-      if (LSData) dispatch(getFullScoreObj(LSData));
-      else if (LSDataExtract && LSDataExtract.length) {
-        dispatch(getFullScoreObj(LSDataExtract));
-      }
+      const LSDataExtract = JSON.parse(localStorage.getItem("snapshots")),
+        { data: dbScoreObj } = await axios.get(`/api/hours/${userId}`),
+        adjFullScoreObj = dbScoreObj.concat(LSDataExtract);
+
+      if (adjFullScoreObj.length) dispatch(getFullScoreObj(adjFullScoreObj));
+      else dispatch(getFullScoreObj([]));
     } catch (error) {
       console.error(error);
     }

@@ -13699,7 +13699,7 @@ function isnan (val) {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "/* ------------------ GLOBAL ELEMENTS ------------------ */\nbody {\n  margin: 0;\n  font-family: sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\nh1 {\n  margin: 0;\n}\n\nh2 {\n  margin: 0;\n}\n\nh3 {\n  margin: 0;\n}\n\n.linkText {\n  text-decoration: none;\n  color: black;\n}\n\n.linkText:hover {\n  text-decoration: underline;\n  color: purple;\n}\n\n/* ----------------- AUTH FORM ELEMENT ----------------- */\n.signInFullDiv {\n  display: flex;\n  justify-content: space-between;\n  width: 80%;\n  color: black;\n}\n\n.authFormDiv {\n  margin: 20px auto;\n  width: 35vw;\n  height: 50vh;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-evenly;\n  align-items: center;\n  border-radius: 10px;\n}\n\n.login-authFormDiv {\n  background-color: orange;\n}\n\n.signup-authFormDiv {\n  background-color: lightskyblue;\n}\n\n.authSignInBtn {\n  font-size: 15px;\n  border-radius: 5px;\n  width: 100px;\n  height: 25px;\n}\n\n.authForm {\n  width: 90%;\n  height: 70%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-evenly;\n  align-items: center;\n}\n\n.authInputDiv {\n  width: 80%;\n  display: flex;\n  align-items: center;\n  margin: 5px 0;\n}\n\n.authFormLabel {\n  width: 150px;\n}\n\n.authInputBox {\n  width: 150px;\n  height: 25px;\n  padding: 0;\n}\n\n/* ------------------ NAVBAR ELEMENT ------------------ */\n.navBarFullDiv {\n  position: fixed;\n  z-index: 2;\n  width: 100vw;\n  height: 10vh;\n  background-color: rgba(234, 234, 234, 1);\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  color: black;\n}\n\n.navBarLeft {\n  width: 40%;\n  display: flex;\n  align-items: center;\n  padding: 0 15px;\n}\n\n.navBarRight {\n  width: 20%;\n  display: flex;\n  justify-content: space-around;\n  padding: 0 15px;\n}\n\n.navBarHeader {\n  font-size: 35px;\n}\n\n.navBarLink {\n  font-size: 20px;\n  font-weight: bold;\n}\n\n/* ------------------ MAIN APP ELEMENT ------------------ */\n.appLogo {\n  height: 7vmin;\n  pointer-events: none;\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  .appLogo {\n    animation: appLogo-spin infinite 20s linear;\n  }\n}\n\n@keyframes appLogo-spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n.appFullDiv {\n  background-color: #282c34;\n  display: flex;\n  justify-content: center;\n  font-size: calc(10px + 2vmin);\n  color: white;\n}\n\n.appInsideDiv {\n  display: flex;\n  justify-content: space-evenly;\n  width: 100vw;\n  min-height: 100vh;\n  padding-top: 15vh;\n}\n\n/* ------------------ TABLE ELEMENT ------------------ */\n.tableFullDiv {\n  display: flex;\n  justify-content: space-evenly;\n  width: 60%;\n  padding: 0 15px;\n  text-align: center;\n}\n\n.tableHeader {\n  border-spacing: 0;\n  display: flex;\n  justify-content: space-evenly;\n}\n\n.tableHeaderRow {\n  font-size: 17px;\n  background-color: white;\n  border-style: solid;\n  border-color: black;\n  color: black;\n  border-width: 1px;\n  width: 120px;\n}\n\n.tableData {\n  display: flex;\n  justify-content: space-evenly;\n}\n\n.tableDataRow {\n  font-size: 17px;\n  width: 120px;\n  border-style: solid;\n  border-color: white;\n  border-width: 1px;\n}\n\n/* ------------------ DASHBOARD ELEMENT ------------------ */\n.dashboardFullDiv {\n  background-color: lightgray;\n  display: flex;\n  flex-direction: column;\n  width: 50vw;\n  height: 60vh;\n  padding: 15px;\n  border-radius: 5px;\n}\n\n.dashboardHeader {\n  text-align: center;\n  color: black;\n}\n\n.dashboardRow {\n  display: flex;\n  justify-content: space-evenly;\n  width: 100%;\n  height: 45%;\n  margin: 5px 0;\n}\n\n.dashboardTable {\n  background-color: #282c34;\n  margin: 10px;\n  width: 40%;\n  height: 95%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n", ""]);
+exports.push([module.i, "/* ------------------ GLOBAL ELEMENTS ------------------ */\nbody {\n  margin: 0;\n  font-family: sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\nh1 {\n  margin: 0;\n}\n\nh2 {\n  margin: 0;\n}\n\nh3 {\n  margin: 0;\n}\n\n.linkText {\n  text-decoration: none;\n  color: black;\n}\n\n.linkText:hover {\n  text-decoration: underline;\n  color: purple;\n}\n\n/* ----------------- AUTH FORM ELEMENT ----------------- */\n.signInFullDiv {\n  display: flex;\n  justify-content: space-between;\n  width: 80%;\n  color: black;\n}\n\n.authFormDiv {\n  margin: 20px auto;\n  width: 35vw;\n  height: 50vh;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-evenly;\n  align-items: center;\n  border-radius: 10px;\n}\n\n.login-authFormDiv {\n  background-color: orange;\n}\n\n.signup-authFormDiv {\n  background-color: lightskyblue;\n}\n\n.authSignInBtn {\n  font-size: 15px;\n  border-radius: 5px;\n  width: 100px;\n  height: 25px;\n}\n\n.authForm {\n  width: 90%;\n  height: 70%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-evenly;\n  align-items: center;\n}\n\n.authInputDiv {\n  width: 80%;\n  display: flex;\n  align-items: center;\n  margin: 5px 0;\n}\n\n.authFormLabel {\n  width: 150px;\n}\n\n.authInputBox {\n  width: 150px;\n  height: 25px;\n  padding: 0;\n}\n\n/* ------------------ NAVBAR ELEMENT ------------------ */\n.navBarFullDiv {\n  position: fixed;\n  z-index: 2;\n  width: 100vw;\n  height: 10vh;\n  background-color: rgba(234, 234, 234, 1);\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  color: black;\n}\n\n.navBarLeft {\n  width: 40%;\n  display: flex;\n  align-items: center;\n  padding: 0 15px;\n}\n\n.navBarRight {\n  width: 20%;\n  display: flex;\n  justify-content: space-around;\n  padding: 0 15px;\n}\n\n.navBarHeader {\n  font-size: 35px;\n}\n\n.navBarLink {\n  font-size: 20px;\n  font-weight: bold;\n}\n\n/* ------------------ MAIN APP ELEMENT ------------------ */\n.appLogo {\n  height: 7vmin;\n  pointer-events: none;\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  .appLogo {\n    animation: appLogo-spin infinite 20s linear;\n  }\n}\n\n@keyframes appLogo-spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n.appFullDiv {\n  background-color: #282c34;\n  display: flex;\n  justify-content: center;\n  font-size: calc(10px + 2vmin);\n  color: white;\n}\n\n.appInsideDiv {\n  display: flex;\n  justify-content: space-evenly;\n  width: 100vw;\n  min-height: 100vh;\n  padding-top: 15vh;\n}\n\n/* ------------------ TABLE ELEMENT ------------------ */\n.tableFullDiv {\n  display: flex;\n  justify-content: space-evenly;\n  width: 60%;\n  padding: 0 15px;\n  text-align: center;\n}\n\n.tableHeader {\n  border-spacing: 0;\n  display: flex;\n  justify-content: space-evenly;\n}\n\n.tableHeaderRow {\n  font-size: 15px;\n  background-color: white;\n  border-style: solid;\n  border-color: black;\n  color: black;\n  border-width: 1px;\n  width: 100px;\n}\n\n.tableData {\n  display: flex;\n  justify-content: space-evenly;\n}\n\n.tableDataRow {\n  font-size: 15px;\n  width: 100px;\n  border-style: solid;\n  border-color: white;\n  border-width: 1px;\n}\n\n/* ------------------ DASHBOARD ELEMENT ------------------ */\n.dashboardFullDiv {\n  background-color: lightgray;\n  display: flex;\n  flex-direction: column;\n  width: 50vw;\n  height: 60vh;\n  padding: 15px;\n  border-radius: 5px;\n}\n\n.dashboardHeader {\n  text-align: center;\n  color: black;\n}\n\n.dashboardRow {\n  display: flex;\n  justify-content: space-evenly;\n  width: 100%;\n  height: 45%;\n  margin: 5px 0;\n}\n\n.dashboardTable {\n  background-color: #282c34;\n  margin: 10px;\n  width: 40%;\n  height: 95%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -65130,7 +65130,8 @@ function (_Component) {
   _createClass(Table, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.getLSScoreObj();
+      var user = this.props.user;
+      if (user && user.id) this.props.setFullScoreObj(user.id);
     }
   }, {
     key: "componentDidUpdate",
@@ -65138,7 +65139,7 @@ function (_Component) {
       var fullScoreObj = this.props.fullScoreObj;
 
       if (fullScoreObj.length !== prevProps.fullScoreObj.length) {
-        this.props.getLSScoreObj();
+        this.props.setFullScoreObj();
       }
     }
   }, {
@@ -65183,14 +65184,15 @@ function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
+    user: state.user,
     fullScoreObj: state.score.fullScoreObj
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    getLSScoreObj: function getLSScoreObj() {
-      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_2__["getLSScoreObj"])());
+    setFullScoreObj: function setFullScoreObj(userId) {
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_2__["setFullScoreObj"])(userId));
     }
   };
 };
@@ -65386,11 +65388,11 @@ function (_Component) {
         currSnapshot.push(snapshot);
         localStorage.setItem("snapshots", JSON.stringify(currSnapshot));
 
-        _this.props.getLSScoreObj(currSnapshot);
+        _this.props.setFullScoreObj(userId);
       } else {
         localStorage.setItem("snapshots", JSON.stringify([snapshot]));
 
-        _this.props.getLSScoreObj([snapshot]);
+        _this.props.setFullScoreObj(userId);
       }
     });
 
@@ -65477,6 +65479,8 @@ function (_Component) {
         var currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
 
         if (currSnapshot && currSnapshot.length) {
+          console.log("INSIDE VIDEO DATABASE !!");
+
           _this.props.calcNormalizedScore(userId);
 
           _this.props.postLSScoreObj(userId);
@@ -65596,8 +65600,8 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    getLSScoreObj: function getLSScoreObj(LSData) {
-      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["getLSScoreObj"])(LSData));
+    setFullScoreObj: function setFullScoreObj(userId) {
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["setFullScoreObj"])(userId));
     },
     calcNormalizedScore: function calcNormalizedScore(userId) {
       return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["calcNormalizedScore"])(userId));
@@ -65875,7 +65879,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 /*!****************************!*\
   !*** ./src/store/index.js ***!
   \****************************/
-/*! exports provided: default, getUser, removeUser, me, auth, logout, getFullScoreObj, getNormalizedScore, getLSScoreObj, postLSScoreObj, calcNormalizedScore */
+/*! exports provided: default, getUser, removeUser, me, auth, logout, getFullScoreObj, getNormalizedScore, setFullScoreObj, postLSScoreObj, calcNormalizedScore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65902,7 +65906,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getNormalizedScore", function() { return _score__WEBPACK_IMPORTED_MODULE_5__["getNormalizedScore"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getLSScoreObj", function() { return _score__WEBPACK_IMPORTED_MODULE_5__["getLSScoreObj"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "setFullScoreObj", function() { return _score__WEBPACK_IMPORTED_MODULE_5__["setFullScoreObj"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postLSScoreObj", function() { return _score__WEBPACK_IMPORTED_MODULE_5__["postLSScoreObj"]; });
 
@@ -65933,14 +65937,14 @@ var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, m
 /*!****************************!*\
   !*** ./src/store/score.js ***!
   \****************************/
-/*! exports provided: getFullScoreObj, getNormalizedScore, getLSScoreObj, postLSScoreObj, calcNormalizedScore, default */
+/*! exports provided: getFullScoreObj, getNormalizedScore, setFullScoreObj, postLSScoreObj, calcNormalizedScore, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFullScoreObj", function() { return getFullScoreObj; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNormalizedScore", function() { return getNormalizedScore; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLSScoreObj", function() { return getLSScoreObj; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setFullScoreObj", function() { return setFullScoreObj; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postLSScoreObj", function() { return postLSScoreObj; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calcNormalizedScore", function() { return calcNormalizedScore; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -65980,44 +65984,29 @@ var getNormalizedScore = function getNormalizedScore(normalizedScore) {
   };
 }; // THUNKY THUNKS
 
-var getLSScoreObj = function getLSScoreObj(LSData) {
-  return function (dispatch) {
-    try {
-      var LSDataExtract = JSON.parse(localStorage.getItem("snapshots"));
-      if (LSData) dispatch(getFullScoreObj(LSData));else if (LSDataExtract && LSDataExtract.length) {
-        dispatch(getFullScoreObj(LSDataExtract));
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-};
-var postLSScoreObj = function postLSScoreObj(userId) {
+var setFullScoreObj = function setFullScoreObj() {
   return (
     /*#__PURE__*/
     function () {
       var _ref = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(dispatch) {
-        var LSDataObj, targetLSDataObj, adjLSDataObj, newWtdScore;
+        var LSDataExtract, _ref2, dbScoreObj, adjFullScoreObj;
+
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                // ADJUSTING LS SCORE OBJ FOR BACKEND DIGESTION
-                LSDataObj = JSON.parse(localStorage.getItem("snapshots")), targetLSDataObj = LSDataObj.filter(function (snap) {
-                  return snap.userId === userId;
-                }), adjLSDataObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_1__["condenseScoreObj"])(targetLSDataObj, userId);
-                console.log("POST THUNK 1 -", adjLSDataObj); // INTERACT WITH DATABASE
+                LSDataExtract = JSON.parse(localStorage.getItem("snapshots"));
+                _context.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/hours/".concat(userId));
 
-                _context.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/hours", adjLSDataObj);
-
-              case 5:
-                newWtdScore = _context.sent;
-                console.log("POST THUNK 2 -", newWtdScore.data);
-                dispatch(getFullScoreObj(newWtdScore.data));
+              case 4:
+                _ref2 = _context.sent;
+                dbScoreObj = _ref2.data;
+                adjFullScoreObj = dbScoreObj.concat(LSDataExtract);
+                if (adjFullScoreObj.length) dispatch(getFullScoreObj(adjFullScoreObj));else dispatch(getFullScoreObj([]));
                 _context.next = 13;
                 break;
 
@@ -66040,25 +66029,73 @@ var postLSScoreObj = function postLSScoreObj(userId) {
     }()
   );
 };
-var calcNormalizedScore = function calcNormalizedScore(userId) {
+var postLSScoreObj = function postLSScoreObj(userId) {
   return (
     /*#__PURE__*/
     function () {
-      var _ref2 = _asyncToGenerator(
+      var _ref3 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee2(dispatch) {
-        var normalizeScore, normalizeDBObj;
+        var LSDataObj, targetLSDataObj, adjLSDataObj, newWtdScore;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
-                _context2.next = 3;
+                // ADJUSTING LS SCORE OBJ FOR BACKEND DIGESTION
+                LSDataObj = JSON.parse(localStorage.getItem("snapshots")), targetLSDataObj = LSDataObj.filter(function (snap) {
+                  return snap.userId === userId;
+                }), adjLSDataObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_1__["condenseScoreObj"])(targetLSDataObj, userId);
+                console.log("POST THUNK 1 -", adjLSDataObj); // INTERACT WITH DATABASE
+
+                _context2.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/hours", adjLSDataObj);
+
+              case 5:
+                newWtdScore = _context2.sent;
+                console.log("POST THUNK 2 -", newWtdScore.data);
+                dispatch(getFullScoreObj(newWtdScore.data));
+                _context2.next = 13;
+                break;
+
+              case 10:
+                _context2.prev = 10;
+                _context2.t0 = _context2["catch"](0);
+                console.error(_context2.t0);
+
+              case 13:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 10]]);
+      }));
+
+      return function (_x2) {
+        return _ref3.apply(this, arguments);
+      };
+    }()
+  );
+};
+var calcNormalizedScore = function calcNormalizedScore(userId) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref4 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee3(dispatch) {
+        var normalizeScore, normalizeDBObj;
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
                 return Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_1__["calcNormalizeUtility"])(userId);
 
               case 3:
-                normalizeScore = _context2.sent;
-                _context2.next = 6;
+                normalizeScore = _context3.sent;
+                _context3.next = 6;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/normalizeScore", {
                   userId: userId,
                   normalizeScore: normalizeScore,
@@ -66066,27 +66103,27 @@ var calcNormalizedScore = function calcNormalizedScore(userId) {
                 });
 
               case 6:
-                normalizeDBObj = _context2.sent;
+                normalizeDBObj = _context3.sent;
                 console.log("NORMALIZE THUNK -", normalizeDBObj.data);
                 dispatch(getNormalizedScore(normalizeScore));
-                _context2.next = 14;
+                _context3.next = 14;
                 break;
 
               case 11:
-                _context2.prev = 11;
-                _context2.t0 = _context2["catch"](0);
-                console.error(_context2.t0);
+                _context3.prev = 11;
+                _context3.t0 = _context3["catch"](0);
+                console.error(_context3.t0);
 
               case 14:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, null, [[0, 11]]);
+        }, _callee3, null, [[0, 11]]);
       }));
 
-      return function (_x2) {
-        return _ref2.apply(this, arguments);
+      return function (_x3) {
+        return _ref4.apply(this, arguments);
       };
     }()
   );

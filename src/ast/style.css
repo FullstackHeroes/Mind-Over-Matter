@@ -177,13 +177,13 @@ h3 {
 }
 
 .tableHeaderRow {
-  font-size: 17px;
+  font-size: 15px;
   background-color: white;
   border-style: solid;
   border-color: black;
   color: black;
   border-width: 1px;
-  width: 120px;
+  width: 100px;
 }
 
 .tableData {
@@ -192,8 +192,8 @@ h3 {
 }
 
 .tableDataRow {
-  font-size: 17px;
-  width: 120px;
+  font-size: 15px;
+  width: 100px;
   border-style: solid;
   border-color: white;
   border-width: 1px;

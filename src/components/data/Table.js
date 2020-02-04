@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getLSScoreObj } from "../../store";
+import { setFullScoreObj } from "../../store";
 import TableRow from "./TableRow";
 
 class Table extends Component {
   componentDidMount() {
-    this.props.getLSScoreObj();
+    const { user } = this.props;
+    if (user && user.id) this.props.setFullScoreObj(user.id);
   }
 
   componentDidUpdate(prevProps) {
     const { fullScoreObj } = this.props;
     if (fullScoreObj.length !== prevProps.fullScoreObj.length) {
-      this.props.getLSScoreObj();
+      this.props.setFullScoreObj();
     }
   }
 
@@ -51,13 +52,14 @@ class Table extends Component {
 
 const mapStateToProps = state => {
   return {
+    user: state.user,
     fullScoreObj: state.score.fullScoreObj
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getLSScoreObj: () => dispatch(getLSScoreObj())
+    setFullScoreObj: userId => dispatch(setFullScoreObj(userId))
   };
 };
 
