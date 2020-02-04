@@ -17249,6 +17249,7 @@ var env = {
 initialize();
 //# sourceMappingURL=index.js.map
 
+
 /***/ }),
 
 /***/ "./node_modules/face-api.js/build/es6/env/isBrowser.js":
@@ -66627,48 +66628,6 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
-/***/ "./src/components/Homepage.js":
-/*!************************************!*\
-  !*** ./src/components/Homepage.js ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _homepage_Carousel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./homepage/Carousel */ "./src/components/homepage/Carousel.js");
-/* harmony import */ var react_responsive_carousel_lib_styles_carousel_min_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-responsive-carousel/lib/styles/carousel.min.css */ "./node_modules/react-responsive-carousel/lib/styles/carousel.min.css");
-/* harmony import */ var react_responsive_carousel_lib_styles_carousel_min_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_responsive_carousel_lib_styles_carousel_min_css__WEBPACK_IMPORTED_MODULE_3__);
-
-
-
-
-
-var Homepage = function Homepage() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_homepage_Carousel__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "homepageWhite"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "homepageText"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "What Is Mind Over Matter?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Mind Over Matter is a mental health analytics program that analyzes your emotional state and mental wellbeing as you progress through your day. We record this data and provide feedback to help you improve your health."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Why Should I use Mind Over Matter?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Mental health is almost always overlooked and not taken seriously. We want to change that. Our purpose is to help those in need and make people more aware of their wellbeing."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=375&w=630"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "homepageWhite"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "homepageText"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "How Can We Help?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "We provide more than just feedback. We present our data findings in digestible pieces such as tables, graphs and charts. We supply educational articles and readings to enable you to take better care of yourself. And if the worst does come, we make finding a health professional near you easy. We're with you all the way in your journey to better health."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Here at Mind Over Matter, we take care of you."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    align: "center"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Join the mental health revolution! Sign up today!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Mind Over Matter - A Mental Health Improvement Platform", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "By Emmanuel Kanadilas, James Shen, Kenneth Chen and Robert Costello"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)));
-}; // render(<Homepage />, document.getElementById("root"));
-
-
-/* harmony default export */ __webpack_exports__["default"] = (Homepage);
-
-/***/ }),
-
 /***/ "./src/components/Routes.js":
 /*!**********************************!*\
   !*** ./src/components/Routes.js ***!
@@ -66705,7 +66664,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
- // import { Dashboard, Table, Login, Signup  } from "./index";
 
 
 
@@ -67752,6 +67710,48 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/components/homepage/Homepage.js":
+/*!*********************************************!*\
+  !*** ./src/components/homepage/Homepage.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Carousel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Carousel */ "./src/components/homepage/Carousel.js");
+/* harmony import */ var react_responsive_carousel_lib_styles_carousel_min_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-responsive-carousel/lib/styles/carousel.min.css */ "./node_modules/react-responsive-carousel/lib/styles/carousel.min.css");
+/* harmony import */ var react_responsive_carousel_lib_styles_carousel_min_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_responsive_carousel_lib_styles_carousel_min_css__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+
+var Homepage = function Homepage() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Carousel__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "homepageWhite"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "homepageText"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "What Is Mind Over Matter?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Mind Over Matter is a mental health analytics program that analyzes your emotional state and mental wellbeing as you progress through your day. We record this data and provide feedback to help you improve your health."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Why Should I use Mind Over Matter?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Mental health is almost always overlooked and not taken seriously. We want to change that. Our purpose is to help those in need and make people more aware of their wellbeing."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=375&w=630"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "homepageWhite"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "homepageText"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "How Can We Help?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "We provide more than just feedback. We present our data findings in digestible pieces such as tables, graphs and charts. We supply educational articles and readings to enable you to take better care of yourself. And if the worst does come, we make finding a health professional near you easy. We're with you all the way in your journey to better health."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Here at Mind Over Matter, we take care of you."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    align: "center"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Join the mental health revolution! Sign up today!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Mind Over Matter - A Mental Health Improvement Platform", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "By Emmanuel Kanadilas, James Shen, Kenneth Chen and Robert Costello"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)));
+}; // render(<Homepage />, document.getElementById("root"));
+
+
+/* harmony default export */ __webpack_exports__["default"] = (Homepage);
+
+/***/ }),
+
 /***/ "./src/components/index.js":
 /*!*********************************!*\
   !*** ./src/components/index.js ***!
@@ -67778,8 +67778,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Signup", function() { return _auth_AuthForm__WEBPACK_IMPORTED_MODULE_4__["Signup"]; });
 
-/* harmony import */ var _Homepage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Homepage */ "./src/components/Homepage.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Homepage", function() { return _Homepage__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+/* harmony import */ var _homepage_Homepage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./homepage/Homepage */ "./src/components/homepage/Homepage.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Homepage", function() { return _homepage_Homepage__WEBPACK_IMPORTED_MODULE_5__["default"]; });
 
 
 
@@ -68046,31 +68046,29 @@ var postLSScoreObj = function postLSScoreObj(userId) {
                 // ADJUSTING LS SCORE OBJ FOR BACKEND DIGESTION
                 LSDataObj = JSON.parse(localStorage.getItem("snapshots")), targetLSDataObj = LSDataObj.filter(function (snap) {
                   return snap.userId === userId;
-                }), adjLSDataObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_1__["condenseScoreObj"])(targetLSDataObj, userId);
-                console.log("POST THUNK 1 -", adjLSDataObj); // INTERACT WITH DATABASE
+                }), adjLSDataObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_1__["condenseScoreObj"])(targetLSDataObj, userId); // INTERACT WITH DATABASE
 
-                _context2.next = 5;
+                _context2.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/hours", adjLSDataObj);
 
-              case 5:
+              case 4:
                 newWtdScore = _context2.sent;
-                console.log("POST THUNK 2 -", newWtdScore.data);
                 dispatch(getFullScoreObj(newWtdScore.data));
                 localStorage.clear();
-                _context2.next = 14;
+                _context2.next = 12;
                 break;
 
-              case 11:
-                _context2.prev = 11;
+              case 9:
+                _context2.prev = 9;
                 _context2.t0 = _context2["catch"](0);
                 console.error(_context2.t0);
 
-              case 14:
+              case 12:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 11]]);
+        }, _callee2, null, [[0, 9]]);
       }));
 
       return function (_x2) {
@@ -68106,22 +68104,21 @@ var calcNormalizedScore = function calcNormalizedScore(userId) {
 
               case 6:
                 normalizeDBObj = _context3.sent;
-                console.log("NORMALIZE THUNK -", normalizeDBObj.data);
                 dispatch(getNormalizedScore(normalizeScore));
-                _context3.next = 14;
+                _context3.next = 13;
                 break;
 
-              case 11:
-                _context3.prev = 11;
+              case 10:
+                _context3.prev = 10;
                 _context3.t0 = _context3["catch"](0);
                 console.error(_context3.t0);
 
-              case 14:
+              case 13:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 11]]);
+        }, _callee3, null, [[0, 10]]);
       }));
 
       return function (_x3) {
