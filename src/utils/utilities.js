@@ -119,20 +119,38 @@ export const normalizedLen = 3000;
 export const calcNormalizeUtility = async userId => {
   // RETRIEVE BOTH LS AND DB DATAPOINTS AND CONDENSING LS BASE
   const LSScoreObj = JSON.parse(localStorage.getItem("snapshots")),
-    dbScoreObj = await axios.get(`/api/hours/${userId}`),
+    { data: dbScoreObj } = await axios.get(`/api/hours/${userId}`),
     condensedLSObj = condenseScoreObj(LSScoreObj, userId);
 
   // APPEND LS DATA TO DB SCORE OBJ
   dbScoreObj.push(condensedLSObj);
 
   // GETTING BASIS FOR WEIGHTED AVERAGE CALC
-  const shortenFullScore = dbScoreObj.slice(-normalizedLen),
-    totalScreenScore = shortenFullScore.reduce((acm, val) => {
-      return (acm += val.screenScore);
-    }, 0),
+  const shortenFullScore = dbScoreObj.slice(-normalizedLen);
+  let totalScreenScore = 0,
+    totalCount = 0;
+  for (let val of shortenFullScore) {
+    totalScreenScore += val.screenScore;
+    totalCount += val.count;
+  }
+
+  console.log("total -", totalScreenScore, totalCount);
+  const screenWeight = 0.5,
+    countWeight = 1 - screenWeight,
     calcNormalScore = shortenFullScore.reduce((acm, val) => {
-      return (acm += val.trueScore * (val.screenScore / totalScreenScore));
+      const screenWtdAvg = (val.screenScore / totalScreenScore) * screenWeight,
+        countWtdAvg = (val.count / totalCount) * countWeight,
+        blendedWtdAvg = screenWtdAvg + countWtdAvg;
+      return (acm += val.trueScore * blendedWtdAvg);
     }, 0);
+
+  console.log(
+    "normalize 2 -",
+    calcNormalScore,
+    shortenFullScore.length,
+    shortenFullScore,
+    totalScreenScore
+  );
 
   // CALCULATING AVERAGED (WEIGHTED) NORMALIZE SCORE
   return calcNormalScore / shortenFullScore.length;

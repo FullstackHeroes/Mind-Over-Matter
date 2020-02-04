@@ -44,27 +44,12 @@ export const getLSScoreObj = LSData => {
 export const calcNormalizedScore = userId => {
   return async dispatch => {
     try {
-      // RETRIEVE BOTH LS AND DB DATAPOINTS BEFORE CALCULATING BASIS
-      // const LSScoreObj = JSON.parse(localStorage.getItem("snapshots")),
-      //   dbScoreObj = await axios.get(`/api/hours/${userId}`),
-      //   condensedLSObj = condenseScoreObj(LSScoreObj, userId);
-
-      // dbScoreObj.push(condensedLSObj);
-
-      // const shortenFullScore = dbScoreObj.slice(-normalizedLen),
-      //   totalScreenScore = shortenFullScore.reduce((acm, val) => {
-      //     return (acm += val.screenScore);
-      //   }, 0);
-
-      // let calcNormalScore = 0;
-      // for (let val of shortenFullScore) {
-      //   calcNormalScore += val.trueScore * (val.screenScore / totalScreenScore);
-      // }
-      const normalizeScore = calcNormalizeUtility(userId);
-      await axios.post(`/api/normalizeScore`, {
-        normalizeScore,
-        timeStamp: new Date()
-      });
+      const normalizeScore = await calcNormalizeUtility(userId),
+        normalizeDBObj = await axios.post(`/api/normalizeScore`, {
+          userId,
+          normalizeScore,
+          timeStamp: new Date()
+        });
       dispatch(getNormalizedScore(normalizeScore));
     } catch (error) {
       console.error(error);

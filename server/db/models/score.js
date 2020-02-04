@@ -3,106 +3,124 @@ const { db } = require("../db");
 
 const Hour = db.define("hour", {
   trueScore: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   happy: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   surprised: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   neutral: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   disgusted: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   fearful: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   angry: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   sad: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   timeStamp: {
     type: Sequelize.STRING
   },
   count: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.INTEGER
   },
   screenScore: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   screenTime: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   }
 });
 
 const Day = db.define("day", {
   trueScore: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   happy: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   surprised: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   neutral: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   disgusted: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   fearful: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   angry: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   sad: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   timeStamp: {
     type: Sequelize.STRING
+  },
+  count: {
+    type: Sequelize.INTEGER
+  },
+  screenScore: {
+    type: Sequelize.FLOAT
+  },
+  screenTime: {
+    type: Sequelize.FLOAT
   }
 });
 
 const Week = db.define("week", {
   trueScore: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   happy: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   surprised: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   neutral: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   disgusted: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   fearful: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   angry: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   sad: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   timeStamp: {
     type: Sequelize.STRING
+  },
+  count: {
+    type: Sequelize.INTEGER
+  },
+  screenScore: {
+    type: Sequelize.FLOAT
+  },
+  screenTime: {
+    type: Sequelize.FLOAT
   }
 });
 
 const NormalizeScore = db.define("normalizeScore", {
   normalizeScore: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.FLOAT
   },
   timeStamp: {
     type: Sequelize.STRING

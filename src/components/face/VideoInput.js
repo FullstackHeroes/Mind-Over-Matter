@@ -89,9 +89,9 @@ class VideoInput extends Component {
     console.log("VIDEO DATABASE !!");
   };
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
+  // componentWillUnmount() {
+  //   clearInterval(this.interval);
+  // }
 
   render() {
     const { detections, facingMode } = this.state;
