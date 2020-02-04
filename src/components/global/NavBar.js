@@ -15,28 +15,30 @@ class NavBar extends Component {
           <img src={logo} className="appLogo" alt="logo" />
         </div>
 
-        <div className="navBarRight">
-          <Link to="/Dashboard" className="linkText navBarLink">
-            Dashboard
-          </Link>
+        {user && user.id ? (
+          <div className="navBarRight">
+            <Link to="/Dashboard" className="linkText navBarLink">
+              Dashboard
+            </Link>
 
-          <Link to="/Table" className="linkText navBarLink">
-            Table
-          </Link>
+            <Link to="/Table" className="linkText navBarLink">
+              Table
+            </Link>
 
-          {user && user.id ? (
             <a
               href="#"
               onClick={() => this.props.logout()}
               className="linkText navBarLink">
               Logout
             </a>
-          ) : (
+          </div>
+        ) : (
+          <div className="navBarRight">
             <Link to="/SignIn" className="linkText navBarLink">
               Sign In
             </Link>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     );
   }
