@@ -34,6 +34,9 @@ const Hour = db.define("hour", {
   },
   screenScore: {
     type: Sequelize.DECIMAL
+  },
+  screenTime: {
+    type: Sequelize.DECIMAL
   }
 });
 

@@ -27,7 +27,8 @@ const hourSeed = [
     sad: 0.07,
     timeStamp: new Date(),
     count: 335,
-    screenScore: 0.85
+    screenScore: 0.85,
+    screenTime: 15
   },
   {
     userId: 1,
@@ -41,7 +42,8 @@ const hourSeed = [
     sad: 0.05,
     timeStamp: new Date(),
     count: 310,
-    screenScore: 0.99
+    screenScore: 0.99,
+    screenTime: 13
   },
   {
     userId: 1,
@@ -55,7 +57,8 @@ const hourSeed = [
     sad: 0.01,
     timeStamp: new Date(),
     count: 320,
-    screenScore: 0.88
+    screenScore: 0.88,
+    screenTime: 12
   },
   {
     userId: 1,
@@ -69,7 +72,8 @@ const hourSeed = [
     sad: 0.11,
     timeStamp: new Date(),
     count: 280,
-    screenScore: 0.98
+    screenScore: 0.98,
+    screenTime: 14
   },
   {
     userId: 1,
@@ -83,7 +87,8 @@ const hourSeed = [
     sad: 0.04,
     timeStamp: new Date(),
     count: 290,
-    screenScore: 0.77
+    screenScore: 0.77,
+    screenTime: 11
   },
   {
     userId: 1,
@@ -97,7 +102,8 @@ const hourSeed = [
     sad: 0.08,
     timeStamp: new Date(),
     count: 330,
-    screenScore: 0.78
+    screenScore: 0.78,
+    screenTime: 14
   },
   {
     userId: 1,
@@ -111,7 +117,8 @@ const hourSeed = [
     sad: 0.12,
     timeStamp: new Date(),
     count: 290,
-    screenScore: 0.95
+    screenScore: 0.95,
+    screenTime: 12
   },
   {
     userId: 1,
@@ -125,7 +132,8 @@ const hourSeed = [
     sad: 0.31,
     timeStamp: new Date(),
     count: 275,
-    screenScore: 0.78
+    screenScore: 0.78,
+    screenTime: 10
   },
   {
     userId: 1,
@@ -139,7 +147,8 @@ const hourSeed = [
     sad: 0.28,
     timeStamp: new Date(),
     count: 310,
-    screenScore: 0.98
+    screenScore: 0.98,
+    screenTime: 15
   },
   {
     userId: 1,
@@ -153,7 +162,8 @@ const hourSeed = [
     sad: 0.01,
     timeStamp: new Date(),
     count: 250,
-    screenScore: 0.78
+    screenScore: 0.78,
+    screenTime: 13
   }
 ];
 

@@ -137,3 +137,8 @@ export const calcNormalizeUtility = async userId => {
   // CALCULATING AVERAGED (WEIGHTED) NORMALIZE SCORE
   return calcNormalScore / shortenFullScore.length;
 };
+
+//  CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
+export const calcScreenTime = (length, interval) => {
+  return (interval * length) / 1000;
+};
