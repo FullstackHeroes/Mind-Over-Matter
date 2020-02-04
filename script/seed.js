@@ -25,9 +25,10 @@ const hourSeed = [
     fearful: 0.0,
     angry: 0.05,
     sad: 0.07,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 335,
-    screenScore: 0.85
+    screenScore: 0.85,
+    screenTime: 15
   },
   {
     userId: 1,
@@ -39,9 +40,10 @@ const hourSeed = [
     fearful: 0.12,
     angry: 0.07,
     sad: 0.05,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 310,
-    screenScore: 0.99
+    screenScore: 0.99,
+    screenTime: 13
   },
   {
     userId: 1,
@@ -53,9 +55,10 @@ const hourSeed = [
     fearful: 0.1,
     angry: 0.1,
     sad: 0.01,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 320,
-    screenScore: 0.88
+    screenScore: 0.88,
+    screenTime: 12
   },
   {
     userId: 1,
@@ -67,9 +70,10 @@ const hourSeed = [
     fearful: 0.29,
     angry: 0.24,
     sad: 0.11,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 280,
-    screenScore: 0.98
+    screenScore: 0.98,
+    screenTime: 14
   },
   {
     userId: 1,
@@ -81,9 +85,10 @@ const hourSeed = [
     fearful: 0.22,
     angry: 0.28,
     sad: 0.04,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 290,
-    screenScore: 0.77
+    screenScore: 0.77,
+    screenTime: 11
   },
   {
     userId: 1,
@@ -95,9 +100,10 @@ const hourSeed = [
     fearful: 0.15,
     angry: 0.31,
     sad: 0.08,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 330,
-    screenScore: 0.78
+    screenScore: 0.78,
+    screenTime: 14
   },
   {
     userId: 1,
@@ -109,9 +115,10 @@ const hourSeed = [
     fearful: 0.21,
     angry: 0.02,
     sad: 0.12,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 290,
-    screenScore: 0.95
+    screenScore: 0.95,
+    screenTime: 12
   },
   {
     userId: 1,
@@ -123,9 +130,10 @@ const hourSeed = [
     fearful: 0.02,
     angry: 0.17,
     sad: 0.31,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 275,
-    screenScore: 0.78
+    screenScore: 0.78,
+    screenTime: 10
   },
   {
     userId: 1,
@@ -137,9 +145,10 @@ const hourSeed = [
     fearful: 0.21,
     angry: 0.02,
     sad: 0.28,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 310,
-    screenScore: 0.98
+    screenScore: 0.98,
+    screenTime: 15
   },
   {
     userId: 1,
@@ -151,9 +160,10 @@ const hourSeed = [
     fearful: 0.06,
     angry: 0.17,
     sad: 0.01,
-    timeStamp: Date(),
+    timeStamp: new Date(),
     count: 250,
-    screenScore: 0.78
+    screenScore: 0.78,
+    screenTime: 13
   }
 ];
 

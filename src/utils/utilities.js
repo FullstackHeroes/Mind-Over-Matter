@@ -106,3 +106,8 @@ export const condenseScoreObj = (targetScoreObj, userId) => {
 
   return condensedLSObj;
 };
+
+//  CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
+export const calcScreenTime = (length, interval) => {
+  return (interval * length) / 1000;
+};
