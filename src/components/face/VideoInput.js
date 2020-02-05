@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import Webcam from "react-webcam";
 import { loadModels, getFaceDescr } from "../../utils/faceBase";

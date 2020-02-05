@@ -67330,7 +67330,7 @@ function (_Component) {
                         switch (_context2.prev = _context2.next) {
                           case 0:
                             if (!(!!fullDesc && fullDesc.length)) {
-                              _context2.next = 13;
+                              _context2.next = 12;
                               break;
                             }
 
@@ -67349,17 +67349,17 @@ function (_Component) {
 
                           case 8:
                             runningTrueScore = _context2.sent;
-                            console.log("!!!!!!!!!!!!!!!", runningTrueScore); // APPENDING LOCAL STORAGE
 
+                            // APPENDING LOCAL STORAGE
                             _this.appendLocalStorage(fullScoreObj, userId);
 
-                            _context2.next = 14;
+                            _context2.next = 13;
                             break;
 
-                          case 13:
+                          case 12:
                             console.error("WAHH -- no current detection");
 
-                          case 14:
+                          case 13:
                           case "end":
                             return _context2.stop();
                         }
