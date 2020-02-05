@@ -116,11 +116,7 @@ class VideoInput extends Component {
     try {
       const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
       if (currSnapshot && currSnapshot.length) {
-<<<<<<< HEAD
-        this.props.calcNormalizedScore(userId);
-=======
         this.props.postNormalizedScore(userId);
->>>>>>> master
         this.props.postLSScoreObj(userId);
       }
     } catch (error) {
