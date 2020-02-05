@@ -76,7 +76,7 @@ export const sentimentAlgo = (screenScore, expressions) => {
 const rounding = 10 ** 5;
 
 export const condenseScoreObj = (targetScoreObj, userId) => {
-  if (targetScoreObj.length) {
+  if (targetScoreObj && targetScoreObj.length) {
     const condensedLSObj = {
         userId,
         trueScore: 0,

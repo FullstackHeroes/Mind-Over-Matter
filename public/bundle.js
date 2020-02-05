@@ -68612,7 +68612,7 @@ var sentimentAlgo = function sentimentAlgo(screenScore, expressions) {
 
 var rounding = Math.pow(10, 5);
 var condenseScoreObj = function condenseScoreObj(targetScoreObj, userId) {
-  if (targetScoreObj.length) {
+  if (targetScoreObj && targetScoreObj.length) {
     var _condensedLSObj = {
       userId: userId,
       trueScore: 0,
