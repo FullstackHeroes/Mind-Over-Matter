@@ -66964,23 +66964,28 @@ function (_Component) {
               case 0:
                 _this$props = this.props, fullScoreObj = _this$props.fullScoreObj, user = _this$props.user;
 
+                if (!(user && user.id)) {
+                  _context.next = 9;
+                  break;
+                }
+
                 if (!(fullScoreObj.length !== prevProps.fullScoreObj.length || user.id !== prevProps.user.id)) {
-                  _context.next = 8;
+                  _context.next = 9;
                   break;
                 }
 
                 this.props.setFullScoreObj(user.id);
                 this.props.setNormalizedScore(user.id);
-                _context.next = 6;
+                _context.next = 7;
                 return Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_3__["calcWeightedTrueScore"])(user.id);
 
-              case 6:
+              case 7:
                 wtdTrueScore = _context.sent;
                 this.setState({
                   wtdTrueScore: wtdTrueScore.toFixed(3)
                 });
 
-              case 8:
+              case 9:
               case "end":
                 return _context.stop();
             }

@@ -18,14 +18,16 @@ class Dashboard extends Component {
 
   async componentDidUpdate(prevProps) {
     const { fullScoreObj, user } = this.props;
-    if (
-      fullScoreObj.length !== prevProps.fullScoreObj.length ||
-      user.id !== prevProps.user.id
-    ) {
-      this.props.setFullScoreObj(user.id);
-      this.props.setNormalizedScore(user.id);
-      const wtdTrueScore = await calcWeightedTrueScore(user.id);
-      this.setState({ wtdTrueScore: wtdTrueScore.toFixed(3) });
+    if (user && user.id) {
+      if (
+        fullScoreObj.length !== prevProps.fullScoreObj.length ||
+        user.id !== prevProps.user.id
+      ) {
+        this.props.setFullScoreObj(user.id);
+        this.props.setNormalizedScore(user.id);
+        const wtdTrueScore = await calcWeightedTrueScore(user.id);
+        this.setState({ wtdTrueScore: wtdTrueScore.toFixed(3) });
+      }
     }
   }
 
