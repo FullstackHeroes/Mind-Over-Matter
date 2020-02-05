@@ -47,6 +47,8 @@ class VideoInput extends Component {
     }
   }
 
+  // BIND METHODS
+
   // LOCAL STORAGE MANAGER
   appendLocalStorage = (snapshot, userId) => {
     snapshot.timeStamp = new Date();
@@ -124,13 +126,18 @@ class VideoInput extends Component {
     }
   };
 
-  showHelp = e => {
-    this.setState({ showPopUp: true });
+  toggleHelp = e => {
+    this.setState({
+      showPopUp: !this.showPopUp.show
+    });
   };
+  // showHelp = () => {
+  //   this.setState({ showPopUp: true });
+  // };
 
-  hideHelp = e => {
-    this.setState({ showPopUp: false });
-  };
+  // hideHelp = () => {
+  //   this.setState({ showPopUp: false });
+  // };
 
   componentWillUnmount() {
     clearInterval(this.intervalSnap);
@@ -225,14 +232,13 @@ class VideoInput extends Component {
                   position: "absolute",
                   bottom: 0
                 }}
-                onClick={e => {
-                  this.showHelp(e);
+                onClick={() => {
+                  this.toggleHelp();
                 }}>
-                {" "}
-                show Modal{" "}
+                show Modal
               </button>
 
-              <PopUp onClose={this.hideHelp} show={this.state.showPopUp} />
+              <PopUp show={this.state.showPopUp} onClose={this.toggleHelp} />
             </div>
           </div>
         </div>

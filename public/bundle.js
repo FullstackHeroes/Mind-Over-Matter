@@ -67826,11 +67826,7 @@ function (_Component) {
         var currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
 
         if (currSnapshot && currSnapshot.length) {
-<<<<<<< HEAD
-          _this.props.calcNormalizedScore(userId);
-=======
           _this.props.postNormalizedScore(userId);
->>>>>>> master
 
           _this.props.postLSScoreObj(userId);
         }
@@ -67839,15 +67835,9 @@ function (_Component) {
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "showHelp", function (e) {
+    _defineProperty(_assertThisInitialized(_this), "toggleHelp", function (e) {
       _this.setState({
-        showPopUp: true
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "hideHelp", function (e) {
-      _this.setState({
-        showPopUp: false
+        showPopUp: !_this.showPopUp.show
       });
     });
 
@@ -67872,10 +67862,17 @@ function (_Component) {
         this.startCapture();
         this.startDatabase();
       }
-    } // LOCAL STORAGE MANAGER
+    } // BIND METHODS
+    // LOCAL STORAGE MANAGER
 
   }, {
     key: "componentWillUnmount",
+    // showHelp = () => {
+    //   this.setState({ showPopUp: true });
+    // };
+    // hideHelp = () => {
+    //   this.setState({ showPopUp: false });
+    // };
     value: function componentWillUnmount() {
       clearInterval(this.intervalSnap);
       clearInterval(this.intervalDB);
@@ -67968,12 +67965,12 @@ function (_Component) {
           position: "absolute",
           bottom: 0
         },
-        onClick: function onClick(e) {
-          _this2.showHelp(e);
+        onClick: function onClick() {
+          _this2.toggleHelp();
         }
-      }, " ", "show Modal", " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_global_PopUp__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        onClose: this.hideHelp,
-        show: this.state.showPopUp
+      }, "show Modal"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_global_PopUp__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        show: this.state.showPopUp,
+        onClose: this.toggleHelp
       })))));
     }
   }]);
@@ -67994,13 +67991,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     setFullScoreObj: function setFullScoreObj(userId) {
       return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_7__["setFullScoreObj"])(userId));
     },
-<<<<<<< HEAD
-    calcNormalizedScore: function calcNormalizedScore(userId) {
-      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_7__["calcNormalizedScore"])(userId));
-=======
     postNormalizedScore: function postNormalizedScore(userId) {
-      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["postNormalizedScore"])(userId));
->>>>>>> master
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_7__["postNormalizedScore"])(userId));
     },
     postLSScoreObj: function postLSScoreObj(userId) {
       return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_7__["postLSScoreObj"])(userId));
@@ -68214,8 +68206,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var PopUp =
 /*#__PURE__*/
-function (_React$Component) {
-  _inherits(PopUp, _React$Component);
+function (_Component) {
+  _inherits(PopUp, _Component);
 
   function PopUp() {
     var _getPrototypeOf2;
@@ -68230,8 +68222,8 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(PopUp)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_this), "onClose", function (e) {
-      _this.props.showPopUp =  false && false;
+    _defineProperty(_assertThisInitialized(_this), "onClose", function () {
+      _this.props.onClose && _this.props.onClose();
     });
 
     return _this;
@@ -68240,10 +68232,11 @@ function (_React$Component) {
   _createClass(PopUp, [{
     key: "render",
     value: function render() {
-      if (!this.props.showPopUp) {
-        return null;
-      } // return <div>{this.props.children}</div>;
+      var _this2 = this;
 
+      if (!this.props.show) {
+        return null;
+      }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
@@ -68254,16 +68247,21 @@ function (_React$Component) {
           position: "absolute",
           bottom: 0
         },
-        "class": "toggle-button",
-        onClick: this.onClose
+        onClick: function onClick() {
+          _this2.hideHelp;
+        }
       }, "close"));
     }
   }]);
 
   return PopUp;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
+PopUp.propTypes = {
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  show: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired
+};
 
 /***/ }),
 
@@ -69135,8 +69133,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-<<<<<<< HEAD
-=======
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
@@ -69144,7 +69140,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  // VARIABLE DRIVERS
 
 var rounding = Math.pow(10, 5); // DECIMAL ROUNDING
->>>>>>> master
 
 var screenWeight = 0.5;
 var countWeight = 1 - screenWeight;
@@ -69361,11 +69356,7 @@ function () {
   var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(userId) {
-<<<<<<< HEAD
-    var userLocalData, _ref4, userDbData, condensedUserLocalData, orderArr, totalScreenScore, count, i, obj, shortOrderArr, screenWeight, countWeight, calcNormalScore;
-=======
     var userLocalData, condensedLSData, _ref4, userDbData, orderArr, totalScreenScore, totalCount, i, obj, shortOrderArr, calcNormalScore;
->>>>>>> master
 
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
@@ -69373,18 +69364,6 @@ function () {
           case 0:
             //RETRIEVE LS DATA AND DB SCORE OBJECTS AND CONDENSE LS DATA INTO SINGLE OBJ
             userLocalData = JSON.parse(localStorage.getItem("snapshots"));
-<<<<<<< HEAD
-            _context2.next = 3;
-            return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/hours/".concat(userId));
-
-          case 3:
-            _ref4 = _context2.sent;
-            userDbData = _ref4.data;
-            condensedUserLocalData = condenseScoreObj(userLocalData, userId); // APPEND LS DATA TO DB SCORE OBJ
-
-            userDbData.push(condensedUserLocalData); // console.log("user agguser data from algo:", userDbData );
-            //ORDER userDbData FROM NEW TO OLD
-=======
             condensedLSData = userLocalData && userLocalData.length ? condenseScoreObj(userLocalData, userId) : [];
             _context2.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/hours/".concat(userId));
@@ -69394,7 +69373,6 @@ function () {
             userDbData = _ref4.data;
             // APPEND LS DATA TO DB SCORE OBJ
             if (condensedLSData.length) userDbData.push(condensedLSData); //ORDER aggUserDataObjArr FROM NEW TO OLD
->>>>>>> master
 
             orderArr = userDbData.reverse(); //BASE DATA FOR WEIGHTED AVG CALC
 

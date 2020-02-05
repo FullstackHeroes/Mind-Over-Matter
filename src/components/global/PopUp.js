@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-export default class PopUp extends React.Component {
-  onClose = e => {
-    this.props.showPopUp = false && this.props.onClose(e);
+export default class PopUp extends Component {
+  onClose = () => {
+    this.props.onClose && this.props.onClose()
   };
   render() {
-    if (!this.props.showPopUp) {
+    if (!this.props.show) {
       return null;
     }
-    // return <div>{this.props.children}</div>;
     return (
       <div
         style={{
@@ -22,11 +21,16 @@ export default class PopUp extends React.Component {
             position: "absolute",
             bottom: 0
           }}
-          class="toggle-button"
-          onClick={this.onClose}>
+          onClick={() => {this.hideHelp}}>
           close
         </button>
       </div>
     );
   }
 }
+
+
+PopUp.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  show: PropTypes.bool.isRequired
+};
