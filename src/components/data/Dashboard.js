@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setFullScoreObj, setNormalizedScore } from "../../store";
 import { calcWeightedTrueScore } from "../../utils/utilities";
+import ScreenTime from "./ScreenTime";
 
 class Dashboard extends Component {
   constructor() {
@@ -39,7 +40,9 @@ class Dashboard extends Component {
         <h3 className="dashboardHeader">Hi, {user.name}!</h3>
         <div className="dashboardRowOne dashboardRow">
           <div className="dashboardTable">Time Session</div>
-          <div className="dashboardTable">Total Time Duration</div>
+          <div className="dashboardTable">
+            <ScreenTime user={user} />
+          </div>
         </div>
 
         <div className="dashboardRowTwo dashboardRow">
