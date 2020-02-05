@@ -78,7 +78,7 @@ router.get("/:userId/today", async (req, res, next) => {
   const dailyScreenTime = screenTimeArr.reduce((a, b) => ({
     screenTime: a.screenTime + b.screenTime
   }));
-  res.json(dailyScreenTime.screenTime);
+  res.json(Math.floor(dailyScreenTime.screenTime / 60));
 });
 
 module.exports = router;
