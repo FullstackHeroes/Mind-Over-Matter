@@ -104,7 +104,7 @@ export const postNormalizedScore = userId => {
           userId,
           normalizeScore,
           runningScore,
-          sentimentDiff: runningScore / normalizedScore,
+          sentimentDiff: runningScore / normalizeScore,
           timeStamp: new Date()
         });
       dispatch(getNormalizedScore(normalizeDBObj));
