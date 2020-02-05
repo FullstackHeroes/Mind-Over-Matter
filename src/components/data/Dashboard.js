@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setFullScoreObj, setNormalizedScore } from "../../store";
 import { calcWeightedTrueScore } from "../../utils/utilities";
+import { getTodaysScreenTime } from "../../store/screenTime";
 
 class Dashboard extends Component {
   constructor() {
@@ -14,6 +15,7 @@ class Dashboard extends Component {
   componentDidMount() {
     const { user } = this.props;
     if (user && user.id) this.props.setFullScoreObj(user.id);
+    this.props.getToday(user.id);
   }
 
   async componentDidUpdate(prevProps) {
@@ -25,6 +27,7 @@ class Dashboard extends Component {
       ) {
         this.props.setFullScoreObj(user.id);
         this.props.setNormalizedScore(user.id);
+        this.props.getToday(user.id);
         const wtdTrueScore = await calcWeightedTrueScore(user.id);
         this.setState({ wtdTrueScore: wtdTrueScore.toFixed(3) });
       }
@@ -39,7 +42,9 @@ class Dashboard extends Component {
         <h3 className="dashboardHeader">Hi, {user.name}!</h3>
         <div className="dashboardRowOne dashboardRow">
           <div className="dashboardTable">Time Session</div>
-          <div className="dashboardTable">Total Time Duration</div>
+          <div className="dashboardTable">
+            Today: {this.props.todaysScreenMins}
+          </div>
         </div>
 
         <div className="dashboardRowTwo dashboardRow">
@@ -76,14 +81,16 @@ const mapStateToProps = state => {
     user: state.user,
     fullScoreObj: state.score.fullScoreObj,
     normalizedScore: state.score.normalizedScore,
-    state: state
+    state: state,
+    todaysScreenMins: state.time.screenMinsToday
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     setFullScoreObj: userId => dispatch(setFullScoreObj(userId)),
-    setNormalizedScore: userId => dispatch(setNormalizedScore(userId))
+    setNormalizedScore: userId => dispatch(setNormalizedScore(userId)),
+    getToday: userId => dispatch(getTodaysScreenTime(userId))
   };
 };
 

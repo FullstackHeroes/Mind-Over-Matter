@@ -5,8 +5,9 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import user from "./user";
 import score from "./score";
+import time from "./screenTime";
 
-const reducer = combineReducers({ user, score });
+const reducer = combineReducers({ user, score, time });
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
