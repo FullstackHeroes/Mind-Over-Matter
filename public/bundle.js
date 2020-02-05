@@ -67020,7 +67020,7 @@ function (_Component) {
         className: "dashboardLabel"
       }, "Normalized Score"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "dashboardContent"
-      }, normalizedScore.length ? normalizedScore[normalizedScore.length - 1].toFixed(3) : "Loading")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, normalizedScore.length ? normalizedScore[normalizedScore.length - 1].normalizeScore.toFixed(3) : "Loading")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dashboardTable"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "dashboardLabel"

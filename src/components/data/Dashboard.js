@@ -46,7 +46,9 @@ class Dashboard extends Component {
             <span className="dashboardLabel">Normalized Score</span>
             <span className="dashboardContent">
               {normalizedScore.length
-                ? normalizedScore[normalizedScore.length - 1].toFixed(3)
+                ? normalizedScore[
+                    normalizedScore.length - 1
+                  ].normalizeScore.toFixed(3)
                 : "Loading"}
             </span>
           </div>
