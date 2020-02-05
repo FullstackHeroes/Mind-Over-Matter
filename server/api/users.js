@@ -5,7 +5,7 @@ const db = require("../db");
 router.get("/", async (req, res, next) => {
   try {
     const users = await User.findAll({
-      attributes: ["id", "email", "first_name", "last_name"]
+      attributes: ["id", "email", "name", "normalizeScore"]
     });
     res.json(users);
   } catch (err) {
