@@ -67330,7 +67330,8 @@ function (_Component) {
                         screenScore = desc.detection._score,
                         expressions = desc.expressions,
                         fullScoreObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["sentimentAlgo"])(screenScore, expressions);
-                    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["calcWeightedTrueScore"])(userId)); // APPENDING LOCAL STORAGE
+                    runningTrueScore = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["calcWeightedTrueScore"])(userId);
+                    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", runningTrueScore); // APPENDING LOCAL STORAGE
 
                     _this.appendLocalStorage(fullScoreObj, userId);
                   } else console.error("WAHH -- no current detection");
@@ -68712,11 +68713,10 @@ function () {
           case 0:
             //RETRIEVE LS DATA AND DB SCORE OBJECTS AND CONDENSE LS DATA INTO SINGLE OBJ
             userLocalData = JSON.parse(localStorage.getItem("snapshots"));
-            console.log("this is user local data from line 193 utilities", userLocalData);
-            _context2.next = 4;
+            _context2.next = 3;
             return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/hours/".concat(userId));
 
-          case 4:
+          case 3:
             _ref4 = _context2.sent;
             userDbData = _ref4.data;
             condensedUserLocalData = condenseScoreObj(userLocalData, userId); // APPEND LS DATA TO DB SCORE OBJ
@@ -68746,7 +68746,7 @@ function () {
             }, 0);
             return _context2.abrupt("return", Math.floor(calcNormalScore * rounding / rounding));
 
-          case 14:
+          case 13:
           case "end":
             return _context2.stop();
         }
