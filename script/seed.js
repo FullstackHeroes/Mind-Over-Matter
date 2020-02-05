@@ -220,7 +220,7 @@ const normalizeScoreSeed = [
   },
   {
     userId: 2,
-    normalizeScore: 7.2,
+    normalizeScore: 9.2,
     timeStamp: new Date("1/4/20")
   },
   {
@@ -230,12 +230,12 @@ const normalizeScoreSeed = [
   },
   {
     userId: 2,
-    normalizeScore: 6.3,
+    normalizeScore: 10.0,
     timeStamp: new Date("1/6/20")
   },
   {
     userId: 2,
-    normalizeScore: 5.8,
+    normalizeScore: 9.8,
     timeStamp: new Date("1/7/20")
   }
 ];
