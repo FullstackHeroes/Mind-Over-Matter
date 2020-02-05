@@ -68561,7 +68561,7 @@ var sentimentAlgo = function sentimentAlgo(screenScore, expressions) {
 
 var rounding = Math.pow(10, 5);
 var condenseScoreObj = function condenseScoreObj(targetScoreObj, userId) {
-  if (targetScoreObj.length) {
+  if (targetScoreObj && targetScoreObj.length) {
     var condensedLSObj = {
       userId: userId,
       trueScore: 0,
@@ -68704,7 +68704,7 @@ function () {
   var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(userId) {
-    var userLocalData, condensedUserLocalData, _ref4, userDbData, orderArr, totalScreenScore, count, i, obj, shortOrderArr, screenWeight, countWeight, calcNormalScore;
+    var userLocalData, _ref4, userDbData, condensedUserLocalData, orderArr, totalScreenScore, count, i, obj, shortOrderArr, screenWeight, countWeight, calcNormalScore;
 
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
@@ -68712,14 +68712,15 @@ function () {
           case 0:
             //RETRIEVE LS DATA AND DB SCORE OBJECTS AND CONDENSE LS DATA INTO SINGLE OBJ
             userLocalData = JSON.parse(localStorage.getItem("snapshots"));
-            condensedUserLocalData = condenseScoreObj(userLocalData, userId);
+            console.log("this is user local data from line 193 utilities", userLocalData);
             _context2.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/hours/".concat(userId));
 
           case 4:
             _ref4 = _context2.sent;
             userDbData = _ref4.data;
-            // APPEND LS DATA TO DB SCORE OBJ
+            condensedUserLocalData = condenseScoreObj(userLocalData, userId); // APPEND LS DATA TO DB SCORE OBJ
+
             userDbData.push(condensedUserLocalData); // console.log("user agguser data from algo:", userDbData );
             //ORDER userDbData FROM NEW TO OLD
 
@@ -68745,7 +68746,7 @@ function () {
             }, 0);
             return _context2.abrupt("return", Math.floor(calcNormalScore * rounding / rounding));
 
-          case 13:
+          case 14:
           case "end":
             return _context2.stop();
         }

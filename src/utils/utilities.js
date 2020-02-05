@@ -76,7 +76,7 @@ export const sentimentAlgo = (screenScore, expressions) => {
 const rounding = 10 ** 5;
 
 export const condenseScoreObj = (targetScoreObj, userId) => {
-  if (targetScoreObj.length) {
+  if (targetScoreObj && targetScoreObj.length) {
     const condensedLSObj = {
         userId,
         trueScore: 0,
@@ -190,8 +190,9 @@ const wtdAvgCount = 3000;
 export const calcWeightedTrueScore = async userId => {
   //RETRIEVE LS DATA AND DB SCORE OBJECTS AND CONDENSE LS DATA INTO SINGLE OBJ
   const userLocalData = JSON.parse(localStorage.getItem("snapshots"));
-  const condensedUserLocalData = condenseScoreObj(userLocalData, userId);
+  console.log("this is user local data from line 193 utilities", userLocalData);
   const { data: userDbData } = await axios.get(`api/hours/${userId}`);
+  const condensedUserLocalData = condenseScoreObj(userLocalData, userId);
 
   // APPEND LS DATA TO DB SCORE OBJ
   userDbData.push(condensedUserLocalData);
