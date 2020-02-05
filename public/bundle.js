@@ -17249,7 +17249,6 @@ var env = {
 initialize();
 //# sourceMappingURL=index.js.map
 
-
 /***/ }),
 
 /***/ "./node_modules/face-api.js/build/es6/env/isBrowser.js":
