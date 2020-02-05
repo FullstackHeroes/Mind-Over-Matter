@@ -67305,53 +67305,88 @@ function (_Component) {
     function () {
       var _ref2 = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(userId) {
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      regeneratorRuntime.mark(function _callee3(userId) {
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context2.prev = 0;
+                _context3.prev = 0;
 
                 if (!_this.webcam.current) {
-                  _context2.next = 4;
+                  _context3.next = 4;
                   break;
                 }
 
-                _context2.next = 4;
-                return Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_3__["getFaceDescr"])(_this.webcam.current.getScreenshot(), inputSize).then(function (fullDesc) {
-                  if (!!fullDesc && fullDesc.length) {
-                    _this.setState({
-                      detections: fullDesc.map(function (fd) {
-                        return fd.detection;
-                      })
-                    });
+                _context3.next = 4;
+                return Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_3__["getFaceDescr"])(_this.webcam.current.getScreenshot(), inputSize).then(
+                /*#__PURE__*/
+                function () {
+                  var _ref3 = _asyncToGenerator(
+                  /*#__PURE__*/
+                  regeneratorRuntime.mark(function _callee2(fullDesc) {
+                    var desc, screenScore, expressions, fullScoreObj, runningTrueScore;
+                    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                      while (1) {
+                        switch (_context2.prev = _context2.next) {
+                          case 0:
+                            if (!(!!fullDesc && fullDesc.length)) {
+                              _context2.next = 13;
+                              break;
+                            }
 
-                    var desc = fullDesc[0],
-                        screenScore = desc.detection._score,
-                        expressions = desc.expressions,
-                        fullScoreObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["sentimentAlgo"])(screenScore, expressions),
-                        runningTrueScore = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["calcWeightedTrueScore"])(userId);
-                    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", runningTrueScore); // APPENDING LOCAL STORAGE
+                            _this.setState({
+                              detections: fullDesc.map(function (fd) {
+                                return fd.detection;
+                              })
+                            });
 
-                    _this.appendLocalStorage(fullScoreObj, userId);
-                  } else console.error("WAHH -- no current detection");
-                });
+                            desc = fullDesc[0];
+                            screenScore = desc.detection._score;
+                            expressions = desc.expressions;
+                            fullScoreObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["sentimentAlgo"])(screenScore, expressions);
+                            _context2.next = 8;
+                            return Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["calcWeightedTrueScore"])(userId);
+
+                          case 8:
+                            runningTrueScore = _context2.sent;
+                            console.log("!!!!!!!!!!!!!!!", runningTrueScore); // APPENDING LOCAL STORAGE
+
+                            _this.appendLocalStorage(fullScoreObj, userId);
+
+                            _context2.next = 14;
+                            break;
+
+                          case 13:
+                            console.error("WAHH -- no current detection");
+
+                          case 14:
+                          case "end":
+                            return _context2.stop();
+                        }
+                      }
+                    }, _callee2);
+                  }));
+
+                  return function (_x2) {
+                    return _ref3.apply(this, arguments);
+                  };
+                }());
 
               case 4:
-                _context2.next = 9;
+                _context3.next = 9;
                 break;
 
               case 6:
-                _context2.prev = 6;
-                _context2.t0 = _context2["catch"](0);
-                console.error("WAHH --", _context2.t0);
+                _context3.prev = 6;
+                _context3.t0 = _context3["catch"](0);
+                console.error("WAHH --", _context3.t0);
 
               case 9:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, null, [[0, 6]]);
+        }, _callee3, null, [[0, 6]]);
       }));
 
       return function (_x) {

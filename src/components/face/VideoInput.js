@@ -72,7 +72,7 @@ class VideoInput extends Component {
     try {
       if (!!this.webcam.current) {
         await getFaceDescr(this.webcam.current.getScreenshot(), inputSize).then(
-          fullDesc => {
+          async fullDesc => {
             if (!!fullDesc && fullDesc.length) {
               this.setState({
                 detections: fullDesc.map(fd => fd.detection)
@@ -82,11 +82,9 @@ class VideoInput extends Component {
                 screenScore = desc.detection._score,
                 expressions = desc.expressions,
                 fullScoreObj = sentimentAlgo(screenScore, expressions),
-                runningTrueScore = calcWeightedTrueScore(userId);
-              console.log(
-                "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
-                runningTrueScore
-              );
+                runningTrueScore = await calcWeightedTrueScore(userId);
+              console.log("!!!!!!!!!!!!!!!", runningTrueScore);
+
               // APPENDING LOCAL STORAGE
               this.appendLocalStorage(fullScoreObj, userId);
             } else console.error("WAHH -- no current detection");
