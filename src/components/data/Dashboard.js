@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setFullScoreObj, setNormalizedScore } from "../../store";
 import { calcWeightedTrueScore } from "../../utils/utilities";
-import { getTodaysScreenTime } from "../../store/screenTime";
+import {
+  getTodaysScreenTime,
+  getMonthsScreenTime,
+  gotYearsScreenTime
+} from "../../store/screenTime";
 
 class Dashboard extends Component {
   constructor() {
@@ -15,7 +19,7 @@ class Dashboard extends Component {
   componentDidMount() {
     const { user } = this.props;
     if (user && user.id) this.props.setFullScoreObj(user.id);
-    this.props.getToday(user.id);
+    this.props.getTime(user.id);
   }
 
   async componentDidUpdate(prevProps) {
@@ -27,7 +31,8 @@ class Dashboard extends Component {
       ) {
         this.props.setFullScoreObj(user.id);
         this.props.setNormalizedScore(user.id);
-        this.props.getToday(user.id);
+        this.props.getTime(user.id);
+        // this.props.getMonth(user.id);
         const wtdTrueScore = await calcWeightedTrueScore(user.id);
         this.setState({ wtdTrueScore: wtdTrueScore.toFixed(3) });
       }
@@ -43,7 +48,11 @@ class Dashboard extends Component {
         <div className="dashboardRowOne dashboardRow">
           <div className="dashboardTable">Time Session</div>
           <div className="dashboardTable">
-            Today: {this.props.todaysScreenMins}
+            Today: {this.props.todaysScreenMins} mins
+            <br />
+            This Month: {this.props.monthsScreenHours} hours
+            <br />
+            This Year: {this.props.yearsScreenHours} hours
           </div>
         </div>
 
@@ -82,7 +91,9 @@ const mapStateToProps = state => {
     fullScoreObj: state.score.fullScoreObj,
     normalizedScore: state.score.normalizedScore,
     state: state,
-    todaysScreenMins: state.time.screenMinsToday
+    todaysScreenMins: state.time.screenMinsToday,
+    monthsScreenHours: state.time.screenHoursThisMonth,
+    yearsScreenHours: state.time.screenHoursThisYear
   };
 };
 
@@ -90,7 +101,12 @@ const mapDispatchToProps = dispatch => {
   return {
     setFullScoreObj: userId => dispatch(setFullScoreObj(userId)),
     setNormalizedScore: userId => dispatch(setNormalizedScore(userId)),
-    getToday: userId => dispatch(getTodaysScreenTime(userId))
+    getTime: userId =>
+      dispatch(
+        getTodaysScreenTime(userId),
+        getMonthsScreenTime(userId),
+        gotYearsScreenTime(userId)
+      )
   };
 };
 
