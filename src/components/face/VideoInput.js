@@ -99,21 +99,23 @@ class VideoInput extends Component {
               // APPENDING LOCAL STORAGE
               this.appendLocalStorage(fullScoreObj, userId);
 
-              let { normalizedScore } = this.props;
-              let mostRecentNormalized = normalizedScore[0].normalizeScore;
-              let RunningTrueScore = await calcWeightedTrueScore(userId);
+              //USER DATA AND CALCULATIONS
+              const { normalizedScore } = this.props,
+                mostRecentNormalized = normalizedScore[0].normalizeScore,
+                RunningTrueScore = await calcWeightedTrueScore(userId),
+                perDiff = percentDifference(
+                  RunningTrueScore,
+                  mostRecentNormalized
+                );
 
-              let perDiff = percentDifference(RunningTrueScore, mostRecentNormalized)
-              //THE TRIGGER TO show help\
-              
-              console.log("percent diff:", perDiff)
+              //THE TRIGGER TO SHOW THE HELP MODAL
+              console.log("percent diff:", perDiff);
               if (perDiff <= 45) {
                 this.setState({
                   emoPercent: perDiff
-                })
+                });
                 this.showHelp();
               }
-
             } else console.error("WAHH -- no current detection");
           }
         );
@@ -238,11 +240,10 @@ class VideoInput extends Component {
             <div
               style={{
                 position: "relative"
-              }}>
-            </div>
+              }}></div>
           </div>
         </div>
-              <PopUp show={this.state.showPopUp} onClose={this.hideHelp} />
+        <PopUp show={this.state.showPopUp} onClose={this.hideHelp} />
       </div>
     );
   }

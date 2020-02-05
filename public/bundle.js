@@ -67761,7 +67761,8 @@ function (_Component) {
 
                             desc = fullDesc[0], screenScore = desc.detection._score, expressions = desc.expressions, fullScoreObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_6__["sentimentAlgo"])(screenScore, expressions); // APPENDING LOCAL STORAGE
 
-                            _this.appendLocalStorage(fullScoreObj, userId);
+                            _this.appendLocalStorage(fullScoreObj, userId); //USER DATA AND CALCULATIONS
+
 
                             normalizedScore = _this.props.normalizedScore;
                             mostRecentNormalized = normalizedScore[0].normalizeScore;
@@ -67770,8 +67771,8 @@ function (_Component) {
 
                           case 8:
                             RunningTrueScore = _context2.sent;
-                            perDiff = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_6__["percentDifference"])(RunningTrueScore, mostRecentNormalized); //THE TRIGGER TO show help\
-
+                            perDiff = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_6__["percentDifference"])(RunningTrueScore, mostRecentNormalized);
+                            //THE TRIGGER TO SHOW THE HELP MODAL
                             console.log("percent diff:", perDiff);
 
                             if (perDiff <= 45) {
