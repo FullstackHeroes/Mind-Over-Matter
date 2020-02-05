@@ -69,13 +69,16 @@ router.get("/:userId", async (req, res, next) => {
   res.json(userHours);
 });
 
-router.get("/:userId", async (req, res, next) => {
-  const text = `SELECT hours."timeStamp" --SUM(hours."screenTime")
+router.get("/:userId/today", async (req, res, next) => {
+  const text = `SELECT hours."screenTime"
   FROM hours
   WHERE date(hours."timeStamp") = CURRENT_DATE;`;
-  const userHours = await db.query();
-
-  res.json(userHours);
+  const userHours = await db.query(text);
+  const screenTimeArr = userHours[0];
+  const dailyScreenTime = screenTimeArr.reduce((a, b) => ({
+    screenTime: a.screenTime + b.screenTime
+  }));
+  res.json(dailyScreenTime.screenTime);
 });
 
 module.exports = router;
