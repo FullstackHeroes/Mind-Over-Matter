@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Webcam from "react-webcam";
 import { loadModels, getFaceDescr } from "../../utils/faceBase";
 import { sentimentAlgo, calcWeightedTrueScore } from "../../utils/utilities";
+import PopUp from "../global/PopUp";
 import {
   setFullScoreObj,
   calcNormalizedScore,
@@ -22,7 +23,8 @@ class VideoInput extends Component {
     this.state = {
       facingMode: "user",
       detections: null,
-      showPopUp: false
+      showPopUp: false,
+      runningTrueScore: 0
     };
   }
 
@@ -83,8 +85,10 @@ class VideoInput extends Component {
               const desc = fullDesc[0],
                 screenScore = desc.detection._score,
                 expressions = desc.expressions,
-                fullScoreObj = sentimentAlgo(screenScore, expressions),
-                runningTrueScore = await calcWeightedTrueScore(userId);
+                fullScoreObj = sentimentAlgo(screenScore, expressions);
+
+              let nextRunningTrueScore = await calcWeightedTrueScore(userId);
+              this.setState({ runningTrueScore: nextRunningTrueScore });
 
               // APPENDING LOCAL STORAGE
               this.appendLocalStorage(fullScoreObj, userId);
@@ -208,6 +212,9 @@ class VideoInput extends Component {
                 </div>
               ) : null}
               {!!drawBox ? drawBox : null}
+            </div>
+            <div>
+              <PopUp />
             </div>
           </div>
         </div>

@@ -1,30 +1,10 @@
-const PopUp = props => {
-  const { handleClose, show, children } = props;
-  const showHideClassName = show ? "modal display-block" : "modal display-none";
+import React, { Component } from "react";
 
-  return (
-    <div className={showHideClassname}>
-      <section className="modal-main">
-        {children}
-        <button onClick={handleClose}>close</button>
-      </section>
-    </div>
-  );
-};
-
-// import React, { Component } from "react";
-
-// class PopUp extends React.Component {
-//   render() {
-//     return (
-//       <div className="popup">
-//         <div className="popup\_inner">
-//           <h1>{this.props.text}</h1>
-//           <button onClick={this.props.closePopup}>close me</button>
-//         </div>
-//       </div>
-//     );
-//   }
-// }
-
-// export default PopUp;
+export default class PopUp extends React.Component {
+  render() {
+    if (!this.props.show) {
+      return null;
+    }
+    return <div>{this.props.children}</div>;
+  }
+}

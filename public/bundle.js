@@ -67196,12 +67196,14 @@ function (_Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_webcam__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-webcam */ "./node_modules/react-webcam/dist/react-webcam.js");
-/* harmony import */ var react_webcam__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_webcam__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _utils_faceBase__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/faceBase */ "./src/utils/faceBase.js");
-/* harmony import */ var _utils_utilities__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/utilities */ "./src/utils/utilities.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../store */ "./src/store/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_webcam__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-webcam */ "./node_modules/react-webcam/dist/react-webcam.js");
+/* harmony import */ var react_webcam__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_webcam__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _utils_faceBase__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/faceBase */ "./src/utils/faceBase.js");
+/* harmony import */ var _utils_utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/utilities */ "./src/utils/utilities.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../store */ "./src/store/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -67225,6 +67227,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -67258,7 +67261,7 @@ function (_Component) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_3__["loadModels"])();
+              return Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_4__["loadModels"])();
 
             case 2:
               _this.props.getTimeInterval(); // this.startCapture();
@@ -67318,19 +67321,19 @@ function (_Component) {
                 }
 
                 _context3.next = 4;
-                return Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_3__["getFaceDescr"])(_this.webcam.current.getScreenshot(), inputSize).then(
+                return Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_4__["getFaceDescr"])(_this.webcam.current.getScreenshot(), inputSize).then(
                 /*#__PURE__*/
                 function () {
                   var _ref3 = _asyncToGenerator(
                   /*#__PURE__*/
                   regeneratorRuntime.mark(function _callee2(fullDesc) {
-                    var desc, screenScore, expressions, fullScoreObj, runningTrueScore;
+                    var desc, screenScore, expressions, fullScoreObj, nextRunningTrueScore;
                     return regeneratorRuntime.wrap(function _callee2$(_context2) {
                       while (1) {
                         switch (_context2.prev = _context2.next) {
                           case 0:
                             if (!(!!fullDesc && fullDesc.length)) {
-                              _context2.next = 12;
+                              _context2.next = 10;
                               break;
                             }
 
@@ -67340,26 +67343,27 @@ function (_Component) {
                               })
                             });
 
-                            desc = fullDesc[0];
-                            screenScore = desc.detection._score;
-                            expressions = desc.expressions;
-                            fullScoreObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["sentimentAlgo"])(screenScore, expressions);
-                            _context2.next = 8;
-                            return Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["calcWeightedTrueScore"])(userId);
+                            desc = fullDesc[0], screenScore = desc.detection._score, expressions = desc.expressions, fullScoreObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_5__["sentimentAlgo"])(screenScore, expressions);
+                            _context2.next = 5;
+                            return Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_5__["calcWeightedTrueScore"])(userId);
 
-                          case 8:
-                            runningTrueScore = _context2.sent;
+                          case 5:
+                            nextRunningTrueScore = _context2.sent;
 
-                            // APPENDING LOCAL STORAGE
+                            _this.setState({
+                              runningTrueScore: nextRunningTrueScore
+                            }); // APPENDING LOCAL STORAGE
+
+
                             _this.appendLocalStorage(fullScoreObj, userId);
 
-                            _context2.next = 13;
+                            _context2.next = 11;
                             break;
 
-                          case 12:
+                          case 10:
                             console.error("WAHH -- no current detection");
 
-                          case 13:
+                          case 11:
                           case "end":
                             return _context2.stop();
                         }
@@ -67418,10 +67422,24 @@ function (_Component) {
       }
     });
 
+    _defineProperty(_assertThisInitialized(_this), "showHelp", function () {
+      _this.setState({
+        showPopUp: true
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "hidehelpshowHelp", function () {
+      _this.setState({
+        showPopUp: false
+      });
+    });
+
     _this.webcam = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     _this.state = {
       facingMode: "user",
-      detections: null
+      detections: null,
+      showPopUp: false,
+      runningTrueScore: 0
     };
     return _this;
   }
@@ -67515,7 +67533,7 @@ function (_Component) {
           position: "absolute",
           backgroundColor: "black"
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_webcam__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_webcam__WEBPACK_IMPORTED_MODULE_3___default.a, {
         audio: false,
         width: WIDTH,
         height: HEIGHT,
@@ -67540,21 +67558,21 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     setFullScoreObj: function setFullScoreObj(userId) {
-      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["setFullScoreObj"])(userId));
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_6__["setFullScoreObj"])(userId));
     },
     calcNormalizedScore: function calcNormalizedScore(userId) {
-      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["calcNormalizedScore"])(userId));
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_6__["calcNormalizedScore"])(userId));
     },
     postLSScoreObj: function postLSScoreObj(userId) {
-      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["postLSScoreObj"])(userId));
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_6__["postLSScoreObj"])(userId));
     },
     getTimeInterval: function getTimeInterval(snapInterval, dbInterval) {
-      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["getTimeInterval"])(snapInterval, dbInterval));
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_6__["getTimeInterval"])(snapInterval, dbInterval));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(VideoInput));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(VideoInput));
 
 /***/ }),
 
