@@ -22,7 +22,7 @@ class VideoInput extends Component {
     this.state = {
       facingMode: "user",
       detections: null,
-      showHelp: false
+      showPopUp: false
     };
   }
 
@@ -117,6 +117,14 @@ class VideoInput extends Component {
     } catch (error) {
       console.error("WAHH --", error);
     }
+  };
+
+  showHelp = () => {
+    this.setState({ showPopUp: true });
+  };
+
+  hidehelpshowHelp = () => {
+    this.setState({ showPopUp: false });
   };
 
   componentWillUnmount() {
