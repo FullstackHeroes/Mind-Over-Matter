@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Webcam from "react-webcam";
 import { loadModels, getFaceDescr } from "../../utils/faceBase";
-import { sentimentAlgo } from "../../utils/utilities"; //import mentalCheck algo here
+import { sentimentAlgo, calcWeightedTrueScore } from "../../utils/utilities";
 import {
   setFullScoreObj,
   calcNormalizedScore,
