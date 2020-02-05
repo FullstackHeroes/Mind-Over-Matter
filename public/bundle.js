@@ -67047,8 +67047,7 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     user: state.user,
     fullScoreObj: state.score.fullScoreObj,
-    normalizedScore: state.score.normalizedScore,
-    state: state
+    normalizedScore: state.score.normalizedScore
   };
 };
 
@@ -68657,7 +68656,7 @@ var screenWeight = 0.5;
 var countWeight = 1 - screenWeight;
 var normalizedLen = 5000; // LENGTH FOR NORMALIZED CALC
 
-var wtdAvgCount = 3000; // WEIGHTED AVERAGE COUNT LIMIT
+var wtdAvgCount = 500; // WEIGHTED AVERAGE COUNT LIMIT
 // SCORING FROM 1-10 (BAD - GOOD) AND MULTIPLIER WILL BE DONE PRO-RATA
 
 var sentimentSpectrum = {

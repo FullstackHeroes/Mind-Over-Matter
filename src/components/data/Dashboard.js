@@ -37,6 +37,7 @@ class Dashboard extends Component {
     return (
       <div className="dashboardFullDiv">
         <h3 className="dashboardHeader">Hi, {user.name}!</h3>
+
         <div className="dashboardRowOne dashboardRow">
           <div className="dashboardTable">Time Session</div>
           <div className="dashboardTable">Total Time Duration</div>
@@ -53,6 +54,7 @@ class Dashboard extends Component {
                 : "Loading"}
             </span>
           </div>
+
           <div className="dashboardTable">
             <span className="dashboardLabel">Running True Score</span>
             <span className="dashboardContent">{this.state.wtdTrueScore}</span>
@@ -75,8 +77,7 @@ const mapStateToProps = state => {
   return {
     user: state.user,
     fullScoreObj: state.score.fullScoreObj,
-    normalizedScore: state.score.normalizedScore,
-    state: state
+    normalizedScore: state.score.normalizedScore
   };
 };
 
