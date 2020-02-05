@@ -21,7 +21,8 @@ class VideoInput extends Component {
     this.webcam = React.createRef();
     this.state = {
       facingMode: "user",
-      detections: null
+      detections: null,
+      showHelp: false
     };
   }
 

@@ -1,5 +1,5 @@
 const PopUp = props => {
-  const { handleClose, show, children } = this.props;
+  const { handleClose, show, children } = props;
   const showHideClassName = show ? "modal display-block" : "modal display-none";
 
   return (
