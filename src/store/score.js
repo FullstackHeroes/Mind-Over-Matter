@@ -84,7 +84,6 @@ export const setNormalizedScore = userId => {
       const { data: normalizeDBObj } = await axios.get(
         `/api/normalizeScore/${userId}`
       );
-      console.log("hello --", normalizeDBObj);
       dispatch(getNormalizedScore(normalizeDBObj));
     } catch (error) {
       console.error(error);

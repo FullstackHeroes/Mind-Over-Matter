@@ -184,14 +184,14 @@ export const calcScreenTime = (length, interval) => (interval * length) / 1000;
 export const calcWeightedTrueScore = async userId => {
   //RETRIEVE LS DATA AND DB SCORE OBJECTS AND CONDENSE LS DATA INTO SINGLE OBJ
   const userLocalData = JSON.parse(localStorage.getItem("snapshots"));
-  const condensedUserLocalData =
+  const condensedLSData =
     userLocalData && userLocalData.length
       ? condenseScoreObj(userLocalData, userId)
       : [];
   const { data: userDbData } = await axios.get(`api/hours/${userId}`);
 
   // APPEND LS DATA TO DB SCORE OBJ
-  userDbData.push(condensedUserLocalData);
+  if (condensedLSData.length) userDbData.push(condensedLSData);
 
   //ORDER aggUserDataObjArr FROM NEW TO OLD
   const orderArr = userDbData.reverse();

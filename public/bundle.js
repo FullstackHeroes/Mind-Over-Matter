@@ -67006,7 +67006,6 @@ function (_Component) {
           user = _this$props2.user,
           fullScoreObj = _this$props2.fullScoreObj,
           normalizedScore = _this$props2.normalizedScore;
-      console.log("RENDER --");
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dashboardFullDiv"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
@@ -68195,22 +68194,21 @@ var setNormalizedScore = function setNormalizedScore(userId) {
               case 3:
                 _ref5 = _context3.sent;
                 normalizeDBObj = _ref5.data;
-                console.log("hello --", normalizeDBObj);
                 dispatch(getNormalizedScore(normalizeDBObj));
-                _context3.next = 12;
+                _context3.next = 11;
                 break;
 
-              case 9:
-                _context3.prev = 9;
+              case 8:
+                _context3.prev = 8;
                 _context3.t0 = _context3["catch"](0);
                 console.error(_context3.t0);
 
-              case 12:
+              case 11:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 9]]);
+        }, _callee3, null, [[0, 8]]);
       }));
 
       return function (_x3) {
@@ -68870,7 +68868,7 @@ function () {
   var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(userId) {
-    var userLocalData, condensedUserLocalData, _ref4, userDbData, orderArr, totalScreenScore, totalCount, i, obj, shortOrderArr, calcNormalScore;
+    var userLocalData, condensedLSData, _ref4, userDbData, orderArr, totalScreenScore, totalCount, i, obj, shortOrderArr, calcNormalScore;
 
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
@@ -68878,7 +68876,7 @@ function () {
           case 0:
             //RETRIEVE LS DATA AND DB SCORE OBJECTS AND CONDENSE LS DATA INTO SINGLE OBJ
             userLocalData = JSON.parse(localStorage.getItem("snapshots"));
-            condensedUserLocalData = userLocalData && userLocalData.length ? condenseScoreObj(userLocalData, userId) : [];
+            condensedLSData = userLocalData && userLocalData.length ? condenseScoreObj(userLocalData, userId) : [];
             _context2.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/hours/".concat(userId));
 
@@ -68886,7 +68884,7 @@ function () {
             _ref4 = _context2.sent;
             userDbData = _ref4.data;
             // APPEND LS DATA TO DB SCORE OBJ
-            userDbData.push(condensedUserLocalData); //ORDER aggUserDataObjArr FROM NEW TO OLD
+            if (condensedLSData.length) userDbData.push(condensedLSData); //ORDER aggUserDataObjArr FROM NEW TO OLD
 
             orderArr = userDbData.reverse(); //BASE DATA FOR WEIGHTED AVG CALC
 
