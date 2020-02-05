@@ -1,23 +1,37 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setFullScoreObj } from "../../store";
+import { setFullScoreObj, setNormalizedScore } from "../../store";
+import { calcWeightedTrueScore } from "../../utils/utilities";
 
 class Dashboard extends Component {
+  constructor() {
+    super();
+    this.state = {
+      wtdTrueScore: "Loading"
+    };
+  }
+
   componentDidMount() {
     const { user } = this.props;
     if (user && user.id) this.props.setFullScoreObj(user.id);
   }
 
-  componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps) {
     const { fullScoreObj, user } = this.props;
-    if (fullScoreObj.length !== prevProps.fullScoreObj.length) {
+    if (
+      fullScoreObj.length !== prevProps.fullScoreObj.length ||
+      user.id !== prevProps.user.id
+    ) {
       this.props.setFullScoreObj(user.id);
+      this.props.setNormalizedScore(user.id);
+      const wtdTrueScore = await calcWeightedTrueScore(user.id);
+      this.setState({ wtdTrueScore: wtdTrueScore.toFixed(3) });
     }
   }
 
   render() {
-    const { user } = this.props;
-    console.log("RENDER --", this.props.state);
+    const { user, fullScoreObj, normalizedScore } = this.props;
+    console.log("RENDER --", fullScoreObj.slice(-1), this.props.state);
 
     return (
       <div className="dashboardFullDiv">
@@ -28,8 +42,26 @@ class Dashboard extends Component {
         </div>
 
         <div className="dashboardRowTwo dashboardRow">
-          <div className="dashboardTable">Normalized Score</div>
-          <div className="dashboardTable">Running True Score</div>
+          <div className="dashboardTable">
+            <span className="dashboardLabel">Normalized Score</span>
+            <span className="dashboardContent">
+              {normalizedScore.length
+                ? normalizedScore[normalizedScore.length - 1].toFixed(3)
+                : "Loading"}
+            </span>
+          </div>
+          <div className="dashboardTable">
+            <span className="dashboardLabel">Running True Score</span>
+            <span className="dashboardContent">{this.state.wtdTrueScore}</span>
+          </div>
+          <div className="dashboardTable">
+            <span className="dashboardLabel">Latest True Score</span>
+            <span className="dashboardContent">
+              {fullScoreObj.length
+                ? fullScoreObj[fullScoreObj.length - 1].trueScore.toFixed(3)
+                : "Loading"}
+            </span>
+          </div>
         </div>
       </div>
     );
@@ -40,13 +72,15 @@ const mapStateToProps = state => {
   return {
     user: state.user,
     fullScoreObj: state.score.fullScoreObj,
+    normalizedScore: state.score.normalizedScore,
     state: state
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    setFullScoreObj: userId => dispatch(setFullScoreObj(userId))
+    setFullScoreObj: userId => dispatch(setFullScoreObj(userId)),
+    setNormalizedScore: userId => dispatch(setNormalizedScore(userId))
   };
 };
 

@@ -78,16 +78,30 @@ export const postLSScoreObj = userId => {
   };
 };
 
-export const calcNormalizedScore = userId => {
+export const setNormalizedScore = userId => {
+  return async dispatch => {
+    try {
+      const { data: normalizeDBObj } = await axios.get(
+        `/api/normalizeScore/${userId}`
+      );
+      console.log("hello --", normalizeDBObj);
+      dispatch(getNormalizedScore(normalizeDBObj));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const postNormalizedScore = userId => {
   return async dispatch => {
     try {
       const normalizeScore = await calcNormalizeUtility(userId),
-        normalizeDBObj = await axios.post(`/api/normalizeScore`, {
+        { data: normalizeDBObj } = await axios.post(`/api/normalizeScore`, {
           userId,
           normalizeScore,
           timeStamp: new Date()
         });
-      dispatch(getNormalizedScore(normalizeScore));
+      dispatch(getNormalizedScore(normalizeDBObj));
     } catch (error) {
       console.error(error);
     }

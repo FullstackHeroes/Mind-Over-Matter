@@ -231,8 +231,18 @@ h3 {
   width: 40%;
   height: 95%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
+}
+
+.dashboardLabel {
+  font-size: 20px;
+}
+
+.dashboardContent {
+  font-size: 35px;
+  font-weight: bold;
 }
 
 /* ------------------ HOMEPAGE ELEMENT ------------------ */
