@@ -6,7 +6,7 @@ const rounding = 10 ** 5; // DECIMAL ROUNDING
 const screenWeight = 0.5;
 const countWeight = 1 - screenWeight;
 export const normalizedLen = 5000; // LENGTH FOR NORMALIZED CALC
-const wtdAvgCount = 500; // WEIGHTED AVERAGE COUNT LIMIT
+const wtdAvgCount = 5; // WEIGHTED AVERAGE COUNT LIMIT
 
 // SCORING FROM 1-10 (BAD - GOOD) AND MULTIPLIER WILL BE DONE PRO-RATA
 let sentimentSpectrum = {
@@ -38,6 +38,10 @@ let sentimentSpectrum = {
     spectrumScore: 1,
     multiplier: 1
   }
+};
+
+export const percentDifference = (running, norm) => {
+  return running / norm;
 };
 
 export const sentimentAlgo = (screenScore, expressions) => {

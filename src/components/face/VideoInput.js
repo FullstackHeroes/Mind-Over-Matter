@@ -1,14 +1,22 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import Webcam from "react-webcam";
+import { setNormalizedScore } from "../../store";
 import { loadModels, getFaceDescr } from "../../utils/faceBase";
-import { sentimentAlgo } from "../../utils/utilities"; //import mentalCheck algo here
+import {
+  sentimentAlgo,
+  calcWeightedTrueScore,
+  percentDifference
+} from "../../utils/utilities";
+import PopUp from "../global/PopUp";
 import {
   setFullScoreObj,
   postNormalizedScore,
   postLSScoreObj,
   getTimeInterval
 } from "../../store";
+import { relative } from "path";
 
 const WIDTH = 420;
 const HEIGHT = 420;
@@ -20,7 +28,8 @@ class VideoInput extends Component {
     this.webcam = React.createRef();
     this.state = {
       facingMode: "user",
-      detections: null
+      detections: null,
+      showPopUp: false
     };
   }
 
@@ -32,7 +41,7 @@ class VideoInput extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const { snapInterval, dbInterval } = this.props;
+    const { snapInterval, dbInterval, user } = this.props;
     if (
       snapInterval !== prevProps.snapInterval ||
       dbInterval !== prevProps.dbInterval
@@ -41,6 +50,8 @@ class VideoInput extends Component {
       this.startDatabase();
     }
   }
+
+  // BIND METHODS
 
   // LOCAL STORAGE MANAGER
   appendLocalStorage = (snapshot, userId) => {
@@ -63,6 +74,7 @@ class VideoInput extends Component {
     if (user && user.id) {
       this.intervalSnap = setInterval(() => {
         this.capture(user.id);
+        this.props.setNormalizedScore(user.id);
       }, this.props.snapInterval);
     }
   };
@@ -72,7 +84,7 @@ class VideoInput extends Component {
     try {
       if (!!this.webcam.current) {
         await getFaceDescr(this.webcam.current.getScreenshot(), inputSize).then(
-          fullDesc => {
+          async fullDesc => {
             if (!!fullDesc && fullDesc.length) {
               this.setState({
                 detections: fullDesc.map(fd => fd.detection)
@@ -85,6 +97,16 @@ class VideoInput extends Component {
 
               // APPENDING LOCAL STORAGE
               this.appendLocalStorage(fullScoreObj, userId);
+
+              let { normalizedScore } = this.props;
+              let mostRecentNormalized = normalizedScore[0].normalizeScore;
+              let RunningTrueScore = await calcWeightedTrueScore(userId);
+
+              //THE TRIGGER TO
+              if (mostRecentNormalized - RunningTrueScore > 2) {
+                this.showHelp();
+              }
+              //this is going to be where my logic for the popup toggle goes
             } else console.error("WAHH -- no current detection");
           }
         );
@@ -114,6 +136,19 @@ class VideoInput extends Component {
     } catch (error) {
       console.error("WAHH --", error);
     }
+  };
+
+  // toggleHelp = e => {
+  //   this.setState({
+  //     showPopUp: !this.state.showPopUp
+  //   });
+  // };
+  showHelp = () => {
+    this.setState({ showPopUp: true });
+  };
+
+  hideHelp = () => {
+    this.setState({ showPopUp: false });
   };
 
   componentWillUnmount() {
@@ -198,6 +233,25 @@ class VideoInput extends Component {
               ) : null}
               {!!drawBox ? drawBox : null}
             </div>
+            <div
+              style={{
+                position: "relative"
+              }}>
+              {/* temp button to test */}
+
+              {/* <button
+                style={{
+                  position: "absolute",
+                  bottom: 0
+                }}
+                onClick={() => {
+                  this.showHelp();
+                }}>
+                show Modal
+              </button> */}
+
+              <PopUp show={this.state.showPopUp} onClose={this.hideHelp} />
+            </div>
           </div>
         </div>
       </div>
@@ -209,7 +263,8 @@ const mapStateToProps = state => {
   return {
     user: state.user,
     snapInterval: state.score.snapInterval,
-    dbInterval: state.score.dbInterval
+    dbInterval: state.score.dbInterval,
+    normalizedScore: state.score.normalizedScore
   };
 };
 
@@ -219,7 +274,8 @@ const mapDispatchToProps = dispatch => {
     postNormalizedScore: userId => dispatch(postNormalizedScore(userId)),
     postLSScoreObj: userId => dispatch(postLSScoreObj(userId)),
     getTimeInterval: (snapInterval, dbInterval) =>
-      dispatch(getTimeInterval(snapInterval, dbInterval))
+      dispatch(getTimeInterval(snapInterval, dbInterval)),
+    setNormalizedScore: userId => dispatch(setNormalizedScore(userId))
   };
 };
 
