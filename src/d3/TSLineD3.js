@@ -109,6 +109,7 @@ class TSLineD3 {
       .attr("cx", d => vis.x(d[xAttr]))
       .attr("r", 9)
       // .on("click", d => store.dispatch(setActiveName(d.name)))
+      .on("click", d => console.log("Hello Click!"))
       .transition(1000)
       .attr("cy", d => vis.y(d[yAttr]));
   }
