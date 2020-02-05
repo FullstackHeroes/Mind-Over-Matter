@@ -7,7 +7,7 @@ import { sentimentAlgo, calcWeightedTrueScore } from "../../utils/utilities";
 import PopUp from "../global/PopUp";
 import {
   setFullScoreObj,
-  calcNormalizedScore,
+  postNormalizedScore,
   postLSScoreObj,
   getTimeInterval
 } from "../../store";
@@ -116,7 +116,11 @@ class VideoInput extends Component {
     try {
       const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
       if (currSnapshot && currSnapshot.length) {
+<<<<<<< HEAD
         this.props.calcNormalizedScore(userId);
+=======
+        this.props.postNormalizedScore(userId);
+>>>>>>> master
         this.props.postLSScoreObj(userId);
       }
     } catch (error) {
@@ -252,7 +256,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     setFullScoreObj: userId => dispatch(setFullScoreObj(userId)),
-    calcNormalizedScore: userId => dispatch(calcNormalizedScore(userId)),
+    postNormalizedScore: userId => dispatch(postNormalizedScore(userId)),
     postLSScoreObj: userId => dispatch(postLSScoreObj(userId)),
     getTimeInterval: (snapInterval, dbInterval) =>
       dispatch(getTimeInterval(snapInterval, dbInterval))
