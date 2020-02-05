@@ -67743,13 +67743,13 @@ function (_Component) {
                   var _ref3 = _asyncToGenerator(
                   /*#__PURE__*/
                   regeneratorRuntime.mark(function _callee2(fullDesc) {
-                    var desc, screenScore, expressions, fullScoreObj, normalizedScore, mostRecentNormalized, RunningTrueScore;
+                    var desc, screenScore, expressions, fullScoreObj, normalizedScore, mostRecentNormalized, RunningTrueScore, perDiff;
                     return regeneratorRuntime.wrap(function _callee2$(_context2) {
                       while (1) {
                         switch (_context2.prev = _context2.next) {
                           case 0:
                             if (!(!!fullDesc && fullDesc.length)) {
-                              _context2.next = 12;
+                              _context2.next = 14;
                               break;
                             }
 
@@ -67770,20 +67770,25 @@ function (_Component) {
 
                           case 8:
                             RunningTrueScore = _context2.sent;
+                            perDiff = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_6__["percentDifference"])(RunningTrueScore, mostRecentNormalized); //THE TRIGGER TO show help\
 
-                            //THE TRIGGER TO
-                            if (mostRecentNormalized - RunningTrueScore > 2) {
+                            console.log("percent diff:", perDiff);
+
+                            if (perDiff <= 45) {
+                              _this.setState({
+                                emoPercent: perDiff
+                              });
+
                               _this.showHelp();
-                            } //this is going to be where my logic for the popup toggle goes
+                            }
 
-
-                            _context2.next = 13;
+                            _context2.next = 15;
                             break;
 
-                          case 12:
+                          case 14:
                             console.error("WAHH -- no current detection");
 
-                          case 13:
+                          case 15:
                           case "end":
                             return _context2.stop();
                         }
@@ -67858,7 +67863,8 @@ function (_Component) {
     _this.state = {
       facingMode: "user",
       detections: null,
-      showPopUp: false
+      showPopUp: false,
+      emoPercent: 0
     };
     return _this;
   }
@@ -67942,7 +67948,7 @@ function (_Component) {
         style: {
           width: WIDTH,
           height: HEIGHT,
-          opacity: 1
+          opacity: 0
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
@@ -67965,10 +67971,10 @@ function (_Component) {
         style: {
           position: "relative"
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_global_PopUp__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_global_PopUp__WEBPACK_IMPORTED_MODULE_7__["default"], {
         show: this.state.showPopUp,
         onClose: this.hideHelp
-      })))));
+      }));
     }
   }]);
 

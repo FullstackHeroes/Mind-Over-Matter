@@ -29,7 +29,8 @@ class VideoInput extends Component {
     this.state = {
       facingMode: "user",
       detections: null,
-      showPopUp: false
+      showPopUp: false,
+      emoPercent: 0
     };
   }
 
@@ -102,11 +103,17 @@ class VideoInput extends Component {
               let mostRecentNormalized = normalizedScore[0].normalizeScore;
               let RunningTrueScore = await calcWeightedTrueScore(userId);
 
-              //THE TRIGGER TO
-              if (mostRecentNormalized - RunningTrueScore > 2) {
+              let perDiff = percentDifference(RunningTrueScore, mostRecentNormalized)
+              //THE TRIGGER TO show help\
+              
+              console.log("percent diff:", perDiff)
+              if (perDiff <= 45) {
+                this.setState({
+                  emoPercent: perDiff
+                })
                 this.showHelp();
               }
-              //this is going to be where my logic for the popup toggle goes
+
             } else console.error("WAHH -- no current detection");
           }
         );
@@ -138,11 +145,6 @@ class VideoInput extends Component {
     }
   };
 
-  // toggleHelp = e => {
-  //   this.setState({
-  //     showPopUp: !this.state.showPopUp
-  //   });
-  // };
   showHelp = () => {
     this.setState({ showPopUp: true });
   };
@@ -212,7 +214,7 @@ class VideoInput extends Component {
             style={{
               width: WIDTH,
               height: HEIGHT,
-              opacity: 1
+              opacity: 0
             }}>
             <div style={{ position: "relative", width: WIDTH }}>
               {!!videoConstraints ? (
@@ -237,23 +239,10 @@ class VideoInput extends Component {
               style={{
                 position: "relative"
               }}>
-              {/* temp button to test */}
-
-              {/* <button
-                style={{
-                  position: "absolute",
-                  bottom: 0
-                }}
-                onClick={() => {
-                  this.showHelp();
-                }}>
-                show Modal
-              </button> */}
-
-              <PopUp show={this.state.showPopUp} onClose={this.hideHelp} />
             </div>
           </div>
         </div>
+              <PopUp show={this.state.showPopUp} onClose={this.hideHelp} />
       </div>
     );
   }
