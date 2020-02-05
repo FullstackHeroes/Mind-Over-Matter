@@ -24,8 +24,7 @@ class VideoInput extends Component {
     this.state = {
       facingMode: "user",
       detections: null,
-      showPopUp: false,
-      runningTrueScore: 0
+      showPopUp: true
     };
   }
 
@@ -91,7 +90,7 @@ class VideoInput extends Component {
                 fullScoreObj = sentimentAlgo(screenScore, expressions);
 
               let nextRunningTrueScore = await calcWeightedTrueScore(userId);
-              this.setState({ runningTrueScore: nextRunningTrueScore });
+             //this is going to be where my logic for the popup toggle goes
 
               // APPENDING LOCAL STORAGE
               this.appendLocalStorage(fullScoreObj, userId);
@@ -126,18 +125,18 @@ class VideoInput extends Component {
     }
   };
 
-  toggleHelp = e => {
-    this.setState({
-      showPopUp: !this.state.showPopUp
-    });
+  // toggleHelp = e => {
+  //   this.setState({
+  //     showPopUp: !this.state.showPopUp
+  //   });
+  // };
+  showHelp = () => {
+    this.setState({ showPopUp: true });
   };
-  // showHelp = () => {
-  //   this.setState({ showPopUp: true });
-  // };
 
-  // hideHelp = () => {
-  //   this.setState({ showPopUp: false });
-  // };
+  hideHelp = () => {
+    this.setState({ showPopUp: false });
+  };
 
   componentWillUnmount() {
     clearInterval(this.intervalSnap);
@@ -227,18 +226,18 @@ class VideoInput extends Component {
               }}>
               {/* temp button to test */}
 
-              <button
+              {/* <button
                 style={{
                   position: "absolute",
                   bottom: 0
                 }}
                 onClick={() => {
-                  this.toggleHelp();
+                  this.showHelp();
                 }}>
                 show Modal
-              </button>
+              </button> */}
 
-              <PopUp show={this.state.showPopUp} onClose={this.toggleHelp} />
+              <PopUp show={this.state.showPopUp} onClose={this.hideHelp} />
             </div>
           </div>
         </div>

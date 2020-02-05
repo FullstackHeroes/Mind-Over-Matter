@@ -67746,7 +67746,7 @@ function (_Component) {
                         switch (_context2.prev = _context2.next) {
                           case 0:
                             if (!(!!fullDesc && fullDesc.length)) {
-                              _context2.next = 10;
+                              _context2.next = 9;
                               break;
                             }
 
@@ -67763,20 +67763,17 @@ function (_Component) {
                           case 5:
                             nextRunningTrueScore = _context2.sent;
 
-                            _this.setState({
-                              runningTrueScore: nextRunningTrueScore
-                            }); // APPENDING LOCAL STORAGE
-
-
+                            //this is going to be where my logic for the popup toggle goes
+                            // APPENDING LOCAL STORAGE
                             _this.appendLocalStorage(fullScoreObj, userId);
 
-                            _context2.next = 11;
+                            _context2.next = 10;
                             break;
 
-                          case 10:
+                          case 9:
                             console.error("WAHH -- no current detection");
 
-                          case 11:
+                          case 10:
                           case "end":
                             return _context2.stop();
                         }
@@ -67835,9 +67832,15 @@ function (_Component) {
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "toggleHelp", function (e) {
+    _defineProperty(_assertThisInitialized(_this), "showHelp", function () {
       _this.setState({
-        showPopUp: !_this.state.showPopUp
+        showPopUp: true
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "hideHelp", function () {
+      _this.setState({
+        showPopUp: false
       });
     });
 
@@ -67845,8 +67848,7 @@ function (_Component) {
     _this.state = {
       facingMode: "user",
       detections: null,
-      showPopUp: false,
-      runningTrueScore: 0
+      showPopUp: true
     };
     return _this;
   }
@@ -67867,12 +67869,6 @@ function (_Component) {
 
   }, {
     key: "componentWillUnmount",
-    // showHelp = () => {
-    //   this.setState({ showPopUp: true });
-    // };
-    // hideHelp = () => {
-    //   this.setState({ showPopUp: false });
-    // };
     value: function componentWillUnmount() {
       clearInterval(this.intervalSnap);
       clearInterval(this.intervalDB);
@@ -67880,8 +67876,6 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       var _this$state = this.state,
           detections = _this$state.detections,
           facingMode = _this$state.facingMode;
@@ -67960,17 +67954,9 @@ function (_Component) {
         style: {
           position: "relative"
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        style: {
-          position: "absolute",
-          bottom: 0
-        },
-        onClick: function onClick() {
-          _this2.toggleHelp();
-        }
-      }, "show Modal"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_global_PopUp__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_global_PopUp__WEBPACK_IMPORTED_MODULE_6__["default"], {
         show: this.state.showPopUp,
-        onClose: this.toggleHelp
+        onClose: this.hideHelp
       })))));
     }
   }]);
