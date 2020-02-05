@@ -30,7 +30,8 @@ class VideoInput extends Component {
       facingMode: "user",
       detections: null,
       showPopUp: false,
-      emoPercent: 0
+      emoPercent: 0,
+      lastAlert: new Date()
     };
   }
 
@@ -108,11 +109,12 @@ class VideoInput extends Component {
                   mostRecentNormalized
                 );
 
-              //THE TRIGGER TO SHOW THE HELP MODAL
-              console.log("percent diff:", perDiff);
-              if (perDiff <= 45) {
+              //THE TRIGGER TO SHOW THE HELP ALERT
+              console.log("percent diff:", perDiff * 100);
+              console.log(this.state.lastAlert)
+              if (perDiff * 100 < 80.01) {
                 this.setState({
-                  emoPercent: perDiff
+                  emoPercent: perDiff * 100
                 });
                 this.showHelp();
               }
