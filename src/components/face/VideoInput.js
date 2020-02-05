@@ -83,7 +83,6 @@ class VideoInput extends Component {
                 expressions = desc.expressions,
                 fullScoreObj = sentimentAlgo(screenScore, expressions),
                 runningTrueScore = await calcWeightedTrueScore(userId);
-              console.log("!!!!!!!!!!!!!!!", runningTrueScore);
 
               // APPENDING LOCAL STORAGE
               this.appendLocalStorage(fullScoreObj, userId);
