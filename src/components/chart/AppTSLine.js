@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 import ChartTSLine from "./ChartTSLine";
 
 class AppTSLine extends Component {
-  renderData(liveData) {
-    return !liveData || !liveData.length ? (
+  renderData(scoreObj) {
+    return !scoreObj || !scoreObj.length ? (
       <h3 className="loadDataText">Load Some Data First!</h3>
     ) : (
       <ChartTSLine />
@@ -15,14 +15,16 @@ class AppTSLine extends Component {
 
   render() {
     return (
-      <div className="appTSLineDiv">{this.renderData(this.props.liveData)}</div>
+      <div className="appTSLineDiv">
+        {this.renderData(this.props.fullScoreObj)}
+      </div>
     );
   }
 }
 
 const mapState = state => {
   return {
-    liveData: state.liveData
+    fullScoreObj: state.score.fullScoreObj
   };
 };
 

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setFullScoreObj, setNormalizedScore } from "../../store";
 import { calcWeightedTrueScore } from "../../utils/utilities";
+import AppTSLine from "../chart/AppTSLine";
 
 class Dashboard extends Component {
   constructor() {
@@ -68,6 +69,8 @@ class Dashboard extends Component {
             </span>
           </div>
         </div>
+
+        <AppTSLine />
       </div>
     );
   }

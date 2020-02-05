@@ -5,22 +5,19 @@ import TSLineD3 from "../../d3/TSLineD3";
 class ChartTSLine extends Component {
   componentDidMount() {
     this.setState({
-      TSLineChart: new TSLineD3(
-        this.refs.TSLineChart,
-        this.props.liveData.slice(1)
-      )
+      TSLineChart: new TSLineD3(this.refs.TSLineChart, this.props.fullScoreObj)
     });
   }
 
   componentDidUpdate(prevProps) {
-    const { liveData } = this.props;
-    if (this.checkSameArray(liveData, prevProps.liveData))
-      this.state.TSLineChart.update(liveData.slice(1));
+    const { fullScoreObj } = this.props;
+    if (this.checkSameArray(fullScoreObj, prevProps.fullScoreObj))
+      this.state.TSLineChart.update(fullScoreObj);
   }
 
   checkSameArray(one, two) {
     if (one.length !== two.length) return true;
-    for (let i = 0; i < Math.max(one.length, two.length); i++) {
+    for (let i = 0; i < one.length; i++) {
       const oneObj = one[i],
         twoObj = two[i];
       if (!oneObj || !twoObj) return true;
@@ -47,7 +44,7 @@ class ChartTSLine extends Component {
 
 const mapState = state => {
   return {
-    liveData: state.liveData
+    fullScoreObj: state.score.fullScoreObj
   };
 };
 
