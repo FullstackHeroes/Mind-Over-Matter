@@ -68483,14 +68483,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -68570,7 +68562,7 @@ var sentimentAlgo = function sentimentAlgo(screenScore, expressions) {
 var rounding = Math.pow(10, 5);
 var condenseScoreObj = function condenseScoreObj(targetScoreObj, userId) {
   if (targetScoreObj.length) {
-    var _condensedLSObj = {
+    var condensedLSObj = {
       userId: userId,
       trueScore: 0,
       screenScore: 0,
@@ -68591,19 +68583,19 @@ var condenseScoreObj = function condenseScoreObj(targetScoreObj, userId) {
         snapInterval = _store__WEBPACK_IMPORTED_MODULE_1__["default"].getState().score.snapInterval; // WEIGHTED AVERAGE CALCS FOR EACH SENTIMENT SCORE
 
     targetScoreObj.forEach(function (snap) {
-      _condensedLSObj.trueScore += Math.round(snap.trueScore * (snap.screenScore / totalScreenScore) * rounding) / rounding;
-      _condensedLSObj.neutral += Math.round(snap.neutral * (snap.screenScore / totalScreenScore) * rounding) / rounding;
-      _condensedLSObj.happy += Math.round(snap.happy * (snap.screenScore / totalScreenScore) * rounding) / rounding;
-      _condensedLSObj.sad += Math.round(snap.sad * (snap.screenScore / totalScreenScore) * rounding) / rounding;
-      _condensedLSObj.angry += Math.round(snap.angry * (snap.screenScore / totalScreenScore) * rounding) / rounding;
-      _condensedLSObj.fearful += Math.round(snap.fearful * (snap.screenScore / totalScreenScore) * rounding) / rounding;
-      _condensedLSObj.disgusted += Math.round(snap.disgusted * (snap.screenScore / totalScreenScore) * rounding) / rounding;
-      _condensedLSObj.surprised += Math.round(snap.surprised * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.trueScore += Math.round(snap.trueScore * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.neutral += Math.round(snap.neutral * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.happy += Math.round(snap.happy * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.sad += Math.round(snap.sad * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.angry += Math.round(snap.angry * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.fearful += Math.round(snap.fearful * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.disgusted += Math.round(snap.disgusted * (snap.screenScore / totalScreenScore) * rounding) / rounding;
+      condensedLSObj.surprised += Math.round(snap.surprised * (snap.screenScore / totalScreenScore) * rounding) / rounding;
     }); // AVERAGE SCREENSCORE CALC && TIME
 
-    _condensedLSObj.screenScore = totalScreenScore / targetScoreObj.length;
-    _condensedLSObj.screenTime = calcScreenTime(_condensedLSObj.count, snapInterval);
-    return _condensedLSObj;
+    condensedLSObj.screenScore = totalScreenScore / targetScoreObj.length;
+    condensedLSObj.screenTime = calcScreenTime(condensedLSObj.count, snapInterval);
+    return condensedLSObj;
   } else return {};
 }; // VARIABLE DETERMINING LENGHT OF MATERIALS FOR NORMALIZED CALC
 
@@ -68712,23 +68704,26 @@ function () {
   var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(userId) {
-    var userLocalData, condensedUserLocalData, userDbData, aggUserDataObjArr, orderArr, totalScreenScore, count, i, obj, shortOrderArr, screenWeight, countWeight, calcNormalScore;
+    var userLocalData, condensedUserLocalData, _ref4, userDbData, orderArr, totalScreenScore, count, i, obj, shortOrderArr, screenWeight, countWeight, calcNormalScore;
+
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             //RETRIEVE LS DATA AND DB SCORE OBJECTS AND CONDENSE LS DATA INTO SINGLE OBJ
             userLocalData = JSON.parse(localStorage.getItem("snapshots"));
-            condensedUserLocalData = condensedLSObj(userLocalData, userId);
+            condensedUserLocalData = condenseScoreObj(userLocalData, userId);
             _context2.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/hours/".concat(userId));
 
           case 4:
-            userDbData = _context2.sent;
+            _ref4 = _context2.sent;
+            userDbData = _ref4.data;
             // APPEND LS DATA TO DB SCORE OBJ
-            aggUserDataObjArr = [].concat(_toConsumableArray(userDbData), _toConsumableArray(condensedUserLocalData)); //ORDER aggUserDataObjArr FROM NEW TO OLD
+            userDbData.push(condensedUserLocalData); // console.log("user agguser data from algo:", userDbData );
+            //ORDER userDbData FROM NEW TO OLD
 
-            orderArr = aggUserDataObjArr.reverse(); //BASE DATA FOR WEIGHTED AVG CALC
+            orderArr = userDbData.reverse(); //BASE DATA FOR WEIGHTED AVG CALC
 
             totalScreenScore = 0, count = 0, i = 0;
 
@@ -68750,7 +68745,7 @@ function () {
             }, 0);
             return _context2.abrupt("return", Math.floor(calcNormalScore * rounding / rounding));
 
-          case 12:
+          case 13:
           case "end":
             return _context2.stop();
         }

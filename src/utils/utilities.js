@@ -190,14 +190,14 @@ const wtdAvgCount = 3000;
 export const calcWeightedTrueScore = async userId => {
   //RETRIEVE LS DATA AND DB SCORE OBJECTS AND CONDENSE LS DATA INTO SINGLE OBJ
   const userLocalData = JSON.parse(localStorage.getItem("snapshots"));
-  const condensedUserLocalData = condensedLSObj(userLocalData, userId);
-  const userDbData = await axios.get(`api/hours/${userId}`);
-
+  const condensedUserLocalData = condenseScoreObj(userLocalData, userId);
+  const { data: userDbData } = await axios.get(`api/hours/${userId}`);
   // APPEND LS DATA TO DB SCORE OBJ
-  const aggUserDataObjArr = [...userDbData, ...condensedUserLocalData];
+  userDbData.push(condensedUserLocalData);
+  // console.log("user agguser data from algo:", userDbData );
 
-  //ORDER aggUserDataObjArr FROM NEW TO OLD
-  const orderArr = aggUserDataObjArr.reverse();
+  //ORDER userDbData FROM NEW TO OLD
+  const orderArr = userDbData.reverse();
 
   //BASE DATA FOR WEIGHTED AVG CALC
   let totalScreenScore = 0,
