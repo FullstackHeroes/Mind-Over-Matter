@@ -42,11 +42,13 @@ export const auth = userObj => async dispatch => {
 
 export const logout = userId => async dispatch => {
   try {
-    const LSDataObj = JSON.parse(localStorage.getItem("snapshots")),
-      targetLSDataObj = LSDataObj.filter(snap => snap.userId === userId),
-      adjLSDataObj = condenseScoreObj(targetLSDataObj, userId);
+    const LSDataObj = JSON.parse(localStorage.getItem("snapshots"));
+    if (LSDataObj && LSDataObj.length) {
+      const targetLSDataObj = LSDataObj.filter(snap => snap.userId === userId),
+        adjLSDataObj = condenseScoreObj(targetLSDataObj, userId);
+      await axios.post("/auth/logout", adjLSDataObj);
+    } else await axios.post("/auth/logout");
 
-    await axios.post("/auth/logout", adjLSDataObj);
     dispatch(removeUser());
     localStorage.clear();
     history.push("/SignIn");

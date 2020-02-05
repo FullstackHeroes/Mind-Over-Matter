@@ -42,6 +42,10 @@ class NavBar extends Component {
           </div>
         ) : (
           <div className="navBarRight">
+            <Link to="/" className="linkText navBarLink">
+              HomePage
+            </Link>
+
             <Link to="/SignIn" className="linkText navBarLink">
               Sign In
             </Link>

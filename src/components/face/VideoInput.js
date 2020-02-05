@@ -106,10 +106,8 @@ class VideoInput extends Component {
 
   pushToDatabase = userId => {
     try {
-      console.log("VIDEO DATABASE !!");
       const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
       if (currSnapshot && currSnapshot.length) {
-        console.log("INSIDE VIDEO DATABASE !!");
         this.props.calcNormalizedScore(userId);
         this.props.postLSScoreObj(userId);
       }

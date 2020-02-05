@@ -66898,7 +66898,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _history__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../history */ "./src/history.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store */ "./src/store/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -66933,9 +66933,27 @@ function (_Component) {
   }
 
   _createClass(Dashboard, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var user = this.props.user;
+      if (user && user.id) this.props.setFullScoreObj(user.id);
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var _this$props = this.props,
+          fullScoreObj = _this$props.fullScoreObj,
+          user = _this$props.user;
+
+      if (fullScoreObj.length !== prevProps.fullScoreObj.length) {
+        this.props.setFullScoreObj(user.id);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var user = this.props.user;
+      console.log("RENDER --", this.props.state);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dashboardFullDiv"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
@@ -66961,12 +66979,18 @@ function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user,
+    fullScoreObj: state.score.fullScoreObj,
+    state: state
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    setFullScoreObj: function setFullScoreObj(userId) {
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_2__["setFullScoreObj"])(userId));
+    }
+  };
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Dashboard));
@@ -67371,12 +67395,9 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "pushToDatabase", function (userId) {
       try {
-        console.log("VIDEO DATABASE !!");
         var currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
 
         if (currSnapshot && currSnapshot.length) {
-          console.log("INSIDE VIDEO DATABASE !!");
-
           _this.props.calcNormalizedScore(userId);
 
           _this.props.postLSScoreObj(userId);
@@ -67653,6 +67674,9 @@ function (_Component) {
       }, "Logout")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "navBarRight"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/",
+        className: "linkText navBarLink"
+      }, "HomePage"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/SignIn",
         className: "linkText navBarLink"
       }, "Sign In")));
@@ -68306,30 +68330,45 @@ var logout = function logout(userId) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.prev = 0;
-                LSDataObj = JSON.parse(localStorage.getItem("snapshots")), targetLSDataObj = LSDataObj.filter(function (snap) {
+                LSDataObj = JSON.parse(localStorage.getItem("snapshots"));
+
+                if (!(LSDataObj && LSDataObj.length)) {
+                  _context3.next = 8;
+                  break;
+                }
+
+                targetLSDataObj = LSDataObj.filter(function (snap) {
                   return snap.userId === userId;
                 }), adjLSDataObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_2__["condenseScoreObj"])(targetLSDataObj, userId);
-                _context3.next = 4;
+                _context3.next = 6;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/auth/logout", adjLSDataObj);
 
-              case 4:
+              case 6:
+                _context3.next = 10;
+                break;
+
+              case 8:
+                _context3.next = 10;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/auth/logout");
+
+              case 10:
                 dispatch(removeUser());
                 localStorage.clear();
                 _history__WEBPACK_IMPORTED_MODULE_1__["default"].push("/SignIn");
-                _context3.next = 12;
+                _context3.next = 18;
                 break;
 
-              case 9:
-                _context3.prev = 9;
+              case 15:
+                _context3.prev = 15;
                 _context3.t0 = _context3["catch"](0);
                 console.error(_context3.t0);
 
-              case 12:
+              case 18:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 9]]);
+        }, _callee3, null, [[0, 15]]);
       }));
 
       return function (_x3) {
