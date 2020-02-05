@@ -109,7 +109,6 @@ class VideoInput extends Component {
                 );
 
               //THE TRIGGER TO SHOW THE HELP MODAL
-              console.log("percent diff:", perDiff);
               if (perDiff <= 45) {
                 this.setState({
                   emoPercent: perDiff
