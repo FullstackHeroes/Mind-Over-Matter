@@ -70,7 +70,7 @@ class Dashboard extends Component {
           </div>
         </div>
 
-        <AppTSLine />
+        {/* <AppTSLine /> */}
       </div>
     );
   }

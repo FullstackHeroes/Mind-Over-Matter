@@ -8,6 +8,7 @@ const HEIGHT = 400 - MARGIN.TOP - MARGIN.BOTTOM;
 class TSLineD3 {
   constructor(element, data) {
     const vis = this;
+    console.log("D3 TIME!", element, data);
 
     vis.g = d3
       .select(element)
