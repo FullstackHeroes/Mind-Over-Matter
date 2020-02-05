@@ -128,7 +128,7 @@ class VideoInput extends Component {
 
   toggleHelp = e => {
     this.setState({
-      showPopUp: !this.showPopUp.show
+      showPopUp: !this.state.showPopUp
     });
   };
   // showHelp = () => {

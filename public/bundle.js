@@ -67837,7 +67837,7 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "toggleHelp", function (e) {
       _this.setState({
-        showPopUp: !_this.showPopUp.show
+        showPopUp: !_this.state.showPopUp
       });
     });
 
@@ -68232,8 +68232,6 @@ function (_Component) {
   _createClass(PopUp, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       if (!this.props.show) {
         return null;
       }
@@ -68247,9 +68245,7 @@ function (_Component) {
           position: "absolute",
           bottom: 0
         },
-        onClick: function onClick() {
-          _this2.hideHelp;
-        }
+        onClick: this.onClose
       }, "close"));
     }
   }]);

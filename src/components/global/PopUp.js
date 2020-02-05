@@ -21,7 +21,7 @@ export default class PopUp extends Component {
             position: "absolute",
             bottom: 0
           }}
-          onClick={() => {this.hideHelp}}>
+          onClick={this.onClose}>
           close
         </button>
       </div>
