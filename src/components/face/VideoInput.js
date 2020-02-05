@@ -81,8 +81,8 @@ class VideoInput extends Component {
               const desc = fullDesc[0],
                 screenScore = desc.detection._score,
                 expressions = desc.expressions,
-                fullScoreObj = sentimentAlgo(screenScore, expressions);
-              runningTrueScore = calcWeightedTrueScore(userId);
+                fullScoreObj = sentimentAlgo(screenScore, expressions),
+                runningTrueScore = calcWeightedTrueScore(userId);
               console.log(
                 "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
                 runningTrueScore

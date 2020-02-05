@@ -67329,8 +67329,8 @@ function (_Component) {
                     var desc = fullDesc[0],
                         screenScore = desc.detection._score,
                         expressions = desc.expressions,
-                        fullScoreObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["sentimentAlgo"])(screenScore, expressions);
-                    runningTrueScore = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["calcWeightedTrueScore"])(userId);
+                        fullScoreObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["sentimentAlgo"])(screenScore, expressions),
+                        runningTrueScore = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["calcWeightedTrueScore"])(userId);
                     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", runningTrueScore); // APPENDING LOCAL STORAGE
 
                     _this.appendLocalStorage(fullScoreObj, userId);
