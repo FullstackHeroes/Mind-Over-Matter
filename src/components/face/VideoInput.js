@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import Webcam from "react-webcam";
+import { setNormalizedScore } from "../../store";
 import { loadModels, getFaceDescr } from "../../utils/faceBase";
 import { sentimentAlgo, calcWeightedTrueScore } from "../../utils/utilities";
 import PopUp from "../global/PopUp";
@@ -24,7 +25,7 @@ class VideoInput extends Component {
     this.state = {
       facingMode: "user",
       detections: null,
-      showPopUp: true
+      showPopUp: false
     };
   }
 
@@ -36,7 +37,7 @@ class VideoInput extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const { snapInterval, dbInterval } = this.props;
+    const { snapInterval, dbInterval, user } = this.props;
     if (
       snapInterval !== prevProps.snapInterval ||
       dbInterval !== prevProps.dbInterval
@@ -69,6 +70,7 @@ class VideoInput extends Component {
     if (user && user.id) {
       this.intervalSnap = setInterval(() => {
         this.capture(user.id);
+        this.props.setNormalizedScore(user.id);
       }, this.props.snapInterval);
     }
   };
@@ -89,11 +91,17 @@ class VideoInput extends Component {
                 expressions = desc.expressions,
                 fullScoreObj = sentimentAlgo(screenScore, expressions);
 
-              let nextRunningTrueScore = await calcWeightedTrueScore(userId);
-             //this is going to be where my logic for the popup toggle goes
-
               // APPENDING LOCAL STORAGE
               this.appendLocalStorage(fullScoreObj, userId);
+
+              let { normalizedScore } = this.props;
+              let mostRecentNormalized = normalizedScore[0].normalizeScore;
+              let RunningTrueScore = await calcWeightedTrueScore(userId);
+
+              if (mostRecentNormalized - RunningTrueScore > 2) {
+                this.showHelp();
+              }
+              //this is going to be where my logic for the popup toggle goes
             } else console.error("WAHH -- no current detection");
           }
         );
@@ -250,7 +258,8 @@ const mapStateToProps = state => {
   return {
     user: state.user,
     snapInterval: state.score.snapInterval,
-    dbInterval: state.score.dbInterval
+    dbInterval: state.score.dbInterval,
+    normalizedScore: state.score.normalizedScore
   };
 };
 
@@ -260,7 +269,8 @@ const mapDispatchToProps = dispatch => {
     postNormalizedScore: userId => dispatch(postNormalizedScore(userId)),
     postLSScoreObj: userId => dispatch(postLSScoreObj(userId)),
     getTimeInterval: (snapInterval, dbInterval) =>
-      dispatch(getTimeInterval(snapInterval, dbInterval))
+      dispatch(getTimeInterval(snapInterval, dbInterval)),
+    setNormalizedScore: userId => dispatch(setNormalizedScore(userId))
   };
 };
 

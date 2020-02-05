@@ -67609,10 +67609,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_webcam__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-webcam */ "./node_modules/react-webcam/dist/react-webcam.js");
 /* harmony import */ var react_webcam__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_webcam__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _utils_faceBase__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/faceBase */ "./src/utils/faceBase.js");
-/* harmony import */ var _utils_utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/utilities */ "./src/utils/utilities.js");
-/* harmony import */ var _global_PopUp__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../global/PopUp */ "./src/components/global/PopUp.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../store */ "./src/store/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../store */ "./src/store/index.js");
+/* harmony import */ var _utils_faceBase__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/faceBase */ "./src/utils/faceBase.js");
+/* harmony import */ var _utils_utilities__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/utilities */ "./src/utils/utilities.js");
+/* harmony import */ var _global_PopUp__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../global/PopUp */ "./src/components/global/PopUp.js");
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! path */ "./node_modules/path-browserify/index.js");
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_8__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -67638,6 +67638,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -67674,7 +67675,7 @@ function (_Component) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_4__["loadModels"])();
+              return Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_5__["loadModels"])();
 
             case 2:
               _this.props.getTimeInterval(); // this.startCapture();
@@ -67712,6 +67713,8 @@ function (_Component) {
       if (user && user.id) {
         _this.intervalSnap = setInterval(function () {
           _this.capture(user.id);
+
+          _this.props.setNormalizedScore(user.id);
         }, _this.props.snapInterval);
       }
     });
@@ -67734,19 +67737,19 @@ function (_Component) {
                 }
 
                 _context3.next = 4;
-                return Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_4__["getFaceDescr"])(_this.webcam.current.getScreenshot(), inputSize).then(
+                return Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_5__["getFaceDescr"])(_this.webcam.current.getScreenshot(), inputSize).then(
                 /*#__PURE__*/
                 function () {
                   var _ref3 = _asyncToGenerator(
                   /*#__PURE__*/
                   regeneratorRuntime.mark(function _callee2(fullDesc) {
-                    var desc, screenScore, expressions, fullScoreObj, nextRunningTrueScore;
+                    var desc, screenScore, expressions, fullScoreObj, normalizedScore, mostRecentNormalized, RunningTrueScore;
                     return regeneratorRuntime.wrap(function _callee2$(_context2) {
                       while (1) {
                         switch (_context2.prev = _context2.next) {
                           case 0:
                             if (!(!!fullDesc && fullDesc.length)) {
-                              _context2.next = 9;
+                              _context2.next = 12;
                               break;
                             }
 
@@ -67756,24 +67759,30 @@ function (_Component) {
                               })
                             });
 
-                            desc = fullDesc[0], screenScore = desc.detection._score, expressions = desc.expressions, fullScoreObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_5__["sentimentAlgo"])(screenScore, expressions);
-                            _context2.next = 5;
-                            return Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_5__["calcWeightedTrueScore"])(userId);
+                            desc = fullDesc[0], screenScore = desc.detection._score, expressions = desc.expressions, fullScoreObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_6__["sentimentAlgo"])(screenScore, expressions); // APPENDING LOCAL STORAGE
 
-                          case 5:
-                            nextRunningTrueScore = _context2.sent;
-
-                            //this is going to be where my logic for the popup toggle goes
-                            // APPENDING LOCAL STORAGE
                             _this.appendLocalStorage(fullScoreObj, userId);
 
-                            _context2.next = 10;
+                            normalizedScore = _this.props.normalizedScore;
+                            mostRecentNormalized = normalizedScore[0].normalizeScore;
+                            _context2.next = 8;
+                            return Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_6__["calcWeightedTrueScore"])(userId);
+
+                          case 8:
+                            RunningTrueScore = _context2.sent;
+
+                            if (mostRecentNormalized - RunningTrueScore > 2) {
+                              _this.showHelp();
+                            } //this is going to be where my logic for the popup toggle goes
+
+
+                            _context2.next = 13;
                             break;
 
-                          case 9:
+                          case 12:
                             console.error("WAHH -- no current detection");
 
-                          case 10:
+                          case 13:
                           case "end":
                             return _context2.stop();
                         }
@@ -67848,7 +67857,7 @@ function (_Component) {
     _this.state = {
       facingMode: "user",
       detections: null,
-      showPopUp: true
+      showPopUp: false
     };
     return _this;
   }
@@ -67858,7 +67867,8 @@ function (_Component) {
     value: function componentDidUpdate(prevProps) {
       var _this$props = this.props,
           snapInterval = _this$props.snapInterval,
-          dbInterval = _this$props.dbInterval;
+          dbInterval = _this$props.dbInterval,
+          user = _this$props.user;
 
       if (snapInterval !== prevProps.snapInterval || dbInterval !== prevProps.dbInterval) {
         this.startCapture();
@@ -67954,7 +67964,7 @@ function (_Component) {
         style: {
           position: "relative"
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_global_PopUp__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_global_PopUp__WEBPACK_IMPORTED_MODULE_7__["default"], {
         show: this.state.showPopUp,
         onClose: this.hideHelp
       })))));
@@ -67968,23 +67978,27 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     user: state.user,
     snapInterval: state.score.snapInterval,
-    dbInterval: state.score.dbInterval
+    dbInterval: state.score.dbInterval,
+    normalizedScore: state.score.normalizedScore
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     setFullScoreObj: function setFullScoreObj(userId) {
-      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_7__["setFullScoreObj"])(userId));
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_4__["setFullScoreObj"])(userId));
     },
     postNormalizedScore: function postNormalizedScore(userId) {
-      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_7__["postNormalizedScore"])(userId));
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_4__["postNormalizedScore"])(userId));
     },
     postLSScoreObj: function postLSScoreObj(userId) {
-      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_7__["postLSScoreObj"])(userId));
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_4__["postLSScoreObj"])(userId));
     },
     getTimeInterval: function getTimeInterval(snapInterval, dbInterval) {
-      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_7__["getTimeInterval"])(snapInterval, dbInterval));
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_4__["getTimeInterval"])(snapInterval, dbInterval));
+    },
+    setNormalizedScore: function setNormalizedScore(userId) {
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_4__["setNormalizedScore"])(userId));
     }
   };
 };
@@ -69127,7 +69141,7 @@ var screenWeight = 0.5;
 var countWeight = 1 - screenWeight;
 var normalizedLen = 5000; // LENGTH FOR NORMALIZED CALC
 
-var wtdAvgCount = 3000; // WEIGHTED AVERAGE COUNT LIMIT
+var wtdAvgCount = 5; // WEIGHTED AVERAGE COUNT LIMIT
 // SCORING FROM 1-10 (BAD - GOOD) AND MULTIPLIER WILL BE DONE PRO-RATA
 
 var sentimentSpectrum = {
