@@ -41,8 +41,8 @@ let sentimentSpectrum = {
 };
 
 export const percentDifference = (running, norm) => {
-  return (running/norm)
-}
+  return running / norm;
+};
 
 export const sentimentAlgo = (screenScore, expressions) => {
   let totalMultScore = 0,
@@ -225,3 +225,6 @@ export const calcWeightedTrueScore = async userId => {
 
   return Math.floor(calcNormalScore * rounding) / rounding;
 };
+
+//AVERAGE 15 MINS OF SNAPSHOTS
+export const averageLocalStorageSnaps = snaps => {};
