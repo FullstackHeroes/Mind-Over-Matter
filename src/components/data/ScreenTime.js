@@ -1,23 +1,37 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setFullScoreObj } from "../../store";
 import { getTodaysScreenTime } from "../../store/screenTime";
-import { dispatch } from "d3";
+
 class ScreenTime extends Component {
-  componentDidMount = async () => {
-    await getTodaysScreenTime(this.props.user.id);
-  };
+  componentDidMount() {
+    this.props.getToday(this.props.user.id);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { user } = this.props;
+    console.log("updating -", user);
+    if (user.id !== prevProps.user.id) {
+      this.props.getToday(user.id);
+    }
+  }
 
   render() {
-    console.log("ST!!!", this.props.todaysScreenMins);
     return <div>{this.props.todaysScreenMins}</div>;
   }
 }
 
 const mapStateToProps = state => {
   return {
-    todaysScreenMins: state.time.screenMinstoday
+    user: state.user,
+    todaysScreenMins: state.time.screenMinsToday,
+    state: state
   };
 };
 
-export default connect(mapStateToProps)(ScreenTime);
+const mapDispatchToProps = dispatch => {
+  return {
+    getToday: userId => dispatch(getTodaysScreenTime(userId))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScreenTime);

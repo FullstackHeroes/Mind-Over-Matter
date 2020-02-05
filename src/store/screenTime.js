@@ -8,10 +8,10 @@ const initialState = {
 const GOT_TODAYS_SCREENTIME = "GOT_TODAYS_SCREENTIME";
 
 // ACTION CREATORS
-export const gotTodaysScreenTime = todaysScreenTime => {
+export const gotTodaysScreenTime = screenMinsToday => {
   return {
     type: GOT_TODAYS_SCREENTIME,
-    screenTime
+    screenMinsToday
   };
 };
 
@@ -20,9 +20,9 @@ export const getTodaysScreenTime = userId => {
   return async dispatch => {
     try {
       const screenTime = await axios.get(`/api/hours/${userId}/today`);
-      dispatch(gotTodaysScreenTime(screenTime));
+      dispatch(gotTodaysScreenTime(screenTime.data));
     } catch (error) {
-      next(error);
+      console.error(error);
     }
   };
 };
@@ -32,7 +32,7 @@ const timeReducer = (state = initialState, action) => {
     case GOT_TODAYS_SCREENTIME:
       return {
         ...state,
-        screenMinsToday: action.screenTime
+        screenMinsToday: action.screenMinsToday
       };
     default:
       return state;
