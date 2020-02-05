@@ -5,7 +5,7 @@ import store from "../store";
 const rounding = 10 ** 5; // DECIMAL ROUNDING
 const screenWeight = 0.5;
 const countWeight = 1 - screenWeight;
-export const normalizedLen = 3000; // LENGTH FOR NORMALIZED CALC
+export const normalizedLen = 5000; // LENGTH FOR NORMALIZED CALC
 const wtdAvgCount = 3000; // WEIGHTED AVERAGE COUNT LIMIT
 
 // SCORING FROM 1-10 (BAD - GOOD) AND MULTIPLIER WILL BE DONE PRO-RATA
@@ -191,10 +191,10 @@ export const calcWeightedTrueScore = async userId => {
   const { data: userDbData } = await axios.get(`api/hours/${userId}`);
 
   // APPEND LS DATA TO DB SCORE OBJ
-  const aggUserDataObjArr = [...userDbData, ...condensedUserLocalData];
+  userDbData.push(condensedUserLocalData);
 
   //ORDER aggUserDataObjArr FROM NEW TO OLD
-  const orderArr = aggUserDataObjArr.reverse();
+  const orderArr = userDbData.reverse();
 
   //BASE DATA FOR WEIGHTED AVG CALC
   let totalScreenScore = 0,

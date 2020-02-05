@@ -67001,7 +67001,7 @@ function (_Component) {
           user = _this$props2.user,
           fullScoreObj = _this$props2.fullScoreObj,
           normalizedScore = _this$props2.normalizedScore;
-      console.log("RENDER --", fullScoreObj.slice(-1), this.props.state);
+      console.log("RENDER --");
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dashboardFullDiv"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
@@ -68641,14 +68641,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -68660,7 +68652,7 @@ var rounding = Math.pow(10, 5); // DECIMAL ROUNDING
 
 var screenWeight = 0.5;
 var countWeight = 1 - screenWeight;
-var normalizedLen = 3000; // LENGTH FOR NORMALIZED CALC
+var normalizedLen = 5000; // LENGTH FOR NORMALIZED CALC
 
 var wtdAvgCount = 3000; // WEIGHTED AVERAGE COUNT LIMIT
 // SCORING FROM 1-10 (BAD - GOOD) AND MULTIPLIER WILL BE DONE PRO-RATA
@@ -68873,7 +68865,7 @@ function () {
   var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(userId) {
-    var userLocalData, condensedUserLocalData, _ref4, userDbData, aggUserDataObjArr, orderArr, totalScreenScore, totalCount, i, obj, shortOrderArr, calcNormalScore;
+    var userLocalData, condensedUserLocalData, _ref4, userDbData, orderArr, totalScreenScore, totalCount, i, obj, shortOrderArr, calcNormalScore;
 
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
@@ -68889,9 +68881,9 @@ function () {
             _ref4 = _context2.sent;
             userDbData = _ref4.data;
             // APPEND LS DATA TO DB SCORE OBJ
-            aggUserDataObjArr = [].concat(_toConsumableArray(userDbData), _toConsumableArray(condensedUserLocalData)); //ORDER aggUserDataObjArr FROM NEW TO OLD
+            userDbData.push(condensedUserLocalData); //ORDER aggUserDataObjArr FROM NEW TO OLD
 
-            orderArr = aggUserDataObjArr.reverse(); //BASE DATA FOR WEIGHTED AVG CALC
+            orderArr = userDbData.reverse(); //BASE DATA FOR WEIGHTED AVG CALC
 
             totalScreenScore = 0, totalCount = 0, i = 0;
 

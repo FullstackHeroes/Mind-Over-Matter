@@ -31,7 +31,7 @@ class Dashboard extends Component {
 
   render() {
     const { user, fullScoreObj, normalizedScore } = this.props;
-    console.log("RENDER --", fullScoreObj.slice(-1), this.props.state);
+    console.log("RENDER --");
 
     return (
       <div className="dashboardFullDiv">
