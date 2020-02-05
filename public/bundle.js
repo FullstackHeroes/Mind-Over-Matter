@@ -25528,6 +25528,320 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 /***/ }),
 
+/***/ "./node_modules/path-browserify/index.js":
+/*!***********************************************!*\
+  !*** ./node_modules/path-browserify/index.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(process) {// .dirname, .basename, and .extname methods are extracted from Node.js v8.11.1,
+// backported and transplited with Babel, with backwards-compat fixes
+
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+// resolves . and .. elements in a path array with directory names there
+// must be no slashes, empty elements, or device names (c:\) in the array
+// (so also no leading and trailing slashes - it does not distinguish
+// relative and absolute paths)
+function normalizeArray(parts, allowAboveRoot) {
+  // if the path tries to go above the root, `up` ends up > 0
+  var up = 0;
+  for (var i = parts.length - 1; i >= 0; i--) {
+    var last = parts[i];
+    if (last === '.') {
+      parts.splice(i, 1);
+    } else if (last === '..') {
+      parts.splice(i, 1);
+      up++;
+    } else if (up) {
+      parts.splice(i, 1);
+      up--;
+    }
+  }
+
+  // if the path is allowed to go above the root, restore leading ..s
+  if (allowAboveRoot) {
+    for (; up--; up) {
+      parts.unshift('..');
+    }
+  }
+
+  return parts;
+}
+
+// path.resolve([from ...], to)
+// posix version
+exports.resolve = function() {
+  var resolvedPath = '',
+      resolvedAbsolute = false;
+
+  for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
+    var path = (i >= 0) ? arguments[i] : process.cwd();
+
+    // Skip empty and invalid entries
+    if (typeof path !== 'string') {
+      throw new TypeError('Arguments to path.resolve must be strings');
+    } else if (!path) {
+      continue;
+    }
+
+    resolvedPath = path + '/' + resolvedPath;
+    resolvedAbsolute = path.charAt(0) === '/';
+  }
+
+  // At this point the path should be resolved to a full absolute path, but
+  // handle relative paths to be safe (might happen when process.cwd() fails)
+
+  // Normalize the path
+  resolvedPath = normalizeArray(filter(resolvedPath.split('/'), function(p) {
+    return !!p;
+  }), !resolvedAbsolute).join('/');
+
+  return ((resolvedAbsolute ? '/' : '') + resolvedPath) || '.';
+};
+
+// path.normalize(path)
+// posix version
+exports.normalize = function(path) {
+  var isAbsolute = exports.isAbsolute(path),
+      trailingSlash = substr(path, -1) === '/';
+
+  // Normalize the path
+  path = normalizeArray(filter(path.split('/'), function(p) {
+    return !!p;
+  }), !isAbsolute).join('/');
+
+  if (!path && !isAbsolute) {
+    path = '.';
+  }
+  if (path && trailingSlash) {
+    path += '/';
+  }
+
+  return (isAbsolute ? '/' : '') + path;
+};
+
+// posix version
+exports.isAbsolute = function(path) {
+  return path.charAt(0) === '/';
+};
+
+// posix version
+exports.join = function() {
+  var paths = Array.prototype.slice.call(arguments, 0);
+  return exports.normalize(filter(paths, function(p, index) {
+    if (typeof p !== 'string') {
+      throw new TypeError('Arguments to path.join must be strings');
+    }
+    return p;
+  }).join('/'));
+};
+
+
+// path.relative(from, to)
+// posix version
+exports.relative = function(from, to) {
+  from = exports.resolve(from).substr(1);
+  to = exports.resolve(to).substr(1);
+
+  function trim(arr) {
+    var start = 0;
+    for (; start < arr.length; start++) {
+      if (arr[start] !== '') break;
+    }
+
+    var end = arr.length - 1;
+    for (; end >= 0; end--) {
+      if (arr[end] !== '') break;
+    }
+
+    if (start > end) return [];
+    return arr.slice(start, end - start + 1);
+  }
+
+  var fromParts = trim(from.split('/'));
+  var toParts = trim(to.split('/'));
+
+  var length = Math.min(fromParts.length, toParts.length);
+  var samePartsLength = length;
+  for (var i = 0; i < length; i++) {
+    if (fromParts[i] !== toParts[i]) {
+      samePartsLength = i;
+      break;
+    }
+  }
+
+  var outputParts = [];
+  for (var i = samePartsLength; i < fromParts.length; i++) {
+    outputParts.push('..');
+  }
+
+  outputParts = outputParts.concat(toParts.slice(samePartsLength));
+
+  return outputParts.join('/');
+};
+
+exports.sep = '/';
+exports.delimiter = ':';
+
+exports.dirname = function (path) {
+  if (typeof path !== 'string') path = path + '';
+  if (path.length === 0) return '.';
+  var code = path.charCodeAt(0);
+  var hasRoot = code === 47 /*/*/;
+  var end = -1;
+  var matchedSlash = true;
+  for (var i = path.length - 1; i >= 1; --i) {
+    code = path.charCodeAt(i);
+    if (code === 47 /*/*/) {
+        if (!matchedSlash) {
+          end = i;
+          break;
+        }
+      } else {
+      // We saw the first non-path separator
+      matchedSlash = false;
+    }
+  }
+
+  if (end === -1) return hasRoot ? '/' : '.';
+  if (hasRoot && end === 1) {
+    // return '//';
+    // Backwards-compat fix:
+    return '/';
+  }
+  return path.slice(0, end);
+};
+
+function basename(path) {
+  if (typeof path !== 'string') path = path + '';
+
+  var start = 0;
+  var end = -1;
+  var matchedSlash = true;
+  var i;
+
+  for (i = path.length - 1; i >= 0; --i) {
+    if (path.charCodeAt(i) === 47 /*/*/) {
+        // If we reached a path separator that was not part of a set of path
+        // separators at the end of the string, stop now
+        if (!matchedSlash) {
+          start = i + 1;
+          break;
+        }
+      } else if (end === -1) {
+      // We saw the first non-path separator, mark this as the end of our
+      // path component
+      matchedSlash = false;
+      end = i + 1;
+    }
+  }
+
+  if (end === -1) return '';
+  return path.slice(start, end);
+}
+
+// Uses a mixed approach for backwards-compatibility, as ext behavior changed
+// in new Node.js versions, so only basename() above is backported here
+exports.basename = function (path, ext) {
+  var f = basename(path);
+  if (ext && f.substr(-1 * ext.length) === ext) {
+    f = f.substr(0, f.length - ext.length);
+  }
+  return f;
+};
+
+exports.extname = function (path) {
+  if (typeof path !== 'string') path = path + '';
+  var startDot = -1;
+  var startPart = 0;
+  var end = -1;
+  var matchedSlash = true;
+  // Track the state of characters (if any) we see before our first dot and
+  // after any path separator we find
+  var preDotState = 0;
+  for (var i = path.length - 1; i >= 0; --i) {
+    var code = path.charCodeAt(i);
+    if (code === 47 /*/*/) {
+        // If we reached a path separator that was not part of a set of path
+        // separators at the end of the string, stop now
+        if (!matchedSlash) {
+          startPart = i + 1;
+          break;
+        }
+        continue;
+      }
+    if (end === -1) {
+      // We saw the first non-path separator, mark this as the end of our
+      // extension
+      matchedSlash = false;
+      end = i + 1;
+    }
+    if (code === 46 /*.*/) {
+        // If this is our first dot, mark it as the start of our extension
+        if (startDot === -1)
+          startDot = i;
+        else if (preDotState !== 1)
+          preDotState = 1;
+    } else if (startDot !== -1) {
+      // We saw a non-dot and non-path separator before our dot, so we should
+      // have a good chance at having a non-empty extension
+      preDotState = -1;
+    }
+  }
+
+  if (startDot === -1 || end === -1 ||
+      // We saw a non-dot character immediately before the dot
+      preDotState === 0 ||
+      // The (right-most) trimmed path component is exactly '..'
+      preDotState === 1 && startDot === end - 1 && startDot === startPart + 1) {
+    return '';
+  }
+  return path.slice(startDot, end);
+};
+
+function filter (xs, f) {
+    if (xs.filter) return xs.filter(f);
+    var res = [];
+    for (var i = 0; i < xs.length; i++) {
+        if (f(xs[i], i, xs)) res.push(xs[i]);
+    }
+    return res;
+}
+
+// String.prototype.substr - negative index don't work in IE8
+var substr = 'ab'.substr(-1) === 'b'
+    ? function (str, start, len) { return str.substr(start, len) }
+    : function (str, start, len) {
+        if (start < 0) start = str.length + start;
+        return str.substr(start, len);
+    }
+;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../process/browser.js */ "./node_modules/process/browser.js")))
+
+/***/ }),
+
 /***/ "./node_modules/process/browser.js":
 /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
@@ -67290,12 +67604,17 @@ function (_Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_webcam__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-webcam */ "./node_modules/react-webcam/dist/react-webcam.js");
-/* harmony import */ var react_webcam__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_webcam__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _utils_faceBase__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/faceBase */ "./src/utils/faceBase.js");
-/* harmony import */ var _utils_utilities__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/utilities */ "./src/utils/utilities.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../store */ "./src/store/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_webcam__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-webcam */ "./node_modules/react-webcam/dist/react-webcam.js");
+/* harmony import */ var react_webcam__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_webcam__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../store */ "./src/store/index.js");
+/* harmony import */ var _utils_faceBase__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/faceBase */ "./src/utils/faceBase.js");
+/* harmony import */ var _utils_utilities__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/utilities */ "./src/utils/utilities.js");
+/* harmony import */ var _global_PopUp__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../global/PopUp */ "./src/components/global/PopUp.js");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! path */ "./node_modules/path-browserify/index.js");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_8__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -67324,7 +67643,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
- //import mentalCheck algo here
+
+
+
+
 
 
 var WIDTH = 420;
@@ -67353,7 +67675,7 @@ function (_Component) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_3__["loadModels"])();
+              return Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_5__["loadModels"])();
 
             case 2:
               _this.props.getTimeInterval(); // this.startCapture();
@@ -67391,6 +67713,8 @@ function (_Component) {
       if (user && user.id) {
         _this.intervalSnap = setInterval(function () {
           _this.capture(user.id);
+
+          _this.props.setNormalizedScore(user.id);
         }, _this.props.snapInterval);
       }
     });
@@ -67400,51 +67724,93 @@ function (_Component) {
     function () {
       var _ref2 = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(userId) {
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      regeneratorRuntime.mark(function _callee3(userId) {
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context2.prev = 0;
+                _context3.prev = 0;
 
                 if (!_this.webcam.current) {
-                  _context2.next = 4;
+                  _context3.next = 4;
                   break;
                 }
 
-                _context2.next = 4;
-                return Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_3__["getFaceDescr"])(_this.webcam.current.getScreenshot(), inputSize).then(function (fullDesc) {
-                  if (!!fullDesc && fullDesc.length) {
-                    _this.setState({
-                      detections: fullDesc.map(function (fd) {
-                        return fd.detection;
-                      })
-                    });
+                _context3.next = 4;
+                return Object(_utils_faceBase__WEBPACK_IMPORTED_MODULE_5__["getFaceDescr"])(_this.webcam.current.getScreenshot(), inputSize).then(
+                /*#__PURE__*/
+                function () {
+                  var _ref3 = _asyncToGenerator(
+                  /*#__PURE__*/
+                  regeneratorRuntime.mark(function _callee2(fullDesc) {
+                    var desc, screenScore, expressions, fullScoreObj, normalizedScore, mostRecentNormalized, RunningTrueScore;
+                    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                      while (1) {
+                        switch (_context2.prev = _context2.next) {
+                          case 0:
+                            if (!(!!fullDesc && fullDesc.length)) {
+                              _context2.next = 12;
+                              break;
+                            }
 
-                    var desc = fullDesc[0],
-                        screenScore = desc.detection._score,
-                        expressions = desc.expressions,
-                        fullScoreObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["sentimentAlgo"])(screenScore, expressions); // APPENDING LOCAL STORAGE
+                            _this.setState({
+                              detections: fullDesc.map(function (fd) {
+                                return fd.detection;
+                              })
+                            });
 
-                    _this.appendLocalStorage(fullScoreObj, userId);
-                  } else console.error("WAHH -- no current detection");
-                });
+                            desc = fullDesc[0], screenScore = desc.detection._score, expressions = desc.expressions, fullScoreObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_6__["sentimentAlgo"])(screenScore, expressions); // APPENDING LOCAL STORAGE
+
+                            _this.appendLocalStorage(fullScoreObj, userId);
+
+                            normalizedScore = _this.props.normalizedScore;
+                            mostRecentNormalized = normalizedScore[0].normalizeScore;
+                            _context2.next = 8;
+                            return Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_6__["calcWeightedTrueScore"])(userId);
+
+                          case 8:
+                            RunningTrueScore = _context2.sent;
+
+                            //THE TRIGGER TO
+                            if (mostRecentNormalized - RunningTrueScore > 2) {
+                              _this.showHelp();
+                            } //this is going to be where my logic for the popup toggle goes
+
+
+                            _context2.next = 13;
+                            break;
+
+                          case 12:
+                            console.error("WAHH -- no current detection");
+
+                          case 13:
+                          case "end":
+                            return _context2.stop();
+                        }
+                      }
+                    }, _callee2);
+                  }));
+
+                  return function (_x2) {
+                    return _ref3.apply(this, arguments);
+                  };
+                }());
 
               case 4:
-                _context2.next = 9;
+                _context3.next = 9;
                 break;
 
               case 6:
-                _context2.prev = 6;
-                _context2.t0 = _context2["catch"](0);
-                console.error("WAHH --", _context2.t0);
+                _context3.prev = 6;
+                _context3.t0 = _context3["catch"](0);
+                console.error("WAHH --", _context3.t0);
 
               case 9:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, null, [[0, 6]]);
+        }, _callee3, null, [[0, 6]]);
       }));
 
       return function (_x) {
@@ -67476,10 +67842,23 @@ function (_Component) {
       }
     });
 
+    _defineProperty(_assertThisInitialized(_this), "showHelp", function () {
+      _this.setState({
+        showPopUp: true
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "hideHelp", function () {
+      _this.setState({
+        showPopUp: false
+      });
+    });
+
     _this.webcam = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     _this.state = {
       facingMode: "user",
-      detections: null
+      detections: null,
+      showPopUp: false
     };
     return _this;
   }
@@ -67489,13 +67868,15 @@ function (_Component) {
     value: function componentDidUpdate(prevProps) {
       var _this$props = this.props,
           snapInterval = _this$props.snapInterval,
-          dbInterval = _this$props.dbInterval;
+          dbInterval = _this$props.dbInterval,
+          user = _this$props.user;
 
       if (snapInterval !== prevProps.snapInterval || dbInterval !== prevProps.dbInterval) {
         this.startCapture();
         this.startDatabase();
       }
-    } // LOCAL STORAGE MANAGER
+    } // BIND METHODS
+    // LOCAL STORAGE MANAGER
 
   }, {
     key: "componentWillUnmount",
@@ -67573,14 +67954,21 @@ function (_Component) {
           position: "absolute",
           backgroundColor: "black"
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_webcam__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_webcam__WEBPACK_IMPORTED_MODULE_3___default.a, {
         audio: false,
         width: WIDTH,
         height: HEIGHT,
         ref: this.webcam,
         screenshotFormat: "image/jpeg",
         videoConstraints: videoConstraints
-      })) : null, !!drawBox ? drawBox : null))));
+      })) : null, !!drawBox ? drawBox : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          position: "relative"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_global_PopUp__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        show: this.state.showPopUp,
+        onClose: this.hideHelp
+      })))));
     }
   }]);
 
@@ -67591,28 +67979,32 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     user: state.user,
     snapInterval: state.score.snapInterval,
-    dbInterval: state.score.dbInterval
+    dbInterval: state.score.dbInterval,
+    normalizedScore: state.score.normalizedScore
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     setFullScoreObj: function setFullScoreObj(userId) {
-      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["setFullScoreObj"])(userId));
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_4__["setFullScoreObj"])(userId));
     },
     postNormalizedScore: function postNormalizedScore(userId) {
-      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["postNormalizedScore"])(userId));
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_4__["postNormalizedScore"])(userId));
     },
     postLSScoreObj: function postLSScoreObj(userId) {
-      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["postLSScoreObj"])(userId));
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_4__["postLSScoreObj"])(userId));
     },
     getTimeInterval: function getTimeInterval(snapInterval, dbInterval) {
-      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["getTimeInterval"])(snapInterval, dbInterval));
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_4__["getTimeInterval"])(snapInterval, dbInterval));
+    },
+    setNormalizedScore: function setNormalizedScore(userId) {
+      return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_4__["setNormalizedScore"])(userId));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(VideoInput));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(VideoInput));
 
 /***/ }),
 
@@ -67773,6 +68165,108 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(NavBar));
+
+/***/ }),
+
+/***/ "./src/components/global/PopUp.js":
+/*!****************************************!*\
+  !*** ./src/components/global/PopUp.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PopUp; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var PopUp =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(PopUp, _Component);
+
+  function PopUp() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, PopUp);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(PopUp)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_this), "onClose", function () {
+      _this.props.onClose && _this.props.onClose();
+    });
+
+    return _this;
+  }
+
+  _createClass(PopUp, [{
+    key: "render",
+    value: function render() {
+      if (!this.props.show) {
+        return null;
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          position: "relative"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "WAAASSSAAAAAAA!!!!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        style: {
+          position: "absolute",
+          bottom: 0
+        },
+        onClick: this.onClose
+      }, "close"));
+    }
+  }]);
+
+  return PopUp;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); //spitballing css
+// .modal {
+//   width: 600px;
+//   background: white;
+//   border: 1px solid #ccc;
+//   transition: 1.1s ease-out;
+//   box-shadow: 
+//     -2rem 2rem 2rem 
+
+
+
+PopUp.propTypes = {
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  show: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired
+};
 
 /***/ }),
 
@@ -68629,12 +69123,13 @@ function () {
 /*!********************************!*\
   !*** ./src/utils/utilities.js ***!
   \********************************/
-/*! exports provided: normalizedLen, sentimentAlgo, condenseScoreObj, calcNormalizeUtility, calcScreenTime, calcWeightedTrueScore */
+/*! exports provided: normalizedLen, percentDifference, sentimentAlgo, condenseScoreObj, calcNormalizeUtility, calcScreenTime, calcWeightedTrueScore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "normalizedLen", function() { return normalizedLen; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "percentDifference", function() { return percentDifference; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sentimentAlgo", function() { return sentimentAlgo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "condenseScoreObj", function() { return condenseScoreObj; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calcNormalizeUtility", function() { return calcNormalizeUtility; });
@@ -68656,7 +69151,7 @@ var screenWeight = 0.5;
 var countWeight = 1 - screenWeight;
 var normalizedLen = 5000; // LENGTH FOR NORMALIZED CALC
 
-var wtdAvgCount = 3000; // WEIGHTED AVERAGE COUNT LIMIT
+var wtdAvgCount = 5; // WEIGHTED AVERAGE COUNT LIMIT
 // SCORING FROM 1-10 (BAD - GOOD) AND MULTIPLIER WILL BE DONE PRO-RATA
 
 var sentimentSpectrum = {
@@ -68688,6 +69183,9 @@ var sentimentSpectrum = {
     spectrumScore: 1,
     multiplier: 1
   }
+};
+var percentDifference = function percentDifference(running, norm) {
+  return running / norm;
 };
 var sentimentAlgo = function sentimentAlgo(screenScore, expressions) {
   var totalMultScore = 0,

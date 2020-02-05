@@ -1132,6 +1132,41 @@ const normalizeScoreSeed = [
     userId: 1,
     normalizeScore: 5.5,
     timeStamp: new Date("1/7/20")
+  },
+  {
+    userId: 2,
+    normalizeScore: 9.1,
+    timeStamp: new Date("1/1/20")
+  },
+  {
+    userId: 2,
+    normalizeScore: 8.9,
+    timeStamp: new Date("1/2/20")
+  },
+  {
+    userId: 2,
+    normalizeScore: 8.3,
+    timeStamp: new Date("1/3/20")
+  },
+  {
+    userId: 2,
+    normalizeScore: 9.2,
+    timeStamp: new Date("1/4/20")
+  },
+  {
+    userId: 2,
+    normalizeScore: 8.8,
+    timeStamp: new Date("1/5/20")
+  },
+  {
+    userId: 2,
+    normalizeScore: 10.0,
+    timeStamp: new Date("1/6/20")
+  },
+  {
+    userId: 2,
+    normalizeScore: 9.8,
+    timeStamp: new Date("1/7/20")
   }
 ];
 
