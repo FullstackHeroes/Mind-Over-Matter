@@ -1,5 +1,18 @@
 const router = require("express").Router();
-const { User, Hour, NormalizeScore } = require("../db/models");
+const { NormalizeScore } = require("../db/models");
+
+router.get("/:userId", async function(req, res, next) {
+  try {
+    const allNormalizeScores = await NormalizeScore.findAll({
+      where: {
+        userId: req.params.userId
+      }
+    });
+    res.json(allNormalizeScores);
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.post("/", async function(req, res, next) {
   try {
@@ -9,7 +22,12 @@ router.post("/", async function(req, res, next) {
       timeStamp,
       userId
     });
-    res.json(newNormalize);
+    const allNormalizeScores = await NormalizeScore.findAll({
+      where: {
+        userId: userId
+      }
+    });
+    res.json(allNormalizeScores);
   } catch (err) {
     next(err);
   }

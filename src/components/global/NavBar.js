@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
-import { logout, calcNormalizedScore } from "../../store";
+import { logout, postNormalizedScore } from "../../store";
 
 class NavBar extends Component {
   loggingOut = () => {
@@ -10,7 +10,7 @@ class NavBar extends Component {
     // POST A NEW GROUPED TRUE SCORE / DATA SET WHEN LOGGING OUT
     this.props.logout(userId);
     // POST A NEW NORMALIZED SCORE INTO DATABASE WHEN LOGGING OUT
-    this.props.calcNormalizedScore(userId);
+    this.props.postNormalizedScore(userId);
   };
 
   render() {
@@ -42,6 +42,10 @@ class NavBar extends Component {
           </div>
         ) : (
           <div className="navBarRight">
+            <Link to="/" className="linkText navBarLink">
+              HomePage
+            </Link>
+
             <Link to="/SignIn" className="linkText navBarLink">
               Sign In
             </Link>
@@ -61,7 +65,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     logout: userId => dispatch(logout(userId)),
-    calcNormalizedScore: userId => dispatch(calcNormalizedScore(userId))
+    postNormalizedScore: userId => dispatch(postNormalizedScore(userId))
   };
 };
 
