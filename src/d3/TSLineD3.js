@@ -15,8 +15,7 @@ class TSLineD3 {
       .append("svg")
       .attr("width", WIDTH + MARGIN.LEFT + MARGIN.RIGHT)
       .attr("height", HEIGHT + MARGIN.TOP + MARGIN.BOTTOM)
-      .classed("scatterPlotSvg", true)
-      .classed("svgChart", true)
+      .classed("TSLineSvg", true)
       .append("g")
       .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`);
 
