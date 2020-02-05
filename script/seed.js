@@ -3,12 +3,12 @@ const { User, Hour, NormalizeScore } = require("../server/db/models");
 
 const userSeed = [
   {
-    name: "Peter",
+    name: "Peter Parker",
     email: "peter@a.com",
     password: "123"
   },
   {
-    name: "Steve",
+    name: "Steven Strange",
     email: "steve@a.com",
     password: "123"
   }
