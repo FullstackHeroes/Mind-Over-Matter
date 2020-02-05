@@ -225,3 +225,6 @@ export const calcWeightedTrueScore = async userId => {
 
   return Math.floor(calcNormalScore * rounding) / rounding;
 };
+
+//AVERAGE 15 MINS OF SNAPSHOTS
+export const averageLocalStorageSnaps = snaps => {};
