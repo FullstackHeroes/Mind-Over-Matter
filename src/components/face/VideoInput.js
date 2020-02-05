@@ -216,7 +216,7 @@ class VideoInput extends Component {
             style={{
               width: WIDTH,
               height: HEIGHT,
-              opacity: 0
+              opacity: 1
             }}>
             <div style={{ position: "relative", width: WIDTH }}>
               {!!videoConstraints ? (
@@ -243,7 +243,7 @@ class VideoInput extends Component {
               }}></div>
           </div>
         </div>
-        <PopUp show={this.state.showPopUp} onClose={this.hideHelp} />
+        <PopUp show={this.state.showPopUp} onClose={this.hideHelp} helpStatus={this.state.emoPercent} />
       </div>
     );
   }

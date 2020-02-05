@@ -15,7 +15,7 @@ export default class PopUp extends Component {
           position: "relative"
         }}>
         <h1>WAAASSSAAAAAAA!!!!</h1>
-
+        {console.log("Help!!!!!!!!!!!",this.props.helpStatus)}
         <button
           style={{
             position: "absolute",

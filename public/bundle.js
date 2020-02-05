@@ -67949,7 +67949,7 @@ function (_Component) {
         style: {
           width: WIDTH,
           height: HEIGHT,
-          opacity: 0
+          opacity: 1
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
@@ -67974,7 +67974,8 @@ function (_Component) {
         }
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_global_PopUp__WEBPACK_IMPORTED_MODULE_7__["default"], {
         show: this.state.showPopUp,
-        onClose: this.hideHelp
+        onClose: this.hideHelp,
+        helpStatus: this.state.emoPercent
       }));
     }
   }]);
@@ -68248,7 +68249,7 @@ function (_Component) {
         style: {
           position: "relative"
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "WAAASSSAAAAAAA!!!!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "WAAASSSAAAAAAA!!!!"), console.log("Help!!!!!!!!!!!", this.props.helpStatus), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         style: {
           position: "absolute",
           bottom: 0
