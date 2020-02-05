@@ -1100,37 +1100,37 @@ const hourSeed = [
 const normalizeScoreSeed = [
   {
     userId: 1,
-    normalizeScore: 6,
+    normalizeScore: 6.1,
     timeStamp: new Date("1/1/20")
   },
   {
     userId: 1,
-    normalizeScore: 7,
+    normalizeScore: 7.9,
     timeStamp: new Date("1/2/20")
   },
   {
     userId: 1,
-    normalizeScore: 6,
+    normalizeScore: 6.3,
     timeStamp: new Date("1/3/20")
   },
   {
     userId: 1,
-    normalizeScore: 7,
+    normalizeScore: 7.2,
     timeStamp: new Date("1/4/20")
   },
   {
     userId: 1,
-    normalizeScore: 5,
+    normalizeScore: 5.8,
     timeStamp: new Date("1/5/20")
   },
   {
     userId: 1,
-    normalizeScore: 3,
+    normalizeScore: 3.3,
     timeStamp: new Date("1/6/20")
   },
   {
     userId: 1,
-    normalizeScore: 3,
+    normalizeScore: 5.5,
     timeStamp: new Date("1/7/20")
   }
 ];
