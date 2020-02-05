@@ -192,6 +192,7 @@ export const calcWeightedTrueScore = async userId => {
   const userLocalData = JSON.parse(localStorage.getItem("snapshots"));
   const condensedUserLocalData = condenseScoreObj(userLocalData, userId);
   const { data: userDbData } = await axios.get(`api/hours/${userId}`);
+
   // APPEND LS DATA TO DB SCORE OBJ
   userDbData.push(condensedUserLocalData);
   // console.log("user agguser data from algo:", userDbData );
