@@ -88,7 +88,17 @@ router.get("/:userId/month", async (req, res, next) => {
   const dailyScreenTime = screenTimeArr.reduce((a, b) => ({
     screenTime: a.screenTime + b.screenTime
   }));
-  res.json(Math.floor(dailyScreenTime.screenTime / 60));
+  res.json(Math.floor(dailyScreenTime.screenTime / 120));
+});
+
+router.get("/:userId/year", async (req, res, next) => {
+  const text = `SELECT hours."screenTime" FROM hours where DATE_PART('year', date(hours."timeStamp")) = DATE_PART('year', CURRENT_DATE)`;
+  const userHours = await db.query(text);
+  const screenTimeArr = userHours[0];
+  const dailyScreenTime = screenTimeArr.reduce((a, b) => ({
+    screenTime: a.screenTime + b.screenTime
+  }));
+  res.json(Math.floor(dailyScreenTime.screenTime / 120));
 });
 
 module.exports = router;
