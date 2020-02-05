@@ -82,7 +82,10 @@ class VideoInput extends Component {
                 screenScore = desc.detection._score,
                 expressions = desc.expressions,
                 fullScoreObj = sentimentAlgo(screenScore, expressions);
-
+              console.log(
+                "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+                calcWeightedTrueScore(userId)
+              );
               // APPENDING LOCAL STORAGE
               this.appendLocalStorage(fullScoreObj, userId);
             } else console.error("WAHH -- no current detection");
@@ -106,10 +109,8 @@ class VideoInput extends Component {
 
   pushToDatabase = userId => {
     try {
-      console.log("VIDEO DATABASE !!");
       const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
       if (currSnapshot && currSnapshot.length) {
-        console.log("INSIDE VIDEO DATABASE !!");
         this.props.calcNormalizedScore(userId);
         this.props.postLSScoreObj(userId);
       }

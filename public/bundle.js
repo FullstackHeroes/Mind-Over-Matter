@@ -67329,7 +67329,8 @@ function (_Component) {
                     var desc = fullDesc[0],
                         screenScore = desc.detection._score,
                         expressions = desc.expressions,
-                        fullScoreObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["sentimentAlgo"])(screenScore, expressions); // APPENDING LOCAL STORAGE
+                        fullScoreObj = Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["sentimentAlgo"])(screenScore, expressions);
+                    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", Object(_utils_utilities__WEBPACK_IMPORTED_MODULE_4__["calcWeightedTrueScore"])(userId)); // APPENDING LOCAL STORAGE
 
                     _this.appendLocalStorage(fullScoreObj, userId);
                   } else console.error("WAHH -- no current detection");
@@ -67369,12 +67370,9 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "pushToDatabase", function (userId) {
       try {
-        console.log("VIDEO DATABASE !!");
         var currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
 
         if (currSnapshot && currSnapshot.length) {
-          console.log("INSIDE VIDEO DATABASE !!");
-
           _this.props.calcNormalizedScore(userId);
 
           _this.props.postLSScoreObj(userId);
