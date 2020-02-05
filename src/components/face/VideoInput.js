@@ -5,7 +5,7 @@ import { loadModels, getFaceDescr } from "../../utils/faceBase";
 import { sentimentAlgo } from "../../utils/utilities"; //import mentalCheck algo here
 import {
   setFullScoreObj,
-  calcNormalizedScore,
+  postNormalizedScore,
   postLSScoreObj,
   getTimeInterval
 } from "../../store";
@@ -106,11 +106,9 @@ class VideoInput extends Component {
 
   pushToDatabase = userId => {
     try {
-      console.log("VIDEO DATABASE !!");
       const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
       if (currSnapshot && currSnapshot.length) {
-        console.log("INSIDE VIDEO DATABASE !!");
-        this.props.calcNormalizedScore(userId);
+        this.props.postNormalizedScore(userId);
         this.props.postLSScoreObj(userId);
       }
     } catch (error) {
@@ -218,7 +216,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     setFullScoreObj: userId => dispatch(setFullScoreObj(userId)),
-    calcNormalizedScore: userId => dispatch(calcNormalizedScore(userId)),
+    postNormalizedScore: userId => dispatch(postNormalizedScore(userId)),
     postLSScoreObj: userId => dispatch(postLSScoreObj(userId)),
     getTimeInterval: (snapInterval, dbInterval) =>
       dispatch(getTimeInterval(snapInterval, dbInterval))

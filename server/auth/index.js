@@ -39,36 +39,38 @@ router.post("/signup", async (req, res, next) => {
 });
 
 router.post("/logout", async (req, res) => {
-  const {
-    trueScore,
-    userId,
-    happy,
-    surprised,
-    neutral,
-    disgusted,
-    fearful,
-    angry,
-    sad,
-    timeStamp,
-    count,
-    screenScore,
-    screenTime
-  } = req.body;
-  await Hour.create({
-    trueScore,
-    userId,
-    happy,
-    surprised,
-    neutral,
-    disgusted,
-    fearful,
-    angry,
-    sad,
-    timeStamp,
-    count,
-    screenScore,
-    screenTime
-  });
+  if (req.body.trueScore) {
+    const {
+      trueScore,
+      userId,
+      happy,
+      surprised,
+      neutral,
+      disgusted,
+      fearful,
+      angry,
+      sad,
+      timeStamp,
+      count,
+      screenScore,
+      screenTime
+    } = req.body;
+    await Hour.create({
+      trueScore,
+      userId,
+      happy,
+      surprised,
+      neutral,
+      disgusted,
+      fearful,
+      angry,
+      sad,
+      timeStamp,
+      count,
+      screenScore,
+      screenTime
+    });
+  }
   req.logout();
   req.session.destroy();
   res.redirect("/SignIn");
