@@ -11,6 +11,7 @@ import {
   postLSScoreObj,
   getTimeInterval
 } from "../../store";
+import { relative } from "path";
 
 const WIDTH = 420;
 const HEIGHT = 420;
@@ -123,11 +124,11 @@ class VideoInput extends Component {
     }
   };
 
-  showHelp = () => {
+  showHelp = e => {
     this.setState({ showPopUp: true });
   };
 
-  hidehelpshowHelp = () => {
+  hideHelp = e => {
     this.setState({ showPopUp: false });
   };
 
@@ -213,8 +214,25 @@ class VideoInput extends Component {
               ) : null}
               {!!drawBox ? drawBox : null}
             </div>
-            <div>
-              <PopUp />
+            <div
+              style={{
+                position: "relative"
+              }}>
+              {/* temp button to test */}
+
+              <button
+                style={{
+                  position: "absolute",
+                  bottom: 0
+                }}
+                onClick={e => {
+                  this.showHelp(e);
+                }}>
+                {" "}
+                show Modal{" "}
+              </button>
+
+              <PopUp onClose={this.hideHelp} show={this.state.showPopUp} />
             </div>
           </div>
         </div>
