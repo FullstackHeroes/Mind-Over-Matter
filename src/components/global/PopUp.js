@@ -14,7 +14,7 @@ export default class PopUp extends Component {
         style={{
           position: "relative"
         }}>
-        <h1>WAAASSSAAAAAAA</h1>
+        <h1>WAAASSSAAAAAAA!!!!</h1>
 
         <button
           style={{
@@ -28,6 +28,15 @@ export default class PopUp extends Component {
     );
   }
 }
+
+//spitballing css
+// .modal {
+//   width: 600px;
+//   background: white;
+//   border: 1px solid #ccc;
+//   transition: 1.1s ease-out;
+//   box-shadow: 
+//     -2rem 2rem 2rem 
 
 
 PopUp.propTypes = {

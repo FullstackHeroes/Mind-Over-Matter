@@ -67771,6 +67771,7 @@ function (_Component) {
                           case 8:
                             RunningTrueScore = _context2.sent;
 
+                            //THE TRIGGER TO
                             if (mostRecentNormalized - RunningTrueScore > 2) {
                               _this.showHelp();
                             } //this is going to be where my logic for the popup toggle goes
@@ -68240,7 +68241,7 @@ function (_Component) {
         style: {
           position: "relative"
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "WAAASSSAAAAAAA"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "WAAASSSAAAAAAA!!!!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         style: {
           position: "absolute",
           bottom: 0
@@ -68251,7 +68252,15 @@ function (_Component) {
   }]);
 
   return PopUp;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); //spitballing css
+// .modal {
+//   width: 600px;
+//   background: white;
+//   border: 1px solid #ccc;
+//   transition: 1.1s ease-out;
+//   box-shadow: 
+//     -2rem 2rem 2rem 
+
 
 
 PopUp.propTypes = {
@@ -69114,12 +69123,13 @@ function () {
 /*!********************************!*\
   !*** ./src/utils/utilities.js ***!
   \********************************/
-/*! exports provided: normalizedLen, sentimentAlgo, condenseScoreObj, calcNormalizeUtility, calcScreenTime, calcWeightedTrueScore */
+/*! exports provided: normalizedLen, percentDifference, sentimentAlgo, condenseScoreObj, calcNormalizeUtility, calcScreenTime, calcWeightedTrueScore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "normalizedLen", function() { return normalizedLen; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "percentDifference", function() { return percentDifference; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sentimentAlgo", function() { return sentimentAlgo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "condenseScoreObj", function() { return condenseScoreObj; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calcNormalizeUtility", function() { return calcNormalizeUtility; });
@@ -69173,6 +69183,9 @@ var sentimentSpectrum = {
     spectrumScore: 1,
     multiplier: 1
   }
+};
+var percentDifference = function percentDifference(running, norm) {
+  return running / norm;
 };
 var sentimentAlgo = function sentimentAlgo(screenScore, expressions) {
   var totalMultScore = 0,

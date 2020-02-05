@@ -40,6 +40,10 @@ let sentimentSpectrum = {
   }
 };
 
+export const percentDifference = (running, norm) => {
+  return (running/norm)
+}
+
 export const sentimentAlgo = (screenScore, expressions) => {
   let totalMultScore = 0,
     totalExpressionScore = 0;

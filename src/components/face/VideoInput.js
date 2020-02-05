@@ -4,7 +4,11 @@ import { connect } from "react-redux";
 import Webcam from "react-webcam";
 import { setNormalizedScore } from "../../store";
 import { loadModels, getFaceDescr } from "../../utils/faceBase";
-import { sentimentAlgo, calcWeightedTrueScore } from "../../utils/utilities";
+import {
+  sentimentAlgo,
+  calcWeightedTrueScore,
+  percentDifference
+} from "../../utils/utilities";
 import PopUp from "../global/PopUp";
 import {
   setFullScoreObj,
@@ -98,6 +102,7 @@ class VideoInput extends Component {
               let mostRecentNormalized = normalizedScore[0].normalizeScore;
               let RunningTrueScore = await calcWeightedTrueScore(userId);
 
+              //THE TRIGGER TO
               if (mostRecentNormalized - RunningTrueScore > 2) {
                 this.showHelp();
               }
