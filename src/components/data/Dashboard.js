@@ -19,8 +19,11 @@ class Dashboard extends Component {
 
   componentDidMount() {
     const { user } = this.props;
-    if (user && user.id) this.props.setFullScoreObj(user.id);
-    this.props.getTime(user.id);
+    if (user && user.id) {
+      this.props.setFullScoreObj(user.id);
+      this.props.setNormalizedScore(user.id);
+      this.props.getTime(user.id);
+    }
   }
 
   async componentDidUpdate(prevProps) {
@@ -40,7 +43,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { user, fullScoreObj, normalizedScore } = this.props;
+    const { user, fullScoreObj, normalizedScore, runningScore } = this.props;
 
     return (
       <div className="dashboardFullDiv">
@@ -71,7 +74,11 @@ class Dashboard extends Component {
 
           <div className="dashboardTable">
             <span className="dashboardLabel">Running True Score</span>
-            <span className="dashboardContent">{this.state.wtdTrueScore}</span>
+            <span className="dashboardContent">
+              {runningScore.length
+                ? runningScore[runningScore.length - 1].runningScore.toFixed(3)
+                : "Loading"}
+            </span>
           </div>
           <div className="dashboardTable">
             <span className="dashboardLabel">Latest True Score</span>
@@ -94,6 +101,7 @@ const mapStateToProps = state => {
     user: state.user,
     fullScoreObj: state.score.fullScoreObj,
     normalizedScore: state.score.normalizedScore,
+    runningScore: state.score.runningScore,
     todaysScreenMins: state.time.screenMinsToday,
     monthsScreenHours: state.time.screenHoursThisMonth,
     yearsScreenHours: state.time.screenHoursThisYear
