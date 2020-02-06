@@ -31,7 +31,8 @@ class TSLineD3 {
       .attr("font-size", 20)
       .attr("fill", "white")
       .attr("font-weight", "bold")
-      .attr("text-anchor", "middle");
+      .attr("text-anchor", "middle")
+      .text("Time");
 
     // Y AXIS LABEL
     vis.yAxisLabel = vis.g
@@ -42,7 +43,8 @@ class TSLineD3 {
       .attr("font-size", 20)
       .attr("fill", "white")
       .attr("font-weight", "bold")
-      .attr("text-anchor", "middle");
+      .attr("text-anchor", "middle")
+      .text("Running Score");
 
     vis.xAxisGroup = vis.g
       .append("g")
@@ -71,20 +73,19 @@ class TSLineD3 {
       d3.max(vis.data, d => Number(d[yAttr]) * 1.05)
     ]);
 
-    // AXIS LABEL TRANSITION
-    vis.xAxisLabel
-      .transition(1000)
-      .text(xAttr.slice(0, 1).toUpperCase() + xAttr.slice(1));
-    vis.yAxisLabel
-      .transition(1000)
-      .text(yAttr.slice(0, 1).toUpperCase() + yAttr.slice(1));
-
     // AXIS FIGURES TRANSITION
     const xAxisCall = d3.axisBottom(vis.x);
     const yAxisCall = d3.axisLeft(vis.y);
 
     vis.xAxisGroup.transition(1000).call(xAxisCall);
     vis.yAxisGroup.transition(1000).call(yAxisCall);
+
+    // LINE CHART
+    vis.lineChart = vis.g
+      .append("path")
+      .datum(data)
+      .attr("class", "runningScoreLine")
+      .attr("d", d3.line().curve(d3.curveMonotoneX));
 
     // JOIN
     const circles = vis.g.selectAll("circle").data(vis.data, d => d.name);

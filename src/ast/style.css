@@ -271,4 +271,5 @@ img {
 /* ------------------ RUNNING LINE CHART ELEMENT ------------------ */
 .TSLineChartArea {
   width: 100%;
+  background-color: #282c34;
 }
