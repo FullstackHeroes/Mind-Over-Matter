@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setFullScoreObj, setNormalizedScore } from "../../store";
-import { calcWeightedTrueScore } from "../../utils/utilities";
 import AppTSLine from "../chart/AppTSLine";
 import {
   getTodaysScreenTime,
@@ -10,13 +9,6 @@ import {
 } from "../../store/screenTime";
 
 class Dashboard extends Component {
-  constructor() {
-    super();
-    this.state = {
-      wtdTrueScore: "Loading"
-    };
-  }
-
   componentDidMount() {
     const { user } = this.props;
     if (user && user.id) {
@@ -26,7 +18,7 @@ class Dashboard extends Component {
     }
   }
 
-  async componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps) {
     const { fullScoreObj, user } = this.props;
     if (user && user.id) {
       if (
@@ -36,8 +28,6 @@ class Dashboard extends Component {
         this.props.setFullScoreObj(user.id);
         this.props.setNormalizedScore(user.id);
         this.props.getTime(user.id);
-        const wtdTrueScore = await calcWeightedTrueScore(user.id);
-        this.setState({ wtdTrueScore: wtdTrueScore.toFixed(3) });
       }
     }
   }
