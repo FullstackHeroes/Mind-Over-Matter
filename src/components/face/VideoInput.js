@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import Webcam from "react-webcam";
-import { setNormalizedScore } from "../../store";
 import { loadModels, getFaceDescr } from "../../utils/faceBase";
 import { sentimentAlgo, calcWeightedTrueScore } from "../../utils/utilities";
 import PopUp from "../global/PopUp";
 import {
+  setNormalizedScore, 
+  postCurrentRunningSentiment,
   setFullScoreObj,
   postNormalizedScore,
   postLSScoreObj,
@@ -22,9 +23,7 @@ class VideoInput extends Component {
     super(props);
     this.webcam = React.createRef();
     this.state = {
-      facingMode: "user",
-      detections: null,
-      currentSentiment: null
+      detections: null
     };
   }
 
@@ -94,10 +93,9 @@ class VideoInput extends Component {
                 mostRecentNormalized = normalizedScore[0].normalizeScore,
                 RunningTrueScore = await calcWeightedTrueScore(userId);
 
-              this.setState({
-                currentSentiment:
-                  (RunningTrueScore / mostRecentNormalized) * 100
-              });
+              this.props.postCurrentRunningSentiment(
+                (RunningTrueScore / mostRecentNormalized) * 100
+              );
             } else console.error("WAHH -- no current detection");
           }
         );
@@ -135,17 +133,13 @@ class VideoInput extends Component {
   }
 
   render() {
-    const { detections, facingMode } = this.state;
-    let videoConstraints = null;
+    const { detections } = this.state;
+    const videoConstraints = {
+      width: WIDTH,
+      height: HEIGHT,
+      facingMode: "user"
+    };
     let detected = "";
-
-    if (!!facingMode) {
-      videoConstraints = {
-        width: WIDTH,
-        height: HEIGHT,
-        facingMode: facingMode
-      };
-    }
 
     // DETECTION BOX CODE (POSSIBLY OPTIONAL)
     let drawBox = null;
@@ -174,6 +168,7 @@ class VideoInput extends Component {
         );
       });
     }
+
 
     return (
       <div className="cameraFullDiv">
@@ -217,7 +212,7 @@ class VideoInput extends Component {
               }}></div>
           </div>
         </div>
-        <PopUp currentSentiment={this.state.currentSentiment} />
+        <PopUp currentSentiment={this.props.currentRunningSentiment} />
       </div>
     );
   }
@@ -228,7 +223,9 @@ const mapStateToProps = state => {
     user: state.user,
     snapInterval: state.score.snapInterval,
     dbInterval: state.score.dbInterval,
-    normalizedScore: state.score.normalizedScore
+    normalizedScore: state.score.normalizedScore,
+    currentRunningSentiment: state.score.currentRunningSentiment,
+    state: state
   };
 };
 
@@ -239,7 +236,9 @@ const mapDispatchToProps = dispatch => {
     postLSScoreObj: userId => dispatch(postLSScoreObj(userId)),
     getTimeInterval: (snapInterval, dbInterval) =>
       dispatch(getTimeInterval(snapInterval, dbInterval)),
-    setNormalizedScore: userId => dispatch(setNormalizedScore(userId))
+    setNormalizedScore: userId => dispatch(setNormalizedScore(userId)),
+    postCurrentRunningSentiment: currentSentiment =>
+      dispatch(postCurrentRunningSentiment(currentSentiment))
   };
 };
 
