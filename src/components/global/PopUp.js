@@ -7,7 +7,6 @@ export default class PopUp extends Component {
   };
 
   helpMessage = status => {
-    console.log("status:", status);
     if (status <= 45) {
       return (
         <div>
