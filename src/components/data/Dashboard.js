@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setFullScoreObj, setNormalizedScore } from "../../store";
 import { calcWeightedTrueScore } from "../../utils/utilities";
+import AppTSLine from "../chart/AppTSLine";
 import {
   getTodaysScreenTime,
   getMonthsScreenTime,
@@ -32,7 +33,6 @@ class Dashboard extends Component {
         this.props.setFullScoreObj(user.id);
         this.props.setNormalizedScore(user.id);
         this.props.getTime(user.id);
-        // this.props.getMonth(user.id);
         const wtdTrueScore = await calcWeightedTrueScore(user.id);
         this.setState({ wtdTrueScore: wtdTrueScore.toFixed(3) });
       }
@@ -45,6 +45,7 @@ class Dashboard extends Component {
     return (
       <div className="dashboardFullDiv">
         <h3 className="dashboardHeader">Hi, {user.name}!</h3>
+
         <div className="dashboardRowOne dashboardRow">
           <div className="dashboardTable">Time Session</div>
           <div className="dashboardTable">
@@ -67,6 +68,7 @@ class Dashboard extends Component {
                 : "Loading"}
             </span>
           </div>
+
           <div className="dashboardTable">
             <span className="dashboardLabel">Running True Score</span>
             <span className="dashboardContent">{this.state.wtdTrueScore}</span>
@@ -80,6 +82,8 @@ class Dashboard extends Component {
             </span>
           </div>
         </div>
+
+        {/* <AppTSLine /> */}
       </div>
     );
   }
@@ -90,7 +94,6 @@ const mapStateToProps = state => {
     user: state.user,
     fullScoreObj: state.score.fullScoreObj,
     normalizedScore: state.score.normalizedScore,
-    state: state,
     todaysScreenMins: state.time.screenMinsToday,
     monthsScreenHours: state.time.screenHoursThisMonth,
     yearsScreenHours: state.time.screenHoursThisYear

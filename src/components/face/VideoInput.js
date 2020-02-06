@@ -112,9 +112,13 @@ class VideoInput extends Component {
               //THE TRIGGER TO SHOW THE HELP ALERT
               console.log("percent diff:", perDiff * 100);
               console.log(this.state.lastAlert)
-              if (perDiff * 100 < 80.01) {
+              const checkDate = new Date()
+                  // 15 mins in milisecs: 900000
+
+              if (checkDate - this.state.lastAlert > 10000 && this.state.emoPercent <= 80 ) {
                 this.setState({
-                  emoPercent: perDiff * 100
+                  emoPercent: perDiff * 100,
+                  lastAlert: new Date()
                 });
                 this.showHelp();
               }
@@ -245,7 +249,11 @@ class VideoInput extends Component {
               }}></div>
           </div>
         </div>
-        <PopUp show={this.state.showPopUp} onClose={this.hideHelp} helpStatus={this.state.emoPercent} />
+        <PopUp
+          show={this.state.showPopUp}
+          onClose={this.hideHelp}
+          helpStatus={this.state.emoPercent}
+        />
       </div>
     );
   }

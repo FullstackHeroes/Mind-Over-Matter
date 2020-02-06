@@ -122,6 +122,12 @@ const NormalizeScore = db.define("normalizeScore", {
   normalizeScore: {
     type: Sequelize.FLOAT
   },
+  runningScore: {
+    type: Sequelize.FLOAT
+  },
+  sentimentDiff: {
+    type: Sequelize.FLOAT
+  },
   timeStamp: {
     type: Sequelize.STRING
   }

@@ -16,11 +16,19 @@ router.get("/:userId", async function(req, res, next) {
 
 router.post("/", async function(req, res, next) {
   try {
-    const { normalizeScore, timeStamp, userId } = req.body;
+    const {
+      normalizeScore,
+      timeStamp,
+      userId,
+      runningScore,
+      sentimentDiff
+    } = req.body;
     const newNormalize = await NormalizeScore.create({
       normalizeScore,
       timeStamp,
-      userId
+      userId,
+      runningScore,
+      sentimentDiff
     });
     const allNormalizeScores = await NormalizeScore.findAll({
       where: {

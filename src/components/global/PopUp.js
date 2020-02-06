@@ -7,41 +7,28 @@ export default class PopUp extends Component {
   };
 
   helpMessage = status => {
-    console.log("status:",status)
+    console.log("status:", status);
     if (status <= 45) {
       return (
         <div>
           <div>
-            <h5>Word on the streets is that you think better when hydrated!</h5>
-            <h5>I think its time you grabbed a drink of water</h5>
-            <h5>We would give you ours but its stuck behind this screen</h5>
+            <h5>Woah there Buddy!</h5>
+            <h5>Step away from your desk and put those hands up!</h5>
+            <h5>
+              Seems to us like you have had quite the day... you deserve a walk
+            </h5>
+            <h5>Take 10-15 mins to yourself and walk it off</h5>
           </div>
           <div>
             <img
               src={
-                "https://www.sciencenews.org/wp-content/uploads/2018/11/112418_water_feat_free.jpg"
+                " https://sd.keepcalms.com/i/keep-calm-and-step-away-from-the-computer.png"
               }
             />
           </div>
         </div>
       );
     } else if (status <= 55) {
-      return (
-        <div>
-          <div>
-            <h4>Here is a cute picture of a cat!</h4>
-            <h4>Hope it makes your day!</h4>
-          </div>
-          <div>
-            <img
-              src={
-                "https://www.mobilecause.com/wp-content/uploads/2016/03/shutterstock_84271234.jpg>"
-              }
-            />
-          </div>
-        </div>
-      );
-    } else if (status <= 65) {
       return (
         <div>
           <div>
@@ -57,21 +44,34 @@ export default class PopUp extends Component {
           </div>
         </div>
       );
-    } else if (status <= 80) {
+    } else if (status <= 65) {
       return (
         <div>
           <div>
-            <h5>Woah there Buddy!</h5>
-            <h5>Step away from your desk and put those hands up!</h5>
-            <h5>
-              Seems to us like you have had quite the day... you deserve a walk
-            </h5>
-            <h5>Take 10-15 mins to yourself and walk it off</h5>
+            <h4>Here is a cute picture of a cat!</h4>
+            <h4>Hope it makes your day!</h4>
           </div>
           <div>
             <img
               src={
-                " https://sd.keepcalms.com/i/keep-calm-and-step-away-from-the-computer.png"
+                "https://www.mobilecause.com/wp-content/uploads/2016/03/shutterstock_84271234.jpg>"
+              }
+            />
+          </div>
+        </div>
+      );
+    } else if (status <= 80) {
+      return (
+        <div>
+          <div>
+            <h5>Word on the streets is that you think better when hydrated!</h5>
+            <h5>I think its time you grabbed a drink of water</h5>
+            <h5>We would give you ours but its stuck behind this screen</h5>
+          </div>
+          <div>
+            <img
+              src={
+                "https://www.sciencenews.org/wp-content/uploads/2018/11/112418_water_feat_free.jpg"
               }
             />
           </div>

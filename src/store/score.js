@@ -1,5 +1,9 @@
 import axios from "axios";
-import { condenseScoreObj, calcNormalizeUtility } from "../utils/utilities";
+import {
+  condenseScoreObj,
+  calcNormalizeUtility,
+  calcWeightedTrueScore
+} from "../utils/utilities";
 
 // INITIAL STATE
 const initialState = {
@@ -95,9 +99,12 @@ export const postNormalizedScore = userId => {
   return async dispatch => {
     try {
       const normalizeScore = await calcNormalizeUtility(userId),
+        runningScore = await calcWeightedTrueScore(userId),
         { data: normalizeDBObj } = await axios.post(`/api/normalizeScore`, {
           userId,
           normalizeScore,
+          runningScore,
+          sentimentDiff: runningScore / normalizeScore,
           timeStamp: new Date()
         });
       dispatch(getNormalizedScore(normalizeDBObj));
