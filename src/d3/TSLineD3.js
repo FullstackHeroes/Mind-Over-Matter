@@ -11,10 +11,15 @@ class TSLineD3 {
     vis.data = [...data].map(obj => Object.assign({}, obj));
     vis.xAttr = "timeStamp";
     vis.yAttr = "runningScore";
-    console.log("STARTING -", data);
 
-    // vis.x = d3.scaleTime().range([0, 100]);
-    vis.x = d3.scaleLinear().range([0, WIDTH]);
+    vis.formatTime = d3.timeParse("%d-%b-%y");
+
+    vis.data.forEach(d => {
+      d[vis.xAttr] = new Date(Date.parse(d[vis.xAttr]));
+    });
+
+    vis.x = d3.scaleTime().range([0, WIDTH]);
+    // vis.x = d3.scaleLinear().range([0, WIDTH]);
     vis.y = d3.scaleLinear().range([HEIGHT, 0]);
 
     // INITIAL SVG CREATION
@@ -58,15 +63,15 @@ class TSLineD3 {
     vis.valueLine = d3
       .line()
       .x((d, i) => {
-        // console.log("X -", i, d, vis.xAttr, d[vis.xAttr]);
-        return vis.x(i);
-        // return vis.x(d[vis.xAttr]);
+        console.log("X -", i, d[vis.xAttr], typeof d[vis.xAttr]);
+        // return vis.x(i);
+        return vis.x(d[vis.xAttr]);
       })
       .y(d => {
         // console.log("Y Y Y -", d[vis.yAttr]);
         return vis.y(d[vis.yAttr]);
       })
-      .curve(d3.curveMonotoneX);
+      .curve(d3.curveCatmullRom.alpha(0.5));
 
     vis.update(vis.data);
   }
@@ -74,6 +79,11 @@ class TSLineD3 {
   update(data) {
     const vis = this;
     vis.data = [...data].map(obj => Object.assign({}, obj));
+
+    vis.data.forEach(d => {
+      d[vis.xAttr] = new Date(Date.parse(d[vis.xAttr]));
+    });
+
     console.log("D3 UPDATING!", vis.data, vis.xAttr, vis.yAttr);
 
     // ADJUST SCALING
@@ -81,15 +91,17 @@ class TSLineD3 {
     //   d3.min(vis.data, d => Number(d[xAttr]) * 0.9),
     //   d3.max(vis.data, d => Number(d[xAttr]) * 1.05)
     // ]);
-    // vis.x.domain(d3.extent(vis.data, d => d[vis.xAttr]));
+    vis.x.domain(d3.extent(vis.data, d => d[vis.xAttr]));
     vis.y.domain([
       d3.min(vis.data, d => Number(d[vis.yAttr]) * 0.95),
       d3.max(vis.data, d => Number(d[vis.yAttr]) * 1.05)
     ]);
 
     // AXIS FIGURES TRANSITION
-    const xAxisCall = d3.axisBottom(vis.x);
-    const yAxisCall = d3.axisLeft(vis.y);
+    const xAxisCall = d3
+      .axisBottom(vis.x)
+      .tickFormat(d3.timeFormat("%m %d %y"));
+    const yAxisCall = d3.axisLeft(vis.y).tickFormat(d3.format(".0f"));
 
     vis.xAxisGroup.transition(1000).call(xAxisCall);
     vis.yAxisGroup.transition(1000).call(yAxisCall);
