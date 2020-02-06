@@ -10,9 +10,9 @@ const initialState = {
   snapInterval: 0,
   dbInterval: 0,
   fullScoreObj: [],
-  normalizedScore: 0,
-  runningScore: 0,
-  sentimentDiff: 0
+  normalizedScore: [],
+  runningScore: [],
+  sentimentDiff: []
 };
 
 // ACTION TYPES
