@@ -28,9 +28,7 @@ class VideoInput extends Component {
     this.state = {
       facingMode: "user",
       detections: null,
-      showPopUp: false,
-      emoPercent: 0,
-      lastAlert: new Date()
+      currentSentiment: null
     };
   }
 
@@ -110,10 +108,10 @@ class VideoInput extends Component {
 
               if (
                 checkDate - this.state.lastAlert > 10000 &&
-                this.state.emoPercent <= 80
+                this.state.currentSentiment <= 80
               ) {
                 this.setState({
-                  emoPercent: perDiff * 100,
+                  currentSentiment: perDiff * 100,
                   lastAlert: new Date()
                 });
                 this.showHelp();
@@ -246,9 +244,8 @@ class VideoInput extends Component {
           </div>
         </div>
         <PopUp
-          show={this.state.showPopUp}
-          onClose={this.hideHelp}
-          helpStatus={this.state.emoPercent}
+          detections={this.state.detections}
+          currentSentiment={this.state.currentSentiment}
         />
       </div>
     );

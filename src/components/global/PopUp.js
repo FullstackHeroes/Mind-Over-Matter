@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import AlertContent from "./AlertContent";
 import { setNormalizedScore } from "../../store";
+import { connect } from "react-redux";
 
 class PopUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showPopUp: false,
-      emoPercent: 0,
       lastAlert: new Date()
     };
     this.showHelp = this.showHelp.bind(this);
@@ -20,39 +20,23 @@ class PopUp extends Component {
   };
 
   hideHelp = () => {
-    this.setState({ showPopUp: false });
-  };
-
-  //USER DATA AND CALCULATIONS
-  calcNormScore = async () => {
-    const { normalizedScore } = this.props,
-      mostRecentNormalized = normalizedScore[0].normalizeScore,
-      RunningTrueScore = await calcWeightedTrueScore(userId),
-      perDiff = percentDifference(RunningTrueScore, mostRecentNormalized);
-
-    //THE TRIGGER TO SHOW THE HELP ALERT
-    const checkDate = new Date();
-    // 15 mins in milisecs: 900000
-
-    if (
-      checkDate - this.state.lastAlert > 10000 &&
-      this.state.emoPercent <= 80
-    ) {
-      this.setState({
-        emoPercent: perDiff * 100
-      });
-      this.showHelp();
-    }
+    this.setState({
+      showPopUp: false,
+      lastAlert: new Date()
+    });
   };
 
   render() {
     const helpStatus = this.props.helpStatus;
-
-    if (!this.props.show) return null;
+    console.log("popupprops!!!!", this.props);
 
     return (
       <div>
-        <AlertContent onClose={this.showHelp} />
+        <AlertContent
+          onClose={this.hideHelp}
+          currentSentiment={this.props.currentSentiment}
+          lastAlert={this.state.lastAlert}
+        />
       </div>
     );
   }
@@ -65,6 +49,10 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(PopUp);
 
 //spitballing css
@@ -75,8 +63,3 @@ export default connect(mapStateToProps, mapDispatchToProps)(PopUp);
 //   transition: 1.1s ease-out;
 //   box-shadow:
 //     -2rem 2rem 2rem
-
-PopUp.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  show: PropTypes.bool.isRequired
-};
