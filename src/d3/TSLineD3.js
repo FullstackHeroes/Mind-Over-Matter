@@ -72,7 +72,7 @@ class TSLineD3 {
       d[vis.xAttr] = new Date(Date.parse(d[vis.xAttr]));
     });
 
-    console.log("D3 UPDATING!", vis.data, vis.xAttr, vis.yAttr);
+    console.log("D3 UPDATING!", vis.data.length, vis.xAttr, vis.yAttr);
 
     // ADJUST SCALING
     vis.x.domain(d3.extent(vis.data, d => d[vis.xAttr]));
@@ -85,7 +85,8 @@ class TSLineD3 {
     const xAxisCall = d3
       .axisBottom(vis.x)
       .ticks(7)
-      .tickFormat(d3.timeFormat("%m %d"));
+      .tickFormat(d3.timeFormat("%m %d"))
+      .attr("transform", "rotate(-65)");
     const yAxisCall = d3.axisLeft(vis.y).tickFormat(d3.format(".0f"));
 
     vis.xAxisGroup.transition(1000).call(xAxisCall);
