@@ -11,7 +11,9 @@ const initialState = {
   // dbInterval: 15 * 60 * 1000, // 15 MINUTES
   dbInterval: 0,
   fullScoreObj: [],
-  normalizedScore: 0
+  normalizedScore: 0,
+  runningScore: 0,
+  sentimentDiff: 0
 };
 
 // ACTION TYPES
