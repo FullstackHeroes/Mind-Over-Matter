@@ -8,15 +8,8 @@ const HEIGHT = 400 - MARGIN.TOP - MARGIN.BOTTOM;
 class TSLineD3 {
   constructor(element, data) {
     const vis = this;
-    vis.data = [...data].map(obj => Object.assign({}, obj));
     vis.xAttr = "timeStamp";
     vis.yAttr = "runningScore";
-
-    vis.formatTime = d3.timeParse("%d-%b-%y");
-
-    vis.data.forEach(d => {
-      d[vis.xAttr] = new Date(Date.parse(d[vis.xAttr]));
-    });
 
     vis.x = d3.scaleTime().range([0, WIDTH]);
     // vis.x = d3.scaleLinear().range([0, WIDTH]);
@@ -62,18 +55,13 @@ class TSLineD3 {
 
     vis.valueLine = d3
       .line()
-      .x((d, i) => {
-        console.log("X -", i, d[vis.xAttr], typeof d[vis.xAttr]);
-        // return vis.x(i);
-        return vis.x(d[vis.xAttr]);
-      })
-      .y(d => {
-        // console.log("Y Y Y -", d[vis.yAttr]);
-        return vis.y(d[vis.yAttr]);
-      })
-      .curve(d3.curveCatmullRom.alpha(0.5));
+      // .x((d, i) => vis.x(i))
+      .x(d => vis.x(d[vis.xAttr]))
+      .y(d => vis.y(d[vis.yAttr]))
+      // .curve(d3.curveCatmullRom.alpha(0.5));
+      .curve(d3.curveMonotoneX);
 
-    vis.update(vis.data);
+    vis.update(data);
   }
 
   update(data) {
@@ -87,10 +75,6 @@ class TSLineD3 {
     console.log("D3 UPDATING!", vis.data, vis.xAttr, vis.yAttr);
 
     // ADJUST SCALING
-    // vis.x.domain([
-    //   d3.min(vis.data, d => Number(d[xAttr]) * 0.9),
-    //   d3.max(vis.data, d => Number(d[xAttr]) * 1.05)
-    // ]);
     vis.x.domain(d3.extent(vis.data, d => d[vis.xAttr]));
     vis.y.domain([
       d3.min(vis.data, d => Number(d[vis.yAttr]) * 0.95),
@@ -98,9 +82,7 @@ class TSLineD3 {
     ]);
 
     // AXIS FIGURES TRANSITION
-    const xAxisCall = d3
-      .axisBottom(vis.x)
-      .tickFormat(d3.timeFormat("%m %d %y"));
+    const xAxisCall = d3.axisBottom(vis.x).tickFormat(d3.timeFormat("%m %d"));
     const yAxisCall = d3.axisLeft(vis.y).tickFormat(d3.format(".0f"));
 
     vis.xAxisGroup.transition(1000).call(xAxisCall);
@@ -113,35 +95,35 @@ class TSLineD3 {
       .attr("class", "runningScoreLine")
       .attr("d", vis.valueLine);
 
-    // JOIN;
-    const circles = vis.g.selectAll("circle").data(vis.data, d => d.name);
+    // // JOIN;
+    // const circles = vis.g.selectAll("circle").data(vis.data, d => d.name);
 
-    // EXIT
-    circles
-      .exit()
-      .transition(1000)
-      .attr("cy", vis.y(0))
-      .remove();
+    // // EXIT
+    // circles
+    //   .exit()
+    //   .transition(1000)
+    //   .attr("cy", vis.y(0))
+    //   .remove();
 
-    // UPDATE
-    circles
-      .transition(1000)
-      // .attr("cx", d => vis.x(d[xAttr]))
-      .attr("cx", (d, i) => vis.x(i))
-      .attr("cy", d => vis.y(d[vis.yAttr]));
+    // // UPDATE
+    // circles
+    //   .transition(1000)
+    //   // .attr("cx", d => vis.x(d[xAttr]))
+    //   .attr("cx", (d, i) => vis.x(i))
+    //   .attr("cy", d => vis.y(d[vis.yAttr]));
 
-    // ENTER
-    circles
-      .enter()
-      .append("circle")
-      .classed("scatterCircle", true)
-      .attr("cy", vis.y(0))
-      // .attr("cx", d => vis.x(d[xAttr]))
-      .attr("cx", (d, i) => vis.x(i))
-      .attr("r", 9)
-      .on("click", d => console.log("Clicking -", d))
-      .transition(1000)
-      .attr("cy", d => vis.y(d[vis.yAttr]));
+    // // ENTER
+    // circles
+    //   .enter()
+    //   .append("circle")
+    //   .classed("scatterCircle", true)
+    //   .attr("cy", vis.y(0))
+    //   // .attr("cx", d => vis.x(d[xAttr]))
+    //   .attr("cx", (d, i) => vis.x(i))
+    //   .attr("r", 9)
+    //   .on("click", d => console.log("Clicking -", d))
+    //   .transition(1000)
+    //   .attr("cy", d => vis.y(d[vis.yAttr]));
   }
 }
 
