@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setFullScoreObj, setNormalizedScore } from "../../store";
-import AppTSLine from "../chart/AppTSLine";
 import ChartTSLine from "../chart/ChartTSLine";
 import {
   getTodaysScreenTime,

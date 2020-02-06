@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import TSLineD3 from "../../d3/TSLineD3";
 
 class ChartTSLine extends Component {
@@ -42,10 +41,4 @@ class ChartTSLine extends Component {
   }
 }
 
-const mapState = state => {
-  return {
-    fullScoreObj: state.score.fullScoreObj
-  };
-};
-
-export default connect(mapState)(ChartTSLine);
+export default ChartTSLine;
