@@ -26,7 +26,6 @@ class PopUp extends Component {
   };
 
   render() {
-    const helpStatus = this.props.helpStatus;
     console.log("popupprops!!!!", this.props);
 
     return (
