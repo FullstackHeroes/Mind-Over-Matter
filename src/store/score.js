@@ -126,12 +126,6 @@ export const postNormalizedScore = userId => {
           timeStamp: new Date()
         }),
         { normalizeScoreArr, runningScoreArr, sentimentDiffArr } = data;
-      console.log(
-        "NORMAL THUNK 2 -",
-        normalizeScoreArr,
-        runningScoreArr,
-        sentimentDiffArr
-      );
       dispatch(getNormalizedScore(normalizeScoreArr));
       dispatch(getRunningScore(runningScoreArr));
       dispatch(getSentimentDiff(sentimentDiffArr));
