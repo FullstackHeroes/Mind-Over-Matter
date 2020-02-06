@@ -8,8 +8,8 @@ const HEIGHT = 400 - MARGIN.TOP - MARGIN.BOTTOM;
 class TSLineD3 {
   constructor(element, data) {
     const vis = this;
-    console.log("D3 TIME!", element, data);
 
+    // INITIAL SVG CREATION
     vis.g = d3
       .select(element)
       .append("svg")
@@ -55,13 +55,12 @@ class TSLineD3 {
   }
 
   update(data) {
-    console.log("D3 UPDATING!");
-
     const vis = this,
-      keys = Object.keys(data[0]),
-      noNameKeys = keys.filter(x => x !== "name"),
-      [xAttr, yAttr] = noNameKeys;
+      xAttr = "timeStamp",
+      yAttr = "runningScore";
     vis.data = data;
+
+    console.log("D3 UPDATING!", vis.data, xAttr, yAttr);
 
     // ADJUST SCALING
     vis.x.domain([
@@ -83,9 +82,20 @@ class TSLineD3 {
     // LINE CHART
     vis.lineChart = vis.g
       .append("path")
-      .datum(data)
+      .datum(vis.data)
+      // .datum(vis.data, d => {
+      //   console.log("HMM -", d);
+      //   d.runningScore;
+      // })
       .attr("class", "runningScoreLine")
-      .attr("d", d3.line().curve(d3.curveMonotoneX));
+      .attr(
+        "d",
+        d3
+          .line(vis.data)
+          .x(d => d[xAttr])
+          .y(d => d[yAttr])
+          .curve(d3.curveMonotoneX)
+      );
 
     // JOIN
     const circles = vis.g.selectAll("circle").data(vis.data, d => d.name);
