@@ -12,6 +12,7 @@ class TSLineD3 {
     vis.yAttr = "runningScore";
 
     vis.x = d3.scaleTime().range([0, WIDTH]);
+    // .attr("transform", "rotate(-25)");
     // vis.x = d3.scaleLinear().range([0, WIDTH]);
     vis.y = d3.scaleLinear().range([HEIGHT, 0]);
 
@@ -29,7 +30,7 @@ class TSLineD3 {
     vis.xAxisLabel = vis.g
       .append("text")
       .attr("x", WIDTH / 2)
-      .attr("y", HEIGHT + 40)
+      .attr("y", HEIGHT + 60)
       .attr("font-size", 20)
       .attr("fill", "white")
       .attr("font-weight", "bold")
@@ -58,8 +59,8 @@ class TSLineD3 {
       // .x((d, i) => vis.x(i))
       .x(d => vis.x(d[vis.xAttr]))
       .y(d => vis.y(d[vis.yAttr]))
-      // .curve(d3.curveCatmullRom.alpha(0.5));
-      .curve(d3.curveMonotoneX);
+      .curve(d3.curveCatmullRom.alpha(0.5));
+    // .curve(d3.curveMonotoneX);
 
     vis.update(data);
   }
@@ -85,11 +86,15 @@ class TSLineD3 {
     const xAxisCall = d3
       .axisBottom(vis.x)
       .ticks(7)
-      .tickFormat(d3.timeFormat("%m %d"))
-      .attr("transform", "rotate(-65)");
+      .tickFormat(d3.timeFormat("%b %d"));
     const yAxisCall = d3.axisLeft(vis.y).tickFormat(d3.format(".0f"));
 
-    vis.xAxisGroup.transition(1000).call(xAxisCall);
+    vis.xAxisGroup
+      .transition(1000)
+      .call(xAxisCall)
+      .selectAll("text")
+      .attr("transform", "rotate(-45)")
+      .style("text-anchor", "end");
     vis.yAxisGroup.transition(1000).call(yAxisCall);
 
     // LINE CHART

@@ -82,7 +82,7 @@ class Dashboard extends Component {
         </div>
 
         {runningScore.length ? (
-          <ChartTSLine runningScore={runningScore.slice(-30)} />
+          <ChartTSLine runningScore={runningScore.slice(-10)} />
         ) : (
           "Loading"
         )}
