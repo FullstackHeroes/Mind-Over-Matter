@@ -4,11 +4,7 @@ import { connect } from "react-redux";
 import Webcam from "react-webcam";
 import { setNormalizedScore } from "../../store";
 import { loadModels, getFaceDescr } from "../../utils/faceBase";
-import {
-  sentimentAlgo,
-  calcWeightedTrueScore,
-  percentDifference
-} from "../../utils/utilities";
+import { sentimentAlgo, calcWeightedTrueScore } from "../../utils/utilities";
 import PopUp from "../global/PopUp";
 import {
   setFullScoreObj,
@@ -96,26 +92,12 @@ class VideoInput extends Component {
               //USER DATA AND CALCULATIONS
               const { normalizedScore } = this.props,
                 mostRecentNormalized = normalizedScore[0].normalizeScore,
-                RunningTrueScore = await calcWeightedTrueScore(userId),
-                perDiff = percentDifference(
-                  RunningTrueScore,
-                  mostRecentNormalized
-                );
+                RunningTrueScore = await calcWeightedTrueScore(userId);
 
-              //THE TRIGGER TO SHOW THE HELP ALERT
-              const checkDate = new Date();
-              // 15 mins in milisecs: 900000
-
-              if (
-                checkDate - this.state.lastAlert > 10000 &&
-                this.state.currentSentiment <= 80
-              ) {
-                this.setState({
-                  currentSentiment: perDiff * 100,
-                  lastAlert: new Date()
-                });
-                this.showHelp();
-              }
+              this.setState({
+                currentSentiment:
+                  (RunningTrueScore / mostRecentNormalized) * 100
+              });
             } else console.error("WAHH -- no current detection");
           }
         );
@@ -145,14 +127,6 @@ class VideoInput extends Component {
     } catch (error) {
       console.error("WAHH --", error);
     }
-  };
-
-  showHelp = () => {
-    this.setState({ showPopUp: true });
-  };
-
-  hideHelp = () => {
-    this.setState({ showPopUp: false });
   };
 
   componentWillUnmount() {
@@ -243,10 +217,7 @@ class VideoInput extends Component {
               }}></div>
           </div>
         </div>
-        <PopUp
-          detections={this.state.detections}
-          currentSentiment={this.state.currentSentiment}
-        />
+        <PopUp currentSentiment={this.state.currentSentiment} />
       </div>
     );
   }
