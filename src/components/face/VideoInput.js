@@ -16,7 +16,6 @@ import {
   postLSScoreObj,
   getTimeInterval
 } from "../../store";
-import { relative } from "path";
 
 const WIDTH = 420;
 const HEIGHT = 420;
@@ -38,8 +37,6 @@ class VideoInput extends Component {
   componentDidMount = async () => {
     await loadModels();
     this.props.getTimeInterval();
-    // this.startCapture();
-    // this.startDatabase();
   };
 
   componentDidUpdate(prevProps) {
@@ -52,8 +49,6 @@ class VideoInput extends Component {
       this.startDatabase();
     }
   }
-
-  // BIND METHODS
 
   // LOCAL STORAGE MANAGER
   appendLocalStorage = (snapshot, userId) => {
@@ -110,12 +105,13 @@ class VideoInput extends Component {
                 );
 
               //THE TRIGGER TO SHOW THE HELP ALERT
-              console.log("percent diff:", perDiff * 100);
-              console.log(this.state.lastAlert)
-              const checkDate = new Date()
-                  // 15 mins in milisecs: 900000
+              const checkDate = new Date();
+              // 15 mins in milisecs: 900000
 
-              if (checkDate - this.state.lastAlert > 10000 && this.state.emoPercent <= 80 ) {
+              if (
+                checkDate - this.state.lastAlert > 10000 &&
+                this.state.emoPercent <= 80
+              ) {
                 this.setState({
                   emoPercent: perDiff * 100,
                   lastAlert: new Date()
