@@ -82,7 +82,10 @@ class TSLineD3 {
     ]);
 
     // AXIS FIGURES TRANSITION
-    const xAxisCall = d3.axisBottom(vis.x).tickFormat(d3.timeFormat("%m %d"));
+    const xAxisCall = d3
+      .axisBottom(vis.x)
+      .ticks(7)
+      .tickFormat(d3.timeFormat("%m %d"));
     const yAxisCall = d3.axisLeft(vis.y).tickFormat(d3.format(".0f"));
 
     vis.xAxisGroup.transition(1000).call(xAxisCall);
@@ -95,35 +98,35 @@ class TSLineD3 {
       .attr("class", "runningScoreLine")
       .attr("d", vis.valueLine);
 
-    // // JOIN;
-    // const circles = vis.g.selectAll("circle").data(vis.data, d => d.name);
+    // JOIN;
+    const circles = vis.g.selectAll("circle").data(vis.data, d => d.name);
 
-    // // EXIT
-    // circles
-    //   .exit()
-    //   .transition(1000)
-    //   .attr("cy", vis.y(0))
-    //   .remove();
+    // EXIT
+    circles
+      .exit()
+      .transition(1000)
+      .attr("cy", vis.y(0))
+      .remove();
 
-    // // UPDATE
-    // circles
-    //   .transition(1000)
-    //   // .attr("cx", d => vis.x(d[xAttr]))
-    //   .attr("cx", (d, i) => vis.x(i))
-    //   .attr("cy", d => vis.y(d[vis.yAttr]));
+    // UPDATE
+    circles
+      .transition(1000)
+      // .attr("cx", d => vis.x(d[xAttr]))
+      .attr("cx", (d, i) => vis.x(i))
+      .attr("cy", d => vis.y(d[vis.yAttr]));
 
-    // // ENTER
-    // circles
-    //   .enter()
-    //   .append("circle")
-    //   .classed("scatterCircle", true)
-    //   .attr("cy", vis.y(0))
-    //   // .attr("cx", d => vis.x(d[xAttr]))
-    //   .attr("cx", (d, i) => vis.x(i))
-    //   .attr("r", 9)
-    //   .on("click", d => console.log("Clicking -", d))
-    //   .transition(1000)
-    //   .attr("cy", d => vis.y(d[vis.yAttr]));
+    // ENTER
+    circles
+      .enter()
+      .append("circle")
+      .classed("scatterCircle", true)
+      .attr("cy", vis.y(0))
+      // .attr("cx", d => vis.x(d[xAttr]))
+      .attr("cx", (d, i) => vis.x(i))
+      .attr("r", 9)
+      .on("click", d => console.log("Clicking -", d))
+      .transition(1000)
+      .attr("cy", d => vis.y(d[vis.yAttr]));
   }
 }
 
