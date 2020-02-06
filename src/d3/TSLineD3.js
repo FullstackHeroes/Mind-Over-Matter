@@ -53,6 +53,8 @@ class TSLineD3 {
   }
 
   update(data) {
+    console.log("D3 UPDATING!");
+
     const vis = this,
       keys = Object.keys(data[0]),
       noNameKeys = keys.filter(x => x !== "name"),
