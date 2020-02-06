@@ -16,16 +16,11 @@ class AppTSLine extends Component {
   render() {
     return (
       <div className="appTSLineDiv">
-        {this.renderData(this.props.fullScoreObj)}
+        {/* {this.renderData(this.props.runningScore)} */}
+        <ChartTSLine runningScore={this.props.runningScore} />
       </div>
     );
   }
 }
 
-const mapState = state => {
-  return {
-    fullScoreObj: state.score.fullScoreObj
-  };
-};
-
-export default connect(mapState)(AppTSLine);
+export default AppTSLine;

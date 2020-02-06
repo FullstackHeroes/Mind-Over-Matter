@@ -80,7 +80,11 @@ class Dashboard extends Component {
           </div>
         </div>
 
-        {/* <AppTSLine /> */}
+        {runningScore.length ? (
+          <AppTSLine runningScore={runningScore.slice(-30)} />
+        ) : (
+          "Loading"
+        )}
       </div>
     );
   }
