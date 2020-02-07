@@ -52,33 +52,17 @@ class SentiStackD3 {
       .attr("transform", `translate(0, ${HEIGHT})`);
     vis.yAxisGroup = vis.g.append("g");
 
-    // LINE CREATION
-    vis.valueLine = d3
-      .line()
-      .x(d => vis.x(d[vis.xAttr]))
-      .y(d => vis.y(d[vis.yAttr]))
-      .curve(d3.curveCatmullRom.alpha(0.5));
-
     // AREA CREATION
     vis.area = d3
       .area()
       .x(d => vis.x(d[vis.xAttr]))
       .y0(d => vis.y(d.happy))
-      .y1(d => vis.y(d.surprised))
-      .y2(d => vis.y(d.neutral))
-      .y3(d => vis.y(d.disgusted))
-      .y4(d => vis.y(d.fearful))
-      .y5(d => vis.y(d.angry))
-      .y6(d => vis.y(d.sad));
-
-    // BRUSHING
-    // vis.brush = d3
-    //   .brushX()
-    //   .extent([
-    //     [0, 0],
-    //     [WIDTH, HEIGHT]
-    //   ])
-    //   .on("end", update(vis.data));
+      .y1(d => vis.y(d.surprised));
+    // .y2(d => vis.y(d.neutral))
+    // .y3(d => vis.y(d.disgusted))
+    // .y4(d => vis.y(d.fearful))
+    // .y5(d => vis.y(d.angry))
+    // .y6(d => vis.y(d.sad));
 
     vis.update(data);
   }
@@ -96,14 +80,17 @@ class SentiStackD3 {
       "sad"
     ];
 
-    vis.color = d3.scaleOrdinal().domain(vis.keys)(range(d3.schemeSet2));
-    vis.stackedData = d3.stack().keys(keys)(vis.data);
+    vis.color = d3
+      .scaleOrdinal()
+      .domain(vis.keys)
+      .range(d3.schemeSet2);
+    vis.stackedData = d3.stack().keys(vis.keys)(vis.data);
 
     vis.data.forEach(d => {
       d[vis.xAttr] = new Date(Date.parse(d[vis.xAttr]));
     });
 
-    console.log("D3 STACK!", vis.data, vis.keys);
+    console.log("D3 STACK!", vis.data, vis.stackedData);
 
     // ADJUST SCALING
     vis.x.domain(d3.extent(vis.data, d => d[vis.xAttr]));
@@ -112,9 +99,9 @@ class SentiStackD3 {
     // AXIS FIGURES TRANSITION
     const xAxisCall = d3
       .axisBottom(vis.x)
-      .ticks(7)
+      .ticks(6)
       .tickFormat(d3.timeFormat("%b %d"));
-    const yAxisCall = d3.axisLeft(vis.y).tickFormat(d3.format(".2f"));
+    const yAxisCall = d3.axisLeft(vis.y).tickFormat(d3.format(".1f"));
 
     vis.xAxisGroup
       .transition(1000)
@@ -133,13 +120,13 @@ class SentiStackD3 {
     // const clip = vis.g.append()
 
     // STACK AREA CHART
-    const stackChart = vis.g.selectAll(".sentiStack").data(vis.data);
+    const stackChart = vis.g.selectAll(".sentiStack").data(vis.stackedData);
 
     stackChart
       .enter()
       .append("path")
       .classed("sentiStack", true)
-      .attr("d", d => area(d));
+      .attr("d", d => vis.area(d));
   }
 }
 
