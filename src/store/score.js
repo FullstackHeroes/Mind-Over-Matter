@@ -4,7 +4,6 @@ import {
   calcNormalizeUtility,
   calcWeightedTrueScore
 } from "../utils/utilities";
-import { dispatch } from "d3";
 
 // INITIAL STATE
 const initialState = {
@@ -26,7 +25,7 @@ const GET_SENTIMENT_DIFF = "GET_SENTIMENT_DIFF";
 const GET_CURRENT_RUNNING_SENTIMENT = "GET_CURRENT_RUNNING_SENTIMENT";
 
 // ACTION CREATORS
-export const getTimeInterval = (snapInterval = 3000, dbInterval = 15000) => {
+export const getTimeInterval = (snapInterval = 2000, dbInterval = 20000) => {
   return {
     type: GET_TIME_INTERVAL,
     snapInterval,
