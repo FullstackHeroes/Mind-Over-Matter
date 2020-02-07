@@ -110,11 +110,11 @@ class Dashboard extends Component {
             "Loading"
           )}
 
-          {/* {fullScoreObj.length ? (
+          {fullScoreObj.length ? (
             <ChartSentiStack fullScoreObj={fullScoreObj.slice(-10)} />
           ) : (
             "Loading"
-          )} */}
+          )}
         </div>
       </div>
     );
