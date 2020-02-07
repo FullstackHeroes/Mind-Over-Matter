@@ -1,17 +1,20 @@
 import React, { Component } from "react";
-import TSLineD3 from "../../d3/TSLineD3";
+import SentiStackD3 from "../../d3/SentiStackD3";
 
-class ChartTSLine extends Component {
+class ChartSentiStack extends Component {
   componentDidMount() {
     this.setState({
-      TSLineChart: new TSLineD3(this.refs.TSLineChart, this.props.fullScoreObj)
+      SentiStackChart: new SentiStackD3(
+        this.refs.SentiStackChart,
+        this.props.fullScoreObj
+      )
     });
   }
 
   componentDidUpdate(prevProps) {
     const { fullScoreObj } = this.props;
     if (this.checkSameArray(fullScoreObj, prevProps.fullScoreObj))
-      this.state.TSLineChart.update(fullScoreObj);
+      this.state.SentiStackChart.update(fullScoreObj);
   }
 
   checkSameArray(one, two) {
@@ -37,8 +40,8 @@ class ChartTSLine extends Component {
   }
 
   render() {
-    return <div ref="TSLineChart" className="TSLineChartArea"></div>;
+    return <div ref="SentiStackChart" className="SentiStackChartArea"></div>;
   }
 }
 
-export default ChartTSLine;
+export default ChartSentiStack;
