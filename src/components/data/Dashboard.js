@@ -53,7 +53,7 @@ class Dashboard extends Component {
         <h3 className="dashboardHeader">Hi, {user.name}!</h3>
 
         <div className="dashboardRowOne dashboardRow">
-          <div className="dashboardTable">Time Session</div>
+          {/* <div className="dashboardTable">Time Session</div> */}
           <div className="dashboardTable">
             <h3>Screen Time</h3>
             Today: {this.props.todaysScreenMins} mins
@@ -62,7 +62,7 @@ class Dashboard extends Component {
             <br />
             This Week: {this.props.weeksScreenHours} hours
             <br />
-            This Month: {this.props.monthsScreenHours} hours
+            {/* This Month: {this.props.monthsScreenHours} hours */}
           </div>
         </div>
 
