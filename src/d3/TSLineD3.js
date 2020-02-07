@@ -13,7 +13,6 @@ class TSLineD3 {
 
     // LABEL SCALING
     vis.x = d3.scaleTime().range([0, WIDTH]);
-    // vis.x = d3.scaleLinear().range([0, WIDTH]);
     vis.y = d3.scaleLinear().range([HEIGHT, 0]);
 
     // INITIAL SVG CREATION
@@ -73,21 +72,18 @@ class TSLineD3 {
       d[vis.xAttr] = new Date(Date.parse(d[vis.xAttr]));
     });
 
-    console.log("D3 UPDATING!", vis.data.length, vis.xAttr, vis.yAttr);
+    console.log("D3 UPDATING!", vis.data);
 
     // ADJUST SCALING
     vis.x.domain(d3.extent(vis.data, d => d[vis.xAttr]));
-    vis.y.domain([
-      d3.min(vis.data, d => Number(d[vis.yAttr]) * 0.95),
-      d3.max(vis.data, d => Number(d[vis.yAttr]) * 1.05)
-    ]);
+    vis.y.domain([0, 10]);
 
     // AXIS FIGURES TRANSITION
     const xAxisCall = d3
       .axisBottom(vis.x)
       .ticks(7)
       .tickFormat(d3.timeFormat("%b %d"));
-    const yAxisCall = d3.axisLeft(vis.y).tickFormat(d3.format(".1f"));
+    const yAxisCall = d3.axisLeft(vis.y).tickFormat(d3.format(".0f"));
 
     vis.xAxisGroup
       .transition(1000)
@@ -103,40 +99,48 @@ class TSLineD3 {
       .attr("font-size", 12);
 
     // LINE CHART
-    vis.lineChart = vis.g
+    const lineChart = vis.g.selectAll(".runningScoreLine").data([vis.data]);
+
+    lineChart
+      .enter()
       .append("path")
-      .data([vis.data])
-      .attr("class", "runningScoreLine")
+      .classed("runningScoreLine", true)
       .attr("d", vis.valueLine);
 
-    // JOIN;
+    // vis.lineChart = vis.g
+    //   .append("path")
+    //   .data([vis.data])
+    //   .attr("class", "runningScoreLine")
+    //   .attr("d", vis.valueLine);
+
+    // JOIN
     const circles = vis.g.selectAll("circle").data(vis.data, d => d.name);
 
     // EXIT
     circles
       .exit()
-      .transition(1000)
-      .attr("cy", vis.y(0))
+      // .transition(1000)
+      // .attr("cy", vis.y(0))
       .remove();
 
     // UPDATE
     circles
-      .transition(1000)
-      // .attr("cx", d => vis.x(d[xAttr]))
-      .attr("cx", (d, i) => vis.x(i))
+      // .transition(1000)
+      .attr("cx", d => vis.x(d[vis.xAttr]))
+      // .attr("cx", (d, i) => vis.x(i))
       .attr("cy", d => vis.y(d[vis.yAttr]));
 
     // ENTER
     circles
       .enter()
       .append("circle")
-      .classed("scatterCircle", true)
+      .classed("runningScoreLineCircle", true)
       .attr("cy", vis.y(0))
-      // .attr("cx", d => vis.x(d[xAttr]))
-      .attr("cx", (d, i) => vis.x(i))
-      .attr("r", 9)
+      .attr("cx", d => vis.x(d[vis.xAttr]))
+      // .attr("cx", (d, i) => vis.x(i))
+      .attr("r", 7)
       .on("click", d => console.log("Clicking -", d))
-      .transition(1000)
+      // .transition(1000)
       .attr("cy", d => vis.y(d[vis.yAttr]));
   }
 }

@@ -278,3 +278,13 @@ img {
   display: flex;
   justify-content: center;
 }
+
+.runningScoreLine {
+  fill: none;
+  stroke: rgba(0, 152, 195, 0.8);
+  stroke-width: 3px;
+}
+
+.runningScoreLineCircle {
+  fill: lightcoral;
+}
