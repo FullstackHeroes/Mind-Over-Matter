@@ -65,7 +65,16 @@ class SentiStackD3 {
   update(data) {
     const vis = this;
     vis.data = [...data].map(obj => Object.assign({}, obj));
-    vis.keys = Object.keys(vis.data[0]);
+    vis.keys = [
+      "happy",
+      "surprised",
+      "neutral",
+      "disgusted",
+      "fearful",
+      "angry",
+      "sad"
+    ];
+    // vis.keys = Object.keys(vis.data[0]);
 
     vis.data.forEach(d => {
       d[vis.xAttr] = new Date(Date.parse(d[vis.xAttr]));
