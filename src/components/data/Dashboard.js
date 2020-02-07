@@ -96,11 +96,11 @@ class Dashboard extends Component {
             "Loading"
           )}
 
-          {/* {fullScoreObj.length ? (
+          {fullScoreObj.length ? (
             <ChartTSLine fullScoreObj={fullScoreObj.slice(-10)} />
           ) : (
             "Loading"
-          )} */}
+          )}
         </div>
       </div>
     );

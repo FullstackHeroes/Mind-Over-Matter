@@ -4,14 +4,14 @@ import TSLineD3 from "../../d3/TSLineD3";
 class ChartTSLine extends Component {
   componentDidMount() {
     this.setState({
-      TSLineChart: new TSLineD3(this.refs.TSLineChart, this.props.runningScore)
+      TSLineChart: new TSLineD3(this.refs.TSLineChart, this.props.fullScoreObj)
     });
   }
 
   componentDidUpdate(prevProps) {
-    const { runningScore } = this.props;
-    if (this.checkSameArray(runningScore, prevProps.runningScore))
-      this.state.TSLineChart.update(runningScore);
+    const { fullScoreObj } = this.props;
+    if (this.checkSameArray(fullScoreObj, prevProps.fullScoreObj))
+      this.state.TSLineChart.update(fullScoreObj);
   }
 
   checkSameArray(one, two) {

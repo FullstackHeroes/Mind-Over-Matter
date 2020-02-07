@@ -70,6 +70,8 @@ class RSLineD3 {
       d[vis.xAttr] = new Date(Date.parse(d[vis.xAttr]));
     });
 
+    // console.log("D3 RSLINE!", vis.data);
+
     // ADJUST SCALING
     vis.x.domain(d3.extent(vis.data, d => d[vis.xAttr]));
     vis.y.domain([0, 10]);
@@ -105,7 +107,7 @@ class RSLineD3 {
       .attr("d", vis.valueLine);
 
     // JOIN
-    const circles = vis.g.selectAll("circle").data([vis.data]);
+    const circles = vis.g.selectAll("circle").data(vis.data);
 
     // EXIT
     circles.exit().remove();
