@@ -26,7 +26,7 @@ const hourSeed = [
     angry: 0.05,
     sad: 0.07,
     timeStamp: new Date("11/26/19"),
-    count: 335,
+    count: 15,
     screenScore: 0.85,
     screenTime: 15
   },
@@ -41,7 +41,7 @@ const hourSeed = [
     angry: 0.07,
     sad: 0.05,
     timeStamp: new Date("11/27/19"),
-    count: 310,
+    count: 11,
     screenScore: 0.99,
     screenTime: 13
   },
@@ -56,7 +56,7 @@ const hourSeed = [
     angry: 0.1,
     sad: 0.01,
     timeStamp: new Date("11/28/19"),
-    count: 320,
+    count: 14,
     screenScore: 0.88,
     screenTime: 12
   },
@@ -71,7 +71,7 @@ const hourSeed = [
     angry: 0.24,
     sad: 0.11,
     timeStamp: new Date("11/29/19"),
-    count: 280,
+    count: 12,
     screenScore: 0.98,
     screenTime: 14
   },
@@ -86,7 +86,7 @@ const hourSeed = [
     angry: 0.28,
     sad: 0.04,
     timeStamp: new Date("11/30/19"),
-    count: 290,
+    count: 13,
     screenScore: 0.77,
     screenTime: 11
   },
@@ -101,7 +101,7 @@ const hourSeed = [
     angry: 0.31,
     sad: 0.08,
     timeStamp: new Date("12/1/19"),
-    count: 330,
+    count: 14,
     screenScore: 0.78,
     screenTime: 14
   },
@@ -116,7 +116,7 @@ const hourSeed = [
     angry: 0.02,
     sad: 0.12,
     timeStamp: new Date("12/2/19"),
-    count: 290,
+    count: 15,
     screenScore: 0.95,
     screenTime: 12
   },
@@ -131,7 +131,7 @@ const hourSeed = [
     angry: 0.17,
     sad: 0.31,
     timeStamp: new Date("12/3/19"),
-    count: 275,
+    count: 15,
     screenScore: 0.78,
     screenTime: 10
   },
@@ -146,7 +146,7 @@ const hourSeed = [
     angry: 0.02,
     sad: 0.28,
     timeStamp: new Date("12/4/19"),
-    count: 310,
+    count: 15,
     screenScore: 0.98,
     screenTime: 15
   },
@@ -161,7 +161,7 @@ const hourSeed = [
     angry: 0.17,
     sad: 0.01,
     timeStamp: new Date("12/5/19"),
-    count: 250,
+    count: 15,
     screenScore: 0.78,
     screenTime: 13
   },
@@ -176,7 +176,7 @@ const hourSeed = [
     angry: 0.00068,
     sad: 0.0005,
     timeStamp: new Date("12/6/19"),
-    count: 215,
+    count: 11,
     screenScore: 0.941777809694982,
     screenTime: 3
   },
@@ -191,7 +191,7 @@ const hourSeed = [
     angry: 0.00108,
     sad: 0.0009,
     timeStamp: new Date("12/7/19"),
-    count: 144,
+    count: 14,
     screenScore: 0.9669798887559723,
     screenTime: 3
   },
@@ -206,7 +206,7 @@ const hourSeed = [
     angry: 0,
     sad: 0.00052,
     timeStamp: new Date("12/8/19"),
-    count: 55,
+    count: 11,
     screenScore: 0.8747920140065567,
     screenTime: 15
   },
@@ -221,7 +221,7 @@ const hourSeed = [
     angry: 0,
     sad: 0.00035,
     timeStamp: new Date("12/9/19"),
-    count: 122,
+    count: 12,
     screenScore: 0.8780593754940202,
     screenTime: 6
   },
@@ -236,7 +236,7 @@ const hourSeed = [
     angry: 0,
     sad: 0,
     timeStamp: new Date("12/10/19"),
-    count: 222,
+    count: 13,
     screenScore: 0.9674058123854092,
     screenTime: 6
   },
@@ -251,7 +251,7 @@ const hourSeed = [
     angry: 0.00025,
     sad: 0.11541,
     timeStamp: new Date("12/11/19"),
-    count: 133,
+    count: 14,
     screenScore: 0.7898451222422401,
     screenTime: 9
   },
@@ -266,7 +266,7 @@ const hourSeed = [
     angry: 0.00035,
     sad: 0.06249,
     timeStamp: new Date("12/12/19"),
-    count: 218,
+    count: 15,
     screenScore: 0.9644719538280966,
     screenTime: 6
   },
@@ -281,7 +281,7 @@ const hourSeed = [
     angry: 0.015,
     sad: 0.0025,
     timeStamp: new Date("12/13/19"),
-    count: 190,
+    count: 11,
     screenScore: 0.9171868358335257,
     screenTime: 9
   },
@@ -296,7 +296,7 @@ const hourSeed = [
     angry: 0.00052,
     sad: 0.00014,
     timeStamp: new Date("12/14/19"),
-    count: 300,
+    count: 14,
     screenScore: 0.8952140224211634,
     screenTime: 9
   },
@@ -311,7 +311,7 @@ const hourSeed = [
     angry: 0.1,
     sad: 0.3,
     timeStamp: new Date("12/15/19"),
-    count: 255,
+    count: 12,
     screenScore: 0.9625792051525887,
     screenTime: 9
   },
@@ -326,7 +326,7 @@ const hourSeed = [
     angry: 0.11,
     sad: 0.02,
     timeStamp: new Date("12/16/19"),
-    count: 117,
+    count: 14,
     screenScore: 0.8068972567606721,
     screenTime: 9
   },
@@ -341,7 +341,7 @@ const hourSeed = [
     angry: 0.00015,
     sad: 0.00025,
     timeStamp: new Date("12/17/19"),
-    count: 310,
+    count: 12,
     screenScore: 0.8923296099688285,
     screenTime: 9
   },
@@ -356,7 +356,7 @@ const hourSeed = [
     angry: 0.000179,
     sad: 0.02574,
     timeStamp: new Date("12/18/19"),
-    count: 300,
+    count: 15,
     screenScore: 0.7096647762091651,
     screenTime: 9
   },
@@ -371,7 +371,7 @@ const hourSeed = [
     angry: 0.001515,
     sad: 0.66887,
     timeStamp: new Date("12/19/19"),
-    count: 235,
+    count: 14,
     screenScore: 0.9246126593884891,
     screenTime: 6
   },
@@ -386,7 +386,7 @@ const hourSeed = [
     angry: 0,
     sad: 0.26309,
     timeStamp: new Date("12/20/19"),
-    count: 320,
+    count: 13,
     screenScore: 0.8363629694580724,
     screenTime: 12
   },
@@ -401,7 +401,7 @@ const hourSeed = [
     angry: 0.03155,
     sad: 0.31702,
     timeStamp: new Date("12/21/19"),
-    count: 300,
+    count: 15,
     screenScore: 0.9850796801504087,
     screenTime: 12
   },
@@ -416,7 +416,7 @@ const hourSeed = [
     angry: 0.19175,
     sad: 0.32048,
     timeStamp: new Date("12/22/19"),
-    count: 260,
+    count: 15,
     screenScore: 0.8738671902860103,
     screenTime: 9
   },
@@ -431,7 +431,7 @@ const hourSeed = [
     angry: 0.03836,
     sad: 0.91977,
     timeStamp: new Date("12/23/19"),
-    count: 310,
+    count: 15,
     screenScore: 0.9661108438788758,
     screenTime: 9
   },
@@ -446,7 +446,7 @@ const hourSeed = [
     angry: 0.08599,
     sad: 0.67068,
     timeStamp: new Date("12/24/19"),
-    count: 180,
+    count: 15,
     screenScore: 0.9645120712920843,
     screenTime: 9
   },
@@ -461,7 +461,7 @@ const hourSeed = [
     angry: 0.00037,
     sad: 0.34899,
     timeStamp: new Date("12/25/19"),
-    count: 205,
+    count: 15,
     screenScore: 0.7236837110376336,
     screenTime: 9
   },
@@ -476,7 +476,7 @@ const hourSeed = [
     angry: 0.09659,
     sad: 0.32867,
     timeStamp: new Date("12/26/19"),
-    count: 200,
+    count: 15,
     screenScore: 0.9064725208331947,
     screenTime: 6
   },
@@ -491,7 +491,7 @@ const hourSeed = [
     angry: 0.01953,
     sad: 0.13679,
     timeStamp: new Date("12/27/19"),
-    count: 195,
+    count: 15,
     screenScore: 0.9820138520797688,
     screenTime: 6
   },
@@ -506,7 +506,7 @@ const hourSeed = [
     angry: 0.06428,
     sad: 0.25238,
     timeStamp: new Date("12/28/19"),
-    count: 330,
+    count: 14,
     screenScore: 0.9850062175352103,
     screenTime: 3
   },
@@ -521,7 +521,7 @@ const hourSeed = [
     angry: 0.01151,
     sad: 0.15716,
     timeStamp: new Date("12/29/19"),
-    count: 285,
+    count: 11,
     screenScore: 0.9866736422730208,
     screenTime: 3
   },
@@ -536,7 +536,7 @@ const hourSeed = [
     angry: 0.00166,
     sad: 0.00433,
     timeStamp: new Date("12/30/19"),
-    count: 400,
+    count: 15,
     screenScore: 0.9764896949206125,
     screenTime: 12
   },
@@ -551,7 +551,7 @@ const hourSeed = [
     angry: 0.00094,
     sad: 0.01527,
     timeStamp: new Date("12/31/19"),
-    count: 325,
+    count: 11,
     screenScore: 0.988415422869215,
     screenTime: 9
   },
@@ -566,7 +566,7 @@ const hourSeed = [
     angry: 0.0012,
     sad: 0.00039,
     timeStamp: new Date("1/1/20"),
-    count: 300,
+    count: 12,
     screenScore: 0.8382040130531873,
     screenTime: 9
   },
@@ -581,7 +581,7 @@ const hourSeed = [
     angry: 0.99502,
     sad: 0,
     timeStamp: new Date("1/2/20"),
-    count: 345,
+    count: 14,
     screenScore: 0.9217043852397858,
     screenTime: 9
   },
@@ -596,7 +596,7 @@ const hourSeed = [
     angry: 0.85749,
     sad: 0.00025,
     timeStamp: new Date("1/3/20"),
-    count: 312,
+    count: 11,
     screenScore: 0.8036169963645663,
     screenTime: 9
   },
@@ -611,7 +611,7 @@ const hourSeed = [
     angry: 0.27664,
     sad: 0.08897,
     timeStamp: new Date("1/4/20"),
-    count: 105,
+    count: 12,
     screenScore: 0.5268399481893639,
     screenTime: 3
   },
@@ -626,7 +626,7 @@ const hourSeed = [
     angry: 0.02475,
     sad: 0.28986,
     timeStamp: new Date("1/5/20"),
-    count: 300,
+    count: 14,
     screenScore: 0.6987786523198084,
     screenTime: 9
   },
@@ -641,7 +641,7 @@ const hourSeed = [
     angry: 0.27664,
     sad: 0.08897,
     timeStamp: new Date("1/6/20"),
-    count: 135,
+    count: 15,
     screenScore: 0.9453000037478837,
     screenTime: 3
   },
@@ -656,7 +656,7 @@ const hourSeed = [
     angry: 0.7626,
     sad: 0,
     timeStamp: new Date("1/7/20"),
-    count: 360,
+    count: 14,
     screenScore: 0.8301325884616017,
     screenTime: 9
   },
@@ -671,7 +671,7 @@ const hourSeed = [
     angry: 0.9969,
     sad: 0,
     timeStamp: new Date("1/8/20"),
-    count: 330,
+    count: 12,
     screenScore: 0.9576088212809303,
     screenTime: 9
   },
@@ -686,7 +686,7 @@ const hourSeed = [
     angry: 0.93645,
     sad: 0,
     timeStamp: new Date("1/9/20"),
-    count: 260,
+    count: 10,
     screenScore: 0.8797936852055253,
     screenTime: 6
   },
@@ -701,7 +701,7 @@ const hourSeed = [
     angry: 0.19997,
     sad: 0.77133,
     timeStamp: new Date("1/10/20"),
-    count: 346,
+    count: 11,
     screenScore: 0.7609352729177813,
     screenTime: 9
   },
@@ -716,7 +716,7 @@ const hourSeed = [
     angry: 0.40345,
     sad: 0.14956,
     timeStamp: new Date("1/11/20"),
-    count: 333,
+    count: 12,
     screenScore: 0.7553801967616405,
     screenTime: 9
   },
@@ -731,7 +731,7 @@ const hourSeed = [
     angry: 0.12022,
     sad: 0.31055,
     timeStamp: new Date("1/12/20"),
-    count: 320,
+    count: 13,
     screenScore: 0.6896599067836787,
     screenTime: 9
   },
@@ -746,7 +746,7 @@ const hourSeed = [
     angry: 0.42747,
     sad: 0.04541,
     timeStamp: new Date("1/13/20"),
-    count: 299,
+    count: 15,
     screenScore: 0.9007808613654773,
     screenTime: 9
   },
@@ -761,7 +761,7 @@ const hourSeed = [
     angry: 0.2,
     sad: 0.0101,
     timeStamp: new Date("2/7/20 10:59"),
-    count: 247,
+    count: 13,
     screenScore: 0.9650887688695561,
     screenTime: 6
   },
@@ -776,7 +776,7 @@ const hourSeed = [
     angry: 0.246,
     sad: 0.01021,
     timeStamp: new Date("2/7/20 11:00"),
-    count: 265,
+    count: 14,
     screenScore: 0.9650887688695561,
     screenTime: 6
   },
@@ -791,7 +791,7 @@ const hourSeed = [
     angry: 0,
     sad: 0.009,
     timeStamp: new Date("2/7/20 11:01"),
-    count: 260,
+    count: 12,
     screenScore: 0.9044757868464902,
     screenTime: 9
   },
@@ -806,7 +806,7 @@ const hourSeed = [
     angry: 0.0001,
     sad: 0.0003,
     timeStamp: new Date("2/7/20 11:02"),
-    count: 320,
+    count: 11,
     screenScore: 0.797612036729965,
     screenTime: 9
   },
@@ -821,7 +821,7 @@ const hourSeed = [
     angry: 0.00496,
     sad: 0.06289,
     timeStamp: new Date("2/7/20 11:03"),
-    count: 315,
+    count: 14,
     screenScore: 0.8474974223182222,
     screenTime: 12
   },
@@ -836,7 +836,7 @@ const hourSeed = [
     angry: 0.0559,
     sad: 0.20161,
     timeStamp: new Date("2/7/20 11:04"),
-    count: 312,
+    count: 15,
     screenScore: 0.9542452588612251,
     screenTime: 9
   },
@@ -851,7 +851,7 @@ const hourSeed = [
     angry: 0.03145,
     sad: 0.00506,
     timeStamp: new Date("2/7/20 11:05"),
-    count: 333,
+    count: 11,
     screenScore: 0.9740140820015019,
     screenTime: 9
   },
@@ -866,7 +866,7 @@ const hourSeed = [
     angry: 0.01838,
     sad: 0.0036,
     timeStamp: new Date("2/7/20 11:06"),
-    count: 190,
+    count: 14,
     screenScore: 0.9453000037478837,
     screenTime: 3
   },
@@ -881,7 +881,7 @@ const hourSeed = [
     angry: 0.00047,
     sad: 0.00086,
     timeStamp: new Date("2/7/20 11:07"),
-    count: 120,
+    count: 12,
     screenScore: 0.5349370324837229,
     screenTime: 3
   },
@@ -896,7 +896,7 @@ const hourSeed = [
     angry: 0.00192,
     sad: 0.0002,
     timeStamp: new Date("2/7/20 11:09"),
-    count: 378,
+    count: 15,
     screenScore: 0.9044757868464902,
     screenTime: 9
   },
@@ -911,7 +911,7 @@ const hourSeed = [
     angry: 0.00037,
     sad: 0.00016,
     timeStamp: new Date("2/7/20 11:11"),
-    count: 385,
+    count: 14,
     screenScore: 0.9372568788631427,
     screenTime: 9
   },
@@ -926,7 +926,7 @@ const hourSeed = [
     angry: 0,
     sad: 0.0003,
     timeStamp: new Date("2/7/20 11:13"),
-    count: 298,
+    count: 13,
     screenScore: 0.7392784276577656,
     screenTime: 9
   },
@@ -941,7 +941,7 @@ const hourSeed = [
     angry: 0.0618,
     sad: 0.00648,
     timeStamp: new Date("2/7/20 11:15"),
-    count: 275,
+    count: 12,
     screenScore: 0.9089268722409697,
     screenTime: 9
   },
@@ -956,7 +956,7 @@ const hourSeed = [
     angry: 0.001,
     sad: 0.004,
     timeStamp: new Date("2/7/20 11:16"),
-    count: 251,
+    count: 15,
     screenScore: 0.9348674459634332,
     screenTime: 6
   },
@@ -971,7 +971,7 @@ const hourSeed = [
     angry: 0.021,
     sad: 0.055,
     timeStamp: new Date("2/7/20 11:17"),
-    count: 333,
+    count: 14,
     screenScore: 0.9740660821019738,
     screenTime: 9
   },
@@ -986,7 +986,7 @@ const hourSeed = [
     angry: 0.00031,
     sad: 0.00323,
     timeStamp: new Date("2/7/20 11:18"),
-    count: 322,
+    count: 12,
     screenScore: 0.9481600701021453,
     screenTime: 15
   },
@@ -1001,7 +1001,7 @@ const hourSeed = [
     angry: 0.0006,
     sad: 0.00026,
     timeStamp: new Date("2/7/20 11:20"),
-    count: 287,
+    count: 14,
     screenScore: 0.8338245574089989,
     screenTime: 9
   },
@@ -1016,7 +1016,7 @@ const hourSeed = [
     angry: 0,
     sad: 0,
     timeStamp: new Date("2/7/20 11:22"),
-    count: 60,
+    count: 13,
     screenScore: 0.9247033493351211,
     screenTime: 3
   },
@@ -1031,7 +1031,7 @@ const hourSeed = [
     angry: 0.04063,
     sad: 0.0009,
     timeStamp: new Date("2/7/20 11:25"),
-    count: 340,
+    count: 15,
     screenScore: 0.975053322284435,
     screenTime: 9
   },
@@ -1046,7 +1046,7 @@ const hourSeed = [
     angry: 0,
     sad: 0,
     timeStamp: new Date("2/7/20 11:26"),
-    count: 320,
+    count: 15,
     screenScore: 0.917649346742229,
     screenTime: 9
   },
@@ -1061,7 +1061,7 @@ const hourSeed = [
     angry: 0.0002,
     sad: 0.0005,
     timeStamp: new Date("2/7/20 11:27"),
-    count: 210,
+    count: 15,
     screenScore: 0.9115716436817328,
     screenTime: 9
   },
@@ -1076,7 +1076,7 @@ const hourSeed = [
     angry: 0.0003,
     sad: 0.0005,
     timeStamp: new Date("2/7/20 11:28"),
-    count: 187,
+    count: 15,
     screenScore: 0.8002259629303103,
     screenTime: 9
   },
@@ -1091,7 +1091,7 @@ const hourSeed = [
     angry: 0.00029,
     sad: 0.00013,
     timeStamp: new Date("2/7/20 11:30"),
-    count: 120,
+    count: 15,
     screenScore: 0.6419621587345895,
     screenTime: 3
   }
