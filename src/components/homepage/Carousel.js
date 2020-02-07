@@ -3,7 +3,7 @@ import { Carousel } from "react-responsive-carousel";
 
 export default () => (
   <div>
-    <Carousel autoPlay infiniteLoop>
+    <Carousel autoPlay infiniteLoop showStatus="false" showThumbs="false">
       <div>
         <img src="https://www.rosannadavisonnutrition.com/wp-content/uploads/2019/04/mind-over-matter-600x400.jpg" />
       </div>
