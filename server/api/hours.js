@@ -69,36 +69,67 @@ router.get("/:userId", async (req, res, next) => {
   res.json(userHours);
 });
 
+//NEED A CONDITIONAL. HANGS IF THERE IS NO DATA FOR TODAY
 router.get("/:userId/today", async (req, res, next) => {
   const text = `SELECT hours."screenTime"
   FROM hours
   WHERE date(hours."timeStamp") = CURRENT_DATE;`;
   const userHours = await db.query(text);
   const screenTimeArr = userHours[0];
-  const dailyScreenTime = screenTimeArr.reduce((a, b) => ({
-    screenTime: a.screenTime + b.screenTime
-  }));
-  res.json(Math.floor(dailyScreenTime.screenTime / 60));
+  if (screenTimeArr.length) {
+    const dailyScreenTime = screenTimeArr.reduce((a, b) => ({
+      screenTime: a.screenTime + b.screenTime
+    }));
+    res.json(Math.floor(dailyScreenTime.screenTime / 60));
+  } else res.json(0);
 });
 
 router.get("/:userId/month", async (req, res, next) => {
   const text = `SELECT hours."screenTime" FROM hours where DATE_PART('month', date(hours."timeStamp")) = DATE_PART('month', CURRENT_DATE);`;
   const userHours = await db.query(text);
   const screenTimeArr = userHours[0];
-  const dailyScreenTime = screenTimeArr.reduce((a, b) => ({
-    screenTime: a.screenTime + b.screenTime
-  }));
-  res.json(Math.floor(dailyScreenTime.screenTime / 120));
+  if (screenTimeArr.length) {
+    const dailyScreenTime = screenTimeArr.reduce((a, b) => ({
+      screenTime: a.screenTime + b.screenTime
+    }));
+    res.json(Math.floor(dailyScreenTime.screenTime / 120));
+  } else res.json(0);
 });
 
 router.get("/:userId/year", async (req, res, next) => {
   const text = `SELECT hours."screenTime" FROM hours where DATE_PART('year', date(hours."timeStamp")) = DATE_PART('year', CURRENT_DATE)`;
   const userHours = await db.query(text);
   const screenTimeArr = userHours[0];
-  const dailyScreenTime = screenTimeArr.reduce((a, b) => ({
-    screenTime: a.screenTime + b.screenTime
-  }));
-  res.json(Math.floor(dailyScreenTime.screenTime / 120));
+  if (screenTimeArr.length) {
+    const dailyScreenTime = screenTimeArr.reduce((a, b) => ({
+      screenTime: a.screenTime + b.screenTime
+    }));
+    res.json(Math.floor(dailyScreenTime.screenTime / 120));
+  } else res.json(0);
+});
+
+router.get("/:userId/yesterday", async (req, res, next) => {
+  const text = `SELECT hours."screenTime" FROM hours WHERE date(hours."timeStamp") = CURRENT_DATE - INTERVAL '1 day'`;
+  const userHours = await db.query(text);
+  const screenTimeArr = userHours[0];
+  if (screenTimeArr.length) {
+    const yesterdayScreenTime = screenTimeArr.reduce((a, b) => ({
+      screenTime: a.screenTime + b.screenTime
+    }));
+    res.json(Math.floor(yesterdayScreenTime.screenTime / 60));
+  } else res.json(0);
+});
+
+router.get("/:userId/week", async (req, res, next) => {
+  const text = `SELECT hours."screenTime" FROM hours WHERE date("timeStamp") >= CURRENT_DATE - INTERVAL '7 days'`;
+  const userHours = await db.query(text);
+  const screenTimeArr = userHours[0];
+  if (screenTimeArr.length) {
+    const weeksScreenTime = screenTimeArr.reduce((a, b) => ({
+      screenTime: a.screenTime + b.screenTime
+    }));
+    res.json(Math.round(weeksScreenTime.screenTime / 120));
+  } else res.json(0);
 });
 
 module.exports = router;

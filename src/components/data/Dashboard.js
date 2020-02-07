@@ -5,7 +5,9 @@ import ChartTSLine from "../chart/ChartTSLine";
 import {
   getTodaysScreenTime,
   getMonthsScreenTime,
-  getYearsScreenTime
+  getYearsScreenTime,
+  getYesterdaysScreenTime,
+  getWeeksScreenTime
 } from "../../store/screenTime";
 
 class Dashboard extends Component {
@@ -17,6 +19,8 @@ class Dashboard extends Component {
       this.props.getTime(user.id);
       this.props.getMonth(user.id);
       this.props.getYear(user.id);
+      this.props.getYesterday(user.id);
+      this.props.getWeek(user.id);
     }
   }
 
@@ -32,6 +36,8 @@ class Dashboard extends Component {
         this.props.getTime(user.id);
         this.props.getMonth(user.id);
         this.props.getYear(user.id);
+        this.props.getYesterday(user.id);
+        this.props.getWeek(user.id);
       }
     }
   }
@@ -46,11 +52,14 @@ class Dashboard extends Component {
         <div className="dashboardRowOne dashboardRow">
           <div className="dashboardTable">Time Session</div>
           <div className="dashboardTable">
+            <h3>Screen Time</h3>
             Today: {this.props.todaysScreenMins} mins
             <br />
-            This Month: {this.props.monthsScreenHours} hours
+            Yesterday: {this.props.yesterdaysScreenMins} mins
             <br />
-            This Year: {this.props.yearsScreenHours} hours
+            This Week: {this.props.weeksScreenHours} hours
+            <br />
+            This Month: {this.props.monthsScreenHours} hours
           </div>
         </div>
 
@@ -103,7 +112,9 @@ const mapStateToProps = state => {
     runningScore: state.score.runningScore,
     todaysScreenMins: state.time.screenMinsToday,
     monthsScreenHours: state.time.screenHoursThisMonth,
-    yearsScreenHours: state.time.screenHoursThisYear
+    yearsScreenHours: state.time.screenHoursThisYear,
+    yesterdaysScreenMins: state.time.screenMinsYesterday,
+    weeksScreenHours: state.time.screenHoursWeek
   };
 };
 
@@ -113,7 +124,9 @@ const mapDispatchToProps = dispatch => {
     setNormalizedScore: userId => dispatch(setNormalizedScore(userId)),
     getTime: userId => dispatch(getTodaysScreenTime(userId)),
     getMonth: userId => dispatch(getMonthsScreenTime(userId)),
-    getYear: userId => dispatch(getYearsScreenTime(userId))
+    getYear: userId => dispatch(getYearsScreenTime(userId)),
+    getYesterday: userId => dispatch(getYesterdaysScreenTime(userId)),
+    getWeek: userId => dispatch(getWeeksScreenTime(userId))
   };
 };
 
