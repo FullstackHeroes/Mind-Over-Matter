@@ -1135,16 +1135,37 @@ const normalizeScoreSeed = [
   },
   {
     userId: 1,
-    normalizeScore: 5.8,
+    normalizeScore: 6.8,
     runningScore: 5,
-    sentimentDiff: 0.86207,
+    sentimentDiff: 0.7353,
     timeStamp: new Date("2/7/20 11:25")
   },
   {
     userId: 1,
-    normalizeScore: 5.5,
+    normalizeScore: 6.5,
+    runningScore: 5.2,
+    sentimentDiff: 0.8,
+    timeStamp: new Date("2/7/20 11:26")
+  },
+  {
+    userId: 1,
+    normalizeScore: 6.9,
     runningScore: 4.8,
-    sentimentDiff: 0.8727,
+    sentimentDiff: 0.6957,
+    timeStamp: new Date("2/7/20 11:27")
+  },
+  {
+    userId: 1,
+    normalizeScore: 7.2,
+    runningScore: 6.5,
+    sentimentDiff: 0.90278,
+    timeStamp: new Date("2/7/20 11:28")
+  },
+  {
+    userId: 1,
+    normalizeScore: 7.5,
+    runningScore: 6.8,
+    sentimentDiff: 0.90667,
     timeStamp: new Date("2/7/20 11:30")
   },
   {
