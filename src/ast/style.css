@@ -270,7 +270,7 @@ img {
 }
 
 /* ------------------ RUNNING LINE CHART ELEMENT ------------------ */
-.TSLineChartArea {
+.RSLineChartArea {
   width: 90%;
   background-color: #282c34;
   border-radius: 3px;
@@ -286,6 +286,26 @@ img {
 }
 
 .runningScoreLineCircle {
+  fill: lightcoral;
+}
+
+/* ------------------ TRUE LINE CHART ELEMENT ------------------ */
+.TSLineChartArea {
+  width: 90%;
+  background-color: #282c34;
+  border-radius: 3px;
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.trueScoreLine {
+  fill: none;
+  stroke: rgba(0, 152, 195, 0.8);
+  stroke-width: 3px;
+}
+
+.trueScoreLineCircle {
   fill: lightcoral;
 }
 

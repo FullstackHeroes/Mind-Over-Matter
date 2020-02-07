@@ -20,7 +20,7 @@ class RSLineD3 {
       .append("svg")
       .attr("width", WIDTH + MARGIN.LEFT + MARGIN.RIGHT)
       .attr("height", HEIGHT + MARGIN.TOP + MARGIN.BOTTOM)
-      .classed("TSLineSvg", true)
+      .classed("RSLineSvg", true)
       .append("g")
       .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`);
 
@@ -70,8 +70,6 @@ class RSLineD3 {
       d[vis.xAttr] = new Date(Date.parse(d[vis.xAttr]));
     });
 
-    console.log("D3 UPDATING!", vis.data);
-
     // ADJUST SCALING
     vis.x.domain(d3.extent(vis.data, d => d[vis.xAttr]));
     vis.y.domain([0, 10]);
@@ -107,7 +105,7 @@ class RSLineD3 {
       .attr("d", vis.valueLine);
 
     // JOIN
-    const circles = vis.g.selectAll("circle").data(vis.data, d => d.name);
+    const circles = vis.g.selectAll("circle").data([vis.data]);
 
     // EXIT
     circles.exit().remove();

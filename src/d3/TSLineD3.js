@@ -4,11 +4,11 @@ const MARGIN = { TOP: 10, BOTTOM: 80, LEFT: 70, RIGHT: 70 };
 const WIDTH = 500 - MARGIN.LEFT - MARGIN.RIGHT;
 const HEIGHT = 400 - MARGIN.TOP - MARGIN.BOTTOM;
 
-class RSLineD3 {
+class TSLineD3 {
   constructor(element, data) {
     const vis = this;
     vis.xAttr = "timeStamp";
-    vis.yAttr = "runningScore";
+    vis.yAttr = "trueScore";
 
     // LABEL SCALING
     vis.x = d3.scaleTime().range([0, WIDTH]);
@@ -45,7 +45,7 @@ class RSLineD3 {
       .attr("fill", "white")
       .attr("font-weight", "bold")
       .attr("text-anchor", "middle")
-      .text("Running Score");
+      .text("True Score");
 
     vis.xAxisGroup = vis.g
       .append("g")
@@ -97,12 +97,12 @@ class RSLineD3 {
       .attr("font-size", 12);
 
     // LINE CHART
-    const lineChart = vis.g.selectAll(".runningScoreLine").data([vis.data]);
+    const lineChart = vis.g.selectAll(".trueScoreLine").data([vis.data]);
 
     lineChart
       .enter()
       .append("path")
-      .classed("runningScoreLine", true)
+      .classed("trueScoreLine", true)
       .merge(lineChart)
       .attr("d", vis.valueLine);
 
@@ -122,7 +122,7 @@ class RSLineD3 {
     circles
       .enter()
       .append("circle")
-      .classed("runningScoreLineCircle", true)
+      .classed("trueScoreLineCircle", true)
       .attr("cy", d => vis.y(d[vis.yAttr]))
       .attr("cx", d => vis.x(d[vis.xAttr]))
       .attr("r", 4)
@@ -130,4 +130,4 @@ class RSLineD3 {
   }
 }
 
-export default RSLineD3;
+export default TSLineD3;

@@ -4,14 +4,14 @@ import RSLineD3 from "../../d3/RSLineD3";
 class ChartRSLine extends Component {
   componentDidMount() {
     this.setState({
-      TSLineChart: new RSLineD3(this.refs.TSLineChart, this.props.runningScore)
+      RSLineChart: new RSLineD3(this.refs.RSLineChart, this.props.runningScore)
     });
   }
 
   componentDidUpdate(prevProps) {
     const { runningScore } = this.props;
     if (this.checkSameArray(runningScore, prevProps.runningScore))
-      this.state.TSLineChart.update(runningScore);
+      this.state.RSLineChart.update(runningScore);
   }
 
   checkSameArray(one, two) {
@@ -37,7 +37,7 @@ class ChartRSLine extends Component {
   }
 
   render() {
-    return <div ref="TSLineChart" className="TSLineChartArea"></div>;
+    return <div ref="RSLineChart" className="RSLineChartArea"></div>;
   }
 }
 

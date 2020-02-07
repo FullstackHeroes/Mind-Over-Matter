@@ -89,17 +89,19 @@ class Dashboard extends Component {
           </div>
         </div>
 
-        {runningScore.length ? (
-          <ChartRSLine runningScore={runningScore.slice(-10)} />
-        ) : (
-          "Loading"
-        )}
+        <div className="dashboardRowThree dashboardRow">
+          {runningScore.length ? (
+            <ChartRSLine runningScore={runningScore.slice(-10)} />
+          ) : (
+            "Loading"
+          )}
 
-        {fullScoreObj.length ? (
-          <ChartRSLine fullScoreObj={fullScoreObj.slice(-10)} />
-        ) : (
-          "Loading"
-        )}
+          {/* {fullScoreObj.length ? (
+            <ChartTSLine fullScoreObj={fullScoreObj.slice(-10)} />
+          ) : (
+            "Loading"
+          )} */}
+        </div>
       </div>
     );
   }
