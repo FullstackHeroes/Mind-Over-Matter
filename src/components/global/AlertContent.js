@@ -9,7 +9,7 @@ export default class AlertContent extends Component {
     const currentDate = new Date();
     console.log("!!Status:!!", status);
     if (currentDate - this.props.lastAlert > 10000) {
-      if (status <= 150) {
+      if (status <= 65) {
         return (
           <div className="alertContainer">
             <div>
@@ -31,14 +31,16 @@ export default class AlertContent extends Component {
             </button>
           </div>
         );
-      } else if (status <= 75) {
+      } else if (status <= 74) {
         return (
           <div className="alertContainer">
             <div>
-              <h6>Looking Steamy!</h6>
-              <h6>Stretch those legs and go hang out with your buddy Joe!</h6>
+              <h6>
+                Looking Steamy! Stretch those legs and go hang out with your
+                buddy Cuppa Joe!
+              </h6>
             </div>
-            <div>
+            <div className="alertImgDiv">
               <img
                 src={
                   "https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/326/326443/a-cup-of-coffee-that-makes-people-tired.jpg?w=1155&h=1541"
@@ -57,12 +59,11 @@ export default class AlertContent extends Component {
             </button>
           </div>
         );
-      } else if (status <= 85) {
+      } else if (status <= 87) {
         return (
           <div className="alertContainer">
             <div align="center">
-              <h6>Here is a cute picture!</h6>
-              <h6>Hope it makes your day!</h6>
+              <h6>Here is a cute picture, Hope it makes your day!</h6>
             </div>
             <div>
               <img
