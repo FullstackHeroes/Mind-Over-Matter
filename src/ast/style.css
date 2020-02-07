@@ -346,6 +346,7 @@ img {
 
 .alertContainer > h6 {
   margin: 5px;
+  box-shadow: 10px 10px 5px rgb(110, 109, 109);
 }
 
 .modalFrame {
@@ -359,15 +360,17 @@ img {
   justify-content: space-around;
 }
 
-#alertImg3 {
+.alertImg3 {
   width: 250px;
   height: auto;
 }
 
 .alertButton {
   position: absolute;
-  top: 1;
-  padding: 10;
+  bottom: 0;
+  padding: 20;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 2px 2px 2px 2px;
 }
 
