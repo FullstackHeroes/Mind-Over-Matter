@@ -206,7 +206,7 @@ h3 {
   background-color: lightgray;
   display: flex;
   flex-direction: column;
-  width: 50vw;
+  min-width: 75vw;
   min-height: 60vh;
   padding: 15px;
   border-radius: 5px;
@@ -223,7 +223,6 @@ h3 {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
-  height: 45%;
   margin: 5px 0;
 }
 
@@ -231,7 +230,7 @@ h3 {
   background-color: #282c34;
   margin: 10px;
   width: 40%;
-  height: 95%;
+  min-height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -270,11 +269,10 @@ img {
 }
 
 /* ------------------ RUNNING LINE CHART ELEMENT ------------------ */
-.TSLineChartArea {
-  width: 90%;
+.RSLineChartArea {
   background-color: #282c34;
   border-radius: 3px;
-  margin: 15px 0;
+  margin: 15px 5px;
   display: flex;
   justify-content: center;
 }
@@ -287,6 +285,40 @@ img {
 
 .runningScoreLineCircle {
   fill: lightcoral;
+}
+
+/* ------------------ TRUE LINE CHART ELEMENT ------------------ */
+.TSLineChartArea {
+  background-color: #282c34;
+  border-radius: 3px;
+  margin: 15px 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.trueScoreLine {
+  fill: none;
+  stroke: rgba(0, 152, 195, 0.8);
+  stroke-width: 3px;
+}
+
+.trueScoreLineCircle {
+  fill: rgb(52, 78, 54);
+}
+
+/* ------------------ SENTI STACK CHART ELEMENT ------------------ */
+.SentiStackChartArea {
+  background-color: #282c34;
+  border-radius: 3px;
+  margin: 15px 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.sentiStack {
+  fill: none;
+  stroke: rgba(0, 152, 195, 0.8);
+  stroke-width: 3px;
 }
 
 /* ------------------ ALERT ELEMENT ------------------ */
