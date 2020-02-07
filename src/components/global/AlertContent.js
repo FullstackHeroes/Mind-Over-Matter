@@ -7,19 +7,16 @@ export default class AlertContent extends Component {
 
   helpMessage = status => {
     const currentDate = new Date();
-    console.log("STATUS: ", status);
+    console.log("!!Status:!!", status);
     if (currentDate - this.props.lastAlert > 10000) {
       if (status <= 65) {
         return (
           <div className="alertContainer">
-            <div align="center">
-              <h5>Woah there Buddy!</h5>
-              <h5>Step away from your desk and put those hands up!</h5>
-              <h5>
-                Seems to us like you have had quite the day... you deserve a
-                walk
-              </h5>
-              <h5>Take 10-15 mins to yourself and walk it off</h5>
+            <div>
+              <h6>
+                Woah there Buddy! Step away from your desk and put those hands
+                up! Take 10-15 mins to yourself and walk it off
+              </h6>
             </div>
             <div className="alertImgDiv">
               <img
@@ -29,26 +26,23 @@ export default class AlertContent extends Component {
                 }
               />
             </div>
-            <button
-              style={{
-                position: "absolute",
-                top: 0,
-                right: 0
-              }}
-              onClick={this.onClose}>
-              close
+            <button className="alertButton" onClick={this.onClose}>
+              Got it
             </button>
           </div>
         );
       } else if (status <= 74) {
         return (
           <div className="alertContainer">
-            <div align="center">
-              <h4>Looking Steamy!</h4>
-              <h4>Stretch those legs and go hang out with your buddy Joe!</h4>
+            <div>
+              <h6>
+                Looking Steamy! Stretch those legs and go hang out with your
+                buddy Cuppa Joe!
+              </h6>
             </div>
             <div className="alertImgDiv">
               <img
+                id="alertImg3"
                 src={
                   "https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/326/326443/a-cup-of-coffee-that-makes-people-tired.jpg?w=1155&h=1541"
                 }
@@ -58,7 +52,8 @@ export default class AlertContent extends Component {
               style={{
                 position: "absolute",
                 top: 0,
-                right: 0
+                right: 0,
+                padding: 10
               }}
               onClick={this.onClose}>
               Got it
@@ -68,13 +63,12 @@ export default class AlertContent extends Component {
       } else if (status <= 87) {
         return (
           <div className="alertContainer">
-            <div align="center">
+            <div>
               <h6>Here is a cute picture, Hope it makes your day!</h6>
             </div>
-            <div>
+            <div className="alertImgDiv">
               <img
-                width="150"
-                height="auto"
+                id="alertImg3"
                 src={
                   "https://www.smallbizgenius.net/wp-content/uploads/2019/11/smallbizgenius_favicon.png"
                 }
@@ -84,10 +78,11 @@ export default class AlertContent extends Component {
               style={{
                 position: "absolute",
                 top: 0,
-                right: 0
+                right: 0,
+                padding: 10
               }}
               onClick={this.onClose}>
-              close
+              Got it
             </button>
           </div>
         );

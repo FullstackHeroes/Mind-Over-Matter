@@ -341,6 +341,7 @@ img {
   border-radius: 8px 8px 8px 8px;
   color: rgba(18, 89, 155, 0.925);
   align-items: center;
+  text-align: center;
 }
 
 .alertContainer > h6 {
