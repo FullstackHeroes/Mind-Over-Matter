@@ -5,7 +5,8 @@ import AppTSLine from "../chart/AppTSLine";
 import {
   getTodaysScreenTime,
   getMonthsScreenTime,
-  getYearsScreenTime
+  getYearsScreenTime,
+  getYesterdaysScreenTime
 } from "../../store/screenTime";
 
 class Dashboard extends Component {
@@ -17,6 +18,7 @@ class Dashboard extends Component {
       this.props.getTime(user.id);
       this.props.getMonth(user.id);
       this.props.getYear(user.id);
+      this.props.getYesterday(user.id);
     }
   }
 
@@ -32,6 +34,7 @@ class Dashboard extends Component {
         this.props.getTime(user.id);
         this.props.getMonth(user.id);
         this.props.getYear(user.id);
+        this.props.getYesterday(user.id);
       }
     }
   }
@@ -48,9 +51,9 @@ class Dashboard extends Component {
           <div className="dashboardTable">
             Today: {this.props.todaysScreenMins} mins
             <br />
-            This Month: {this.props.monthsScreenHours} hours
+            Yesterday: {this.props.yesterdaysScreenMins} mins
             <br />
-            This Year: {this.props.yearsScreenHours} hours
+            This Month: {this.props.monthsScreenHours} hours
           </div>
         </div>
 
@@ -98,7 +101,8 @@ const mapStateToProps = state => {
     runningScore: state.score.runningScore,
     todaysScreenMins: state.time.screenMinsToday,
     monthsScreenHours: state.time.screenHoursThisMonth,
-    yearsScreenHours: state.time.screenHoursThisYear
+    yearsScreenHours: state.time.screenHoursThisYear,
+    yesterdaysScreenMins: state.time.screenMinsYesterday
   };
 };
 
@@ -108,7 +112,8 @@ const mapDispatchToProps = dispatch => {
     setNormalizedScore: userId => dispatch(setNormalizedScore(userId)),
     getTime: userId => dispatch(getTodaysScreenTime(userId)),
     getMonth: userId => dispatch(getMonthsScreenTime(userId)),
-    getYear: userId => dispatch(getYearsScreenTime(userId))
+    getYear: userId => dispatch(getYearsScreenTime(userId)),
+    getYesterday: userId => dispatch(getYesterdaysScreenTime(userId))
   };
 };
 
