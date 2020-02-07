@@ -69,6 +69,7 @@ router.get("/:userId", async (req, res, next) => {
   res.json(userHours);
 });
 
+//NEED A CONDITIONAL. HANGS IF THERE IS NO DATA FOR TODAY
 router.get("/:userId/today", async (req, res, next) => {
   const text = `SELECT hours."screenTime"
   FROM hours
@@ -99,6 +100,16 @@ router.get("/:userId/year", async (req, res, next) => {
     screenTime: a.screenTime + b.screenTime
   }));
   res.json(Math.floor(dailyScreenTime.screenTime / 120));
+});
+
+router.get("/:userId/yesterday", async (req, res, next) => {
+  const text = `SELECT hours."screenTime" FROM hours WHERE DATE_PART('month', date(hours."timeStamp")) = DATE_PART('month', now()) AND DATE_PART('year', date(hours."timeStamp")) = DATE_PART('year', now()) AND DATE_PART('day', date(hours."timeStamp")) = DATE_PART('day', now() - INTERVAL '1 day')`;
+  const userHours = await db.query(text);
+  const screenTimeArr = userHours[0];
+  const yesterdayScreenTime = screenTimeArr.reduce((a, b) => ({
+    screenTime: a.screenTime + b.screenTime
+  }));
+  res.json(Math.floor(yesterdayScreenTime.screenTime / 60));
 });
 
 module.exports = router;
