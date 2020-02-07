@@ -6,7 +6,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 const Homepage = () => (
   <div>
     <Carousel />
-
     <div className="homepageWhite">
       <div className="homepageText">
         <br></br>
