@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import TSLineD3 from "../../d3/TSLineD3";
+import RSLineD3 from "../../d3/RSLineD3";
 
-class ChartTSLine extends Component {
+class ChartRSLine extends Component {
   componentDidMount() {
     this.setState({
-      TSLineChart: new TSLineD3(this.refs.TSLineChart, this.props.fullScoreObj)
+      RSLineChart: new RSLineD3(this.refs.RSLineChart, this.props.runningScore)
     });
   }
 
   componentDidUpdate(prevProps) {
-    const { fullScoreObj } = this.props;
-    if (this.checkSameArray(fullScoreObj, prevProps.fullScoreObj))
-      this.state.TSLineChart.update(fullScoreObj);
+    const { runningScore } = this.props;
+    if (this.checkSameArray(runningScore, prevProps.runningScore))
+      this.state.RSLineChart.update(runningScore);
   }
 
   checkSameArray(one, two) {
@@ -37,8 +37,8 @@ class ChartTSLine extends Component {
   }
 
   render() {
-    return <div ref="TSLineChart" className="TSLineChartArea"></div>;
+    return <div ref="RSLineChart" className="RSLineChartArea"></div>;
   }
 }
 
-export default ChartTSLine;
+export default ChartRSLine;

@@ -5,7 +5,7 @@ import store from "../store";
 const rounding = 10 ** 5; // DECIMAL ROUNDING
 const screenWeight = 0.5;
 const countWeight = 1 - screenWeight;
-export const normalizedLen = 5000; // LENGTH FOR NORMALIZED CALC
+export const normalizedLen = 3000; // LENGTH FOR NORMALIZED CALC
 const wtdAvgCount = 50; // WEIGHTED AVERAGE COUNT LIMIT
 
 // SCORING FROM 1-10 (BAD - GOOD) AND MULTIPLIER WILL BE DONE PRO-RATA
