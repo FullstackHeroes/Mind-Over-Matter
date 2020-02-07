@@ -52,12 +52,21 @@ class SentiStackD3 {
       .attr("transform", `translate(0, ${HEIGHT})`);
     vis.yAxisGroup = vis.g.append("g");
 
+    // LINE CREATION
     vis.valueLine = d3
       .line()
       .x(d => vis.x(d[vis.xAttr]))
       .y(d => vis.y(d[vis.yAttr]))
       .curve(d3.curveCatmullRom.alpha(0.5));
-    // .curve(d3.curveMonotoneX);
+
+    // BRUSHING
+    vis.brush = d3
+      .brushX()
+      .extent([
+        [0, 0],
+        [WIDTH, HEIGHT]
+      ])
+      .on("end", update(vis.data));
 
     vis.update(data);
   }
@@ -74,7 +83,9 @@ class SentiStackD3 {
       "angry",
       "sad"
     ];
-    // vis.keys = Object.keys(vis.data[0]);
+
+    vis.color = d3.scaleOrdinal().domain(vis.keys)(range(d3.schemeSet2));
+    vis.stackedData = d3.stack().keys(keys)(vis.data);
 
     vis.data.forEach(d => {
       d[vis.xAttr] = new Date(Date.parse(d[vis.xAttr]));
@@ -84,14 +95,14 @@ class SentiStackD3 {
 
     // ADJUST SCALING
     vis.x.domain(d3.extent(vis.data, d => d[vis.xAttr]));
-    vis.y.domain([0, 10]);
+    vis.y.domain([0, 1]);
 
     // AXIS FIGURES TRANSITION
     const xAxisCall = d3
       .axisBottom(vis.x)
       .ticks(7)
       .tickFormat(d3.timeFormat("%b %d"));
-    const yAxisCall = d3.axisLeft(vis.y).tickFormat(d3.format(".0f"));
+    const yAxisCall = d3.axisLeft(vis.y).tickFormat(d3.format(".2f"));
 
     vis.xAxisGroup
       .transition(1000)
@@ -105,6 +116,9 @@ class SentiStackD3 {
       .call(yAxisCall)
       .selectAll("text")
       .attr("font-size", 12);
+
+    // CLIP PATH
+    // const clip = vis.g.append()
 
     // LINE CHART
     const lineChart = vis.g.selectAll(".sentiStack").data([vis.data]);
