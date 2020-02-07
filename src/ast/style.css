@@ -206,7 +206,7 @@ h3 {
   background-color: lightgray;
   display: flex;
   flex-direction: column;
-  width: 75vw;
+  min-width: 75vw;
   min-height: 60vh;
   padding: 15px;
   border-radius: 5px;
@@ -304,6 +304,21 @@ img {
 
 .trueScoreLineCircle {
   fill: rgb(52, 78, 54);
+}
+
+/* ------------------ SENTI STACK CHART ELEMENT ------------------ */
+.SentiStackChartArea {
+  background-color: #282c34;
+  border-radius: 3px;
+  margin: 15px 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.sentiStack {
+  fill: none;
+  stroke: rgba(0, 152, 195, 0.8);
+  stroke-width: 3px;
 }
 
 /* ------------------ ALERT ELEMENT ------------------ */

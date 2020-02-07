@@ -20,7 +20,7 @@ class SentiStackD3 {
       .append("svg")
       .attr("width", WIDTH + MARGIN.LEFT + MARGIN.RIGHT)
       .attr("height", HEIGHT + MARGIN.TOP + MARGIN.BOTTOM)
-      .classed("RSLineSvg", true)
+      .classed("SentiStackSvg", true)
       .append("g")
       .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`);
 
@@ -45,7 +45,7 @@ class SentiStackD3 {
       .attr("fill", "white")
       .attr("font-weight", "bold")
       .attr("text-anchor", "middle")
-      .text("Running Score");
+      .text("Senti Stack");
 
     vis.xAxisGroup = vis.g
       .append("g")
@@ -98,36 +98,36 @@ class SentiStackD3 {
       .attr("font-size", 12);
 
     // LINE CHART
-    const lineChart = vis.g.selectAll(".runningScoreLine").data([vis.data]);
+    const lineChart = vis.g.selectAll(".sentiStack").data([vis.data]);
 
     lineChart
       .enter()
       .append("path")
-      .classed("runningScoreLine", true)
+      .classed("sentiStack", true)
       .merge(lineChart)
       .attr("d", vis.valueLine);
 
-    // JOIN
-    const circles = vis.g.selectAll("circle").data(vis.data);
+    // // JOIN
+    // const circles = vis.g.selectAll("circle").data(vis.data);
 
-    // EXIT
-    circles.exit().remove();
+    // // EXIT
+    // circles.exit().remove();
 
-    // UPDATE
-    circles
-      .transition(1000)
-      .attr("cx", d => vis.x(d[vis.xAttr]))
-      .attr("cy", d => vis.y(d[vis.yAttr]));
+    // // UPDATE
+    // circles
+    //   .transition(1000)
+    //   .attr("cx", d => vis.x(d[vis.xAttr]))
+    //   .attr("cy", d => vis.y(d[vis.yAttr]));
 
-    // ENTER
-    circles
-      .enter()
-      .append("circle")
-      .classed("runningScoreLineCircle", true)
-      .attr("cy", d => vis.y(d[vis.yAttr]))
-      .attr("cx", d => vis.x(d[vis.xAttr]))
-      .attr("r", 4)
-      .on("click", d => console.log("Clicking -", d));
+    // // ENTER
+    // circles
+    //   .enter()
+    //   .append("circle")
+    //   .classed("runningScoreLineCircle", true)
+    //   .attr("cy", d => vis.y(d[vis.yAttr]))
+    //   .attr("cx", d => vis.x(d[vis.xAttr]))
+    //   .attr("r", 4)
+    //   .on("click", d => console.log("Clicking -", d));
   }
 }
 
