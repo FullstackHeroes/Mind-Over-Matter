@@ -6,12 +6,11 @@ export default class AlertContent extends Component {
   };
 
   helpMessage = status => {
-
     const currentDate = new Date();
     if (currentDate - this.props.lastAlert > 10000) {
-      if (status <= 45) {
+      if (status <= 67) {
         return (
-          <div>
+          <div className="alertContainer">
             <div>
               <h5>Woah there Buddy!</h5>
               <h5>Step away from your desk and put those hands up!</h5>
@@ -38,9 +37,9 @@ export default class AlertContent extends Component {
             </button>
           </div>
         );
-      } else if (status <= 55) {
+      } else if (status <= 75) {
         return (
-          <div>
+          <div className="alertContainer">
             <div>
               <h4>Looking Steamy!</h4>
               <h4>Stretch those legs and go hang out with your buddy Joe!</h4>
@@ -62,54 +61,32 @@ export default class AlertContent extends Component {
             </button>
           </div>
         );
-      } else if (status <= 65) {
+      } else if (status <= 85) {
         return (
-          <div>
-            <div>
-              <h4>Here is a cute picture of a cat!</h4>
+          <div className="alertContainer">
+            <div align="center">
+              <h4>Here is a cute picture!</h4>
               <h4>Hope it makes your day!</h4>
             </div>
             <div>
               <img
+                width="150"
+                height="auto"
                 src={
-                  "https://www.mobilecause.com/wp-content/uploads/2016/03/shutterstock_84271234.jpg>"
+                  "https://www.smallbizgenius.net/wp-content/uploads/2019/11/smallbizgenius_favicon.png"
                 }
               />
             </div>
             <button
               style={{
                 position: "absolute",
-                bottom: 0
+                top: 0,
+                right: 0,
+                padding: 20,
+                fontsize: 24
               }}
               onClick={this.onClose}>
-              close
-            </button>
-          </div>
-        );
-      } else if (status <= 80) {
-        return (
-          <div>
-            <div>
-              <h5>
-                Word on the streets is that you think better when hydrated!
-              </h5>
-              <h5>I think its time you grabbed a drink of water</h5>
-              <h5>We would give you ours but its stuck behind this screen</h5>
-            </div>
-            <div>
-              <img
-                src={
-                  "https://www.sciencenews.org/wp-content/uploads/2018/11/112418_water_feat_free.jpg"
-                }
-              />
-            </div>
-            <button
-              style={{
-                position: "absolute",
-                bottom: 0
-              }}
-              onClick={this.onClose}>
-              close
+              x
             </button>
           </div>
         );
@@ -120,6 +97,10 @@ export default class AlertContent extends Component {
   };
 
   render() {
-    return <div>{this.helpMessage(this.props.currentSentiment)}</div>;
+    return (
+      <div className="modalFrame">
+        {this.helpMessage(this.props.currentSentiment)}
+      </div>
+    );
   }
 }

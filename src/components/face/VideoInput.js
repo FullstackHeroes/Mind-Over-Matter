@@ -181,11 +181,11 @@ class VideoInput extends Component {
             // backgroundColor: "black"
           }}>
           <div
+            // TO ADD THE CAMERA BACK, width: WIDTH, height: HEIGHT, opacity: 1
             style={{
-              width: WIDTH,
-              height: HEIGHT,
+              width: 0,
+              height: 0,
               opacity: 0
-              // zIndex: -1
             }}>
             <div style={{ position: "relative", width: WIDTH }}>
               {!!videoConstraints ? (
