@@ -77,7 +77,7 @@ class TSLineD3 {
     // AXIS FIGURES TRANSITION
     const xAxisCall = d3
       .axisBottom(vis.x)
-      .ticks(7)
+      .ticks(6)
       .tickFormat(d3.timeFormat("%b %d"));
     const yAxisCall = d3.axisLeft(vis.y).tickFormat(d3.format(".0f"));
 
