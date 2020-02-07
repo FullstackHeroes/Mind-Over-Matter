@@ -6,7 +6,7 @@ import { loadModels, getFaceDescr } from "../../utils/faceBase";
 import { sentimentAlgo, calcWeightedTrueScore } from "../../utils/utilities";
 import PopUp from "../global/PopUp";
 import {
-  setNormalizedScore, 
+  setNormalizedScore,
   postCurrentRunningSentiment,
   setFullScoreObj,
   postNormalizedScore,
@@ -169,7 +169,6 @@ class VideoInput extends Component {
       });
     }
 
-
     return (
       <div className="cameraFullDiv">
         <div className={detected}></div>
@@ -178,14 +177,15 @@ class VideoInput extends Component {
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
-            backgroundColor: "black"
+            alignItems: "center"
+            // backgroundColor: "black"
           }}>
           <div
             style={{
               width: WIDTH,
               height: HEIGHT,
-              opacity: 1
+              opacity: 0
+              // zIndex: -1
             }}>
             <div style={{ position: "relative", width: WIDTH }}>
               {!!videoConstraints ? (
