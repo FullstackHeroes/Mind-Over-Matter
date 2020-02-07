@@ -42,6 +42,7 @@ export default class AlertContent extends Component {
             </div>
             <div className="alertImgDiv">
               <img
+                id="alertImg3"
                 src={
                   "https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/326/326443/a-cup-of-coffee-that-makes-people-tired.jpg?w=1155&h=1541"
                 }
@@ -62,13 +63,12 @@ export default class AlertContent extends Component {
       } else if (status <= 87) {
         return (
           <div className="alertContainer">
-            <div align="center">
+            <div>
               <h6>Here is a cute picture, Hope it makes your day!</h6>
             </div>
-            <div>
+            <div className="alertImgDiv">
               <img
-                width="150"
-                height="auto"
+                id="alertImg3"
                 src={
                   "https://www.smallbizgenius.net/wp-content/uploads/2019/11/smallbizgenius_favicon.png"
                 }
