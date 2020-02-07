@@ -1138,7 +1138,7 @@ const normalizeScoreSeed = [
     normalizeScore: 5.8,
     runningScore: 5,
     sentimentDiff: 0.86207,
-    timeStamp: new Date("1/5/20")
+    timeStamp: new Date("2/5/20")
   },
   {
     userId: 1,

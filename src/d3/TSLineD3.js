@@ -110,10 +110,7 @@ class TSLineD3 {
     const circles = vis.g.selectAll("circle").data(vis.data, d => d.name);
 
     // EXIT
-    circles
-      .exit()
-      .transition(1000)
-      .remove();
+    circles.exit().remove();
 
     // UPDATE
     circles
@@ -127,10 +124,9 @@ class TSLineD3 {
       .append("circle")
       .classed("runningScoreLineCircle", true)
       .attr("cy", d => vis.y(d[vis.yAttr]))
-      .attr("r", 5)
-      .on("click", d => console.log("Clicking -", d))
-      .on("mouseover", d => console.log("MOVING -", d[vis.yAttr]))
-      .attr("cx", d => vis.x(d[vis.xAttr]));
+      .attr("cx", d => vis.x(d[vis.xAttr]))
+      .attr("r", 4)
+      .on("click", d => console.log("Clicking -", d));
   }
 }
 

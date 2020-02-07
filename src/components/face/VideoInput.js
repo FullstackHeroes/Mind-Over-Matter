@@ -212,7 +212,7 @@ class VideoInput extends Component {
               }}></div>
           </div>
         </div>
-        <PopUp currentSentiment={this.props.currentRunningSentiment} />
+        {/* <PopUp currentSentiment={this.props.currentRunningSentiment} /> */}
       </div>
     );
   }
