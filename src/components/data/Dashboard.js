@@ -5,7 +5,7 @@ import ChartTSLine from "../chart/ChartTSLine";
 import {
   getTodaysScreenTime,
   getMonthsScreenTime,
-  gotYearsScreenTime
+  getYearsScreenTime
 } from "../../store/screenTime";
 
 class Dashboard extends Component {
@@ -15,6 +15,8 @@ class Dashboard extends Component {
       this.props.setFullScoreObj(user.id);
       this.props.setNormalizedScore(user.id);
       this.props.getTime(user.id);
+      this.props.getMonth(user.id);
+      this.props.getYear(user.id);
     }
   }
 
@@ -28,6 +30,8 @@ class Dashboard extends Component {
         this.props.setFullScoreObj(user.id);
         this.props.setNormalizedScore(user.id);
         this.props.getTime(user.id);
+        this.props.getMonth(user.id);
+        this.props.getYear(user.id);
       }
     }
   }
@@ -107,12 +111,9 @@ const mapDispatchToProps = dispatch => {
   return {
     setFullScoreObj: userId => dispatch(setFullScoreObj(userId)),
     setNormalizedScore: userId => dispatch(setNormalizedScore(userId)),
-    getTime: userId =>
-      dispatch(
-        getTodaysScreenTime(userId),
-        getMonthsScreenTime(userId),
-        gotYearsScreenTime(userId)
-      )
+    getTime: userId => dispatch(getTodaysScreenTime(userId)),
+    getMonth: userId => dispatch(getMonthsScreenTime(userId)),
+    getYear: userId => dispatch(getYearsScreenTime(userId))
   };
 };
 

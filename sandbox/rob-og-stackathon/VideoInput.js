@@ -91,7 +91,6 @@ class VideoInput extends Component {
 
               // disgusted: fullDesc[0].expressions.disgusted + 0.05,
             });
-            console.log(fullDesc);
           }
         });
 

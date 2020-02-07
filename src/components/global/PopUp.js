@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import AlertContent from "./AlertContent";
-import { setNormalizedScore } from "../../store";
 import { connect } from "react-redux";
 
 class PopUp extends Component {
@@ -27,8 +26,6 @@ class PopUp extends Component {
   };
 
   render() {
-    const helpStatus = this.props.helpStatus;
-
     return (
       <div>
         <AlertContent

@@ -4,6 +4,7 @@ import {
   calcNormalizeUtility,
   calcWeightedTrueScore
 } from "../utils/utilities";
+import { dispatch } from "d3";
 
 // INITIAL STATE
 const initialState = {
@@ -12,7 +13,8 @@ const initialState = {
   fullScoreObj: [],
   normalizedScore: [],
   runningScore: [],
-  sentimentDiff: []
+  sentimentDiff: [],
+  currentRunningSentiment: null
 };
 
 // ACTION TYPES
@@ -21,6 +23,7 @@ const GET_FULL_SCORE_OBJ = "GET_FULL_SCORE_OBJ";
 const GET_NORMALIZED_SCORE = "GET_NORMALIZED_SCORE";
 const GET_RUNNING_SCORE = "GET_RUNNING_SCORE";
 const GET_SENTIMENT_DIFF = "GET_SENTIMENT_DIFF";
+const GET_CURRENT_RUNNING_SENTIMENT = "GET_CURRENT_RUNNING_SENTIMENT";
 
 // ACTION CREATORS
 export const getTimeInterval = (snapInterval = 3000, dbInterval = 9000) => {
@@ -56,6 +59,13 @@ export const getSentimentDiff = sentimentDiff => {
   return {
     type: GET_SENTIMENT_DIFF,
     sentimentDiff
+  };
+};
+
+export const getCurrentRunningSentiment = runningSentiment => {
+  return {
+    type: GET_CURRENT_RUNNING_SENTIMENT,
+    runningSentiment
   };
 };
 
@@ -135,6 +145,16 @@ export const postNormalizedScore = userId => {
   };
 };
 
+export const postCurrentRunningSentiment = sentimentScore => {
+  return dispatch => {
+    try {
+      dispatch(getCurrentRunningSentiment(sentimentScore));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
 // REDUCER
 const scoreReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -152,6 +172,8 @@ const scoreReducer = (state = initialState, action) => {
       return { ...state, runningScore: action.runningScore };
     case GET_SENTIMENT_DIFF:
       return { ...state, sentimentDiff: action.sentimentDiff };
+    case GET_CURRENT_RUNNING_SENTIMENT:
+      return { ...state, currentRunningSentiment: action.runningSentiment };
     default:
       return state;
   }

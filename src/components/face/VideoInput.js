@@ -2,15 +2,12 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import Webcam from "react-webcam";
-import { setNormalizedScore } from "../../store";
 import { loadModels, getFaceDescr } from "../../utils/faceBase";
-import {
-  sentimentAlgo,
-  calcWeightedTrueScore,
-  percentDifference
-} from "../../utils/utilities";
+import { sentimentAlgo, calcWeightedTrueScore } from "../../utils/utilities";
 import PopUp from "../global/PopUp";
 import {
+  setNormalizedScore,
+  postCurrentRunningSentiment,
   setFullScoreObj,
   postNormalizedScore,
   postLSScoreObj,
@@ -26,9 +23,7 @@ class VideoInput extends Component {
     super(props);
     this.webcam = React.createRef();
     this.state = {
-      facingMode: "user",
-      detections: null,
-      currentSentiment: null
+      detections: null
     };
   }
 
@@ -96,26 +91,11 @@ class VideoInput extends Component {
               //USER DATA AND CALCULATIONS
               const { normalizedScore } = this.props,
                 mostRecentNormalized = normalizedScore[0].normalizeScore,
-                RunningTrueScore = await calcWeightedTrueScore(userId),
-                perDiff = percentDifference(
-                  RunningTrueScore,
-                  mostRecentNormalized
-                );
+                RunningTrueScore = await calcWeightedTrueScore(userId);
 
-              //THE TRIGGER TO SHOW THE HELP ALERT
-              const checkDate = new Date();
-              // 15 mins in milisecs: 900000
-
-              if (
-                checkDate - this.state.lastAlert > 10000 &&
-                this.state.currentSentiment <= 80
-              ) {
-                this.setState({
-                  currentSentiment: perDiff * 100,
-                  lastAlert: new Date()
-                });
-                this.showHelp();
-              }
+              this.props.postCurrentRunningSentiment(
+                (RunningTrueScore / mostRecentNormalized) * 100
+              );
             } else console.error("WAHH -- no current detection");
           }
         );
@@ -147,31 +127,19 @@ class VideoInput extends Component {
     }
   };
 
-  showHelp = () => {
-    this.setState({ showPopUp: true });
-  };
-
-  hideHelp = () => {
-    this.setState({ showPopUp: false });
-  };
-
   componentWillUnmount() {
     clearInterval(this.intervalSnap);
     clearInterval(this.intervalDB);
   }
 
   render() {
-    const { detections, facingMode } = this.state;
-    let videoConstraints = null;
+    const { detections } = this.state;
+    const videoConstraints = {
+      width: WIDTH,
+      height: HEIGHT,
+      facingMode: "user"
+    };
     let detected = "";
-
-    if (!!facingMode) {
-      videoConstraints = {
-        width: WIDTH,
-        height: HEIGHT,
-        facingMode: facingMode
-      };
-    }
 
     // DETECTION BOX CODE (POSSIBLY OPTIONAL)
     let drawBox = null;
@@ -209,14 +177,15 @@ class VideoInput extends Component {
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
-            backgroundColor: "black"
+            alignItems: "center"
+            // backgroundColor: "black"
           }}>
           <div
             style={{
               width: WIDTH,
               height: HEIGHT,
-              opacity: 1
+              opacity: 0
+              // zIndex: -1
             }}>
             <div style={{ position: "relative", width: WIDTH }}>
               {!!videoConstraints ? (
@@ -243,10 +212,7 @@ class VideoInput extends Component {
               }}></div>
           </div>
         </div>
-        {/* <PopUp
-          detections={this.state.detections}
-          currentSentiment={this.state.currentSentiment}
-        /> */}
+        <PopUp currentSentiment={this.props.currentRunningSentiment} />
       </div>
     );
   }
@@ -257,7 +223,8 @@ const mapStateToProps = state => {
     user: state.user,
     snapInterval: state.score.snapInterval,
     dbInterval: state.score.dbInterval,
-    normalizedScore: state.score.normalizedScore
+    normalizedScore: state.score.normalizedScore,
+    currentRunningSentiment: state.score.currentRunningSentiment
   };
 };
 
@@ -268,7 +235,9 @@ const mapDispatchToProps = dispatch => {
     postLSScoreObj: userId => dispatch(postLSScoreObj(userId)),
     getTimeInterval: (snapInterval, dbInterval) =>
       dispatch(getTimeInterval(snapInterval, dbInterval)),
-    setNormalizedScore: userId => dispatch(setNormalizedScore(userId))
+    setNormalizedScore: userId => dispatch(setNormalizedScore(userId)),
+    postCurrentRunningSentiment: currentSentiment =>
+      dispatch(postCurrentRunningSentiment(currentSentiment))
   };
 };
 
