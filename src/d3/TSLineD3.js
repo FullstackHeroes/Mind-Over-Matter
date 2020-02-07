@@ -1,8 +1,8 @@
 import * as d3 from "d3";
 
 const MARGIN = { TOP: 10, BOTTOM: 80, LEFT: 70, RIGHT: 70 };
-const WIDTH = 500 - MARGIN.LEFT - MARGIN.RIGHT;
-const HEIGHT = 400 - MARGIN.TOP - MARGIN.BOTTOM;
+const WIDTH = 400 - MARGIN.LEFT - MARGIN.RIGHT;
+const HEIGHT = 300 - MARGIN.TOP - MARGIN.BOTTOM;
 
 class TSLineD3 {
   constructor(element, data) {

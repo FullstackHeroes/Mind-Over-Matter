@@ -271,10 +271,10 @@ img {
 
 /* ------------------ RUNNING LINE CHART ELEMENT ------------------ */
 .RSLineChartArea {
-  width: 90%;
+  /* width: 90%; */
   background-color: #282c34;
   border-radius: 3px;
-  margin: 15px 0;
+  margin: 15px 5px;
   display: flex;
   justify-content: center;
 }
@@ -291,10 +291,10 @@ img {
 
 /* ------------------ TRUE LINE CHART ELEMENT ------------------ */
 .TSLineChartArea {
-  width: 90%;
+  /* width: 90%; */
   background-color: #282c34;
   border-radius: 3px;
-  margin: 15px 0;
+  margin: 15px 5px;
   display: flex;
   justify-content: center;
 }
