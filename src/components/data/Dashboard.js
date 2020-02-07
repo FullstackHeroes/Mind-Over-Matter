@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setFullScoreObj, setNormalizedScore } from "../../store";
-import ChartRSLine from "../chart/ChartRSLine";
-import ChartTSLine from "../chart/ChartTSLine";
 import {
+  setFullScoreObj,
+  setNormalizedScore,
   getTodaysScreenTime,
   getMonthsScreenTime,
   getYearsScreenTime,
   getYesterdaysScreenTime
-} from "../../store/screenTime";
+} from "../../store";
+import ChartRSLine from "../chart/ChartRSLine";
+import ChartTSLine from "../chart/ChartTSLine";
+import ChartSentiStack from "../chart/ChartSentiStack";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -98,6 +100,12 @@ class Dashboard extends Component {
 
           {fullScoreObj.length ? (
             <ChartTSLine fullScoreObj={fullScoreObj.slice(-10)} />
+          ) : (
+            "Loading"
+          )}
+
+          {fullScoreObj.length ? (
+            <ChartSentiStack fullScoreObj={fullScoreObj.slice(-10)} />
           ) : (
             "Loading"
           )}

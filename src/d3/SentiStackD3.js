@@ -65,12 +65,13 @@ class SentiStackD3 {
   update(data) {
     const vis = this;
     vis.data = [...data].map(obj => Object.assign({}, obj));
+    vis.keys = Object.keys(vis.data[0]);
 
     vis.data.forEach(d => {
       d[vis.xAttr] = new Date(Date.parse(d[vis.xAttr]));
     });
 
-    // console.log("D3 RSLINE!", vis.data);
+    console.log("D3 STACK!", vis.data, vis.keys);
 
     // ADJUST SCALING
     vis.x.domain(d3.extent(vis.data, d => d[vis.xAttr]));
