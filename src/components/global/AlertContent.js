@@ -9,32 +9,33 @@ export default class AlertContent extends Component {
     const currentDate = new Date();
     console.log("!!Status:!!", status);
     if (currentDate - this.props.lastAlert > 10000) {
-      if (status <= 67) {
+      if (status <= 150) {
         return (
           <div className="alertContainer">
             <div>
-              <h5>Woah there Buddy!</h5>
-              <h5>Step away from your desk and put those hands up!</h5>
-              <h5>
-                Seems to us like you have had quite the day... you deserve a
-                walk
-              </h5>
-              <h5>Take 10-15 mins to yourself and walk it off</h5>
+              <h6>Woah there Buddy!</h6>
+              <h6>Step away from your desk and put those hands up!</h6>
+              <h6>Seems to us like you have had quite the day...</h6>
+              <h6>Take 10-15 mins to yourself and walk it off</h6>
             </div>
-            <div>
+            <div className="alertImgDiv">
               <img
+                id="alertImg3"
                 src={
-                  " https://sd.keepcalms.com/i/keep-calm-and-step-away-from-the-computer.png"
+                  "https://ctl.s6img.com/society6/img/7YUzbWKPlRNoDuosqB_FyQbfYag/w_700/prints/~artwork/s6-original-art-uploads/society6/uploads/misc/8802652faa0d4b5a935d15a2a56436cc/~~/famous-band-walk-road-sign-design-prints.jpg"
                 }
               />
             </div>
             <button
-              style={{
-                position: "absolute",
-                bottom: 0
-              }}
+              className="alertButton"
+              // style={{
+              //   position: "absolute",
+              //   top: 3,
+              //   right: 3,
+              //   padding: 10
+              // }}
               onClick={this.onClose}>
-              close
+              Got it
             </button>
           </div>
         );
@@ -42,8 +43,8 @@ export default class AlertContent extends Component {
         return (
           <div className="alertContainer">
             <div>
-              <h4>Looking Steamy!</h4>
-              <h4>Stretch those legs and go hang out with your buddy Joe!</h4>
+              <h6>Looking Steamy!</h6>
+              <h6>Stretch those legs and go hang out with your buddy Joe!</h6>
             </div>
             <div>
               <img
@@ -55,10 +56,12 @@ export default class AlertContent extends Component {
             <button
               style={{
                 position: "absolute",
-                bottom: 0
+                top: 0,
+                right: 0,
+                padding: 10
               }}
               onClick={this.onClose}>
-              close
+              Got it
             </button>
           </div>
         );
@@ -66,8 +69,8 @@ export default class AlertContent extends Component {
         return (
           <div className="alertContainer">
             <div align="center">
-              <h4>Here is a cute picture!</h4>
-              <h4>Hope it makes your day!</h4>
+              <h6>Here is a cute picture!</h6>
+              <h6>Hope it makes your day!</h6>
             </div>
             <div>
               <img
@@ -83,11 +86,10 @@ export default class AlertContent extends Component {
                 position: "absolute",
                 top: 0,
                 right: 0,
-                padding: 20,
-                fontsize: 24
+                padding: 10
               }}
               onClick={this.onClose}>
-              x
+              Got it
             </button>
           </div>
         );
