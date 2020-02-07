@@ -4,7 +4,6 @@ import {
   calcNormalizeUtility,
   calcWeightedTrueScore
 } from "../utils/utilities";
-import { dispatch } from "d3";
 
 // INITIAL STATE
 const initialState = {

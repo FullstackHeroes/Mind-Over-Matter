@@ -392,7 +392,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 3.63104,
+    trueScore: 7.63104,
     happy: 0.00017,
     surprised: 0.3057,
     neutral: 0.052555,
@@ -407,7 +407,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 2.91877,
+    trueScore: 6.91877,
     happy: 0.00025,
     surprised: 0.02852,
     neutral: 0.4145,
@@ -422,7 +422,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 1.16564,
+    trueScore: 7.16564,
     happy: 0,
     surprised: 0.00034,
     neutral: 0.04027,
@@ -437,7 +437,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 1.96988,
+    trueScore: 7.96988,
     happy: 0,
     surprised: 0.00044,
     neutral: 0.24069,
@@ -452,7 +452,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 3.61921,
+    trueScore: 8.61921,
     happy: 0.00175,
     surprised: 0.00423,
     neutral: 0.64439,
@@ -467,7 +467,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 3.28086,
+    trueScore: 7.28086,
     happy: 0.00067,
     surprised: 0.00109,
     neutral: 0.56118,
@@ -482,7 +482,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 4.0897,
+    trueScore: 6.0897,
     happy: 0.00094,
     surprised: 0.00416,
     neutral: 0.68957,
@@ -497,7 +497,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 3.6559,
+    trueScore: 6.6559,
     happy: 0.00022,
     surprised: 0.00167,
     neutral: 0.64051,
@@ -512,7 +512,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 4.32567,
+    trueScore: 7.32567,
     happy: 0.00015,
     surprised: 0.00053,
     neutral: 0.83044,
@@ -527,7 +527,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 4.97634,
+    trueScore: 6.97634,
     happy: 0,
     surprised: 0.00016,
     neutral: 0.99384,
@@ -542,7 +542,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 4.9021,
+    trueScore: 7.9021,
     happy: 0.00055,
     surprised: 0.00043,
     neutral: 0.97468,
@@ -557,7 +557,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 5.06885,
+    trueScore: 7.06885,
     happy: 0.001,
     surprised: 0.03534,
     neutral: 0.962,
@@ -572,7 +572,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 1.02179,
+    trueScore: 7.02179,
     happy: 0,
     surprised: 0.00093,
     neutral: 0.00402,
@@ -587,7 +587,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 1.77459,
+    trueScore: 6.77459,
     happy: 0.00016,
     surprised: 0.10305,
     neutral: 0.03838,
@@ -602,7 +602,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 2.95833,
+    trueScore: 7.95833,
     happy: 0.00023,
     surprised: 0.02423,
     neutral: 0.2955,
@@ -617,7 +617,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 3.77,
+    trueScore: 8.77,
     happy: 0.00028,
     surprised: 0.11262,
     neutral: 0.48061,
@@ -632,7 +632,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 2.95833,
+    trueScore: 7.95833,
     happy: 0.00023,
     surprised: 0.02423,
     neutral: 0.2955,
@@ -647,7 +647,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 2.42321,
+    trueScore: 6.42321,
     happy: 0,
     surprised: 0.2367,
     neutral: 0.00061,
@@ -662,7 +662,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 1.01223,
+    trueScore: 7.01223,
     happy: 0,
     surprised: 0.00088,
     neutral: 0.00128,
@@ -677,7 +677,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 1.37901,
+    trueScore: 8.37901,
     happy: 0.00025,
     surprised: 0.06272,
     neutral: 0.00044,
@@ -692,7 +692,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 1.11287,
+    trueScore: 7.11287,
     happy: 0,
     surprised: 0,
     neutral: 0.02755,
@@ -707,7 +707,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 2.78296,
+    trueScore: 6.78296,
     happy: 0.00025,
     surprised: 0.00095,
     neutral: 0.44254,
