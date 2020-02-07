@@ -16,7 +16,8 @@
     "seed": "node script/seed.js",
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
-    "start-server": "nodemon server -e html,js,scss --ignore public --ignore client"
+    "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
+    "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
   },
   "husky": {
     "hooks": {
@@ -105,6 +106,7 @@
     "jsdom": "^16.0.1",
     "jsdom-global": "^3.0.2",
     "lint-staged": "^10.0.7",
+    "mocha": "^6.1.4",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
     "style-loader": "^1.1.3",
