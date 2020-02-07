@@ -56,8 +56,10 @@ class SentiStackD3 {
     vis.area = d3
       .area()
       .x(d => vis.x(d[vis.xAttr]))
-      .y0(d => vis.y(d.happy))
-      .y1(d => vis.y(d.surprised));
+      .y0(d => vis.y(d[0]))
+      .y1(d => vis.y(d[1]));
+    // .y0(d => vis.y(d.happy))
+    // .y1(d => vis.y(d.surprised))
     // .y2(d => vis.y(d.neutral))
     // .y3(d => vis.y(d.disgusted))
     // .y4(d => vis.y(d.fearful))
@@ -116,16 +118,19 @@ class SentiStackD3 {
       .selectAll("text")
       .attr("font-size", 12);
 
-    // CLIP PATH
-    // const clip = vis.g.append()
-
     // STACK AREA CHART
     const stackChart = vis.g.selectAll(".sentiStack").data(vis.stackedData);
 
     stackChart
       .enter()
-      .append("path")
+      .append("g")
       .classed("sentiStack", true)
+      .append("path")
+      .style("fill", (d, i) => vis.color[i])
+      .attr("stroke", "steelblue")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 5)
       .attr("d", d => vis.area(d));
   }
 }
