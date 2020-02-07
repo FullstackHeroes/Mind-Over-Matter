@@ -9,7 +9,7 @@ export default class AlertContent extends Component {
     const currentDate = new Date();
     console.log("STATUS: ", status);
     if (currentDate - this.props.lastAlert > 10000) {
-      if (status <= 67) {
+      if (status <= 65) {
         return (
           <div className="alertContainer">
             <div align="center">
@@ -21,10 +21,11 @@ export default class AlertContent extends Component {
               </h5>
               <h5>Take 10-15 mins to yourself and walk it off</h5>
             </div>
-            <div>
+            <div className="alertImgDiv">
               <img
+                id="alertImg3"
                 src={
-                  " https://sd.keepcalms.com/i/keep-calm-and-step-away-from-the-computer.png"
+                  "https://ctl.s6img.com/society6/img/7YUzbWKPlRNoDuosqB_FyQbfYag/w_700/prints/~artwork/s6-original-art-uploads/society6/uploads/misc/8802652faa0d4b5a935d15a2a56436cc/~~/famous-band-walk-road-sign-design-prints.jpg"
                 }
               />
             </div>
@@ -39,14 +40,14 @@ export default class AlertContent extends Component {
             </button>
           </div>
         );
-      } else if (status <= 75) {
+      } else if (status <= 74) {
         return (
           <div className="alertContainer">
             <div align="center">
               <h4>Looking Steamy!</h4>
               <h4>Stretch those legs and go hang out with your buddy Joe!</h4>
             </div>
-            <div>
+            <div className="alertImgDiv">
               <img
                 src={
                   "https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/326/326443/a-cup-of-coffee-that-makes-people-tired.jpg?w=1155&h=1541"
@@ -60,16 +61,15 @@ export default class AlertContent extends Component {
                 right: 0
               }}
               onClick={this.onClose}>
-              close
+              Got it
             </button>
           </div>
         );
-      } else if (status <= 85) {
+      } else if (status <= 87) {
         return (
           <div className="alertContainer">
             <div align="center">
-              <h4>Here is a cute picture!</h4>
-              <h4>Hope it makes your day!</h4>
+              <h6>Here is a cute picture, Hope it makes your day!</h6>
             </div>
             <div>
               <img

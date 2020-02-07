@@ -17,6 +17,9 @@ h2 {
 h3 {
   margin: 0;
 }
+h6 {
+  margin: 0;
+}
 
 .linkText {
   text-decoration: none;
@@ -327,17 +330,52 @@ img {
 
 /* ------------------ ALERT ELEMENT ------------------ */
 .alertContainer {
-  width: 500px;
-  height: 700px;
-  position: fixed;
+  width: 600px;
+  height: 400px;
+  position: absolute;
   top: calc(50% - 250px);
   left: calc(50% - 250px);
-  background-color: black;
+  background-color: white;
+  border-width: 3px;
+  border-style: outset;
+  border-radius: 8px 8px 8px 8px;
+  color: rgba(18, 89, 155, 0.925);
+  align-items: center;
+}
+
+.alertContainer > h6 {
+  margin: 5px;
 }
 
 .modalFrame {
   z-index: 5px;
-  border: 1px solid black;
+  border-radius: 20px 20px 20px 20px;
+}
+
+.alertImgDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#alertImg3 {
+  width: 250px;
+  height: auto;
+}
+
+.alertButton {
+  position: absolute;
+  top: 1;
+  padding: 10;
+  border-radius: 2px 2px 2px 2px;
+}
+
+button:active {
+  background: #b9b8b8;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+  outline: none;
 }
 
 /*------------------ FOOTER ELEMENT --------------------*/
