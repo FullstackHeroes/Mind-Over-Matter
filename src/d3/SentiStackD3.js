@@ -71,7 +71,7 @@ class SentiStackD3 {
       d[vis.xAttr] = new Date(Date.parse(d[vis.xAttr]));
     });
 
-    console.log("D3 STACK!", vis.data, vis.keys);
+    // console.log("D3 STACK!", vis.data, vis.keys);
 
     // ADJUST SCALING
     vis.x.domain(d3.extent(vis.data, d => d[vis.xAttr]));
