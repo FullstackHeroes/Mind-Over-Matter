@@ -10,8 +10,8 @@ import time from "./screenTime";
 const reducer = combineReducers({ user, score, time });
 
 const middleware = composeWithDevTools(
-  // applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
-  applyMiddleware(thunkMiddleware)
+  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+  // applyMiddleware(thunkMiddleware)
 );
 
 const store = createStore(reducer, middleware);

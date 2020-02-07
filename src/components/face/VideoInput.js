@@ -177,8 +177,8 @@ class VideoInput extends Component {
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
-            backgroundColor: "black"
+            alignItems: "center"
+            // backgroundColor: "black"
           }}>
           <div
             // TO ADD THE CAMERA BACK, width: WIDTH, height: HEIGHT, opacity: 1
