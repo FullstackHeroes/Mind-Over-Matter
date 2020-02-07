@@ -10,7 +10,7 @@ class SentiStackD3 {
     vis.xAttr = "timeStamp";
     vis.yAttr = "runningScore";
 
-    // LABEL SCALING
+    // LABEL CREATION AND SCALING
     vis.x = d3.scaleTime().range([0, WIDTH]);
     vis.y = d3.scaleLinear().range([HEIGHT, 0]);
 
@@ -59,14 +59,20 @@ class SentiStackD3 {
       .y(d => vis.y(d[vis.yAttr]))
       .curve(d3.curveCatmullRom.alpha(0.5));
 
+    // AREA CREATION
+    vis.area = d3
+      .area()
+      .x(d => vis.x(d[vis.xAttr]))
+      .y0(d => vis.y(d.happy));
+
     // BRUSHING
-    vis.brush = d3
-      .brushX()
-      .extent([
-        [0, 0],
-        [WIDTH, HEIGHT]
-      ])
-      .on("end", update(vis.data));
+    // vis.brush = d3
+    //   .brushX()
+    //   .extent([
+    //     [0, 0],
+    //     [WIDTH, HEIGHT]
+    //   ])
+    //   .on("end", update(vis.data));
 
     vis.update(data);
   }
@@ -121,36 +127,13 @@ class SentiStackD3 {
     // const clip = vis.g.append()
 
     // LINE CHART
-    const lineChart = vis.g.selectAll(".sentiStack").data([vis.data]);
+    const lineChart = vis.g.selectAll(".sentiStack").data(vis.data);
 
     lineChart
       .enter()
       .append("path")
       .classed("sentiStack", true)
-      .merge(lineChart)
-      .attr("d", vis.valueLine);
-
-    // // JOIN
-    // const circles = vis.g.selectAll("circle").data(vis.data);
-
-    // // EXIT
-    // circles.exit().remove();
-
-    // // UPDATE
-    // circles
-    //   .transition(1000)
-    //   .attr("cx", d => vis.x(d[vis.xAttr]))
-    //   .attr("cy", d => vis.y(d[vis.yAttr]));
-
-    // // ENTER
-    // circles
-    //   .enter()
-    //   .append("circle")
-    //   .classed("runningScoreLineCircle", true)
-    //   .attr("cy", d => vis.y(d[vis.yAttr]))
-    //   .attr("cx", d => vis.x(d[vis.xAttr]))
-    //   .attr("r", 4)
-    //   .on("click", d => console.log("Clicking -", d));
+      .attr("d", d => area(d));
   }
 }
 
