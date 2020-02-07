@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setFullScoreObj, setNormalizedScore } from "../../store";
-import AppTSLine from "../chart/AppTSLine";
+import ChartTSLine from "../chart/ChartTSLine";
 import {
   getTodaysScreenTime,
   getMonthsScreenTime,
@@ -74,6 +74,7 @@ class Dashboard extends Component {
                 : "Loading"}
             </span>
           </div>
+
           <div className="dashboardTable">
             <span className="dashboardLabel">Latest True Score</span>
             <span className="dashboardContent">
@@ -84,7 +85,11 @@ class Dashboard extends Component {
           </div>
         </div>
 
-        {/* <AppTSLine /> */}
+        {runningScore.length ? (
+          <ChartTSLine runningScore={runningScore.slice(-10)} />
+        ) : (
+          "Loading"
+        )}
       </div>
     );
   }

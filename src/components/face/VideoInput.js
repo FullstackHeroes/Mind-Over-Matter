@@ -212,7 +212,7 @@ class VideoInput extends Component {
               }}></div>
           </div>
         </div>
-        <PopUp currentSentiment={this.props.currentRunningSentiment} />
+        {/* <PopUp currentSentiment={this.props.currentRunningSentiment} /> */}
       </div>
     );
   }
@@ -224,8 +224,7 @@ const mapStateToProps = state => {
     snapInterval: state.score.snapInterval,
     dbInterval: state.score.dbInterval,
     normalizedScore: state.score.normalizedScore,
-    currentRunningSentiment: state.score.currentRunningSentiment,
-    state: state
+    currentRunningSentiment: state.score.currentRunningSentiment
   };
 };
 

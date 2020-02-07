@@ -49,6 +49,7 @@
     "firebase-tools": "^7.12.1",
     "http-status": "^1.4.2",
     "json-loader": "^0.5.7",
+    "lodash": "^4.17.15",
     "morgan": "^1.9.1",
     "passport": "^0.4.1",
     "path": "^0.12.7",

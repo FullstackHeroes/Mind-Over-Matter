@@ -11,9 +11,9 @@ const initialState = {
   snapInterval: 0,
   dbInterval: 0,
   fullScoreObj: [],
-  normalizedScore: 0,
-  runningScore: 0,
-  sentimentDiff: 0,
+  normalizedScore: [],
+  runningScore: [],
+  sentimentDiff: [],
   currentRunningSentiment: null
 };
 
@@ -148,12 +148,12 @@ export const postNormalizedScore = userId => {
 export const postCurrentRunningSentiment = sentimentScore => {
   return dispatch => {
     try {
-      dispatch(getCurrentRunningSentiment(sentimentScore))
+      dispatch(getCurrentRunningSentiment(sentimentScore));
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
-}
+  };
+};
 
 // REDUCER
 const scoreReducer = (state = initialState, action) => {
