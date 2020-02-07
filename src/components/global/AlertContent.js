@@ -8,8 +8,8 @@ export default class AlertContent extends Component {
   helpMessage = status => {
     const currentDate = new Date();
     console.log("!!Status:!!", status);
-    if (currentDate - this.props.lastAlert > 10000) {
-      if (status <= 65) {
+    if (currentDate - this.props.lastAlert > 5000) {
+      if (status <= 70) {
         return (
           <div className="alertContainer">
             <div>
@@ -31,7 +31,7 @@ export default class AlertContent extends Component {
             </button>
           </div>
         );
-      } else if (status <= 74) {
+      } else if (status <= 78) {
         return (
           <div className="alertContainer">
             <div>
@@ -48,19 +48,12 @@ export default class AlertContent extends Component {
                 }
               />
             </div>
-            <button
-              style={{
-                position: "absolute",
-                top: 0,
-                right: 0,
-                padding: 10
-              }}
-              onClick={this.onClose}>
+            <button className="alertButton" onClick={this.onClose}>
               Got it
             </button>
           </div>
         );
-      } else if (status <= 87) {
+      } else if (status <= 89) {
         return (
           <div className="alertContainer">
             <div>
@@ -74,14 +67,7 @@ export default class AlertContent extends Component {
                 }
               />
             </div>
-            <button
-              style={{
-                position: "absolute",
-                top: 0,
-                right: 0,
-                padding: 10
-              }}
-              onClick={this.onClose}>
+            <button className="alertButton" onClick={this.onClose}>
               Got it
             </button>
           </div>
