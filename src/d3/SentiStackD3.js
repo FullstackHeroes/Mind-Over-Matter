@@ -71,6 +71,7 @@ class SentiStackD3 {
 
   update(data) {
     const vis = this;
+    // console.log("start -", data);
     vis.data = [...data].map(obj => Object.assign({}, obj));
     vis.keys = [
       "happy",
@@ -81,10 +82,14 @@ class SentiStackD3 {
       "angry",
       "sad"
     ];
-    const totalSum = vis.data.reduce((acm, d, i) => (acm += d[vis.keys[i]]), 0);
+
     vis.data.forEach((d, i) => {
-      d[vis.keys[i]] = d[vis.keys[i]] / totalSum;
       d[vis.xAttr] = new Date(Date.parse(d[vis.xAttr]));
+      const totalSum = d.reduce((acm, x, i) => {
+        if (i < vis.keys.length) acm += x[vis.keys[i]];
+        return acm;
+      }, 0);
+      if (i < vis.keys.length) d[vis.keys[i]] = d[vis.keys[i]] / totalSum;
     });
 
     vis.color = d3
@@ -93,7 +98,7 @@ class SentiStackD3 {
       .range(d3.schemeSet2);
     vis.stackedData = d3.stack().keys(vis.keys)(vis.data);
 
-    console.log("D3 STACK!", vis.color, vis.data, vis.stackedData);
+    console.log("D3 STACK!", totalSum, vis.data, vis.stackedData);
 
     // ADJUST SCALING
     vis.x.domain(d3.extent(vis.data, d => d[vis.xAttr]));
