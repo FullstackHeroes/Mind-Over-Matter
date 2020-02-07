@@ -8,8 +8,8 @@ export default class AlertContent extends Component {
   helpMessage = status => {
     const currentDate = new Date();
     console.log("!!Status:!!", status);
-    if (currentDate - this.props.lastAlert > 10000) {
-      if (status <= 65) {
+    if (currentDate - this.props.lastAlert > 1000) {
+      if (status <= 63) {
         return (
           <div className="alertContainer">
             <div>
@@ -20,7 +20,7 @@ export default class AlertContent extends Component {
             </div>
             <div className="alertImgDiv">
               <img
-                id="alertImg3"
+                className="alertImg3"
                 src={
                   "https://ctl.s6img.com/society6/img/7YUzbWKPlRNoDuosqB_FyQbfYag/w_700/prints/~artwork/s6-original-art-uploads/society6/uploads/misc/8802652faa0d4b5a935d15a2a56436cc/~~/famous-band-walk-road-sign-design-prints.jpg"
                 }
@@ -31,7 +31,7 @@ export default class AlertContent extends Component {
             </button>
           </div>
         );
-      } else if (status <= 74) {
+      } else if (status <= 75) {
         return (
           <div className="alertContainer">
             <div>
@@ -42,7 +42,7 @@ export default class AlertContent extends Component {
             </div>
             <div className="alertImgDiv">
               <img
-                id="alertImg3"
+                className="alertImg3"
                 src={
                   "https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/326/326443/a-cup-of-coffee-that-makes-people-tired.jpg?w=1155&h=1541"
                 }
@@ -60,7 +60,7 @@ export default class AlertContent extends Component {
             </button>
           </div>
         );
-      } else if (status <= 87) {
+      } else if (status <= 88) {
         return (
           <div className="alertContainer">
             <div>
@@ -68,7 +68,7 @@ export default class AlertContent extends Component {
             </div>
             <div className="alertImgDiv">
               <img
-                id="alertImg3"
+                className="alertImg3"
                 src={
                   "https://www.smallbizgenius.net/wp-content/uploads/2019/11/smallbizgenius_favicon.png"
                 }
