@@ -4,7 +4,8 @@ const initialState = {
   screenMinsToday: 0,
   screenHoursThisMonth: 0,
   screenHoursThisYear: 0,
-  screenMinsYesterday: 0
+  screenMinsYesterday: 0,
+  screenHoursWeek: 0
 };
 
 // ACTION TYPES
@@ -12,6 +13,7 @@ const GOT_TODAYS_SCREENTIME = "GOT_TODAYS_SCREENTIME";
 const GOT_MONTHS_SCREENTIME = "GOT_MONTHS_SCREENTIME";
 const GOT_YEARS_SCREENTIME = "GOT_YEARS_SCREENTIME";
 const GOT_YESTERDAYS_SCREENTIME = "GOT_YESTERDAYS_SCREENTIME";
+const GOT_WEEKS_SCREENTIME = "GOT_WEEKS_SCREENTIME";
 
 // ACTION CREATORS
 export const gotTodaysScreenTime = screenMinsToday => {
@@ -39,6 +41,13 @@ export const gotYesterdaysScreenTime = screenMinsYesterday => {
   return {
     type: GOT_YESTERDAYS_SCREENTIME,
     screenMinsYesterday
+  };
+};
+
+export const gotWeeksScreenTime = screenHoursWeek => {
+  return {
+    type: GOT_WEEKS_SCREENTIME,
+    screenHoursWeek
   };
 };
 
@@ -87,6 +96,17 @@ export const getYesterdaysScreenTime = userId => {
   };
 };
 
+export const getWeeksScreenTime = userId => {
+  return async dispatch => {
+    try {
+      const screenTime = await axios.get(`/api/hours/${userId}/week`);
+      dispatch(gotWeeksScreenTime(screenTime.data));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
 const timeReducer = (state = initialState, action) => {
   switch (action.type) {
     case GOT_TODAYS_SCREENTIME:
@@ -108,6 +128,11 @@ const timeReducer = (state = initialState, action) => {
       return {
         ...state,
         screenMinsYesterday: action.screenMinsYesterday
+      };
+    case GOT_WEEKS_SCREENTIME:
+      return {
+        ...state,
+        screenHoursWeek: action.screenHoursWeek
       };
     default:
       return state;
