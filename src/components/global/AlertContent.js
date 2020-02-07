@@ -13,10 +13,10 @@ export default class AlertContent extends Component {
         return (
           <div className="alertContainer">
             <div>
-              <h6>Woah there Buddy!</h6>
-              <h6>Step away from your desk and put those hands up!</h6>
-              <h6>Seems to us like you have had quite the day...</h6>
-              <h6>Take 10-15 mins to yourself and walk it off</h6>
+              <h6>
+                Woah there Buddy! Step away from your desk and put those hands
+                up! Take 10-15 mins to yourself and walk it off
+              </h6>
             </div>
             <div className="alertImgDiv">
               <img
@@ -26,15 +26,7 @@ export default class AlertContent extends Component {
                 }
               />
             </div>
-            <button
-              className="alertButton"
-              // style={{
-              //   position: "absolute",
-              //   top: 3,
-              //   right: 3,
-              //   padding: 10
-              // }}
-              onClick={this.onClose}>
+            <button className="alertButton" onClick={this.onClose}>
               Got it
             </button>
           </div>
