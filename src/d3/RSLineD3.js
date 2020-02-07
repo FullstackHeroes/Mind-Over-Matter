@@ -39,7 +39,7 @@ class RSLineD3 {
     vis.yAxisLabel = vis.g
       .append("text")
       .attr("x", -(HEIGHT / 2))
-      .attr("y", -50)
+      .attr("y", -40)
       .attr("transform", "rotate(-90)")
       .attr("font-size", 20)
       .attr("fill", "white")
