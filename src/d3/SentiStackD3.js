@@ -55,23 +55,19 @@ class SentiStackD3 {
     // AREA CREATION
     vis.area = d3
       .area()
-      .x(d => vis.x(d[vis.xAttr]))
+      .x(d => {
+        console.log("UMM -", d);
+        return vis.x(d[vis.xAttr]);
+      })
+      // .y0(HEIGHT)
       .y0(d => vis.y(d[0]))
       .y1(d => vis.y(d[1]));
-    // .y0(d => vis.y(d.happy))
-    // .y1(d => vis.y(d.surprised))
-    // .y2(d => vis.y(d.neutral))
-    // .y3(d => vis.y(d.disgusted))
-    // .y4(d => vis.y(d.fearful))
-    // .y5(d => vis.y(d.angry))
-    // .y6(d => vis.y(d.sad));
 
     vis.update(data);
   }
 
   update(data) {
     const vis = this;
-    // console.log("start -", data);
     vis.data = [...data].map(obj => Object.assign({}, obj));
     vis.keys = [
       "happy",
@@ -85,11 +81,8 @@ class SentiStackD3 {
 
     vis.data.forEach((d, i) => {
       d[vis.xAttr] = new Date(Date.parse(d[vis.xAttr]));
-      const totalSum = d.reduce((acm, x, i) => {
-        if (i < vis.keys.length) acm += x[vis.keys[i]];
-        return acm;
-      }, 0);
-      if (i < vis.keys.length) d[vis.keys[i]] = d[vis.keys[i]] / totalSum;
+      const totalSum = vis.keys.reduce((acm, key) => (acm += d[key]), 0);
+      vis.keys.forEach(key => (d[key] = d[key] / totalSum));
     });
 
     vis.color = d3
@@ -98,7 +91,7 @@ class SentiStackD3 {
       .range(d3.schemeSet2);
     vis.stackedData = d3.stack().keys(vis.keys)(vis.data);
 
-    console.log("D3 STACK!", totalSum, vis.data, vis.stackedData);
+    console.log("D3 STACK!", vis.data, vis.stackedData);
 
     // ADJUST SCALING
     vis.x.domain(d3.extent(vis.data, d => d[vis.xAttr]));
@@ -125,12 +118,17 @@ class SentiStackD3 {
       .attr("font-size", 12);
 
     // STACK AREA CHART
-    const stackChart = vis.g.selectAll(".sentiStack").data(vis.stackedData);
-
-    stackChart
+    const stackChart = vis.g
+      .selectAll(".sentiStack")
+      .data(vis.stackedData)
       .enter()
       .append("g")
-      .classed("sentiStack", true)
+      .classed("sentiStack", true);
+
+    stackChart
+      // .enter()
+      // .append("g")
+      // .classed("sentiStack", true)
       .append("path")
       .style("fill", (d, i) => vis.color[i])
       .attr("stroke", "steelblue")
