@@ -90,9 +90,11 @@ class VideoInput extends Component {
 
               //USER DATA AND CALCULATIONS
               const { normalizedScore } = this.props,
-                mostRecentNormalized = normalizedScore[0].normalizeScore,
+                mostRecentNormalized =
+                  normalizedScore[normalizedScore.length - 1].normalizeScore,
                 RunningTrueScore = await calcWeightedTrueScore(userId);
-
+              console.log("MRN:", mostRecentNormalized);
+              console.log("RTS:", RunningTrueScore);
               this.props.postCurrentRunningSentiment(
                 (RunningTrueScore / mostRecentNormalized) * 100
               );
@@ -212,7 +214,7 @@ class VideoInput extends Component {
               }}></div>
           </div>
         </div>
-        {/* <PopUp currentSentiment={this.props.currentRunningSentiment} /> */}
+        <PopUp currentSentiment={this.props.currentRunningSentiment} />
       </div>
     );
   }
