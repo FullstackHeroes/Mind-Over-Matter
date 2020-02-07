@@ -1100,31 +1100,38 @@ const hourSeed = [
 const normalizeScoreSeed = [
   {
     userId: 1,
+    normalizeScore: 3.3,
+    runningScore: 4.5,
+    sentimentDiff: 1.3636,
+    timeStamp: new Date("1/31/20")
+  },
+  {
+    userId: 1,
     normalizeScore: 6.1,
     runningScore: 5.9,
     sentimentDiff: 0.9672,
-    timeStamp: new Date("1/1/20")
+    timeStamp: new Date("2/1/20")
   },
   {
     userId: 1,
     normalizeScore: 7.9,
     runningScore: 6,
     sentimentDiff: 0.7595,
-    timeStamp: new Date("1/2/20")
+    timeStamp: new Date("2/2/20")
   },
   {
     userId: 1,
     normalizeScore: 6.3,
     runningScore: 3,
     sentimentDiff: 0.47619,
-    timeStamp: new Date("1/3/20")
+    timeStamp: new Date("2/3/20")
   },
   {
     userId: 1,
     normalizeScore: 7.2,
     runningScore: 5,
     sentimentDiff: 0.69444,
-    timeStamp: new Date("1/4/20")
+    timeStamp: new Date("2/4/20")
   },
   {
     userId: 1,
@@ -1135,17 +1142,10 @@ const normalizeScoreSeed = [
   },
   {
     userId: 1,
-    normalizeScore: 3.3,
-    runningScore: 4.5,
-    sentimentDiff: 1.3636,
-    timeStamp: new Date("1/6/20")
-  },
-  {
-    userId: 1,
     normalizeScore: 5.5,
     runningScore: 4.8,
     sentimentDiff: 0.8727,
-    timeStamp: new Date("1/7/20")
+    timeStamp: new Date("2/6/20")
   },
   {
     userId: 2,
