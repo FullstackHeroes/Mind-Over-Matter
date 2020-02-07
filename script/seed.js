@@ -722,7 +722,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 3.79091,
+    trueScore: 6.79091,
     happy: 0.00084,
     surprised: 0.25854,
     neutral: 0.30622,
@@ -737,7 +737,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 3.059,
+    trueScore: 8.059,
     happy: 0.00017,
     surprised: 0.00145,
     neutral: 0.49914,
@@ -752,7 +752,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 3.3674,
+    trueScore: 7.3674,
     happy: 0.00014,
     surprised: 0.00022,
     neutral: 0.97366,
@@ -767,7 +767,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 3.97619,
+    trueScore: 6.97619,
     happy: 0.00045,
     surprised: 0.00014,
     neutral: 0.74124,
@@ -782,7 +782,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 4.1234,
+    trueScore: 7.1234,
     happy: 0.0001,
     surprised: 0.000103,
     neutral: 0.4444,
@@ -797,7 +797,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 4.44456,
+    trueScore: 6.44456,
     happy: 0.002,
     surprised: 0.0001,
     neutral: 0.8643,
@@ -812,7 +812,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 4.73136,
+    trueScore: 5.73136,
     happy: 0.0002,
     surprised: 0.00107,
     neutral: 0.93066,
@@ -827,7 +827,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 4.589,
+    trueScore: 6.589,
     happy: 0.00039,
     surprised: 0.30848,
     neutral: 0.43391,
@@ -842,7 +842,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 4.93395,
+    trueScore: 6.93395,
     happy: 0.00041,
     surprised: 0.03908,
     neutral: 0.9239,
@@ -857,7 +857,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 4.90814,
+    trueScore: 6.90814,
     happy: 0.003,
     surprised: 0.0015,
     neutral: 0.97294,
@@ -872,7 +872,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 5.00335,
+    trueScore: 7.00335,
     happy: 0,
     surprised: 0.00471,
     neutral: 0.99357,
@@ -887,7 +887,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 5.01578,
+    trueScore: 6.01578,
     happy: 0.00011,
     surprised: 0.01185,
     neutral: 0.9859,
@@ -902,7 +902,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 5.12961,
+    trueScore: 6.12961,
     happy: 0.00353,
     surprised: 0.0578,
     neutral: 0.9377,
@@ -917,7 +917,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 5.05049,
+    trueScore: 7.05049,
     happy: 0.0006,
     surprised: 0.02574,
     neutral: 0.97388,
@@ -932,7 +932,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 5.40929,
+    trueScore: 7.40929,
     happy: 0.06413,
     surprised: 0.27,
     neutral: 0.50069,
@@ -947,7 +947,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 5.40093,
+    trueScore: 6.40093,
     happy: 0.0001,
     surprised: 0.25766,
     neutral: 0.71254,
@@ -962,7 +962,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 4.9666,
+    trueScore: 8.9666,
     happy: 0.00048,
     surprised: 0.03,
     neutral: 0.934,
@@ -977,7 +977,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 4.9922,
+    trueScore: 6.9922,
     happy: 0.0004,
     surprised: 0.00312,
     neutral: 0.99332,
@@ -992,7 +992,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 5.4846,
+    trueScore: 6.4846,
     happy: 0.00304,
     surprised: 0.23536,
     neutral: 0.76126,
@@ -1007,7 +1007,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 5.00002,
+    trueScore: 7.00002,
     happy: 0,
     surprised: 0.0001,
     neutral: 0.99999,
@@ -1022,7 +1022,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 4.84267,
+    trueScore: 6.84267,
     happy: 0.0008,
     surprised: 0.00419,
     neutral: 0.95419,
@@ -1037,7 +1037,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 5.02234,
+    trueScore: 7.02234,
     happy: 0,
     surprised: 0.01116,
     neutral: 0.98882,
@@ -1052,7 +1052,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 5.00173,
+    trueScore: 7.00173,
     happy: 0,
     surprised: 0.00094,
     neutral: 0,
@@ -1067,7 +1067,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 5.00112,
+    trueScore: 7.00112,
     happy: 0.0001,
     surprised: 0.00067,
     neutral: 0.99927,
@@ -1082,7 +1082,7 @@ const hourSeed = [
   },
   {
     userId: 1,
-    trueScore: 5.02249,
+    trueScore: 7.02249,
     happy: 0.00486,
     surprised: 0.0007,
     neutral: 0.9945,

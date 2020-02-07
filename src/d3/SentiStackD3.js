@@ -63,7 +63,13 @@ class SentiStackD3 {
     vis.area = d3
       .area()
       .x(d => vis.x(d[vis.xAttr]))
-      .y0(d => vis.y(d.happy));
+      .y0(d => vis.y(d.happy))
+      .y1(d => vis.y(d.surprised))
+      .y2(d => vis.y(d.neutral))
+      .y3(d => vis.y(d.disgusted))
+      .y4(d => vis.y(d.fearful))
+      .y5(d => vis.y(d.angry))
+      .y6(d => vis.y(d.sad));
 
     // BRUSHING
     // vis.brush = d3
@@ -126,10 +132,10 @@ class SentiStackD3 {
     // CLIP PATH
     // const clip = vis.g.append()
 
-    // LINE CHART
-    const lineChart = vis.g.selectAll(".sentiStack").data(vis.data);
+    // STACK AREA CHART
+    const stackChart = vis.g.selectAll(".sentiStack").data(vis.data);
 
-    lineChart
+    stackChart
       .enter()
       .append("path")
       .classed("sentiStack", true)
