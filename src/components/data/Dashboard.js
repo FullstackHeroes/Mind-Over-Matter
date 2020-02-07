@@ -6,7 +6,8 @@ import {
   getTodaysScreenTime,
   getMonthsScreenTime,
   getYearsScreenTime,
-  getYesterdaysScreenTime
+  getYesterdaysScreenTime,
+  getWeeksScreenTime
 } from "../../store";
 import ChartRSLine from "../chart/ChartRSLine";
 import ChartTSLine from "../chart/ChartTSLine";
@@ -22,6 +23,7 @@ class Dashboard extends Component {
       this.props.getMonth(user.id);
       this.props.getYear(user.id);
       this.props.getYesterday(user.id);
+      this.props.getWeek(user.id);
     }
   }
 
@@ -38,6 +40,7 @@ class Dashboard extends Component {
         this.props.getMonth(user.id);
         this.props.getYear(user.id);
         this.props.getYesterday(user.id);
+        this.props.getWeek(user.id);
       }
     }
   }
@@ -52,9 +55,12 @@ class Dashboard extends Component {
         <div className="dashboardRowOne dashboardRow">
           <div className="dashboardTable">Time Session</div>
           <div className="dashboardTable">
+            <h3>Screen Time</h3>
             Today: {this.props.todaysScreenMins} mins
             <br />
             Yesterday: {this.props.yesterdaysScreenMins} mins
+            <br />
+            This Week: {this.props.weeksScreenHours} hours
             <br />
             This Month: {this.props.monthsScreenHours} hours
           </div>
@@ -124,7 +130,8 @@ const mapStateToProps = state => {
     todaysScreenMins: state.time.screenMinsToday,
     monthsScreenHours: state.time.screenHoursThisMonth,
     yearsScreenHours: state.time.screenHoursThisYear,
-    yesterdaysScreenMins: state.time.screenMinsYesterday
+    yesterdaysScreenMins: state.time.screenMinsYesterday,
+    weeksScreenHours: state.time.screenHoursWeek
   };
 };
 
@@ -135,7 +142,8 @@ const mapDispatchToProps = dispatch => {
     getTime: userId => dispatch(getTodaysScreenTime(userId)),
     getMonth: userId => dispatch(getMonthsScreenTime(userId)),
     getYear: userId => dispatch(getYearsScreenTime(userId)),
-    getYesterday: userId => dispatch(getYesterdaysScreenTime(userId))
+    getYesterday: userId => dispatch(getYesterdaysScreenTime(userId)),
+    getWeek: userId => dispatch(getWeeksScreenTime(userId))
   };
 };
 
