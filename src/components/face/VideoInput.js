@@ -181,11 +181,11 @@ class VideoInput extends Component {
             // backgroundColor: "black"
           }}>
           <div
+            // TO ADD THE CAMERA BACK, width: WIDTH, height: HEIGHT, opacity: 1
             style={{
-              width: WIDTH,
-              height: HEIGHT,
+              width: 0,
+              height: 0,
               opacity: 0
-              // zIndex: -1
             }}>
             <div style={{ position: "relative", width: WIDTH }}>
               {!!videoConstraints ? (
@@ -212,7 +212,7 @@ class VideoInput extends Component {
               }}></div>
           </div>
         </div>
-        <PopUp currentSentiment={this.props.currentRunningSentiment} />
+        {/* <PopUp currentSentiment={this.props.currentRunningSentiment} /> */}
       </div>
     );
   }
@@ -224,8 +224,7 @@ const mapStateToProps = state => {
     snapInterval: state.score.snapInterval,
     dbInterval: state.score.dbInterval,
     normalizedScore: state.score.normalizedScore,
-    currentRunningSentiment: state.score.currentRunningSentiment,
-    state: state
+    currentRunningSentiment: state.score.currentRunningSentiment
   };
 };
 

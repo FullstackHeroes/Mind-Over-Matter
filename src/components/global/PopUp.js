@@ -26,7 +26,6 @@ class PopUp extends Component {
   };
 
   render() {
-
     return (
       <div>
         <AlertContent
