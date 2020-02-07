@@ -4,11 +4,11 @@ const MARGIN = { TOP: 10, BOTTOM: 80, LEFT: 70, RIGHT: 70 };
 const WIDTH = 400 - MARGIN.LEFT - MARGIN.RIGHT;
 const HEIGHT = 300 - MARGIN.TOP - MARGIN.BOTTOM;
 
-class TSLineD3 {
+class RSLineD3 {
   constructor(element, data) {
     const vis = this;
     vis.xAttr = "timeStamp";
-    vis.yAttr = "trueScore";
+    vis.yAttr = "runningScore";
 
     // LABEL SCALING
     vis.x = d3.scaleTime().range([0, WIDTH]);
@@ -20,7 +20,7 @@ class TSLineD3 {
       .append("svg")
       .attr("width", WIDTH + MARGIN.LEFT + MARGIN.RIGHT)
       .attr("height", HEIGHT + MARGIN.TOP + MARGIN.BOTTOM)
-      .classed("TSLineSvg", true)
+      .classed("RSLineSvg", true)
       .append("g")
       .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`);
 
@@ -45,7 +45,7 @@ class TSLineD3 {
       .attr("fill", "white")
       .attr("font-weight", "bold")
       .attr("text-anchor", "middle")
-      .text("True Score");
+      .text("Running Score");
 
     vis.xAxisGroup = vis.g
       .append("g")
@@ -95,17 +95,17 @@ class TSLineD3 {
       .attr("font-size", 12);
 
     // LINE CHART
-    const lineChart = vis.g.selectAll(".trueScoreLine").data([vis.data]);
+    const lineChart = vis.g.selectAll(".runningScoreLine").data([vis.data]);
 
     lineChart
       .enter()
       .append("path")
-      .classed("trueScoreLine", true)
+      .classed("runningScoreLine", true)
       .merge(lineChart)
       .attr("d", vis.valueLine);
 
     // JOIN
-    const circles = vis.g.selectAll("circle").data(vis.data, d => d.name);
+    const circles = vis.g.selectAll("circle").data(vis.data);
 
     // EXIT
     circles.exit().remove();
@@ -120,7 +120,7 @@ class TSLineD3 {
     circles
       .enter()
       .append("circle")
-      .classed("trueScoreLineCircle", true)
+      .classed("runningScoreLineCircle", true)
       .attr("cy", d => vis.y(d[vis.yAttr]))
       .attr("cx", d => vis.x(d[vis.xAttr]))
       .attr("r", 4)
@@ -128,4 +128,4 @@ class TSLineD3 {
   }
 }
 
-export default TSLineD3;
+export default RSLineD3;
