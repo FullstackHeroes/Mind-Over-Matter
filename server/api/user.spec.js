@@ -13,7 +13,7 @@ describe("Screen Time routes", () => {
     beforeEach(() => {
       return User.create({
         name: "Falcon",
-        description: "B-team"
+        email: "falcon@useless.biz"
       });
     });
 
