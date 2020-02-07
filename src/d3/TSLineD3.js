@@ -105,6 +105,7 @@ class TSLineD3 {
       .enter()
       .append("path")
       .classed("runningScoreLine", true)
+      .merge(lineChart)
       .attr("d", vis.valueLine);
 
     // vis.lineChart = vis.g
@@ -119,15 +120,13 @@ class TSLineD3 {
     // EXIT
     circles
       .exit()
-      // .transition(1000)
-      // .attr("cy", vis.y(0))
+      .transition(1000)
       .remove();
 
     // UPDATE
     circles
-      // .transition(1000)
+      .transition(1000)
       .attr("cx", d => vis.x(d[vis.xAttr]))
-      // .attr("cx", (d, i) => vis.x(i))
       .attr("cy", d => vis.y(d[vis.yAttr]));
 
     // ENTER
@@ -135,13 +134,11 @@ class TSLineD3 {
       .enter()
       .append("circle")
       .classed("runningScoreLineCircle", true)
-      .attr("cy", vis.y(0))
-      .attr("cx", d => vis.x(d[vis.xAttr]))
-      // .attr("cx", (d, i) => vis.x(i))
-      .attr("r", 7)
+      .attr("cy", d => vis.y(d[vis.yAttr]))
+      .attr("r", 5)
       .on("click", d => console.log("Clicking -", d))
-      // .transition(1000)
-      .attr("cy", d => vis.y(d[vis.yAttr]));
+      .on("mouseover", d => console.log("MOVING -", d))
+      .attr("cx", d => vis.x(d[vis.xAttr]));
   }
 }
 
