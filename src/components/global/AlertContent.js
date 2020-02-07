@@ -7,11 +7,12 @@ export default class AlertContent extends Component {
 
   helpMessage = status => {
     const currentDate = new Date();
+    console.log("STATUS: ", status);
     if (currentDate - this.props.lastAlert > 10000) {
       if (status <= 67) {
         return (
           <div className="alertContainer">
-            <div>
+            <div align="center">
               <h5>Woah there Buddy!</h5>
               <h5>Step away from your desk and put those hands up!</h5>
               <h5>
@@ -30,7 +31,8 @@ export default class AlertContent extends Component {
             <button
               style={{
                 position: "absolute",
-                bottom: 0
+                top: 0,
+                right: 0
               }}
               onClick={this.onClose}>
               close
@@ -40,7 +42,7 @@ export default class AlertContent extends Component {
       } else if (status <= 75) {
         return (
           <div className="alertContainer">
-            <div>
+            <div align="center">
               <h4>Looking Steamy!</h4>
               <h4>Stretch those legs and go hang out with your buddy Joe!</h4>
             </div>
@@ -54,7 +56,8 @@ export default class AlertContent extends Component {
             <button
               style={{
                 position: "absolute",
-                bottom: 0
+                top: 0,
+                right: 0
               }}
               onClick={this.onClose}>
               close
@@ -81,12 +84,10 @@ export default class AlertContent extends Component {
               style={{
                 position: "absolute",
                 top: 0,
-                right: 0,
-                padding: 20,
-                fontsize: 24
+                right: 0
               }}
               onClick={this.onClose}>
-              x
+              close
             </button>
           </div>
         );

@@ -249,24 +249,27 @@ h3 {
 
 /* ------------------ HOMEPAGE ELEMENT ------------------ */
 .homepageText {
-  margin: 40px;
-  color: black;
+  margin: 150px;
   text-align: center;
 }
 
 .homepageWhite {
   background-color: white;
+  color: black;
   width: 100%;
 }
 
 .carousel {
-  width: 100%;
-  max-height: 400px;
+  width: 500px;
+  max-height: 500px;
 }
 
 img {
-  width: 100%;
-  max-height: 600px;
+  width: 75vh;
+  max-height: auto;
+  float: left;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 /* ------------------ RUNNING LINE CHART ELEMENT ------------------ */
@@ -302,4 +305,13 @@ img {
 .modalFrame {
   z-index: 5px;
   border: 1px solid black;
+}
+
+/*------------------ FOOTER ELEMENT --------------------*/
+.footer {
+  width: 100%;
+  background-color: rgba(234, 234, 234, 1);
+  color: black;
+  text-align: center;
+  height: 10%;
 }

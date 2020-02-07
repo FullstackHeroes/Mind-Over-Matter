@@ -18,7 +18,7 @@ const Homepage = () => (
           health.
         </p>
         <br></br>
-        <h3>Why Should I use Mind Over Matter?</h3>
+        <h3>Why Should I Use Mind Over Matter?</h3>
         <p>
           Mental health is almost always overlooked and not taken seriously. We
           want to change that. Our purpose is to help those in need and make
@@ -30,10 +30,7 @@ const Homepage = () => (
 
     <div>
       <img src="https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=375&w=630"></img>
-    </div>
-    <div className="homepageWhite">
       <div className="homepageText">
-        <br></br>
         <h3>How Can We Help?</h3>
         <p>
           We provide more than just feedback. We present our data findings in
@@ -45,20 +42,20 @@ const Homepage = () => (
         </p>
         <br></br>
         <p>Here at Mind Over Matter, we take care of you.</p>
-        <br></br>
       </div>
     </div>
 
-    <div align="center">
-      <h3>Join the mental health revolution! Sign up today!</h3>
-      <h6>
-        Mind Over Matter - A Mental Health Improvement Platform<br></br>
-        By Emmanuel Kanadilas, James Shen, Kenneth Chen and Robert Costello
-      </h6>
-      <br></br>
+    <div className="footer">
+      <div align="center">
+        <br></br>
+        <h3>Join the mental health revolution! Sign up today!</h3>
+        <h6>
+          Mind Over Matter - A Mental Health Improvement Platform<br></br>
+          By Emmanuel Kanadilas, James Shen, Kenneth Chen and Robert Costello
+        </h6>
+      </div>
     </div>
   </div>
 );
 
-// render(<Homepage />, document.getElementById("root"));
 export default Homepage;
