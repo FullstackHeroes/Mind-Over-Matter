@@ -8,7 +8,7 @@ export default class AlertContent extends Component {
   helpMessage = status => {
     const currentDate = new Date();
     console.log("!!Status:!!", status);
-    if (currentDate - this.props.lastAlert > 5000) {
+    if (currentDate - this.props.lastAlert > 10000) {
       if (status <= 70) {
         return (
           <div className="alertContainer">
@@ -53,7 +53,7 @@ export default class AlertContent extends Component {
             </button>
           </div>
         );
-      } else if (status <= 89) {
+      } else if (status <= 90) {
         return (
           <div className="alertContainer">
             <div>
