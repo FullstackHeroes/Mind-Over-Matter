@@ -55,10 +55,7 @@ class SentiStackD3 {
     // AREA CREATION
     vis.area = d3
       .area()
-      .x(d => {
-        console.log("UMM -", d);
-        return vis.x(d[vis.xAttr]);
-      })
+      .x(d => vis.x(d.data[vis.xAttr]))
       // .y0(HEIGHT)
       .y0(d => vis.y(d[0]))
       .y1(d => vis.y(d[1]));
@@ -134,7 +131,7 @@ class SentiStackD3 {
       .attr("stroke", "steelblue")
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
-      .attr("stroke-width", 5)
+      .attr("stroke-width", 2)
       .attr("d", d => vis.area(d));
   }
 }

@@ -7,7 +7,6 @@ export default class AlertContent extends Component {
 
   helpMessage = status => {
     const currentDate = new Date();
-    console.log("!!Status:!!", status);
     if (currentDate - this.props.lastAlert > 10000) {
       if (status <= 70) {
         return (
