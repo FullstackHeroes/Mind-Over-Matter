@@ -37,7 +37,9 @@ class ChartRSLine extends Component {
   }
 
   render() {
-    return <div ref="RSLineChart" className="RSLineChartArea"></div>;
+    return (
+      <div ref="RSLineChart" className="RSLineChartArea chartWrapDiv"></div>
+    );
   }
 }
 

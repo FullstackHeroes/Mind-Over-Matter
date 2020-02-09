@@ -1,14 +1,15 @@
 import * as d3 from "d3";
+import { emotions } from "../utils/utilities";
 
-const MARGIN = { TOP: 10, BOTTOM: 80, LEFT: 70, RIGHT: 70 };
-const WIDTH = 400 - MARGIN.LEFT - MARGIN.RIGHT;
+const MARGIN = { TOP: 10, BOTTOM: 80, LEFT: 70, RIGHT: 150 };
+const WIDTH = 500 - MARGIN.LEFT - MARGIN.RIGHT;
 const HEIGHT = 300 - MARGIN.TOP - MARGIN.BOTTOM;
 
 class SentiStackD3 {
   constructor(element, data) {
     const vis = this;
     vis.xAttr = "timeStamp";
-    vis.yAttr = "runningScore";
+    vis.keys = emotions;
 
     // LABEL CREATION AND SCALING
     vis.x = d3.scaleTime().range([0, WIDTH]);
@@ -52,16 +53,78 @@ class SentiStackD3 {
       .attr("transform", `translate(0, ${HEIGHT})`);
     vis.yAxisGroup = vis.g.append("g");
 
+    // COLOR PALETTE
+    vis.color = d3
+      .scaleOrdinal()
+      .domain(vis.keys)
+      .range(d3.schemeSet1);
+
+    vis.ownColor = [
+      "deepskyblue", // HAPPY
+      "lightgreen", // SURPRISED
+      "lightgoldenrodyellow", // NEUTRAL
+      "mediumpurple", // DISGUSTED
+      "sienna", // FEARFUL
+      "tomato", // ANGRY
+      "orchid" // SAD
+    ];
+
     // AREA CREATION
     vis.area = d3
       .area()
-      .x(d => {
-        console.log("UMM -", d);
-        return vis.x(d[vis.xAttr]);
-      })
-      // .y0(HEIGHT)
+      .x(d => vis.x(d.data[vis.xAttr]))
       .y0(d => vis.y(d[0]))
       .y1(d => vis.y(d[1]));
+
+    // HIGHLIGHT FUNCTIONALITY
+    vis.highlight = function(d) {
+      d3.selectAll(".sentiArea").style("opacity", 0.1);
+      d3.select("." + d).style("opacity", 1);
+    };
+
+    vis.noHighlight = function(d) {
+      d3.selectAll(".sentiArea").style("opacity", 1);
+    };
+
+    // ADD BRUSHING
+    vis.brush = d3
+      .brushX()
+      .extent([
+        [0, 0],
+        [WIDTH, HEIGHT]
+      ])
+      .on("end", d => vis.update(d));
+    // .on("end", vis.update);
+
+    // LEGEND CREATION
+    const size = 10;
+
+    vis.legendRect = vis.g
+      .selectAll("myrect")
+      .data(vis.keys)
+      .enter()
+      .append("rect")
+      .attr("x", WIDTH + 10)
+      .attr("y", (d, i) => 10 + i * (size + 18))
+      .attr("width", size)
+      .attr("height", size)
+      .style("fill", (d, i) => vis.ownColor[i])
+      .on("mouseover", vis.highlight)
+      .on("mouseleave", vis.noHighlight);
+
+    vis.legendText = vis.g
+      .selectAll("mylabels")
+      .data(vis.keys)
+      .enter()
+      .append("text")
+      .attr("x", WIDTH + 10 + size * 1.5)
+      .attr("y", (d, i) => 10 + i * (size + 18) + size / 2)
+      .style("fill", (d, i) => vis.ownColor[i])
+      .text(d => d)
+      .attr("text-anchor", "left")
+      .style("alignment-baseline", "middle")
+      .on("mouseover", vis.highlight)
+      .on("mouseleave", vis.noHighlight);
 
     vis.update(data);
   }
@@ -69,29 +132,14 @@ class SentiStackD3 {
   update(data) {
     const vis = this;
     vis.data = [...data].map(obj => Object.assign({}, obj));
-    vis.keys = [
-      "happy",
-      "surprised",
-      "neutral",
-      "disgusted",
-      "fearful",
-      "angry",
-      "sad"
-    ];
 
-    vis.data.forEach((d, i) => {
+    vis.data.forEach(d => {
       d[vis.xAttr] = new Date(Date.parse(d[vis.xAttr]));
       const totalSum = vis.keys.reduce((acm, key) => (acm += d[key]), 0);
       vis.keys.forEach(key => (d[key] = d[key] / totalSum));
     });
 
-    vis.color = d3
-      .scaleOrdinal()
-      .domain(vis.keys)
-      .range(d3.schemeSet2);
     vis.stackedData = d3.stack().keys(vis.keys)(vis.data);
-
-    console.log("D3 STACK!", vis.data, vis.stackedData);
 
     // ADJUST SCALING
     vis.x.domain(d3.extent(vis.data, d => d[vis.xAttr]));
@@ -117,25 +165,36 @@ class SentiStackD3 {
       .selectAll("text")
       .attr("font-size", 12);
 
-    // STACK AREA CHART
-    const stackChart = vis.g
-      .selectAll(".sentiStack")
-      .data(vis.stackedData)
-      .enter()
-      .append("g")
-      .classed("sentiStack", true);
+    // STACK AREA CHART JOIN
+    const stackChart = vis.g.selectAll(".sentiStack").data(vis.stackedData);
 
+    // ENTER
     stackChart
-      // .enter()
-      // .append("g")
-      // .classed("sentiStack", true)
+      .enter()
       .append("path")
-      .style("fill", (d, i) => vis.color[i])
-      .attr("stroke", "steelblue")
+      .classed("sentiStack", true)
+      .merge(stackChart)
+      .transition()
+      .ease(d3.easeLinear)
+      .duration(1000)
+      .attr("class", d => `sentiArea ${d.key}`)
+      // .style("fill", d => vis.color(d.key))
+      .style("fill", (d, i) => vis.ownColor[i])
+      .attr("stroke", "lightgray")
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
-      .attr("stroke-width", 5)
+      .attr("stroke-width", 1)
       .attr("d", d => vis.area(d));
+
+    stackChart.transition(1000);
+
+    // EXIT
+    stackChart.exit().remove();
+
+    stackChart
+      .append("g")
+      .attr("class", "brush")
+      .call(vis.brush);
   }
 }
 

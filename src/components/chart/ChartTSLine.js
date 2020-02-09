@@ -37,7 +37,9 @@ class ChartTSLine extends Component {
   }
 
   render() {
-    return <div ref="TSLineChart" className="TSLineChartArea"></div>;
+    return (
+      <div ref="TSLineChart" className="TSLineChartArea chartWrapDiv"></div>
+    );
   }
 }
 

@@ -57,7 +57,6 @@ class TSLineD3 {
       .x(d => vis.x(d[vis.xAttr]))
       .y(d => vis.y(d[vis.yAttr]))
       .curve(d3.curveCatmullRom.alpha(0.5));
-    // .curve(d3.curveMonotoneX);
 
     vis.update(data);
   }
@@ -65,6 +64,9 @@ class TSLineD3 {
   update(data) {
     const vis = this;
     vis.data = [...data].map(obj => Object.assign({}, obj));
+
+    // const point = data[data.length - 1];
+    // console.log("HMM -", point.timeStamp, point);
 
     vis.data.forEach(d => {
       d[vis.xAttr] = new Date(Date.parse(d[vis.xAttr]));
@@ -94,9 +96,10 @@ class TSLineD3 {
       .selectAll("text")
       .attr("font-size", 12);
 
-    // LINE CHART
+    // LINE CHART JOIN
     const lineChart = vis.g.selectAll(".trueScoreLine").data([vis.data]);
 
+    // ENTER
     lineChart
       .enter()
       .append("path")
@@ -104,7 +107,7 @@ class TSLineD3 {
       .merge(lineChart)
       .attr("d", vis.valueLine);
 
-    // JOIN
+    // CIRCLE JOIN
     const circles = vis.g.selectAll("circle").data(vis.data, d => d.name);
 
     // EXIT
@@ -121,8 +124,8 @@ class TSLineD3 {
       .enter()
       .append("circle")
       .classed("trueScoreLineCircle", true)
-      .attr("cy", d => vis.y(d[vis.yAttr]))
       .attr("cx", d => vis.x(d[vis.xAttr]))
+      .attr("cy", d => vis.y(d[vis.yAttr]))
       .attr("r", 4)
       .on("click", d => console.log("Clicking -", d));
   }

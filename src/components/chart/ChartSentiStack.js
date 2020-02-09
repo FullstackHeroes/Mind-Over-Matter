@@ -40,7 +40,11 @@ class ChartSentiStack extends Component {
   }
 
   render() {
-    return <div ref="SentiStackChart" className="SentiStackChartArea"></div>;
+    return (
+      <div
+        ref="SentiStackChart"
+        className="SentiStackChartArea chartWrapDiv"></div>
+    );
   }
 }
 
