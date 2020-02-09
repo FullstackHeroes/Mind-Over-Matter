@@ -36,20 +36,31 @@ class Table extends Component {
   }
 
   render() {
-    const { fullScoreObj } = this.props;
+    const { fullScoreObj, user } = this.props,
+      nameArr = user.name.split(" "),
+      headers = [
+        { label: "True Score", key: "trueScore" },
+        { label: "Happy %", key: "happy" },
+        { label: "Surprised %", key: "surprised" },
+        { label: "Neutral %", key: "neutral" },
+        { label: "Disgusted %", key: "disgusted" },
+        { label: "Fearful %", key: "fearful" },
+        { label: "Angry %", key: "angry" },
+        { label: "Sad %", key: "sad" }
+      ];
 
     //GET MOST RECENT DATA FOR USER SNAPSHOT
-    let tenResults,
-      csvTenArr = [];
-    if (fullScoreObj) tenResults = fullScoreObj.slice(-10).reverse();
-    if (tenResults) csvTenArr = makeCsvTable(tenResults);
+    // let tenResults,
+    //   csvTenArr = [];
+    // if (fullScoreObj) tenResults = fullScoreObj.slice(-10).reverse();
+    // if (tenResults) csvTenArr = makeCsvTable(tenResults);
 
     // let userDataResults,
     //   userDataArr = [];
     // if (fullScoreObj) userDataResults = fullScoreObj.reverse();
     // if (userDataResults) userDataArr = makeCsvTable(userDataResults);
 
-    console.log("TableAllResults", this.state.allResults);
+    // console.log("TableAllResults", this.state.allResults);
     return (
       <div className="tableFullDiv">
         <table className="tableElement">
@@ -76,22 +87,39 @@ class Table extends Component {
               : null}
           </tbody>
         </table>
-        <div>
-          <div> Download My Results</div>
+
+        <div className="csvFullDiv">
+          <span>Download My Results</span>
+
           <button>
+            <CSVLink
+              data={fullScoreObj.slice(-15)}
+              // headers={headers}
+              filename={`${
+                nameArr.length > 1 ? nameArr[0] + "_" + nameArr[1] : nameArr[0]
+              }_history.csv`}
+              onClick={() => {
+                console.log("DOWNLOAD -", fullScoreObj.slice(-15));
+              }}>
+              Score History
+            </CSVLink>
+          </button>
+
+          {/* <button>
             <CSVLink
               data={csvTenArr}
               filename={`${this.props.user.name}_last_10.csv`}>
               Current Snapshot
             </CSVLink>
           </button>
+
           <button>
             <CSVLink
               data={this.state.allResults}
               filename={`${this.props.user.name}_all.csv`}>
               Download User History
             </CSVLink>
-          </button>
+          </button> */}
         </div>
       </div>
     );

@@ -220,6 +220,11 @@ h6 {
   border-width: 1px;
 }
 
+.csvFullDiv {
+  background-color: lightgray;
+  border-radius: 3px;
+}
+
 /* ------------------ DASHBOARD ELEMENT ------------------ */
 .dashboardFullDiv {
   background-color: lightgray;
