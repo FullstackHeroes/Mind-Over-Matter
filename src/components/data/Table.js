@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { CSVLink } from "react-csv";
 import { setFullScoreObj } from "../../store";
 import TableRow from "./TableRow";
-import { CSVLink } from "react-csv";
 
 class Table extends Component {
   async componentDidMount() {
