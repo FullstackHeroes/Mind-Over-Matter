@@ -41,6 +41,7 @@ h6 {
 
 .authFormDiv {
   margin: 20px auto;
+  min-width: 450px;
   width: 35%;
   height: 50vh;
   min-height: 300px;
