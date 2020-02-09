@@ -92,7 +92,9 @@ export const condenseScoreObj = (targetScoreObj, userId) => {
         fearful: 0,
         disgusted: 0,
         surprised: 0,
-        timeStamp: new Date(),
+        timeStamp: new Date(
+          new Date().toLocaleString("en-US", { timeZone: "America/New_York" })
+        ),
         count: targetScoreObj.length,
         screenTime: 0
       },
@@ -224,3 +226,10 @@ export const calcWeightedTrueScore = async userId => {
 
 //AVERAGE 15 MINS OF SNAPSHOTS
 export const averageLocalStorageSnaps = snaps => {};
+
+// DATE CREATION FUNCTION
+export const dateCreate = () => {
+  return new Date(
+    new Date().toLocaleString("en-US", { timeZone: "America/New_York" })
+  );
+};

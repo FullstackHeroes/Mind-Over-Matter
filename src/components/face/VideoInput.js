@@ -3,7 +3,11 @@ import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import Webcam from "react-webcam";
 import { loadModels, getFaceDescr } from "../../utils/faceBase";
-import { sentimentAlgo, calcWeightedTrueScore } from "../../utils/utilities";
+import {
+  sentimentAlgo,
+  calcWeightedTrueScore,
+  dateCreate
+} from "../../utils/utilities";
 import PopUp from "../global/PopUp";
 import {
   setNormalizedScore,
@@ -45,7 +49,7 @@ class VideoInput extends Component {
 
   // LOCAL STORAGE MANAGER
   appendLocalStorage = (snapshot, userId) => {
-    snapshot.timeStamp = new Date();
+    snapshot.timeStamp = dateCreate();
     snapshot.userId = userId;
     if (localStorage.getItem("snapshots")) {
       const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));

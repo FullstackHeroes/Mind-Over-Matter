@@ -2,7 +2,8 @@ import axios from "axios";
 import {
   condenseScoreObj,
   calcNormalizeUtility,
-  calcWeightedTrueScore
+  calcWeightedTrueScore,
+  dateCreate
 } from "../utils/utilities";
 
 // INITIAL STATE
@@ -25,7 +26,7 @@ const GET_SENTIMENT_DIFF = "GET_SENTIMENT_DIFF";
 const GET_CURRENT_RUNNING_SENTIMENT = "GET_CURRENT_RUNNING_SENTIMENT";
 
 // ACTION CREATORS
-export const getTimeInterval = (snapInterval = 2000, dbInterval = 10000) => {
+export const getTimeInterval = (snapInterval = 2000, dbInterval = 60000) => {
   return {
     type: GET_TIME_INTERVAL,
     snapInterval,
@@ -132,7 +133,7 @@ export const postNormalizedScore = userId => {
           normalizeScore,
           runningScore,
           sentimentDiff: runningScore / normalizeScore,
-          timeStamp: new Date()
+          timeStamp: dateCreate()
         }),
         { normalizeScoreArr, runningScoreArr, sentimentDiffArr } = data;
       dispatch(getNormalizedScore(normalizeScoreArr));
