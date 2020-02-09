@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import { logout, postNormalizedScore } from "../../store";
 
@@ -25,13 +25,21 @@ class NavBar extends Component {
 
         {userId ? (
           <div className="navBarRight">
-            <Link to="/Dashboard" className="linkText navBarLink">
+            <NavLink
+              to="/Dashboard"
+              className="linkText navBarLink"
+              activeClassName="selectedNavLink"
+              exact>
               Dashboard
-            </Link>
+            </NavLink>
 
-            <Link to="/Table" className="linkText navBarLink">
+            <NavLink
+              to="/Table"
+              className="linkText navBarLink"
+              activeClassName="selectedNavLink"
+              exact>
               Table
-            </Link>
+            </NavLink>
 
             <a
               href="#"
@@ -42,13 +50,21 @@ class NavBar extends Component {
           </div>
         ) : (
           <div className="navBarRight">
-            <Link to="/" className="linkText navBarLink">
+            <NavLink
+              to="/"
+              className="linkText navBarLink"
+              activeClassName="selectedNavLink"
+              exact>
               HomePage
-            </Link>
+            </NavLink>
 
-            <Link to="/SignIn" className="linkText navBarLink">
+            <NavLink
+              to="/SignIn"
+              className="linkText navBarLink"
+              activeClassName="selectedNavLink"
+              exact>
               Sign In
-            </Link>
+            </NavLink>
           </div>
         )}
       </div>
