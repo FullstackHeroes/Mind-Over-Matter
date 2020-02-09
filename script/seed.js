@@ -1,12 +1,14 @@
 const db = require("../server/db");
 const { User, Hour, NormalizeScore } = require("../server/db/models");
-const {
-  dateCreate,
-  sentimentSpectrum,
-  emotions,
-  snapIntDefault,
-  dbIntDefault
-} = require("../src/utils/utilities");
+// const {
+//   dateCreate,
+//   emotions,
+//   sentimentSpectrum,
+//   snapIntDefault,
+//   dbIntDefault
+// } = require("../src/utils/utilities");
+const share = require("../src/share");
+share.utilShare();
 
 const userSeed = [
   {
@@ -38,7 +40,7 @@ const trueScoreGen = count => {
       const emotion = emotions[idx],
         emotScore = numArr[idx] / totalRand;
       obj[emotion] = emotScore;
-      obj.trueScore += emotScore * sentimentDiff[emotion].spectrumScore;
+      obj.trueScore += emotScore * sentimentSpectrum[emotion].spectrumScore;
     }
     obj.count -= Math.round(Math.random() * obj.count * 0.3);
     obj.trueRes.push(obj);
@@ -1267,6 +1269,8 @@ const seed = async () => {
   await db.sync({ force: true });
   console.log("db synced !");
 
+  // console.log("hmm -", emotions);
+  // console.log(trueScoreGen(3));
   await User.bulkCreate(userSeed);
   await Hour.bulkCreate(hourSeed);
   await NormalizeScore.bulkCreate(normalizeScoreSeed);
