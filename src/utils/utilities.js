@@ -223,8 +223,7 @@ export const calcWeightedTrueScore = async userId => {
   return Math.floor(calcNormalScore * rounding) / rounding;
 };
 
-//THIS FUNCTION TAKES AN ARRAY OF OBJECTS AND BREAK IT DOWN INTO A 2D ARR
-//DESIGNED TO BE USED TO OUTPUT DATA FOR A CSV FILE
+//THIS FUNCTION TAKES AN ARRAY OF OBJECTS AND BREAKS IT DOWN INTO A 2D ARR TO BE USED TO OUTPUT DATA FOR A CSV FILE
 export const makeCsvTable = dataObjArr => {
   const headRow = [
       "True Score",
@@ -237,32 +236,66 @@ export const makeCsvTable = dataObjArr => {
       "Angry %",
       "Sad %"
     ],
-    checkAgainst = [
-      // "trueScore",
-      "screenScore",
-      "happy",
-      "surprised",
-      "neutral",
-      "disgusted",
-      "fearful",
-      "angry",
-      "sad"
-    ],
     decimal = 1;
 
   let csvData = [headRow];
 
   dataObjArr.forEach(obj => {
-    let tr = [];
-    tr.push(Number(obj["trueScore"].toFixed(decimal)));
-    checkAgainst.forEach(field => {
-      const value = Number((obj[field] * 100).toFixed(decimal));
-      tr.push(value);
-    });
-    csvData.push(tr);
+    dataObjArr.push([
+      Number(obj["trueScore"].toFixed(decimal)),
+      Number((obj["screenScore"] * 100).toFixed(decimal)),
+      Number((obj["happy"] * 100).toFixed(decimal)),
+      Number((obj["surprised"] * 100).toFixed(decimal)),
+      Number((obj["neutral"] * 100).toFixed(decimal)),
+      Number(obj["disgusted"].toFixed(decimal)),
+      Number(obj["fearful"].toFixed(decimal)),
+      Number(obj["angry"].toFixed(decimal)),
+      Number(obj["sad"].toFixed(decimal))
+    ]);
   });
   return csvData;
 };
 
 //AVERAGE 15 MINS OF SNAPSHOTS
 export const averageLocalStorageSnaps = snaps => {};
+
+//old version
+//THIS FUNCTION TAKES AN ARRAY OF OBJECTS AND BREAKS IT DOWN INTO A 2D ARR TO BE USED TO OUTPUT DATA FOR A CSV FILE
+// export const makeCsvTable = dataObjArr => {
+//   const headRow = [
+//       "True Score",
+//       "Screen Score %",
+//       "Happy %",
+//       "Surprised %",
+//       "Neutral %",
+//       "Disgusted %",
+//       "Fearful %",
+//       "Angry %",
+//       "Sad %"
+//     ],
+//     checkAgainst = [
+//       // "trueScore",
+//       "screenScore",
+//       "happy",
+//       "surprised",
+//       "neutral",
+//       "disgusted",
+//       "fearful",
+//       "angry",
+//       "sad"
+//     ],
+//     decimal = 1;
+
+//   let csvData = [headRow];
+
+//   dataObjArr.forEach(obj => {
+//     let tr = [];
+//     tr.push(Number(obj["trueScore"].toFixed(decimal)));
+//     checkAgainst.forEach(field => {
+//       const value = Number((obj[field] * 100).toFixed(decimal));
+//       tr.push(value);
+//     });
+//     csvData.push(tr);
+//   });
+//   return csvData;
+// };
