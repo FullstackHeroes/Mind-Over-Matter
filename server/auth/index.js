@@ -55,7 +55,6 @@ router.post("/logout", async (req, res) => {
       screenScore,
       screenTime
     } = req.body;
-    console.log("LOGOUT POST --", timeStamp);
     await Hour.create({
       trueScore,
       userId,

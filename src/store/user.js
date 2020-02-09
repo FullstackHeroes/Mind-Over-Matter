@@ -50,7 +50,6 @@ export const logout = userId => async dispatch => {
           adjLSDataObj.timeStamp.getHours() -
           adjLSDataObj.timeStamp.getTimezoneOffset() / 60;
       adjLSDataObj.timeStamp.setHours(hoursDiff);
-      console.log("POSTING LS -", adjLSDataObj);
       await axios.post("/auth/logout", adjLSDataObj);
     } else await axios.post("/auth/logout");
 
