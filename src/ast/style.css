@@ -279,6 +279,11 @@ img {
   margin-right: 5%;
 }
 
+/* ------------------ CHART DIV ELEMENT ------------------ */
+.chartWrapDiv {
+  min-width: 30%;
+}
+
 /* ------------------ RUNNING LINE CHART ELEMENT ------------------ */
 .RSLineChartArea {
   background-color: #282c34;

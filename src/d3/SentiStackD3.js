@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 
-const MARGIN = { TOP: 10, BOTTOM: 80, LEFT: 70, RIGHT: 70 };
-const WIDTH = 400 - MARGIN.LEFT - MARGIN.RIGHT;
+const MARGIN = { TOP: 10, BOTTOM: 80, LEFT: 70, RIGHT: 150 };
+const WIDTH = 500 - MARGIN.LEFT - MARGIN.RIGHT;
 const HEIGHT = 300 - MARGIN.TOP - MARGIN.BOTTOM;
 
 class SentiStackD3 {
@@ -69,9 +69,9 @@ class SentiStackD3 {
     vis.ownColor = [
       "deepskyblue",
       "lightgreen",
-      "lightyellow",
+      "lightgoldenrodyellow",
       "lightgray",
-      "lightorange",
+      "mediumpurple",
       "lightcoral",
       "tomato"
     ];
@@ -101,31 +101,32 @@ class SentiStackD3 {
         [0, 0],
         [WIDTH, HEIGHT]
       ])
-      // .on("end", d => vis.update(d));
-      .on("end", vis.update);
+      .on("end", d => vis.update(d));
+    // .on("end", vis.update);
 
     // LEGEND CREATION
-    const size = 20;
-    vis.g
+    const size = 10;
+
+    vis.legendRect = vis.g
       .selectAll("myrect")
       .data(vis.keys)
       .enter()
       .append("rect")
-      .attr("x", 400)
-      .attr("y", (d, i) => 10 + i * (size + 5))
+      .attr("x", WIDTH + 10)
+      .attr("y", (d, i) => 10 + i * (size + 18))
       .attr("width", size)
       .attr("height", size)
       .style("fill", (d, i) => vis.ownColor[i])
       .on("mouseover", vis.highlight)
       .on("mouseleave", vis.noHighlight);
 
-    vis.g
+    vis.legendText = vis.g
       .selectAll("mylabels")
       .data(vis.keys)
       .enter()
       .append("text")
-      .attr("x", 400 + size * 1.2)
-      .attr("y", (d, i) => 10 + i * (size + 5) + size / 2)
+      .attr("x", WIDTH + 10 + size * 1.5)
+      .attr("y", (d, i) => 10 + i * (size + 18) + size / 2)
       .style("fill", (d, i) => vis.ownColor[i])
       .text(d => d)
       .attr("text-anchor", "left")
@@ -200,10 +201,10 @@ class SentiStackD3 {
     // EXIT
     stackChart.exit().remove();
 
-    // stackChart
-    //   .append("g")
-    //   .attr("class", "brush")
-    //   .call(vis.brush);
+    stackChart
+      .append("g")
+      .attr("class", "brush")
+      .call(vis.brush);
   }
 }
 
