@@ -35,13 +35,13 @@ h6 {
 .signInFullDiv {
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 75vw;
   color: black;
 }
 
 .authFormDiv {
   margin: 20px auto;
-  width: 35vw;
+  width: 35%;
   height: 50vh;
   min-height: 300px;
   display: flex;
@@ -78,6 +78,7 @@ h6 {
 .authInputDiv {
   width: 80%;
   display: flex;
+  justify-content: center;
   align-items: center;
   margin: 5px 0;
 }
