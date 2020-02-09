@@ -60,6 +60,26 @@ class SentiStackD3 {
       .y0(d => vis.y(d[0]))
       .y1(d => vis.y(d[1]));
 
+    // HIGHLIGHT FUNCTIONALITY
+    vis.highlight = function(d) {
+      console.log(d);
+      d3.selectAll(".sentiArea").style("opacity", 0.1);
+      d3.select("." + d).style("opacity", 1);
+    };
+
+    vis.noHighlight = function(d) {
+      d3.selectAll(".sentiArea").style("opacity", 1);
+    };
+
+    // ADD BRUSHING
+    vis.brush = d3
+      .brushX()
+      .extent([
+        [0, 0],
+        [WIDTH, HEIGHT]
+      ])
+      .on("end", d => vis.update(d));
+
     vis.update(data);
   }
 
@@ -122,14 +142,18 @@ class SentiStackD3 {
       .enter()
       .append("g")
       .classed("sentiStack", true)
-      .merge(stackChart)
       .append("path")
+      .attr("class", d => `sentiArea ${d.key}`)
       .style("fill", d => vis.color(d.key))
       .attr("stroke", "lightgray")
-      .attr("stroke-linejoin", "round")
-      .attr("stroke-linecap", "round")
+      // .attr("stroke-linejoin", "round")
+      // .attr("stroke-linecap", "round")
       .attr("stroke-width", 1)
-      .attr("d", d => vis.area(d));
+      .merge(stackChart)
+      .attr("d", d => vis.area(d))
+      .append("g")
+      .attr("class", "brush")
+      .call(vis.brush(vis.data));
   }
 }
 
