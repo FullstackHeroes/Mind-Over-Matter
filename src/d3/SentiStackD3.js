@@ -143,11 +143,14 @@ class SentiStackD3 {
     // STACK AREA CHART JOIN
     const stackChart = vis.g.selectAll(".sentiStack").data(vis.stackedData);
 
+    console.log("D3 STACK!", stackChart);
+
     // ENTER
     stackChart
       .enter()
       .append("g")
       .classed("sentiStack", true)
+      .merge(stackChart)
       .append("path")
       .attr("class", d => `sentiArea ${d.key}`)
       .style("fill", d => vis.color(d.key))
@@ -156,12 +159,10 @@ class SentiStackD3 {
       .attr("stroke-linecap", "round")
       .attr("stroke-width", 1)
       // .merge(stackChart)
-      .attr("d", d => vis.initialArea(d))
-      .transition()
-      .duration(1000)
+      // .attr("d", d => vis.initialArea(d))
+      // .transition()
+      // .duration(1000)
       .attr("d", d => vis.area(d));
-
-    console.log("D3 STACK!", stackChart);
 
     // stackChart
     //   .append("g")
