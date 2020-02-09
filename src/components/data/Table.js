@@ -17,10 +17,6 @@ class Table extends Component {
     }
   }
 
-  getUserData() {
-    const { user } = this.props;
-  }
-
   render() {
     const { fullScoreObj, user } = this.props,
       nameArr = user.name ? user.name.split(" ") : [],
