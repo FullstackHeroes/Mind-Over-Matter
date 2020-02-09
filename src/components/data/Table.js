@@ -61,7 +61,11 @@ class Table extends Component {
         <div>
           <div> Download My Results</div>
           <button>
-            <CSVLink data={csvTenArr}>Last 10</CSVLink>
+            <CSVLink
+              data={csvTenArr}
+              filename={`${this.props.user.name}_last_10.csv`}>
+              Last 10
+            </CSVLink>
           </button>
 
           {/* <button><CSVLink data={csvOneHundredArr}>Last 100</CSVLink></button> */}
