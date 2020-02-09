@@ -16,8 +16,18 @@ export const dateCreate = () => {
   return new Date(date);
 };
 
+export const emotions = [
+  "happy",
+  "surprised",
+  "neutral",
+  "disgusted",
+  "fearful",
+  "angry",
+  "sad"
+];
+
 // SCORING FROM 1-10 (BAD - GOOD) AND MULTIPLIER WILL BE DONE PRO-RATA
-let sentimentSpectrum = {
+export let sentimentSpectrum = {
   happy: {
     spectrumScore: 10,
     multiplier: 1

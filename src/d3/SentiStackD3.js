@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import { emotions } from "../utils/utilities";
 
 const MARGIN = { TOP: 10, BOTTOM: 80, LEFT: 70, RIGHT: 150 };
 const WIDTH = 500 - MARGIN.LEFT - MARGIN.RIGHT;
@@ -8,15 +9,7 @@ class SentiStackD3 {
   constructor(element, data) {
     const vis = this;
     vis.xAttr = "timeStamp";
-    vis.keys = [
-      "happy",
-      "surprised",
-      "neutral",
-      "disgusted",
-      "fearful",
-      "angry",
-      "sad"
-    ];
+    vis.keys = emotions;
 
     // LABEL CREATION AND SCALING
     vis.x = d3.scaleTime().range([0, WIDTH]);
