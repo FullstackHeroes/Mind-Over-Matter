@@ -19,6 +19,8 @@ class TableRow extends Component {
 
     return (
       <tr className="tableData">
+        {/* {console.log("props from TR:", this.props)}
+      {console.log("score from TR:", score)} */}
         <td className="tableDataRow">{trueScore.toFixed(decimal)}</td>
         <td className="tableDataRow">
           {(screenScore * 100).toFixed(decimal)}%

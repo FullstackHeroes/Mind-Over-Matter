@@ -1,5 +1,6 @@
 import axios from "axios";
 import store from "../store";
+import { tsv } from "d3";
 
 // VARIABLE DRIVERS
 const rounding = 10 ** 5; // DECIMAL ROUNDING
@@ -240,6 +241,62 @@ export const calcWeightedTrueScore = async userId => {
   }, 0);
 
   return Math.floor(calcNormalScore * rounding) / rounding;
+};
+
+//THIS FUNCTION TAKES AN ARRAY OF OBJECTS AND BREAKS IT DOWN INTO A 2D ARR TO BE USED TO OUTPUT DATA FOR A CSV FILE
+export const makeCsvTable = dataObjArr => {
+  const headRow = [
+    "True Score",
+    "Screen Score %",
+    "Happy %",
+    "Surprised %",
+    "Neutral %",
+    "Disgusted %",
+    "Fearful %",
+    "Angry %",
+    "Sad %"
+  ];
+  // decimal = 1;
+
+  let csvData = [headRow];
+  dataObjArr.forEach(obj => {
+    csvData.push([
+      obj.trueScore,
+      obj.screenScore,
+      obj.happy,
+      obj.surprised,
+      obj.neutral,
+      obj.disgusted,
+      obj.fearful,
+      obj.angry,
+      obj.sad
+    ]);
+
+    //SWITCH BACK TO BELOW CODE ONCE WE CAN PASS FIELDS SUCCESSFULLY
+    // csvData.push([
+    //   Number((obj["trueScore"] * 1).toFixed(decimal)),
+    //   Number((obj["screenScore"] * 100).toFixed(decimal)),
+    //   Number((obj["happy"] * 100).toFixed(decimal)),
+    //   Number((obj["surprised"] * 100).toFixed(decimal)),
+    //   Number((obj["neutral"] * 100).toFixed(decimal)),
+    //   Number((obj["disgusted"] * 100).toFixed(decimal)),
+    //   Number((obj["fearful"] * 100).toFixed(decimal)),
+    //   Number((obj["angry"] * 100).toFixed(decimal)),
+    //   Number((obj["sad"] * 100).toFixed(decimal))
+    // ]);
+  });
+  // console.log("csvData", csvData);
+  return csvData;
+};
+
+//FUNCTION THAT USES THE makeCsvTable FUNCTION TO FORMAL ALL USER DATA
+export const getAllUserStats = async userId => {
+  try {
+    const { data } = await axios.get(`/api/hours/${userId}`);
+    return makeCsvTable(data);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 //AVERAGE 15 MINS OF SNAPSHOTS
