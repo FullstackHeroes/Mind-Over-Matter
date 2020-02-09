@@ -3,7 +3,9 @@ import {
   condenseScoreObj,
   calcNormalizeUtility,
   calcWeightedTrueScore,
-  dateCreate
+  dateCreate,
+  snapIntDefault,
+  dbIntDefault
 } from "../utils/utilities";
 
 // INITIAL STATE
@@ -26,7 +28,10 @@ const GET_SENTIMENT_DIFF = "GET_SENTIMENT_DIFF";
 const GET_CURRENT_RUNNING_SENTIMENT = "GET_CURRENT_RUNNING_SENTIMENT";
 
 // ACTION CREATORS
-export const getTimeInterval = (snapInterval = 1000, dbInterval = 120000) => {
+export const getTimeInterval = (
+  snapInterval = snapIntDefault,
+  dbInterval = dbIntDefault
+) => {
   return {
     type: GET_TIME_INTERVAL,
     snapInterval,
