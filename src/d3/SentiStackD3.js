@@ -66,6 +66,16 @@ class SentiStackD3 {
       .domain(vis.keys)
       .range(d3.schemeSet1);
 
+    vis.ownColor = [
+      "deepskyblue",
+      "lightgreen",
+      "lightyellow",
+      "lightgray",
+      "lightorange",
+      "lightcoral",
+      "tomato"
+    ];
+
     // AREA CREATION
     vis.area = d3
       .area()
@@ -148,7 +158,8 @@ class SentiStackD3 {
       .ease(d3.easeLinear)
       .duration(1000)
       .attr("class", d => `sentiArea ${d.key}`)
-      .style("fill", d => vis.color(d.key))
+      // .style("fill", d => vis.color(d.key))
+      .style("fill", (d, i) => vis.ownColor[i])
       .attr("stroke", "lightgray")
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
