@@ -85,7 +85,6 @@ class SentiStackD3 {
 
     // HIGHLIGHT FUNCTIONALITY
     vis.highlight = function(d) {
-      console.log(d);
       d3.selectAll(".sentiArea").style("opacity", 0.1);
       d3.select("." + d).style("opacity", 1);
     };
@@ -176,17 +175,15 @@ class SentiStackD3 {
     // STACK AREA CHART JOIN
     const stackChart = vis.g.selectAll(".sentiStack").data(vis.stackedData);
 
-    console.log("D3 STACK!", stackChart);
-
     // ENTER
     stackChart
       .enter()
       .append("path")
       .classed("sentiStack", true)
       .merge(stackChart)
-      // .transition()
-      // .ease(d3.easeLinear)
-      // .duration(1000)
+      .transition()
+      .ease(d3.easeLinear)
+      .duration(1000)
       .attr("class", d => `sentiArea ${d.key}`)
       // .style("fill", d => vis.color(d.key))
       .style("fill", (d, i) => vis.ownColor[i])

@@ -140,85 +140,74 @@ class VideoInput extends Component {
   }
 
   render() {
-    const { detections } = this.state;
+    // const { detections } = this.state;
     const videoConstraints = {
       width: WIDTH,
       height: HEIGHT,
       facingMode: "user"
     };
-    let detected = "";
+    // let detected = "";
 
-    // DETECTION BOX CODE (POSSIBLY OPTIONAL)
-    let drawBox = null;
-    if (!!detections) {
-      drawBox = detections.map((detection, idx) => {
-        let _H = detection.box.height;
-        let _W = detection.box.width;
-        let _X = detection.box._x;
-        let _Y = detection.box._y;
-        detected = "detected";
+    // // DETECTION BOX CODE (POSSIBLY OPTIONAL)
+    // let drawBox = null;
+    // if (!!detections) {
+    //   drawBox = detections.map((detection, idx) => {
+    //     let _H = detection.box.height;
+    //     let _W = detection.box.width;
+    //     let _X = detection.box._x;
+    //     let _Y = detection.box._y;
+    //     detected = "detected";
 
-        return (
-          <div key={idx}>
-            GOT DETECTIONS!
-            <div
-              style={{
-                position: "absolute",
-                border: "solid",
-                borderColor: "blue",
-                height: _H,
-                width: _W,
-                transform: `translate(${_X}px,${_Y}px)`
-              }}
-            />
-          </div>
-        );
-      });
-    }
+    //     return (
+    //       <div key={idx}>
+    //         GOT DETECTIONS!
+    //         <div
+    //           style={{
+    //             position: "absolute",
+    //             border: "solid",
+    //             borderColor: "blue",
+    //             height: _H,
+    //             width: _W,
+    //             transform: `translate(${_X}px,${_Y}px)`
+    //           }}
+    //         />
+    //       </div>
+    //     );
+    //   });
+    // }
 
     return (
-      <div className="cameraFullDiv">
-        <div className={detected}></div>
-        <div
-          className="camera"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center"
-            // backgroundColor: "black"
-          }}>
-          <div
-            // TO ADD THE CAMERA BACK, width: WIDTH, height: HEIGHT, opacity: 1
-            style={{
-              width: 0,
-              height: 0,
-              opacity: 0
-            }}>
-            <div style={{ position: "relative", width: WIDTH }}>
-              {!!videoConstraints ? (
-                <div
-                  style={{
-                    position: "absolute",
-                    backgroundColor: "black"
-                  }}>
-                  <Webcam
-                    audio={false}
-                    width={WIDTH}
-                    height={HEIGHT}
-                    ref={this.webcam}
-                    screenshotFormat="image/jpeg"
-                    videoConstraints={videoConstraints}
-                  />
-                </div>
-              ) : null}
-              {!!drawBox ? drawBox : null}
-            </div>
-            <div
+      <div className="videoInputDiv">
+        {/* <div className={detected}></div> */}
+        {/* <div className="camera cameraDiv2"> */}
+        {/* <div className="cameraDiv2"> */}
+        {/* <div style={{ position: "relative", width: WIDTH }}> */}
+        {/* {!!videoConstraints ? (
+          // <div
+          //   style={{
+          //     position: "absolute",
+          //     backgroundColor: "black"
+          //   }}> */}
+        <div className="cameraDiv">
+          <Webcam
+            audio={false}
+            width={WIDTH}
+            height={HEIGHT}
+            ref={this.webcam}
+            screenshotFormat="image/jpeg"
+            videoConstraints={videoConstraints}
+          />
+        </div>
+        {/* ) : // </div>
+        null} */}
+        {/* {!!drawBox ? drawBox : null} */}
+        {/* </div> */}
+        {/* <div
               style={{
                 position: "relative"
-              }}></div>
-          </div>
-        </div>
+              }}></div> */}
+        {/* </div> */}
+        {/* </div> */}
         {/* <PopUp currentSentiment={this.props.currentRunningSentiment} /> */}
       </div>
     );

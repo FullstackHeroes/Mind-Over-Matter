@@ -133,6 +133,31 @@ h6 {
   color: rgba(0, 152, 195, 0.8);
 }
 
+/* ------------------ VIDEO INPUT ELEMENT ------------------ */
+.camera {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cameraDiv {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -100;
+}
+
+.cameraDiv2 {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -100;
+}
+
 /* ------------------ MAIN APP ELEMENT ------------------ */
 .appLogo {
   height: 7vmin;
