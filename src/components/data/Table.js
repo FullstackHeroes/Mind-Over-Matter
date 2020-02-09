@@ -2,13 +2,23 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setFullScoreObj } from "../../store";
 import TableRow from "./TableRow";
-import { makeCsvTable } from "../../utils/utilities";
+import { makeCsvTable, getAllUserStats } from "../../utils/utilities";
 import { CSVLink } from "react-csv";
 
 class Table extends Component {
-  componentDidMount() {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     allResults: []
+  //   };
+  // }
+
+  async componentDidMount() {
     const { user } = this.props;
     if (user && user.id) this.props.setFullScoreObj(user.id);
+
+    // //GET ALL USER HISTORY DATA
+    // this.state.allResults = await getAllUserStats(user.id);
   }
 
   componentDidUpdate(prevProps) {
@@ -21,11 +31,18 @@ class Table extends Component {
   render() {
     const { fullScoreObj } = this.props;
 
+    //GET MOST RECENT DATA FOR USER SNAPSHOT
     let tenResults,
       csvTenArr = [];
     if (fullScoreObj) tenResults = fullScoreObj.slice(-10).reverse();
-    if (tenResults.length) csvTenArr = makeCsvTable(tenResults);
+    if (tenResults) csvTenArr = makeCsvTable(tenResults);
 
+    // let userDataResults,
+    //   userDataArr = [];
+    // if (fullScoreObj) userDataResults = fullScoreObj.reverse();
+    // if (userDataResults) userDataArr = makeCsvTable(userDataResults);
+
+    // console.log(this.state.allResults);
     return (
       <div className="tableFullDiv">
         <table className="tableElement">
@@ -58,11 +75,16 @@ class Table extends Component {
             <CSVLink
               data={csvTenArr}
               filename={`${this.props.user.name}_last_10.csv`}>
-              Last 10
+              Current Snapshot
             </CSVLink>
           </button>
-
-          {/* <button><CSVLink data={csvOneHundredArr}>Last 100</CSVLink></button> */}
+          {/* <button>
+            <CSVLink
+              data={userDataArr}
+              filename={`${this.props.user.name}_all.csv`}>
+              Download User History
+            </CSVLink>
+          </button> */}
         </div>
       </div>
     );

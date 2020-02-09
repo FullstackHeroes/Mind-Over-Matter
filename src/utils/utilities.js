@@ -256,5 +256,12 @@ export const makeCsvTable = dataObjArr => {
   return csvData;
 };
 
+// //FUNCTION THAT USES THE makeCsvTable FUNCTION TO FORMAL ALL USER DATA
+// export const getAllUserStats = async userId => {
+//   const { data } = await axios.get(`/api/hours/${userId}`)
+//   let newdata = makeCsvTable(data)
+//   console.log("DATA,", data)
+// }
+
 //AVERAGE 15 MINS OF SNAPSHOTS
 export const averageLocalStorageSnaps = snaps => {};
