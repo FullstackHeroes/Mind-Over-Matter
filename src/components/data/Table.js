@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setFullScoreObj } from "../../store";
 import TableRow from "./TableRow";
+import { makeCsvTable } from "../../utils/utilities";
 
 class Table extends Component {
   componentDidMount() {
