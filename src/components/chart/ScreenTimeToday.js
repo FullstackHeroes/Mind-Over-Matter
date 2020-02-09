@@ -8,10 +8,13 @@ class ScreenTimeToday extends Component {
 
     this.state = {
       data: {
-        labels: ["Hours Worked", "Today"],
+        labels: [`Hours Worked: ${this.props.todaysScreenHours}`, "Today"],
         datasets: [
           {
-            backgroundColor: "rgba(0, 255, 0, 0.75)",
+            backgroundColor: [
+              "rgba(0, 255, 0, 0.75)",
+              "rgba(255, 0, 255, 0.75)"
+            ],
             data: [
               this.props.todaysScreenHours,
               24 - this.props.todaysScreenHours
@@ -25,10 +28,13 @@ class ScreenTimeToday extends Component {
   componentDidMount() {
     this.setState({
       data: {
-        labels: ["Hours Worked", "Today"],
+        labels: [`Hours Worked: ${this.props.todaysScreenHours}`, "Today"],
         datasets: [
           {
-            backgroundColor: "rgba(0, 255, 0, 0.75)",
+            backgroundColor: [
+              "rgba(0, 255, 0, 0.75)",
+              "rgba(255, 0, 255, 0.75)"
+            ],
             data: [this.props.todaysScreenHours, 24]
           }
         ]
@@ -43,7 +49,7 @@ class ScreenTimeToday extends Component {
       console.log("#######", todaysScreenHours);
       this.setState({
         data: {
-          labels: ["Hours Worked", "Today"],
+          labels: [`Hours Worked: ${this.props.todaysScreenHours}`, "Today"],
           datasets: [
             {
               backgroundColor: [
