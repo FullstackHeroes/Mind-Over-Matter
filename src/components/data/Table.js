@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { setFullScoreObj } from "../../store";
 import TableRow from "./TableRow";
 import { makeCsvTable } from "../../utils/utilities";
+import { CSVLink } from "react-csv";
 
 class Table extends Component {
   componentDidMount() {
@@ -54,6 +55,7 @@ class Table extends Component {
           </tbody>
         </table>
         <div>
+          <div></div>
           <div></div>
         </div>
       </div>
