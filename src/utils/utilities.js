@@ -222,5 +222,22 @@ export const calcWeightedTrueScore = async userId => {
   return Math.floor(calcNormalScore * rounding) / rounding;
 };
 
+//THIS FUNCTION TAKES AN ARRAY OF OBJECTS AND BREAK IT DOWN INTO A 2D ARR
+//DESIGNED TO BE USED TO OUTPUT DATA FOR A CSV FILE
+export const makeCsvTable = dataObjArr => {
+  const headRow = [
+    "True Score",
+    "Screen Score",
+    "Happy",
+    "Surprised",
+    "Neutral",
+    "Disgusted",
+    "Fearful",
+    "Angry",
+    "Sad"
+  ];
+  let dataArr = [headRow];
+};
+
 //AVERAGE 15 MINS OF SNAPSHOTS
 export const averageLocalStorageSnaps = snaps => {};

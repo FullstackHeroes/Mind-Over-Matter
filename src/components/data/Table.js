@@ -18,7 +18,8 @@ class Table extends Component {
 
   render() {
     const { fullScoreObj } = this.props;
-
+    console.log("TableProps:", this.props);
+    console.log("fullScoreObj", fullScoreObj);
     return (
       <div className="tableFullDiv">
         <table className="tableElement">

@@ -93,8 +93,7 @@ class VideoInput extends Component {
                 mostRecentNormalized =
                   normalizedScore[normalizedScore.length - 1].normalizeScore,
                 RunningTrueScore = await calcWeightedTrueScore(userId);
-              console.log("MRN:", mostRecentNormalized);
-              console.log("RTS:", RunningTrueScore);
+
               this.props.postCurrentRunningSentiment(
                 (RunningTrueScore / mostRecentNormalized) * 100
               );
