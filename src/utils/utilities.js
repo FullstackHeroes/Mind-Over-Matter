@@ -8,6 +8,13 @@ const countWeight = 1 - screenWeight;
 export const normalizedLen = 3000; // LENGTH FOR NORMALIZED CALC
 const wtdAvgCount = 50; // WEIGHTED AVERAGE COUNT LIMIT
 
+// DATE CREATION FUNCTION
+export const dateCreate = () => {
+  return new Date(
+    new Date().toLocaleString("en-US", { timeZone: "America/New_York" })
+  );
+};
+
 // SCORING FROM 1-10 (BAD - GOOD) AND MULTIPLIER WILL BE DONE PRO-RATA
 let sentimentSpectrum = {
   happy: {
@@ -92,9 +99,7 @@ export const condenseScoreObj = (targetScoreObj, userId) => {
         fearful: 0,
         disgusted: 0,
         surprised: 0,
-        timeStamp: new Date(
-          new Date().toLocaleString("en-US", { timeZone: "America/New_York" })
-        ),
+        timeStamp: dateCreate(),
         count: targetScoreObj.length,
         screenTime: 0
       },
@@ -226,10 +231,3 @@ export const calcWeightedTrueScore = async userId => {
 
 //AVERAGE 15 MINS OF SNAPSHOTS
 export const averageLocalStorageSnaps = snaps => {};
-
-// DATE CREATION FUNCTION
-export const dateCreate = () => {
-  return new Date(
-    new Date().toLocaleString("en-US", { timeZone: "America/New_York" })
-  );
-};
