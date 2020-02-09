@@ -41,20 +41,22 @@ router.post("/signup", async (req, res, next) => {
 router.post("/logout", async (req, res) => {
   if (req.body.trueScore) {
     const {
-      trueScore,
-      userId,
-      happy,
-      surprised,
-      neutral,
-      disgusted,
-      fearful,
-      angry,
-      sad,
-      timeStamp,
-      count,
-      screenScore,
-      screenTime
-    } = req.body;
+        trueScore,
+        userId,
+        happy,
+        surprised,
+        neutral,
+        disgusted,
+        fearful,
+        angry,
+        sad,
+        timeStamp,
+        count,
+        screenScore,
+        screenTime
+      } = req.body,
+      hoursDiff = timeStamp.getHours() - timeStamp.getTimezoneOffset() / 60;
+    timeStamp.setHours(hoursDiff);
     console.log("LOGOUT POST --", timeStamp);
     await Hour.create({
       trueScore,

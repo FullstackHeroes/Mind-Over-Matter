@@ -46,6 +46,7 @@ export const logout = userId => async dispatch => {
     if (LSDataObj && LSDataObj.length) {
       const targetLSDataObj = LSDataObj.filter(snap => snap.userId === userId),
         adjLSDataObj = condenseScoreObj(targetLSDataObj, userId);
+      console.log("POSTING LS -", adjLSDataObj);
       await axios.post("/auth/logout", adjLSDataObj);
     } else await axios.post("/auth/logout");
 

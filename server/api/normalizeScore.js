@@ -48,7 +48,9 @@ router.post("/", async function(req, res, next) {
         runningScore,
         sentimentDiff
       } = req.body,
-      newNormalize = await NormalizeScore.create({
+      hoursDiff = timeStamp.getHours() - timeStamp.getTimezoneOffset() / 60;
+    timeStamp.setHours(hoursDiff);
+    const newNormalize = await NormalizeScore.create({
         normalizeScore,
         timeStamp,
         userId,

@@ -98,8 +98,6 @@ export const postLSScoreObj = userId => {
         targetLSDataObj = LSDataObj.filter(snap => snap.userId === userId),
         adjLSDataObj = condenseScoreObj(targetLSDataObj, userId);
 
-      console.log("POSTING LS -", adjLSDataObj);
-
       // INTERACT WITH DATABASE
       const newWtdScore = await axios.post("/api/hours", adjLSDataObj);
 
