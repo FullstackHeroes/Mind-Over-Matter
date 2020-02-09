@@ -19,7 +19,8 @@ class Table extends Component {
 
     //GET ALL USER HISTORY DATA
     const results = await getAllUserStats(user.id);
-    console.log("!!!!!!!!!RESULTS:", results);
+    // console.log("!!!USER:", user)
+    // console.log("!!!!!!!!!RESULTS:", results);
     this.setState({ allResults: makeCsvTable(results) });
   }
 

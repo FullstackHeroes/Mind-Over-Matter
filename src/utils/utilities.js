@@ -239,18 +239,17 @@ export const makeCsvTable = dataObjArr => {
     decimal = 1;
 
   let csvData = [headRow];
-
   dataObjArr.forEach(obj => {
-    dataObjArr.push([
+    csvData.push([
       Number(obj["trueScore"].toFixed(decimal)),
       Number((obj["screenScore"] * 100).toFixed(decimal)),
       Number((obj["happy"] * 100).toFixed(decimal)),
       Number((obj["surprised"] * 100).toFixed(decimal)),
       Number((obj["neutral"] * 100).toFixed(decimal)),
-      Number(obj["disgusted"].toFixed(decimal)),
-      Number(obj["fearful"].toFixed(decimal)),
-      Number(obj["angry"].toFixed(decimal)),
-      Number(obj["sad"].toFixed(decimal))
+      Number(obj["disgusted"] * (100).toFixed(decimal)),
+      Number(obj["fearful"] * (100).toFixed(decimal)),
+      Number(obj["angry"] * (100).toFixed(decimal)),
+      Number(obj["sad"] * (100).toFixed(decimal))
     ]);
   });
   return csvData;
@@ -259,7 +258,8 @@ export const makeCsvTable = dataObjArr => {
 //FUNCTION THAT USES THE makeCsvTable FUNCTION TO FORMAL ALL USER DATA
 export const getAllUserStats = async userId => {
   const { data } = await axios.get(`/api/hours/${userId}`);
-  console.log("axios user data:", data);
+  // console.log("data from get all users", data)
+  // console.log(makeCsvTable(data));
   return makeCsvTable(data);
 };
 
