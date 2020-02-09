@@ -13,15 +13,15 @@ class Table extends Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const { user } = this.props;
     if (user && user.id) this.props.setFullScoreObj(user.id);
 
     //GET ALL USER HISTORY DATA
-    const results = await getAllUserStats(user.id);
+    // const results = await getAllUserStats(user.id);
     // console.log("!!!USER:", user)
     // console.log("!!!!!!!!!RESULTS:", results);
-    this.setState({ allResults: makeCsvTable(results) });
+    // this.setState({ allResults: makeCsvTable(results) });
   }
 
   componentDidUpdate(prevProps) {
@@ -29,6 +29,10 @@ class Table extends Component {
     if (fullScoreObj.length !== prevProps.fullScoreObj.length) {
       this.props.setFullScoreObj(user.id);
     }
+  }
+
+  getUserData() {
+    const { user } = this.props;
   }
 
   render() {
