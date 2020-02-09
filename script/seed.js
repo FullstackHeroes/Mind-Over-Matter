@@ -1,14 +1,16 @@
 const db = require("../server/db");
 const { User, Hour, NormalizeScore } = require("../server/db/models");
-// const {
-//   dateCreate,
-//   emotions,
-//   sentimentSpectrum,
-//   snapIntDefault,
-//   dbIntDefault
-// } = require("../src/utils/utilities");
-const share = require("../src/share");
-share.utilShare();
+
+// ATTEMPT TO IMPORT MATERIAL FROM CLIENT SIDE
+const share = require("../src/utils/share"),
+  {
+    dateCreate,
+    emotions,
+    sentimentSpectrum,
+    snapIntDefault,
+    dbIntDefault,
+    calcScreenTime
+  } = share.utilShare();
 
 const userSeed = [
   {
@@ -24,26 +26,44 @@ const userSeed = [
 ];
 
 const trueScoreGen = count => {
-  const trueRes = [];
+  const trueRes = [],
+    ogCount = count;
   while (count) {
     const obj = {
         userId: 1,
         trueScore: 0,
-        count: dbIntDefault / snapIntDefault,
         timeStamp: dateCreate(),
+        count: dbIntDefault / snapIntDefault,
         screenScore: Math.random() * 0.5 + 0.5,
         screenTime: 0
       },
-      numArr = new Array(7).fill(null).map(() => Math.random()),
-      totalRand = numArr.reduce((acm, val) => (acm += val), 0);
+      numArr = new Array(7)
+        .fill(null)
+        .map((val, i) => (i === 0 ? Math.random() * 10 : Math.random())),
+      totalRand = numArr.reduce((acm, val) => (acm += val), 0),
+      hoursDiff =
+        obj.timeStamp.getHours() - obj.timeStamp.getTimezoneOffset() / 60,
+      rounding = 10 ** 5;
+
+    // ADDING EACH INDIVIDUAL EMOTION SCORE AND IMPACTING TRUE SCORE
     for (let idx in emotions) {
       const emotion = emotions[idx],
-        emotScore = numArr[idx] / totalRand;
+        emotScore = Math.floor((numArr[idx] / totalRand) * rounding) / rounding;
       obj[emotion] = emotScore;
-      obj.trueScore += emotScore * sentimentSpectrum[emotion].spectrumScore;
+      obj.trueScore +=
+        Math.floor(
+          emotScore * sentimentSpectrum[emotion].spectrumScore * rounding
+        ) / rounding;
     }
+
+    // ADJUST EACH OF THE OTHER ATTRIBUTES
+    obj.timeStamp.setHours(hoursDiff);
+    obj.timeStamp.setSeconds(ogCount - count);
     obj.count -= Math.round(Math.random() * obj.count * 0.3);
-    obj.trueRes.push(obj);
+    obj.screenTime = calcScreenTime(obj.count, snapIntDefault);
+
+    // STORE EACH INSTANCE OBJ INTO PARENT ARRAY
+    trueRes.push(obj);
     count--;
   }
   return trueRes;
@@ -1270,9 +1290,11 @@ const seed = async () => {
   console.log("db synced !");
 
   // console.log("hmm -", emotions);
-  // console.log(trueScoreGen(3));
+  // console.log("seed fn -", trueScoreGen(2));
+
   await User.bulkCreate(userSeed);
-  await Hour.bulkCreate(hourSeed);
+  // await Hour.bulkCreate(hourSeed);
+  await Hour.bulkCreate(trueScoreGen(4));
   await NormalizeScore.bulkCreate(normalizeScoreSeed);
 
   console.log(`seeded successfully`);
