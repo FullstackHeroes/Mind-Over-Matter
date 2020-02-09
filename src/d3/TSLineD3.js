@@ -106,13 +106,19 @@ class TSLineD3 {
       .append("path")
       .classed("trueScoreLine", true)
       .merge(lineChart)
+      .transition()
+      .duration(1000)
       .attr("d", vis.valueLine);
 
     // CIRCLE JOIN
     const circles = vis.g.selectAll("circle").data(vis.data, d => d.name);
 
     // EXIT
-    circles.exit().remove();
+    circles
+      .exit()
+      // .transiton(1000)
+      // .attr("cy", vis.y(0))
+      .remove();
 
     // UPDATE
     circles
@@ -126,6 +132,7 @@ class TSLineD3 {
       .append("circle")
       .classed("trueScoreLineCircle", true)
       .attr("cx", d => vis.x(d[vis.xAttr]))
+      .transition(1000)
       .attr("cy", d => vis.y(d[vis.yAttr]))
       .attr("r", 4)
       .on("click", d => console.log("Clicking -", d));

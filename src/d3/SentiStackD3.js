@@ -144,6 +144,8 @@ class SentiStackD3 {
     const stackChart = vis.g.selectAll(".sentiStack").data(vis.stackedData);
 
     console.log("D3 STACK!", stackChart);
+    // EXIT
+    stackChart.exit().remove();
 
     // ENTER
     stackChart
@@ -160,8 +162,8 @@ class SentiStackD3 {
       .attr("stroke-width", 1)
       // .merge(stackChart)
       // .attr("d", d => vis.initialArea(d))
-      // .transition()
-      // .duration(1000)
+      .transition()
+      .duration(1000)
       .attr("d", d => vis.area(d));
 
     // stackChart
