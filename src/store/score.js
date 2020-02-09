@@ -96,7 +96,11 @@ export const postLSScoreObj = userId => {
       // ADJUSTING LS SCORE OBJ FOR BACKEND DIGESTION
       const LSDataObj = JSON.parse(localStorage.getItem("snapshots")),
         targetLSDataObj = LSDataObj.filter(snap => snap.userId === userId),
-        adjLSDataObj = condenseScoreObj(targetLSDataObj, userId);
+        adjLSDataObj = condenseScoreObj(targetLSDataObj, userId),
+        hoursDiff =
+          adjLSDataObj.timeStamp.getHours() -
+          adjLSDataObj.timeStamp.getTimezoneOffset() / 60;
+      adjLSDataObj.timeStamp.setHours(hoursDiff);
 
       // INTERACT WITH DATABASE
       const newWtdScore = await axios.post("/api/hours", adjLSDataObj);
@@ -127,13 +131,16 @@ export const postNormalizedScore = userId => {
   return async dispatch => {
     try {
       const normalizeScore = await calcNormalizeUtility(userId),
-        runningScore = await calcWeightedTrueScore(userId);
+        runningScore = await calcWeightedTrueScore(userId),
+        timeStamp = dateCreate(),
+        hoursDiff = timeStamp.getHours() - timeStamp.getTimezoneOffset() / 60;
+      timeStamp.setHours(hoursDiff);
       const { data } = await axios.post(`/api/normalizeScore`, {
           userId,
           normalizeScore,
           runningScore,
           sentimentDiff: runningScore / normalizeScore,
-          timeStamp: dateCreate()
+          timeStamp
         }),
         { normalizeScoreArr, runningScoreArr, sentimentDiffArr } = data;
       dispatch(getNormalizedScore(normalizeScoreArr));
