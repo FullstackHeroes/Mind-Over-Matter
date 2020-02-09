@@ -14,6 +14,24 @@ const userSeed = [
   }
 ];
 
+const trueScoreGen = count => {
+  const trueRes = [];
+  while (count) {
+    const obj = {};
+    trueRes.push(obj);
+  }
+  return trueRes;
+};
+
+const normalScoreGen = count => {
+  const normRes = [];
+  while (count) {
+    const obj = {};
+    trueRes.push(obj);
+  }
+  return normRes;
+};
+
 const hourSeed = [
   {
     userId: 1,
