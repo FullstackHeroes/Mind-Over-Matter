@@ -57,6 +57,7 @@ class Dashboard extends Component {
           <div className="dashboardTable">
             <ScreenTimeToday todaysScreenHours={this.props.todaysScreenMins} />
           </div>
+
           <div className="dashboardTable">
             <h3>Screen Time</h3>
             Today: {this.props.todaysScreenMins} hours
