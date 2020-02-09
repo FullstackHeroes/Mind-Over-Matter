@@ -153,6 +153,8 @@ class SentiStackD3 {
       .append("g")
       .classed("sentiStack", true)
       .merge(stackChart)
+      .transition()
+      .duration(1000)
       .append("path")
       .attr("class", d => `sentiArea ${d.key}`)
       .style("fill", d => vis.color(d.key))
@@ -160,10 +162,8 @@ class SentiStackD3 {
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
       .attr("stroke-width", 1)
-      // .merge(stackChart)
+      .merge(stackChart)
       // .attr("d", d => vis.initialArea(d))
-      .transition()
-      .duration(1000)
       .attr("d", d => vis.area(d));
 
     // stackChart
