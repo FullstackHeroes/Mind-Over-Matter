@@ -37,7 +37,7 @@ class Table extends Component {
 
   render() {
     const { fullScoreObj, user } = this.props,
-      nameArr = user.name.split(" "),
+      nameArr = user.name ? user.name.split(" ") : [],
       headers = [
         { label: "True Score", key: "trueScore" },
         { label: "Happy %", key: "happy" },
@@ -88,24 +88,41 @@ class Table extends Component {
           </tbody>
         </table>
 
-        <div className="csvFullDiv">
-          <span>Download My Results</span>
+        {user && fullScoreObj && fullScoreObj.length ? (
+          <div className="csvFullDiv">
+            <span className="csvHeaderText">Download My Results</span>
 
-          <button>
-            <CSVLink
-              data={fullScoreObj.slice(-15)}
-              // headers={headers}
-              filename={`${
-                nameArr.length > 1 ? nameArr[0] + "_" + nameArr[1] : nameArr[0]
-              }_history.csv`}
-              onClick={() => {
-                console.log("DOWNLOAD -", fullScoreObj.slice(-15));
-              }}>
-              Score History
-            </CSVLink>
-          </button>
+            <button>
+              <CSVLink
+                data={fullScoreObj.slice(-15).reverse()}
+                headers={headers}
+                filename={`${
+                  nameArr.length > 1
+                    ? nameArr[0] + "_" + nameArr[1]
+                    : nameArr[0]
+                }_History.csv`}
+                className="csvBtnLimitHistory csvBtn">
+                Score History
+              </CSVLink>
+            </button>
 
-          {/* <button>
+            <button>
+              <CSVLink
+                data={fullScoreObj.reverse()}
+                headers={headers}
+                filename={`${
+                  nameArr.length > 1
+                    ? nameArr[0] + "_" + nameArr[1]
+                    : nameArr[0]
+                }_History.csv`}
+                className="csvBtnAllHistory csvBtn">
+                Score History
+              </CSVLink>
+            </button>
+          </div>
+        ) : null}
+
+        {/* <button>
             <CSVLink
               data={csvTenArr}
               filename={`${this.props.user.name}_last_10.csv`}>
@@ -120,7 +137,6 @@ class Table extends Component {
               Download User History
             </CSVLink>
           </button> */}
-        </div>
       </div>
     );
   }
