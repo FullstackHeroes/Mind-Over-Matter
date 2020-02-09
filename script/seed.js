@@ -25,12 +25,12 @@ const userSeed = [
   }
 ];
 
-const trueScoreGen = count => {
+const trueScoreGen = (userId, count) => {
   const trueRes = [];
   while (count) {
     const rounding = 10 ** 5,
       obj = {
-        userId: 1,
+        userId,
         trueScore: 0,
         timeStamp: dateCreate(),
         count: dbIntDefault / snapIntDefault,
@@ -69,7 +69,7 @@ const trueScoreGen = count => {
   return trueRes;
 };
 
-const normalScoreGen = count => {
+const normalScoreGen = (userId, count) => {
   const normRes = [];
   while (count) {
     const rounding = 10 ** 5,
@@ -78,7 +78,7 @@ const normalScoreGen = count => {
       runScoreMin = 0.5,
       runScoreMax = 0.8,
       obj = {
-        userId: 1,
+        userId,
         normalizeScore:
           Math.floor(
             (Math.random() * (normScoreMax - normScoreMin) + normScoreMin) *
@@ -1321,8 +1321,8 @@ const seed = async () => {
   await User.bulkCreate(userSeed);
   // await Hour.bulkCreate(hourSeed);
   // await NormalizeScore.bulkCreate(normalizeScoreSeed);
-  await Hour.bulkCreate(trueScoreGen(4));
-  await NormalizeScore.bulkCreate(normalScoreGen(4));
+  await Hour.bulkCreate(trueScoreGen(1, 100));
+  await NormalizeScore.bulkCreate(normalScoreGen(1, 100));
 
   console.log(`seeded successfully`);
 };
