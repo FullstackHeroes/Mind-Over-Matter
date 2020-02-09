@@ -126,8 +126,8 @@ export const postNormalizedScore = userId => {
   return async dispatch => {
     try {
       const normalizeScore = await calcNormalizeUtility(userId),
-        runningScore = await calcWeightedTrueScore(userId),
-        { data } = await axios.post(`/api/normalizeScore`, {
+        runningScore = await calcWeightedTrueScore(userId);
+      const { data } = await axios.post(`/api/normalizeScore`, {
           userId,
           normalizeScore,
           runningScore,

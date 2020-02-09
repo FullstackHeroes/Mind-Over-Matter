@@ -155,7 +155,7 @@ export const calcNormalizeUtility = async userId => {
     condensedLSObj = condenseScoreObj(LSScoreObj, userId);
 
   // APPEND LS DATA TO DB SCORE OBJ
-  dbScoreObj.push(condensedLSObj);
+  if (Object.keys(condensedLSObj).length) dbScoreObj.push(condensedLSObj);
 
   // GETTING BASIS FOR WEIGHTED AVERAGE CALC
   const shortenFullScore = dbScoreObj.slice(-normalizedLen);
