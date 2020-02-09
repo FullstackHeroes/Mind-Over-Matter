@@ -97,7 +97,7 @@ class SentiStackD3 {
       "sad"
     ];
 
-    vis.data.forEach((d, i) => {
+    vis.data.forEach(d => {
       d[vis.xAttr] = new Date(Date.parse(d[vis.xAttr]));
       const totalSum = vis.keys.reduce((acm, key) => (acm += d[key]), 0);
       vis.keys.forEach(key => (d[key] = d[key] / totalSum));
@@ -106,7 +106,7 @@ class SentiStackD3 {
     vis.color = d3
       .scaleOrdinal()
       .domain(vis.keys)
-      .range(d3.schemeSet3);
+      .range(d3.schemeSet1);
     vis.stackedData = d3.stack().keys(vis.keys)(vis.data);
 
     // console.log("D3 STACK!", vis.data, vis.stackedData);
@@ -138,6 +138,8 @@ class SentiStackD3 {
     // STACK AREA CHART JOIN
     const stackChart = vis.g.selectAll(".sentiStack").data(vis.stackedData);
 
+    stackChart.transition(1000);
+
     // ENTER
     stackChart
       .enter()
@@ -151,6 +153,7 @@ class SentiStackD3 {
       // .attr("stroke-linecap", "round")
       .attr("stroke-width", 1)
       .merge(stackChart)
+      .transition(1000)
       .attr("d", d => vis.area(d));
 
     stackChart
