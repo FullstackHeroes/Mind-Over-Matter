@@ -20,14 +20,18 @@ class Table extends Component {
 
   render() {
     const { fullScoreObj } = this.props;
-    // console.log("TableProps:", this.props);
-    // console.log("!!!!!!!!!!!!!!!", makeCsvTable(test))
-    let test;
-    if (fullScoreObj) test = fullScoreObj.slice(-10).reverse();
-    let csvArr;
-    if (test.length) csvArr = makeCsvTable(test);
-    console.log(csvArr);
-    // console.log("fullScoreObj", fullScoreObj.slice(-10).reverse());
+
+    let tenResults,
+      csvTenArr = [];
+    // oneHundredResults,
+    // csvOneHundredArr = [];
+    if (fullScoreObj) {
+      tenResults = fullScoreObj.slice(-10).reverse();
+      // oneHundredResults = fullScoreObj.slice(-100).reverse();
+    }
+    if (tenResults.length) csvTenArr = makeCsvTable(tenResults);
+    // if (oneHundredResults.lengh)  csvOneHundredArr = makeCsvTable(oneHundredResults)
+    console.log(oneHundredResults);
     return (
       <div className="tableFullDiv">
         <table className="tableElement">
@@ -55,8 +59,12 @@ class Table extends Component {
           </tbody>
         </table>
         <div>
-          <div></div>
-          <div></div>
+          <div> Download My Results</div>
+          <button>
+            <CSVLink data={csvTenArr}>Last 10</CSVLink>
+          </button>
+
+          {/* <button><CSVLink data={csvOneHundredArr}>Last 100</CSVLink></button> */}
         </div>
       </div>
     );
