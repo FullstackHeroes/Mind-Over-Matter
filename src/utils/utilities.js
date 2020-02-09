@@ -10,9 +10,10 @@ const wtdAvgCount = 50; // WEIGHTED AVERAGE COUNT LIMIT
 
 // DATE CREATION FUNCTION
 export const dateCreate = () => {
-  return new Date(
-    new Date().toLocaleString("en-US", { timeZone: "America/New_York" })
-  );
+  const date = new Date().toLocaleString("en-US", {
+    timeZone: "America/New_York"
+  });
+  return new Date(date);
 };
 
 // SCORING FROM 1-10 (BAD - GOOD) AND MULTIPLIER WILL BE DONE PRO-RATA
