@@ -23,15 +23,9 @@ class Table extends Component {
 
     let tenResults,
       csvTenArr = [];
-    // oneHundredResults,
-    // csvOneHundredArr = [];
-    if (fullScoreObj) {
-      tenResults = fullScoreObj.slice(-10).reverse();
-      // oneHundredResults = fullScoreObj.slice(-100).reverse();
-    }
+    if (fullScoreObj) tenResults = fullScoreObj.slice(-10).reverse();
     if (tenResults.length) csvTenArr = makeCsvTable(tenResults);
-    // if (oneHundredResults.lengh)  csvOneHundredArr = makeCsvTable(oneHundredResults)
-    // console.log(oneHundredResults);
+
     return (
       <div className="tableFullDiv">
         <table className="tableElement">
