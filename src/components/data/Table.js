@@ -19,8 +19,14 @@ class Table extends Component {
 
   render() {
     const { fullScoreObj } = this.props;
-    console.log("TableProps:", this.props);
-    console.log("fullScoreObj", fullScoreObj);
+    // console.log("TableProps:", this.props);
+    // console.log("!!!!!!!!!!!!!!!", makeCsvTable(test))
+    let test;
+    if (fullScoreObj) test = fullScoreObj.slice(-10).reverse();
+    let csvArr;
+    if (test.length) csvArr = makeCsvTable(test);
+    console.log(csvArr);
+    // console.log("fullScoreObj", fullScoreObj.slice(-10).reverse());
     return (
       <div className="tableFullDiv">
         <table className="tableElement">
@@ -47,6 +53,9 @@ class Table extends Component {
               : null}
           </tbody>
         </table>
+        <div>
+          <div></div>
+        </div>
       </div>
     );
   }

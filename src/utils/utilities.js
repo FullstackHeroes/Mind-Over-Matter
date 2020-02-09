@@ -1,5 +1,6 @@
 import axios from "axios";
 import store from "../store";
+import { tsv } from "d3";
 
 // VARIABLE DRIVERS
 const rounding = 10 ** 5; // DECIMAL ROUNDING
@@ -226,17 +227,41 @@ export const calcWeightedTrueScore = async userId => {
 //DESIGNED TO BE USED TO OUTPUT DATA FOR A CSV FILE
 export const makeCsvTable = dataObjArr => {
   const headRow = [
-    "True Score",
-    "Screen Score",
-    "Happy",
-    "Surprised",
-    "Neutral",
-    "Disgusted",
-    "Fearful",
-    "Angry",
-    "Sad"
-  ];
-  let dataArr = [headRow];
+      "True Score",
+      "Screen Score %",
+      "Happy %",
+      "Surprised %",
+      "Neutral %",
+      "Disgusted %",
+      "Fearful %",
+      "Angry %",
+      "Sad %"
+    ],
+    checkAgainst = [
+      // "trueScore",
+      "screenScore",
+      "happy",
+      "surprised",
+      "neutral",
+      "disgusted",
+      "fearful",
+      "angry",
+      "sad"
+    ],
+    decimal = 1;
+
+  let csvData = [headRow];
+
+  dataObjArr.forEach(obj => {
+    let tr = [];
+    tr.push(Number(obj["trueScore"].toFixed(decimal)));
+    checkAgainst.forEach(field => {
+      const value = Number((obj[field] * 100).toFixed(decimal));
+      tr.push(value);
+    });
+    csvData.push(tr);
+  });
+  return csvData;
 };
 
 //AVERAGE 15 MINS OF SNAPSHOTS
