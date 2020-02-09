@@ -19,6 +19,7 @@ const trueScoreGen = count => {
   while (count) {
     const obj = {};
     trueRes.push(obj);
+    count--;
   }
   return trueRes;
 };
@@ -28,6 +29,7 @@ const normalScoreGen = count => {
   while (count) {
     const obj = {};
     trueRes.push(obj);
+    count--;
   }
   return normRes;
 };

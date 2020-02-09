@@ -67,13 +67,13 @@ class SentiStackD3 {
       .range(d3.schemeSet1);
 
     vis.ownColor = [
-      "deepskyblue",
-      "lightgreen",
-      "lightgoldenrodyellow",
-      "lightgray",
-      "mediumpurple",
-      "lightcoral",
-      "tomato"
+      "deepskyblue", // HAPPY
+      "lightgreen", // SURPRISED
+      "lightgoldenrodyellow", // NEUTRAL
+      "mediumpurple", // DISGUSTED
+      "sienna", // FEARFUL
+      "tomato", // ANGRY
+      "orchid" // SAD
     ];
 
     // AREA CREATION
