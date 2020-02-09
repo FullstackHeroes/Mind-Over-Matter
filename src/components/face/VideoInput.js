@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import Webcam from "react-webcam";
 import { loadModels, getFaceDescr } from "../../utils/faceBase";
@@ -26,9 +25,6 @@ class VideoInput extends Component {
   constructor(props) {
     super(props);
     this.webcam = React.createRef();
-    // this.state = {
-    //   detections: null
-    // };
   }
 
   componentDidMount = async () => {
@@ -83,10 +79,6 @@ class VideoInput extends Component {
         await getFaceDescr(this.webcam.current.getScreenshot(), inputSize).then(
           async fullDesc => {
             if (!!fullDesc && fullDesc.length) {
-              // this.setState({
-              //   detections: fullDesc.map(fd => fd.detection)
-              // });
-
               const desc = fullDesc[0],
                 screenScore = desc.detection._score,
                 expressions = desc.expressions,
@@ -140,54 +132,14 @@ class VideoInput extends Component {
   }
 
   render() {
-    // const { detections } = this.state;
     const videoConstraints = {
       width: WIDTH,
       height: HEIGHT,
       facingMode: "user"
     };
-    // let detected = "";
-
-    // // DETECTION BOX CODE (POSSIBLY OPTIONAL)
-    // let drawBox = null;
-    // if (!!detections) {
-    //   drawBox = detections.map((detection, idx) => {
-    //     let _H = detection.box.height;
-    //     let _W = detection.box.width;
-    //     let _X = detection.box._x;
-    //     let _Y = detection.box._y;
-    //     detected = "detected";
-
-    //     return (
-    //       <div key={idx}>
-    //         GOT DETECTIONS!
-    //         <div
-    //           style={{
-    //             position: "absolute",
-    //             border: "solid",
-    //             borderColor: "blue",
-    //             height: _H,
-    //             width: _W,
-    //             transform: `translate(${_X}px,${_Y}px)`
-    //           }}
-    //         />
-    //       </div>
-    //     );
-    //   });
-    // }
 
     return (
       <div className="videoInputDiv">
-        {/* <div className={detected}></div> */}
-        {/* <div className="camera cameraDiv2"> */}
-        {/* <div className="cameraDiv2"> */}
-        {/* <div style={{ position: "relative", width: WIDTH }}> */}
-        {/* {!!videoConstraints ? (
-          // <div
-          //   style={{
-          //     position: "absolute",
-          //     backgroundColor: "black"
-          //   }}> */}
         <div className="cameraDiv">
           <Webcam
             audio={false}
@@ -198,16 +150,6 @@ class VideoInput extends Component {
             videoConstraints={videoConstraints}
           />
         </div>
-        {/* ) : // </div>
-        null} */}
-        {/* {!!drawBox ? drawBox : null} */}
-        {/* </div> */}
-        {/* <div
-              style={{
-                position: "relative"
-              }}></div> */}
-        {/* </div> */}
-        {/* </div> */}
         {/* <PopUp currentSentiment={this.props.currentRunningSentiment} /> */}
       </div>
     );
