@@ -88,7 +88,7 @@ class SentiStackD3 {
       .range(d3.schemeSet2);
     vis.stackedData = d3.stack().keys(vis.keys)(vis.data);
 
-    console.log("D3 STACK!", vis.data, vis.stackedData);
+    console.log("D3 STACK!", vis.data, vis.stackedData, vis.color);
 
     // ADJUST SCALING
     vis.x.domain(d3.extent(vis.data, d => d[vis.xAttr]));
