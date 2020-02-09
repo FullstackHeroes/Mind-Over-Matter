@@ -13,7 +13,7 @@ class Table extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { user } = this.props;
     if (user && user.id) this.props.setFullScoreObj(user.id);
 

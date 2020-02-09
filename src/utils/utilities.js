@@ -272,7 +272,7 @@ export const makeCsvTable = dataObjArr => {
       obj.sad
     ]);
 
-    //INCOMING DATA IS INCONSISTENT WHERE SOMETIMES IT IS NAN
+    //SWITCH BACK TO BELOW CODE ONCE WE CAN PASS FIELDS SUCCESSFULLY
     // csvData.push([
     //   Number((obj["trueScore"] * 1).toFixed(decimal)),
     //   Number((obj["screenScore"] * 100).toFixed(decimal)),
@@ -285,7 +285,7 @@ export const makeCsvTable = dataObjArr => {
     //   Number((obj["sad"] * 100).toFixed(decimal))
     // ]);
   });
-  console.log("csvData", csvData);
+  // console.log("csvData", csvData);
   return csvData;
 };
 
