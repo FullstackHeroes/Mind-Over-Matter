@@ -23,15 +23,7 @@ const trueScoreGen = count => {
   const trueRes = [];
   while (count) {
     const obj = { userId: 1 },
-      numArr = [
-        Math.random(),
-        Math.random(),
-        Math.random(),
-        Math.random(),
-        Math.random(),
-        Math.random(),
-        Math.random()
-      ],
+      numArr = new Array(7).fill(null).map(() => Math.random()),
       totalRand = numArr.reduce((acm, val) => (acm += val), 0);
     for (let idx in emotions) {
       const emotion = emotions[idx];
