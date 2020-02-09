@@ -67,6 +67,12 @@ class SentiStackD3 {
       .range(d3.schemeSet1);
 
     // AREA CREATION
+    vis.initialArea = d3
+      .area()
+      .x(d => vis.x(d.data[vis.xAttr]))
+      .y0(HEIGHT)
+      .y1(HEIGHT);
+
     vis.area = d3
       .area()
       .x(d => vis.x(d.data[vis.xAttr]))
@@ -110,8 +116,6 @@ class SentiStackD3 {
 
     vis.stackedData = d3.stack().keys(vis.keys)(vis.data);
 
-    console.log("D3 STACK!", vis.data, vis.stackedData);
-
     // ADJUST SCALING
     vis.x.domain(d3.extent(vis.data, d => d[vis.xAttr]));
     vis.y.domain([0, 1]);
@@ -139,12 +143,6 @@ class SentiStackD3 {
     // STACK AREA CHART JOIN
     const stackChart = vis.g.selectAll(".sentiStack").data(vis.stackedData);
 
-    // EXIT
-    stackChart.exit().remove();
-
-    // UPDATE
-    stackChart.transition(1000);
-
     // ENTER
     stackChart
       .enter()
@@ -158,8 +156,12 @@ class SentiStackD3 {
       .attr("stroke-linecap", "round")
       .attr("stroke-width", 1)
       // .merge(stackChart)
-      .transition(1000)
+      .attr("d", d => vis.initialArea(d))
+      .transition()
+      .duration(1000)
       .attr("d", d => vis.area(d));
+
+    console.log("D3 STACK!", stackChart);
 
     // stackChart
     //   .append("g")
