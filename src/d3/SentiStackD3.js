@@ -2,8 +2,8 @@ import * as d3 from "d3";
 import { emotions } from "../utils/utilities";
 
 const MARGIN = { TOP: 10, BOTTOM: 80, LEFT: 70, RIGHT: 150 };
-const WIDTH = 500 - MARGIN.LEFT - MARGIN.RIGHT;
-const HEIGHT = 300 - MARGIN.TOP - MARGIN.BOTTOM;
+const WIDTH = 550 - MARGIN.LEFT - MARGIN.RIGHT;
+const HEIGHT = 400 - MARGIN.TOP - MARGIN.BOTTOM;
 
 class SentiStackD3 {
   constructor(element, data) {

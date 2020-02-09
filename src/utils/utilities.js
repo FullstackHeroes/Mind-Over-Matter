@@ -7,7 +7,7 @@ const screenWeight = 0.5;
 const countWeight = 1 - screenWeight;
 export const normalizedLen = 3000; // LENGTH FOR NORMALIZED CALC
 const wtdAvgCount = 50; // WEIGHTED AVERAGE COUNT LIMIT
-export const snapIntDefault = 1000;
+export const snapIntDefault = 3000;
 export const dbIntDefault = 120000;
 
 // DATE CREATION FUNCTION
@@ -197,12 +197,12 @@ export const calcNormalizeUtility = async userId => {
   return Math.round(calcNormalScore * rounding) / rounding;
 };
 
-//  CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
+// CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
 export const calcScreenTime = (length, interval) => (interval * length) / 1000;
 
-//CALCULATE CURRENT MENTAL STATE USING AXIOS REQUESTS AND STORAGE DATA
+// CALCULATE CURRENT MENTAL STATE USING AXIOS REQUESTS AND STORAGE DATA
 export const calcWeightedTrueScore = async userId => {
-  //RETRIEVE LS DATA AND DB SCORE OBJECTS AND CONDENSE LS DATA INTO SINGLE OBJ
+  // RETRIEVE LS DATA AND DB SCORE OBJECTS AND CONDENSE LS DATA INTO SINGLE OBJ
   const userLocalData = JSON.parse(localStorage.getItem("snapshots"));
   const condensedLSData =
     userLocalData && userLocalData.length
@@ -213,10 +213,10 @@ export const calcWeightedTrueScore = async userId => {
   // APPEND LS DATA TO DB SCORE OBJ
   if (condensedLSData.length) userDbData.push(condensedLSData);
 
-  //ORDER aggUserDataObjArr FROM NEW TO OLD
+  // ORDER aggUserDataObjArr FROM NEW TO OLD
   const orderArr = userDbData.reverse();
 
-  //BASE DATA FOR WEIGHTED AVG CALC
+  // BASE DATA FOR WEIGHTED AVG CALC
   let totalScreenScore = 0,
     totalCount = 0,
     i = 0;
@@ -228,10 +228,10 @@ export const calcWeightedTrueScore = async userId => {
     i++;
   }
 
-  //SHORTEN OBJ ARR INTO RELEVANT SIZE (wtdAvgCount)
+  // SHORTEN OBJ ARR INTO RELEVANT SIZE (wtdAvgCount)
   const shortOrderArr = orderArr.slice(0, i);
 
-  //BEGIN WEIGHTED CALCULATIONS
+  // BEGIN WEIGHTED CALCULATIONS
   const calcNormalScore = shortOrderArr.reduce((acm, data) => {
     const screenWtdAvg = (data.screenScore / totalScreenScore) * screenWeight,
       countWtdAvg = (data.count / totalCount) * countWeight,
@@ -241,6 +241,3 @@ export const calcWeightedTrueScore = async userId => {
 
   return Math.floor(calcNormalScore * rounding) / rounding;
 };
-
-//AVERAGE 15 MINS OF SNAPSHOTS
-export const averageLocalStorageSnaps = snaps => {};

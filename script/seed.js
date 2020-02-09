@@ -73,10 +73,10 @@ const normalScoreGen = (userId, count) => {
   const normRes = [];
   while (count) {
     const rounding = 10 ** 5,
-      normScoreMin = 0.5,
-      normScoreMax = 0.8,
-      runScoreMin = 0.5,
-      runScoreMax = 0.8,
+      normScoreMin = 5,
+      normScoreMax = 8,
+      runScoreMin = 5,
+      runScoreMax = 8,
       obj = {
         userId,
         normalizeScore:
@@ -1335,7 +1335,6 @@ const runSeed = async () => {
     console.error(err);
     process.exitCode = 1;
   } finally {
-    console.log("closing db connection");
     await db.close();
     console.log("db connection closed");
   }

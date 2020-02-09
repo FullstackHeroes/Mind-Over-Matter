@@ -46,7 +46,6 @@ class ScreenTimeToday extends Component {
     const { todaysScreenHours } = this.props;
 
     if (todaysScreenHours !== prevProps.todaysScreenHours) {
-      console.log("#######", todaysScreenHours);
       this.setState({
         data: {
           labels: [`Hours Worked: ${this.props.todaysScreenHours}`, "Today"],
