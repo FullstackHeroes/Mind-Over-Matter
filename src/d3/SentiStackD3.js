@@ -88,7 +88,7 @@ class SentiStackD3 {
       .range(d3.schemeSet2);
     vis.stackedData = d3.stack().keys(vis.keys)(vis.data);
 
-    console.log("D3 STACK!", vis.data, vis.stackedData, vis.color);
+    console.log("D3 STACK!", vis.data, vis.stackedData);
 
     // ADJUST SCALING
     vis.x.domain(d3.extent(vis.data, d => d[vis.xAttr]));
@@ -123,11 +123,8 @@ class SentiStackD3 {
       .classed("sentiStack", true);
 
     stackChart
-      // .enter()
-      // .append("g")
-      // .classed("sentiStack", true)
       .append("path")
-      .style("fill", (d, i) => vis.color[i])
+      .style("fill", d => vis.color(d.key))
       .attr("stroke", "steelblue")
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")

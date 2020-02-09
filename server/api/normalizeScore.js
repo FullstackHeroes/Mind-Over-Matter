@@ -41,6 +41,7 @@ router.get("/:userId", async function(req, res, next) {
 
 router.post("/", async function(req, res, next) {
   try {
+    console.log("hmmm -", req.body);
     const {
         normalizeScore,
         timeStamp,
