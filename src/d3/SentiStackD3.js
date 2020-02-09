@@ -8,7 +8,15 @@ class SentiStackD3 {
   constructor(element, data) {
     const vis = this;
     vis.xAttr = "timeStamp";
-    vis.yAttr = "runningScore";
+    vis.keys = [
+      "happy",
+      "surprised",
+      "neutral",
+      "disgusted",
+      "fearful",
+      "angry",
+      "sad"
+    ];
 
     // LABEL CREATION AND SCALING
     vis.x = d3.scaleTime().range([0, WIDTH]);
@@ -52,6 +60,12 @@ class SentiStackD3 {
       .attr("transform", `translate(0, ${HEIGHT})`);
     vis.yAxisGroup = vis.g.append("g");
 
+    // COLOR PALETTE
+    vis.color = d3
+      .scaleOrdinal()
+      .domain(vis.keys)
+      .range(d3.schemeSet1);
+
     // AREA CREATION
     vis.area = d3
       .area()
@@ -87,15 +101,6 @@ class SentiStackD3 {
   update(data) {
     const vis = this;
     vis.data = [...data].map(obj => Object.assign({}, obj));
-    vis.keys = [
-      "happy",
-      "surprised",
-      "neutral",
-      "disgusted",
-      "fearful",
-      "angry",
-      "sad"
-    ];
 
     vis.data.forEach(d => {
       d[vis.xAttr] = new Date(Date.parse(d[vis.xAttr]));
@@ -103,10 +108,6 @@ class SentiStackD3 {
       vis.keys.forEach(key => (d[key] = d[key] / totalSum));
     });
 
-    vis.color = d3
-      .scaleOrdinal()
-      .domain(vis.keys)
-      .range(d3.schemeSet1);
     vis.stackedData = d3.stack().keys(vis.keys)(vis.data);
 
     console.log("D3 STACK!", vis.data, vis.stackedData);
