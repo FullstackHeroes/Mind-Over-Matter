@@ -31,7 +31,7 @@ class Table extends Component {
     }
     if (tenResults.length) csvTenArr = makeCsvTable(tenResults);
     // if (oneHundredResults.lengh)  csvOneHundredArr = makeCsvTable(oneHundredResults)
-    console.log(oneHundredResults);
+    // console.log(oneHundredResults);
     return (
       <div className="tableFullDiv">
         <table className="tableElement">
