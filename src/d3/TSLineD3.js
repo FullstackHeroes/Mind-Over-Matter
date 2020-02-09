@@ -64,6 +64,8 @@ class TSLineD3 {
 
   update(data) {
     const vis = this;
+
+    console.log("HMM -", data);
     vis.data = [...data].map(obj => Object.assign({}, obj));
 
     vis.data.forEach(d => {
@@ -94,9 +96,10 @@ class TSLineD3 {
       .selectAll("text")
       .attr("font-size", 12);
 
-    // LINE CHART
+    // LINE CHART JOIN
     const lineChart = vis.g.selectAll(".trueScoreLine").data([vis.data]);
 
+    // ENTER
     lineChart
       .enter()
       .append("path")
@@ -104,7 +107,7 @@ class TSLineD3 {
       .merge(lineChart)
       .attr("d", vis.valueLine);
 
-    // JOIN
+    // CIRCLE JOIN
     const circles = vis.g.selectAll("circle").data(vis.data, d => d.name);
 
     // EXIT
