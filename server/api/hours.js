@@ -73,7 +73,7 @@ router.get("/:userId", async (req, res, next) => {
 router.get("/:userId/today", async (req, res, next) => {
   const text = `SELECT hours."screenTime"
   FROM hours
-  WHERE date(hours."timeStamp") = CURRENT_DATE;`;
+  WHERE date(hours."timeStamp") = CURRENT_DATE AND hours."userId" = ${req.params.userId}`;
   const userHours = await db.query(text);
   const screenTimeArr = userHours[0];
   if (screenTimeArr.length) {
@@ -84,8 +84,20 @@ router.get("/:userId/today", async (req, res, next) => {
   } else res.json(0);
 });
 
+router.get("/:userId/threehours", async (req, res, next) => {
+  const text = `SELECT hours."count" FROM hours WHERE date(hours."timeStamp") >= CURRENT_DATE - INTERVAL '3 hours' AND hours."userId" = ${req.params.userId}`;
+  const userSnapCount = await db.query(text);
+  const snapCountArr = userSnapCount[0];
+  if (snapCountArr.length) {
+    const threeHourSnapCount = snapCountArr.reduce((a, b) => ({
+      count: a.count + b.count
+    }));
+    res.json(threeHourSnapCount);
+  } else res.json(0);
+});
+
 router.get("/:userId/month", async (req, res, next) => {
-  const text = `SELECT hours."screenTime" FROM hours where DATE_PART('month', date(hours."timeStamp")) = DATE_PART('month', CURRENT_DATE);`;
+  const text = `SELECT hours."screenTime" FROM hours where DATE_PART('month', date(hours."timeStamp")) = DATE_PART('month', CURRENT_DATE) AND hours."userId" = ${req.params.userId}`;
   const userHours = await db.query(text);
   const screenTimeArr = userHours[0];
   if (screenTimeArr.length) {
@@ -97,7 +109,7 @@ router.get("/:userId/month", async (req, res, next) => {
 });
 
 router.get("/:userId/year", async (req, res, next) => {
-  const text = `SELECT hours."screenTime" FROM hours where DATE_PART('year', date(hours."timeStamp")) = DATE_PART('year', CURRENT_DATE)`;
+  const text = `SELECT hours."screenTime" FROM hours where DATE_PART('year', date(hours."timeStamp")) = DATE_PART('year', CURRENT_DATE) AND hours."userId" = ${req.params.userId}`;
   const userHours = await db.query(text);
   const screenTimeArr = userHours[0];
   if (screenTimeArr.length) {
@@ -109,7 +121,7 @@ router.get("/:userId/year", async (req, res, next) => {
 });
 
 router.get("/:userId/yesterday", async (req, res, next) => {
-  const text = `SELECT hours."screenTime" FROM hours WHERE date(hours."timeStamp") = CURRENT_DATE - INTERVAL '1 day'`;
+  const text = `SELECT hours."screenTime" FROM hours WHERE date(hours."timeStamp") = CURRENT_DATE - INTERVAL '1 day' AND hours."userId" = ${req.params.userId}`;
   const userHours = await db.query(text);
   const screenTimeArr = userHours[0];
   if (screenTimeArr.length) {
@@ -121,7 +133,7 @@ router.get("/:userId/yesterday", async (req, res, next) => {
 });
 
 router.get("/:userId/week", async (req, res, next) => {
-  const text = `SELECT hours."screenTime" FROM hours WHERE date("timeStamp") >= CURRENT_DATE - INTERVAL '7 days'`;
+  const text = `SELECT hours."screenTime" FROM hours WHERE date("timeStamp") >= CURRENT_DATE - INTERVAL '7 days' AND hours."userId" = ${req.params.userId}`;
   const userHours = await db.query(text);
   const screenTimeArr = userHours[0];
   if (screenTimeArr.length) {
