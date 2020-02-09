@@ -39,6 +39,7 @@ class Table extends Component {
     const { fullScoreObj, user } = this.props,
       nameArr = user.name ? user.name.split(" ") : [],
       headers = [
+        { label: "Time Stamp", key: "timeStamp" },
         { label: "True Score", key: "trueScore" },
         { label: "Happy %", key: "happy" },
         { label: "Surprised %", key: "surprised" },
