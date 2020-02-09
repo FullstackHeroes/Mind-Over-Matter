@@ -6,21 +6,22 @@ import { makeCsvTable, getAllUserStats } from "../../utils/utilities";
 import { CSVLink } from "react-csv";
 
 class Table extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     allResults: []
-  //   };
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      allResults: []
+    };
+  }
 
   async componentDidMount() {
     const { user } = this.props;
     if (user && user.id) this.props.setFullScoreObj(user.id);
 
-    // //GET ALL USER HISTORY DATA
-    // this.state.allResults = await getAllUserStats(user.id);
+    //GET ALL USER HISTORY DATA
+    const results = await getAllUserStats(user.id);
+    this.setState({ allResults: makeCsvTable(results) });
   }
-
+  make;
   componentDidUpdate(prevProps) {
     const { fullScoreObj, user } = this.props;
     if (fullScoreObj.length !== prevProps.fullScoreObj.length) {
@@ -42,7 +43,7 @@ class Table extends Component {
     // if (fullScoreObj) userDataResults = fullScoreObj.reverse();
     // if (userDataResults) userDataArr = makeCsvTable(userDataResults);
 
-    // console.log(this.state.allResults);
+    console.log("TableAllResults", this.state.allResults);
     return (
       <div className="tableFullDiv">
         <table className="tableElement">
