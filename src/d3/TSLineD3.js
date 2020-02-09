@@ -66,8 +66,8 @@ class TSLineD3 {
     const vis = this;
     vis.data = [...data].map(obj => Object.assign({}, obj));
 
-    const point = data[data.length - 1];
-    console.log("HMM -", point.timeStamp, point);
+    // const point = data[data.length - 1];
+    // console.log("HMM -", point.timeStamp, point);
 
     vis.data.forEach(d => {
       d[vis.xAttr] = new Date(Date.parse(d[vis.xAttr]));
