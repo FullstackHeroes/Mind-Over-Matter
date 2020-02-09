@@ -12,6 +12,7 @@ import {
 import ChartRSLine from "../chart/ChartRSLine";
 import ChartTSLine from "../chart/ChartTSLine";
 import ChartSentiStack from "../chart/ChartSentiStack";
+import ScreenTimeToday from "../chart/ScreenTimeToday";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -53,10 +54,12 @@ class Dashboard extends Component {
         <h3 className="dashboardHeader">Hi, {user.name}!</h3>
 
         <div className="dashboardRowOne dashboardRow">
-          {/* <div className="dashboardTable">Time Session</div> */}
+          <div className="dashboardTable">
+            <ScreenTimeToday todaysScreenHours={this.props.todaysScreenMins} />
+          </div>
           <div className="dashboardTable">
             <h3>Screen Time</h3>
-            Today: {this.props.todaysScreenMins} mins
+            Today: {this.props.todaysScreenMins} hours
             <br />
             Yesterday: {this.props.yesterdaysScreenMins} mins
             <br />
