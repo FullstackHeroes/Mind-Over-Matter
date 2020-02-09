@@ -40,7 +40,7 @@ let sentimentSpectrum = {
   },
   angry: {
     spectrumScore: 1,
-    multiplier: 1
+    multiplier: 2
   },
   sad: {
     spectrumScore: 1,

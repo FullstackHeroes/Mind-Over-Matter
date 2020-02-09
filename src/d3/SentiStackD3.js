@@ -121,7 +121,7 @@ class SentiStackD3 {
 
     vis.g
       .selectAll("mylabels")
-      .data(keys)
+      .data(vis.keys)
       .enter()
       .append("text")
       .attr("x", 400 + size * 1.2)
