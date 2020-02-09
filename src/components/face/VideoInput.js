@@ -26,9 +26,9 @@ class VideoInput extends Component {
   constructor(props) {
     super(props);
     this.webcam = React.createRef();
-    this.state = {
-      detections: null
-    };
+    // this.state = {
+    //   detections: null
+    // };
   }
 
   componentDidMount = async () => {
@@ -83,9 +83,9 @@ class VideoInput extends Component {
         await getFaceDescr(this.webcam.current.getScreenshot(), inputSize).then(
           async fullDesc => {
             if (!!fullDesc && fullDesc.length) {
-              this.setState({
-                detections: fullDesc.map(fd => fd.detection)
-              });
+              // this.setState({
+              //   detections: fullDesc.map(fd => fd.detection)
+              // });
 
               const desc = fullDesc[0],
                 screenScore = desc.detection._score,

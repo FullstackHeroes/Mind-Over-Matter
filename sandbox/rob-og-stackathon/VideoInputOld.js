@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import Webcam from "react-webcam";
-import { loadModels, getFullFaceDescription } from "./face";
+import { loadModels, getFullFaceDescription } from "./faceOld";
 
 // Import face profile
 // const JSON_PROFILE = require('../descriptors/bnk48.json')
