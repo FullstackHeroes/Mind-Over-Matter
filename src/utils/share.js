@@ -1,7 +1,6 @@
 // ---------------------- VERSION 1 ---------------------- //
 (function(exports) {
   exports.utilShare = function() {
-    console.log("FRONT SIDE -");
     return {
       snapIntDefault: 1000,
       dbIntDefault: 120000,
@@ -68,7 +67,6 @@
 
 // (function(exports) {
 //   exports.utilShare = function() {
-//     console.log("FRONT SIDE -");
 //     return {
 //       snapIntDefault,
 //       dbIntDefault,
@@ -136,7 +134,6 @@
 
 // (function(exports) {
 //   exports.utilShare = function() {
-//     console.log("FRONT SIDE -");
 //     return {
 //       snapIntDefault,
 //       dbIntDefault,

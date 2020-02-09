@@ -28,12 +28,14 @@ const userSeed = [
 const trueScoreGen = count => {
   const trueRes = [];
   while (count) {
-    const obj = {
+    const rounding = 10 ** 5,
+      obj = {
         userId: 1,
         trueScore: 0,
         timeStamp: dateCreate(),
         count: dbIntDefault / snapIntDefault,
-        screenScore: Math.random() * 0.5 + 0.5,
+        screenScore:
+          Math.floor((Math.random() * 0.5 + 0.5) * rounding) / rounding,
         screenTime: 0
       },
       numArr = new Array(7)
@@ -41,8 +43,7 @@ const trueScoreGen = count => {
         .map((val, i) => (i === 0 ? Math.random() * 10 : Math.random())),
       totalRand = numArr.reduce((acm, val) => (acm += val), 0),
       hoursDiff =
-        obj.timeStamp.getHours() - obj.timeStamp.getTimezoneOffset() / 60,
-      rounding = 10 ** 5;
+        obj.timeStamp.getHours() - obj.timeStamp.getTimezoneOffset() / 60;
 
     // ADDING EACH INDIVIDUAL EMOTION SCORE AND IMPACTING TRUE SCORE
     for (let idx in emotions) {
@@ -71,8 +72,37 @@ const trueScoreGen = count => {
 const normalScoreGen = count => {
   const normRes = [];
   while (count) {
-    const obj = { userId: 1 };
-    trueRes.push(obj);
+    const rounding = 10 ** 5,
+      normScoreMin = 0.5,
+      normScoreMax = 0.8,
+      runScoreMin = 0.5,
+      runScoreMax = 0.8,
+      obj = {
+        userId: 1,
+        normalizeScore:
+          Math.floor(
+            (Math.random() * (normScoreMax - normScoreMin) + normScoreMin) *
+              rounding
+          ) / rounding,
+        runningScore:
+          Math.floor(
+            (Math.random() * (runScoreMax - runScoreMin) + runScoreMin) *
+              rounding
+          ) / rounding,
+        sentimentDiff: 0,
+        timeStamp: dateCreate()
+      },
+      hoursDiff =
+        obj.timeStamp.getHours() - obj.timeStamp.getTimezoneOffset() / 60;
+
+    // ADJUST EACH OF THE OTHER ATTRIBUTES
+    obj.timeStamp.setHours(hoursDiff);
+    obj.timeStamp.setSeconds(obj.timeStamp.getSeconds() - count + 1);
+    obj.sentimentDiff =
+      Math.floor((obj.runningScore / obj.normalizeScore) * rounding) / rounding;
+
+    // STORE EACH INSTANCE OBJ INTO PARENT ARRAY
+    normRes.push(obj);
     count--;
   }
   return normRes;
@@ -1288,13 +1318,11 @@ const seed = async () => {
   await db.sync({ force: true });
   console.log("db synced !");
 
-  // console.log("hmm -", new Date());
-  // console.log("seed fn -", trueScoreGen(2));
-
   await User.bulkCreate(userSeed);
   // await Hour.bulkCreate(hourSeed);
+  // await NormalizeScore.bulkCreate(normalizeScoreSeed);
   await Hour.bulkCreate(trueScoreGen(4));
-  await NormalizeScore.bulkCreate(normalizeScoreSeed);
+  await NormalizeScore.bulkCreate(normalScoreGen(4));
 
   console.log(`seeded successfully`);
 };
