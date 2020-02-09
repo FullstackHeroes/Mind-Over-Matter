@@ -78,7 +78,8 @@ class SentiStackD3 {
         [0, 0],
         [WIDTH, HEIGHT]
       ])
-      .on("end", d => vis.update(d));
+      // .on("end", d => vis.update(d));
+      .on("end", vis.update);
 
     vis.update(data);
   }
@@ -105,7 +106,7 @@ class SentiStackD3 {
     vis.color = d3
       .scaleOrdinal()
       .domain(vis.keys)
-      .range(d3.schemeSet2);
+      .range(d3.schemeSet3);
     vis.stackedData = d3.stack().keys(vis.keys)(vis.data);
 
     // console.log("D3 STACK!", vis.data, vis.stackedData);
@@ -150,10 +151,12 @@ class SentiStackD3 {
       // .attr("stroke-linecap", "round")
       .attr("stroke-width", 1)
       .merge(stackChart)
-      .attr("d", d => vis.area(d))
+      .attr("d", d => vis.area(d));
+
+    stackChart
       .append("g")
       .attr("class", "brush")
-      .call(vis.brush(vis.data));
+      .call(vis.brush);
   }
 }
 

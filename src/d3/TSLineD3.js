@@ -125,8 +125,8 @@ class TSLineD3 {
       .enter()
       .append("circle")
       .classed("trueScoreLineCircle", true)
-      .attr("cy", d => vis.y(d[vis.yAttr]))
       .attr("cx", d => vis.x(d[vis.xAttr]))
+      .attr("cy", d => vis.y(d[vis.yAttr]))
       .attr("r", 4)
       .on("click", d => console.log("Clicking -", d));
   }
