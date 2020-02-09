@@ -220,6 +220,41 @@ h6 {
   border-width: 1px;
 }
 
+.csvFullDiv {
+  background-color: lightgray;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  min-width: 30%;
+  height: 200px;
+  padding: 15px;
+  margin: 0 10px;
+}
+
+.csvHeaderText {
+  color: black;
+  font-weight: bold;
+}
+
+.csvBtn {
+  border-radius: 3px;
+  font-size: 15px;
+  font-weight: bold;
+  height: 35px;
+  width: 200px;
+}
+
+.csvBtn:hover {
+  background-color: lightskyblue;
+}
+
+.csvLinkText {
+  color: black;
+  text-decoration: none;
+}
+
 /* ------------------ DASHBOARD ELEMENT ------------------ */
 .dashboardFullDiv {
   background-color: lightgray;

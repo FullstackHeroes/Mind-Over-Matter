@@ -1,6 +1,5 @@
 import axios from "axios";
 import store from "../store";
-import { tsv } from "d3";
 
 // VARIABLE DRIVERS
 const rounding = 10 ** 5; // DECIMAL ROUNDING
@@ -8,7 +7,7 @@ const screenWeight = 0.5;
 const countWeight = 1 - screenWeight;
 export const normalizedLen = 3000; // LENGTH FOR NORMALIZED CALC
 const wtdAvgCount = 50; // WEIGHTED AVERAGE COUNT LIMIT
-export const snapIntDefault = 1000;
+export const snapIntDefault = 3000;
 export const dbIntDefault = 120000;
 
 // DATE CREATION FUNCTION
@@ -198,12 +197,12 @@ export const calcNormalizeUtility = async userId => {
   return Math.round(calcNormalScore * rounding) / rounding;
 };
 
-//  CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
+// CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
 export const calcScreenTime = (length, interval) => (interval * length) / 1000;
 
-//CALCULATE CURRENT MENTAL STATE USING AXIOS REQUESTS AND STORAGE DATA
+// CALCULATE CURRENT MENTAL STATE USING AXIOS REQUESTS AND STORAGE DATA
 export const calcWeightedTrueScore = async userId => {
-  //RETRIEVE LS DATA AND DB SCORE OBJECTS AND CONDENSE LS DATA INTO SINGLE OBJ
+  // RETRIEVE LS DATA AND DB SCORE OBJECTS AND CONDENSE LS DATA INTO SINGLE OBJ
   const userLocalData = JSON.parse(localStorage.getItem("snapshots"));
   const condensedLSData =
     userLocalData && userLocalData.length
@@ -214,10 +213,10 @@ export const calcWeightedTrueScore = async userId => {
   // APPEND LS DATA TO DB SCORE OBJ
   if (condensedLSData.length) userDbData.push(condensedLSData);
 
-  //ORDER aggUserDataObjArr FROM NEW TO OLD
+  // ORDER aggUserDataObjArr FROM NEW TO OLD
   const orderArr = userDbData.reverse();
 
-  //BASE DATA FOR WEIGHTED AVG CALC
+  // BASE DATA FOR WEIGHTED AVG CALC
   let totalScreenScore = 0,
     totalCount = 0,
     i = 0;
@@ -229,10 +228,10 @@ export const calcWeightedTrueScore = async userId => {
     i++;
   }
 
-  //SHORTEN OBJ ARR INTO RELEVANT SIZE (wtdAvgCount)
+  // SHORTEN OBJ ARR INTO RELEVANT SIZE (wtdAvgCount)
   const shortOrderArr = orderArr.slice(0, i);
 
-  //BEGIN WEIGHTED CALCULATIONS
+  // BEGIN WEIGHTED CALCULATIONS
   const calcNormalScore = shortOrderArr.reduce((acm, data) => {
     const screenWtdAvg = (data.screenScore / totalScreenScore) * screenWeight,
       countWtdAvg = (data.count / totalCount) * countWeight,
@@ -242,62 +241,3 @@ export const calcWeightedTrueScore = async userId => {
 
   return Math.floor(calcNormalScore * rounding) / rounding;
 };
-
-//THIS FUNCTION TAKES AN ARRAY OF OBJECTS AND BREAKS IT DOWN INTO A 2D ARR TO BE USED TO OUTPUT DATA FOR A CSV FILE
-export const makeCsvTable = dataObjArr => {
-  const headRow = [
-    "True Score",
-    "Screen Score %",
-    "Happy %",
-    "Surprised %",
-    "Neutral %",
-    "Disgusted %",
-    "Fearful %",
-    "Angry %",
-    "Sad %"
-  ];
-  // decimal = 1;
-
-  let csvData = [headRow];
-  dataObjArr.forEach(obj => {
-    csvData.push([
-      obj.trueScore,
-      obj.screenScore,
-      obj.happy,
-      obj.surprised,
-      obj.neutral,
-      obj.disgusted,
-      obj.fearful,
-      obj.angry,
-      obj.sad
-    ]);
-
-    //SWITCH BACK TO BELOW CODE ONCE WE CAN PASS FIELDS SUCCESSFULLY
-    // csvData.push([
-    //   Number((obj["trueScore"] * 1).toFixed(decimal)),
-    //   Number((obj["screenScore"] * 100).toFixed(decimal)),
-    //   Number((obj["happy"] * 100).toFixed(decimal)),
-    //   Number((obj["surprised"] * 100).toFixed(decimal)),
-    //   Number((obj["neutral"] * 100).toFixed(decimal)),
-    //   Number((obj["disgusted"] * 100).toFixed(decimal)),
-    //   Number((obj["fearful"] * 100).toFixed(decimal)),
-    //   Number((obj["angry"] * 100).toFixed(decimal)),
-    //   Number((obj["sad"] * 100).toFixed(decimal))
-    // ]);
-  });
-  // console.log("csvData", csvData);
-  return csvData;
-};
-
-//FUNCTION THAT USES THE makeCsvTable FUNCTION TO FORMAL ALL USER DATA
-export const getAllUserStats = async userId => {
-  try {
-    const { data } = await axios.get(`/api/hours/${userId}`);
-    return makeCsvTable(data);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-//AVERAGE 15 MINS OF SNAPSHOTS
-export const averageLocalStorageSnaps = snaps => {};

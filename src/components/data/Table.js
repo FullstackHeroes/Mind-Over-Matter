@@ -1,27 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { CSVLink } from "react-csv";
 import { setFullScoreObj } from "../../store";
 import TableRow from "./TableRow";
-import { makeCsvTable, getAllUserStats } from "../../utils/utilities";
-import { CSVLink } from "react-csv";
 
 class Table extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      allResults: []
-    };
-  }
-
   async componentDidMount() {
     const { user } = this.props;
     if (user && user.id) this.props.setFullScoreObj(user.id);
-
-    //GET ALL USER HISTORY DATA
-    // const results = await getAllUserStats(user.id);
-    // console.log("!!!USER:", user)
-    // console.log("!!!!!!!!!RESULTS:", results);
-    // this.setState({ allResults: makeCsvTable(results) });
   }
 
   componentDidUpdate(prevProps) {
@@ -31,25 +17,21 @@ class Table extends Component {
     }
   }
 
-  getUserData() {
-    const { user } = this.props;
-  }
-
   render() {
-    const { fullScoreObj } = this.props;
+    const { fullScoreObj, user } = this.props,
+      nameArr = user.name ? user.name.split(" ") : [],
+      headers = [
+        { label: "Time Stamp", key: "timeStamp" },
+        { label: "True Score", key: "trueScore" },
+        { label: "Happy %", key: "happy" },
+        { label: "Surprised %", key: "surprised" },
+        { label: "Neutral %", key: "neutral" },
+        { label: "Disgusted %", key: "disgusted" },
+        { label: "Fearful %", key: "fearful" },
+        { label: "Angry %", key: "angry" },
+        { label: "Sad %", key: "sad" }
+      ];
 
-    //GET MOST RECENT DATA FOR USER SNAPSHOT
-    let tenResults,
-      csvTenArr = [];
-    if (fullScoreObj) tenResults = fullScoreObj.slice(-10).reverse();
-    if (tenResults) csvTenArr = makeCsvTable(tenResults);
-
-    // let userDataResults,
-    //   userDataArr = [];
-    // if (fullScoreObj) userDataResults = fullScoreObj.reverse();
-    // if (userDataResults) userDataArr = makeCsvTable(userDataResults);
-
-    console.log("TableAllResults", this.state.allResults);
     return (
       <div className="tableFullDiv">
         <table className="tableElement">
@@ -76,23 +58,40 @@ class Table extends Component {
               : null}
           </tbody>
         </table>
-        <div>
-          <div> Download My Results</div>
-          <button>
-            <CSVLink
-              data={csvTenArr}
-              filename={`${this.props.user.name}_last_10.csv`}>
-              Current Snapshot
-            </CSVLink>
-          </button>
-          <button>
-            <CSVLink
-              data={this.state.allResults}
-              filename={`${this.props.user.name}_all.csv`}>
-              Download User History
-            </CSVLink>
-          </button>
-        </div>
+
+        {user && fullScoreObj && fullScoreObj.length ? (
+          <div className="csvFullDiv">
+            <span className="csvHeaderText">Download My Results</span>
+
+            <button className="csvBtnLimitHistory csvBtn">
+              <CSVLink
+                data={fullScoreObj.slice(-15).reverse()}
+                headers={headers}
+                filename={`${
+                  nameArr.length > 1
+                    ? nameArr[0] + "_" + nameArr[1]
+                    : nameArr[0]
+                }_Last_15.csv`}
+                className="csvLinkText">
+                Last 15 Score History
+              </CSVLink>
+            </button>
+
+            <button className="csvBtnAllHistory csvBtn">
+              <CSVLink
+                data={fullScoreObj.reverse()}
+                headers={headers}
+                filename={`${
+                  nameArr.length > 1
+                    ? nameArr[0] + "_" + nameArr[1]
+                    : nameArr[0]
+                }_All_History.csv`}
+                className="csvLinkText">
+                All Score History
+              </CSVLink>
+            </button>
+          </div>
+        ) : null}
       </div>
     );
   }
