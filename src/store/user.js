@@ -45,7 +45,11 @@ export const logout = userId => async dispatch => {
     const LSDataObj = JSON.parse(localStorage.getItem("snapshots"));
     if (LSDataObj && LSDataObj.length) {
       const targetLSDataObj = LSDataObj.filter(snap => snap.userId === userId),
-        adjLSDataObj = condenseScoreObj(targetLSDataObj, userId);
+        adjLSDataObj = condenseScoreObj(targetLSDataObj, userId),
+        hoursDiff =
+          adjLSDataObj.timeStamp.getHours() -
+          adjLSDataObj.timeStamp.getTimezoneOffset() / 60;
+      adjLSDataObj.timeStamp.setHours(hoursDiff);
       await axios.post("/auth/logout", adjLSDataObj);
     } else await axios.post("/auth/logout");
 

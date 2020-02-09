@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import AlertContent from "./AlertContent";
 import { connect } from "react-redux";
+import { dateCreate } from "../../utils/utilities";
 
 class PopUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showPopUp: false,
-      lastAlert: new Date()
+      lastAlert: dateCreate()
     };
     this.showHelp = this.showHelp.bind(this);
     this.hideHelp = this.hideHelp.bind(this);
@@ -21,7 +22,7 @@ class PopUp extends Component {
   hideHelp = () => {
     this.setState({
       showPopUp: false,
-      lastAlert: new Date()
+      lastAlert: dateCreate()
     });
   };
 

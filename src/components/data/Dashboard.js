@@ -101,20 +101,18 @@ class Dashboard extends Component {
           {runningScore.length ? (
             <ChartRSLine runningScore={runningScore.slice(-10)} />
           ) : (
-            "Loading"
+            <p>Loading</p>
           )}
 
           {fullScoreObj.length ? (
             <ChartTSLine fullScoreObj={fullScoreObj.slice(-10)} />
           ) : (
-            "Loading"
+            <p>Loading</p>
           )}
 
-          {/* {fullScoreObj.length ? (
+          {fullScoreObj.length ? (
             <ChartSentiStack fullScoreObj={fullScoreObj.slice(-10)} />
-          ) : (
-            "Loading"
-          )} */}
+          ) : null}
         </div>
       </div>
     );

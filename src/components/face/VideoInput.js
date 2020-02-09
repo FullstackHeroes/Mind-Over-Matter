@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import Webcam from "react-webcam";
 import { loadModels, getFaceDescr } from "../../utils/faceBase";
-import { sentimentAlgo, calcWeightedTrueScore } from "../../utils/utilities";
+import {
+  sentimentAlgo,
+  calcWeightedTrueScore,
+  dateCreate
+} from "../../utils/utilities";
 import PopUp from "../global/PopUp";
 import {
   setNormalizedScore,
@@ -22,9 +25,6 @@ class VideoInput extends Component {
   constructor(props) {
     super(props);
     this.webcam = React.createRef();
-    this.state = {
-      detections: null
-    };
   }
 
   componentDidMount = async () => {
@@ -45,7 +45,10 @@ class VideoInput extends Component {
 
   // LOCAL STORAGE MANAGER
   appendLocalStorage = (snapshot, userId) => {
-    snapshot.timeStamp = new Date();
+    const date = dateCreate(),
+      hoursDiff = date.getHours() - date.getTimezoneOffset() / 60;
+    date.setHours(hoursDiff);
+    snapshot.timeStamp = date;
     snapshot.userId = userId;
     if (localStorage.getItem("snapshots")) {
       const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
@@ -76,10 +79,6 @@ class VideoInput extends Component {
         await getFaceDescr(this.webcam.current.getScreenshot(), inputSize).then(
           async fullDesc => {
             if (!!fullDesc && fullDesc.length) {
-              this.setState({
-                detections: fullDesc.map(fd => fd.detection)
-              });
-
               const desc = fullDesc[0],
                 screenScore = desc.detection._score,
                 expressions = desc.expressions,
@@ -93,8 +92,6 @@ class VideoInput extends Component {
                 mostRecentNormalized =
                   normalizedScore[normalizedScore.length - 1].normalizeScore,
                 RunningTrueScore = await calcWeightedTrueScore(userId);
-              console.log("MRN:", mostRecentNormalized);
-              console.log("RTS:", RunningTrueScore);
               this.props.postCurrentRunningSentiment(
                 (RunningTrueScore / mostRecentNormalized) * 100
               );
@@ -135,86 +132,25 @@ class VideoInput extends Component {
   }
 
   render() {
-    const { detections } = this.state;
     const videoConstraints = {
       width: WIDTH,
       height: HEIGHT,
       facingMode: "user"
     };
-    let detected = "";
-
-    // DETECTION BOX CODE (POSSIBLY OPTIONAL)
-    let drawBox = null;
-    if (!!detections) {
-      drawBox = detections.map((detection, idx) => {
-        let _H = detection.box.height;
-        let _W = detection.box.width;
-        let _X = detection.box._x;
-        let _Y = detection.box._y;
-        detected = "detected";
-
-        return (
-          <div key={idx}>
-            GOT DETECTIONS!
-            <div
-              style={{
-                position: "absolute",
-                border: "solid",
-                borderColor: "blue",
-                height: _H,
-                width: _W,
-                transform: `translate(${_X}px,${_Y}px)`
-              }}
-            />
-          </div>
-        );
-      });
-    }
 
     return (
-      <div className="cameraFullDiv">
-        <div className={detected}></div>
-        <div
-          className="camera"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center"
-            // backgroundColor: "black"
-          }}>
-          <div
-            // TO ADD THE CAMERA BACK, width: WIDTH, height: HEIGHT, opacity: 1
-            style={{
-              width: 0,
-              height: 0,
-              opacity: 0
-            }}>
-            <div style={{ position: "relative", width: WIDTH }}>
-              {!!videoConstraints ? (
-                <div
-                  style={{
-                    position: "absolute",
-                    backgroundColor: "black"
-                  }}>
-                  <Webcam
-                    audio={false}
-                    width={WIDTH}
-                    height={HEIGHT}
-                    ref={this.webcam}
-                    screenshotFormat="image/jpeg"
-                    videoConstraints={videoConstraints}
-                  />
-                </div>
-              ) : null}
-              {!!drawBox ? drawBox : null}
-            </div>
-            <div
-              style={{
-                position: "relative"
-              }}></div>
-          </div>
+      <div className="videoInputDiv">
+        <div className="cameraDiv">
+          <Webcam
+            audio={false}
+            width={WIDTH}
+            height={HEIGHT}
+            ref={this.webcam}
+            screenshotFormat="image/jpeg"
+            videoConstraints={videoConstraints}
+          />
         </div>
-        <PopUp currentSentiment={this.props.currentRunningSentiment} />
+        {/* <PopUp currentSentiment={this.props.currentRunningSentiment} /> */}
       </div>
     );
   }
