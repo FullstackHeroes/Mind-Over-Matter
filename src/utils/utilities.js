@@ -7,9 +7,29 @@ const screenWeight = 0.5;
 const countWeight = 1 - screenWeight;
 export const normalizedLen = 3000; // LENGTH FOR NORMALIZED CALC
 const wtdAvgCount = 50; // WEIGHTED AVERAGE COUNT LIMIT
+export const snapIntDefault = 1000;
+export const dbIntDefault = 120000;
+
+// DATE CREATION FUNCTION
+export const dateCreate = () => {
+  const date = new Date().toLocaleString("en-US", {
+    timeZone: "America/New_York"
+  });
+  return new Date(date);
+};
+
+export const emotions = [
+  "happy",
+  "surprised",
+  "neutral",
+  "disgusted",
+  "fearful",
+  "angry",
+  "sad"
+];
 
 // SCORING FROM 1-10 (BAD - GOOD) AND MULTIPLIER WILL BE DONE PRO-RATA
-let sentimentSpectrum = {
+export let sentimentSpectrum = {
   happy: {
     spectrumScore: 10,
     multiplier: 1
@@ -20,7 +40,7 @@ let sentimentSpectrum = {
   },
   neutral: {
     spectrumScore: 5,
-    multiplier: 4
+    multiplier: 2
   },
   disgusted: {
     spectrumScore: 3,
@@ -32,11 +52,11 @@ let sentimentSpectrum = {
   },
   angry: {
     spectrumScore: 1,
-    multiplier: 1
+    multiplier: 3
   },
   sad: {
     spectrumScore: 1,
-    multiplier: 1
+    multiplier: 3
   }
 };
 
@@ -92,7 +112,7 @@ export const condenseScoreObj = (targetScoreObj, userId) => {
         fearful: 0,
         disgusted: 0,
         surprised: 0,
-        timeStamp: new Date(),
+        timeStamp: dateCreate(),
         count: targetScoreObj.length,
         screenTime: 0
       },
@@ -155,7 +175,7 @@ export const calcNormalizeUtility = async userId => {
     condensedLSObj = condenseScoreObj(LSScoreObj, userId);
 
   // APPEND LS DATA TO DB SCORE OBJ
-  dbScoreObj.push(condensedLSObj);
+  if (Object.keys(condensedLSObj).length) dbScoreObj.push(condensedLSObj);
 
   // GETTING BASIS FOR WEIGHTED AVERAGE CALC
   const shortenFullScore = dbScoreObj.slice(-normalizedLen);

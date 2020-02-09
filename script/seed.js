@@ -1,5 +1,12 @@
 const db = require("../server/db");
 const { User, Hour, NormalizeScore } = require("../server/db/models");
+const {
+  dateCreate,
+  sentimentSpectrum,
+  emotions,
+  snapIntDefault,
+  dbIntDefault
+} = require("../src/utils/utilities");
 
 const userSeed = [
   {
@@ -13,6 +20,38 @@ const userSeed = [
     password: "123"
   }
 ];
+
+const trueScoreGen = count => {
+  const trueRes = [];
+  while (count) {
+    const obj = {
+        userId: 1,
+        trueScore: 0,
+        count: dbIntDefault / snapIntDefault
+      },
+      numArr = new Array(7).fill(null).map(() => Math.random()),
+      totalRand = numArr.reduce((acm, val) => (acm += val), 0);
+    for (let idx in emotions) {
+      const emotion = emotions[idx],
+        emotScore = numArr[idx] / totalRand;
+      obj[emotion] = emotScore;
+      obj.trueScore += emotScore * sentimentDiff[emotion].spectrumScore;
+    }
+    trueRes.push(obj);
+    count--;
+  }
+  return trueRes;
+};
+
+const normalScoreGen = count => {
+  const normRes = [];
+  while (count) {
+    const obj = { userId: 1 };
+    trueRes.push(obj);
+    count--;
+  }
+  return normRes;
+};
 
 const hourSeed = [
   {

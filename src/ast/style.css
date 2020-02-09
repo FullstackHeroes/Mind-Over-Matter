@@ -35,13 +35,13 @@ h6 {
 .signInFullDiv {
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 75vw;
   color: black;
 }
 
 .authFormDiv {
   margin: 20px auto;
-  width: 35vw;
+  width: 35%;
   height: 50vh;
   min-height: 300px;
   display: flex;
@@ -78,6 +78,7 @@ h6 {
 .authInputDiv {
   width: 80%;
   display: flex;
+  justify-content: center;
   align-items: center;
   margin: 5px 0;
 }
@@ -126,6 +127,20 @@ h6 {
 .navBarLink {
   font-size: 20px;
   font-weight: bold;
+}
+
+.selectedNavLink {
+  color: rgba(0, 152, 195, 0.8);
+}
+
+/* ------------------ VIDEO INPUT ELEMENT ------------------ */
+.cameraDiv {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -100;
 }
 
 /* ------------------ MAIN APP ELEMENT ------------------ */
@@ -273,6 +288,11 @@ img {
   float: left;
   margin-left: 5%;
   margin-right: 5%;
+}
+
+/* ------------------ CHART DIV ELEMENT ------------------ */
+.chartWrapDiv {
+  min-width: 30%;
 }
 
 /* ------------------ RUNNING LINE CHART ELEMENT ------------------ */

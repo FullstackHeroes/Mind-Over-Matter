@@ -2,7 +2,10 @@ import axios from "axios";
 import {
   condenseScoreObj,
   calcNormalizeUtility,
-  calcWeightedTrueScore
+  calcWeightedTrueScore,
+  dateCreate,
+  snapIntDefault,
+  dbIntDefault
 } from "../utils/utilities";
 
 // INITIAL STATE
@@ -25,7 +28,10 @@ const GET_SENTIMENT_DIFF = "GET_SENTIMENT_DIFF";
 const GET_CURRENT_RUNNING_SENTIMENT = "GET_CURRENT_RUNNING_SENTIMENT";
 
 // ACTION CREATORS
-export const getTimeInterval = (snapInterval = 2000, dbInterval = 10000) => {
+export const getTimeInterval = (
+  snapInterval = snapIntDefault,
+  dbInterval = dbIntDefault
+) => {
   return {
     type: GET_TIME_INTERVAL,
     snapInterval,
@@ -95,7 +101,11 @@ export const postLSScoreObj = userId => {
       // ADJUSTING LS SCORE OBJ FOR BACKEND DIGESTION
       const LSDataObj = JSON.parse(localStorage.getItem("snapshots")),
         targetLSDataObj = LSDataObj.filter(snap => snap.userId === userId),
-        adjLSDataObj = condenseScoreObj(targetLSDataObj, userId);
+        adjLSDataObj = condenseScoreObj(targetLSDataObj, userId),
+        hoursDiff =
+          adjLSDataObj.timeStamp.getHours() -
+          adjLSDataObj.timeStamp.getTimezoneOffset() / 60;
+      adjLSDataObj.timeStamp.setHours(hoursDiff);
 
       // INTERACT WITH DATABASE
       const newWtdScore = await axios.post("/api/hours", adjLSDataObj);
@@ -127,12 +137,15 @@ export const postNormalizedScore = userId => {
     try {
       const normalizeScore = await calcNormalizeUtility(userId),
         runningScore = await calcWeightedTrueScore(userId),
-        { data } = await axios.post(`/api/normalizeScore`, {
+        timeStamp = dateCreate(),
+        hoursDiff = timeStamp.getHours() - timeStamp.getTimezoneOffset() / 60;
+      timeStamp.setHours(hoursDiff);
+      const { data } = await axios.post(`/api/normalizeScore`, {
           userId,
           normalizeScore,
           runningScore,
           sentimentDiff: runningScore / normalizeScore,
-          timeStamp: new Date()
+          timeStamp
         }),
         { normalizeScoreArr, runningScoreArr, sentimentDiffArr } = data;
       dispatch(getNormalizedScore(normalizeScoreArr));
