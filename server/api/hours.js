@@ -80,7 +80,7 @@ router.get("/:userId/today", async (req, res, next) => {
     const dailyScreenTime = screenTimeArr.reduce((a, b) => ({
       screenTime: a.screenTime + b.screenTime
     }));
-    res.json(Math.floor(dailyScreenTime.screenTime / 60));
+    res.json(dailyScreenTime.screenTime / 3600);
   } else res.json(0);
 });
 
@@ -104,7 +104,7 @@ router.get("/:userId/month", async (req, res, next) => {
     const dailyScreenTime = screenTimeArr.reduce((a, b) => ({
       screenTime: a.screenTime + b.screenTime
     }));
-    res.json(Math.floor(dailyScreenTime.screenTime / 120));
+    res.json(Math.floor(dailyScreenTime.screenTime / 3600));
   } else res.json(0);
 });
 
@@ -116,7 +116,7 @@ router.get("/:userId/year", async (req, res, next) => {
     const dailyScreenTime = screenTimeArr.reduce((a, b) => ({
       screenTime: a.screenTime + b.screenTime
     }));
-    res.json(Math.floor(dailyScreenTime.screenTime / 120));
+    res.json(Math.floor(dailyScreenTime.screenTime / 3600));
   } else res.json(0);
 });
 
@@ -140,7 +140,7 @@ router.get("/:userId/week", async (req, res, next) => {
     const weeksScreenTime = screenTimeArr.reduce((a, b) => ({
       screenTime: a.screenTime + b.screenTime
     }));
-    res.json(Math.round(weeksScreenTime.screenTime / 120));
+    res.json(Math.round(weeksScreenTime.screenTime / 3600));
   } else res.json(0);
 });
 

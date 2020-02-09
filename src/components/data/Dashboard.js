@@ -55,7 +55,6 @@ class Dashboard extends Component {
 
         <div className="dashboardRowOne dashboardRow">
           <div className="dashboardTable">
-            Today
             <ScreenTimeToday todaysScreenMins={this.props.todaysScreenMins} />
           </div>
           <div className="dashboardTable">
