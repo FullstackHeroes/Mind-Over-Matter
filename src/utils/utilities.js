@@ -28,7 +28,7 @@ let sentimentSpectrum = {
   },
   neutral: {
     spectrumScore: 5,
-    multiplier: 4
+    multiplier: 1
   },
   disgusted: {
     spectrumScore: 3,

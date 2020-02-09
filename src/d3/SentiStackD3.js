@@ -67,16 +67,9 @@ class SentiStackD3 {
       .range(d3.schemeSet1);
 
     // AREA CREATION
-    vis.initialArea = d3
-      .area()
-      .x(d => vis.x(d.data[vis.xAttr]))
-      .y0(HEIGHT)
-      .y1(HEIGHT);
-
     vis.area = d3
       .area()
       .x(d => vis.x(d.data[vis.xAttr]))
-      // .y0(HEIGHT)
       .y0(d => vis.y(d[0]))
       .y1(d => vis.y(d[1]));
 
@@ -144,25 +137,28 @@ class SentiStackD3 {
     const stackChart = vis.g.selectAll(".sentiStack").data(vis.stackedData);
 
     console.log("D3 STACK!", stackChart);
-    // EXIT
-    stackChart.exit().remove();
 
     // ENTER
     stackChart
       .enter()
-      .append("g")
+      .append("path")
       .classed("sentiStack", true)
       .merge(stackChart)
-      .append("path")
+      .transition()
+      .ease(d3.easeLinear)
+      .duration(1000)
       .attr("class", d => `sentiArea ${d.key}`)
       .style("fill", d => vis.color(d.key))
       .attr("stroke", "lightgray")
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
       .attr("stroke-width", 1)
-      // .merge(stackChart)
-      // .attr("d", d => vis.initialArea(d))
       .attr("d", d => vis.area(d));
+
+    stackChart.transition(1000);
+
+    // EXIT
+    stackChart.exit().remove();
 
     // stackChart
     //   .append("g")
