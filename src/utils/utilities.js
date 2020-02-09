@@ -29,7 +29,7 @@ export const emotions = [
 ];
 
 // SCORING FROM 1-10 (BAD - GOOD) AND MULTIPLIER WILL BE DONE PRO-RATA
-export let sentimentSpectrum = {
+export const sentimentSpectrum = {
   happy: {
     spectrumScore: 10,
     multiplier: 1
@@ -52,7 +52,7 @@ export let sentimentSpectrum = {
   },
   angry: {
     spectrumScore: 1,
-    multiplier: 3
+    multiplier: 4
   },
   sad: {
     spectrumScore: 1,
