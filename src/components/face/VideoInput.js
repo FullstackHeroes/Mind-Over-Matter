@@ -50,10 +50,8 @@ class VideoInput extends Component {
   // LOCAL STORAGE MANAGER
   appendLocalStorage = (snapshot, userId) => {
     const date = dateCreate(),
-      hoursDiff = date.getHours() - date.getTimezoneOffset() / 60,
-      minutesDiff = (date.getHours() - date.getTimezoneOffset()) % 60;
+      hoursDiff = date.getHours() - date.getTimezoneOffset() / 60;
     date.setHours(hoursDiff);
-    date.setMinutes(minutesDiff);
     snapshot.timeStamp = date;
     snapshot.userId = userId;
     if (localStorage.getItem("snapshots")) {

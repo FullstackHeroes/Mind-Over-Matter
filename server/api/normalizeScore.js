@@ -63,6 +63,7 @@ router.post("/", async function(req, res, next) {
       normalizeScoreArr = [],
       runningScoreArr = [],
       sentimentDiffArr = [];
+    console.log("NORMAL POST -", timeStamp);
     if (allNormalizeScores.length) {
       allNormalizeScores.map(entry => {
         const normalizeScoreObj = {},

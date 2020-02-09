@@ -26,7 +26,7 @@ const GET_SENTIMENT_DIFF = "GET_SENTIMENT_DIFF";
 const GET_CURRENT_RUNNING_SENTIMENT = "GET_CURRENT_RUNNING_SENTIMENT";
 
 // ACTION CREATORS
-export const getTimeInterval = (snapInterval = 2000, dbInterval = 60000) => {
+export const getTimeInterval = (snapInterval = 2000, dbInterval = 120000) => {
   return {
     type: GET_TIME_INTERVAL,
     snapInterval,
@@ -97,6 +97,8 @@ export const postLSScoreObj = userId => {
       const LSDataObj = JSON.parse(localStorage.getItem("snapshots")),
         targetLSDataObj = LSDataObj.filter(snap => snap.userId === userId),
         adjLSDataObj = condenseScoreObj(targetLSDataObj, userId);
+
+      console.log("POSTING LS -", adjLSDataObj);
 
       // INTERACT WITH DATABASE
       const newWtdScore = await axios.post("/api/hours", adjLSDataObj);
