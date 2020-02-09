@@ -27,7 +27,10 @@ const trueScoreGen = count => {
     const obj = {
         userId: 1,
         trueScore: 0,
-        count: dbIntDefault / snapIntDefault
+        count: dbIntDefault / snapIntDefault,
+        timeStamp: dateCreate(),
+        screenScore: Math.random() * 0.5 + 0.5,
+        screenTime: 0
       },
       numArr = new Array(7).fill(null).map(() => Math.random()),
       totalRand = numArr.reduce((acm, val) => (acm += val), 0);
@@ -37,7 +40,8 @@ const trueScoreGen = count => {
       obj[emotion] = emotScore;
       obj.trueScore += emotScore * sentimentDiff[emotion].spectrumScore;
     }
-    trueRes.push(obj);
+    obj.count -= Math.round(Math.random() * obj.count * 0.3);
+    obj.trueRes.push(obj);
     count--;
   }
   return trueRes;

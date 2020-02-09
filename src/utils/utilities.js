@@ -52,7 +52,7 @@ export let sentimentSpectrum = {
   },
   angry: {
     spectrumScore: 1,
-    multiplier: 3
+    multiplier: 4
   },
   sad: {
     spectrumScore: 1,
