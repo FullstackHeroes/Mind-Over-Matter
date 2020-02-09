@@ -57,7 +57,6 @@ class TSLineD3 {
       .x(d => vis.x(d[vis.xAttr]))
       .y(d => vis.y(d[vis.yAttr]))
       .curve(d3.curveCatmullRom.alpha(0.5));
-    // .curve(d3.curveMonotoneX);
 
     vis.update(data);
   }
@@ -106,8 +105,6 @@ class TSLineD3 {
       .append("path")
       .classed("trueScoreLine", true)
       .merge(lineChart)
-      .transition()
-      .duration(1000)
       .attr("d", vis.valueLine);
 
     // CIRCLE JOIN

@@ -44,7 +44,7 @@ let sentimentSpectrum = {
   },
   sad: {
     spectrumScore: 1,
-    multiplier: 1
+    multiplier: 2
   }
 };
 
