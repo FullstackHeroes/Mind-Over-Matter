@@ -26,8 +26,7 @@ const userSeed = [
 ];
 
 const trueScoreGen = count => {
-  const trueRes = [],
-    ogCount = count;
+  const trueRes = [];
   while (count) {
     const obj = {
         userId: 1,
@@ -58,7 +57,7 @@ const trueScoreGen = count => {
 
     // ADJUST EACH OF THE OTHER ATTRIBUTES
     obj.timeStamp.setHours(hoursDiff);
-    obj.timeStamp.setSeconds(ogCount - count);
+    obj.timeStamp.setSeconds(obj.timeStamp.getSeconds() - count + 1);
     obj.count -= Math.round(Math.random() * obj.count * 0.3);
     obj.screenTime = calcScreenTime(obj.count, snapIntDefault);
 
@@ -1289,7 +1288,7 @@ const seed = async () => {
   await db.sync({ force: true });
   console.log("db synced !");
 
-  // console.log("hmm -", emotions);
+  // console.log("hmm -", new Date());
   // console.log("seed fn -", trueScoreGen(2));
 
   await User.bulkCreate(userSeed);
