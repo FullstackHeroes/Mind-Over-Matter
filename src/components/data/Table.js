@@ -100,9 +100,9 @@ class Table extends Component {
                   nameArr.length > 1
                     ? nameArr[0] + "_" + nameArr[1]
                     : nameArr[0]
-                }_History.csv`}
+                }_Last_15.csv`}
                 className="csvBtnLimitHistory csvBtn">
-                Score History
+                Last 15 Score History
               </CSVLink>
             </button>
 
@@ -114,9 +114,9 @@ class Table extends Component {
                   nameArr.length > 1
                     ? nameArr[0] + "_" + nameArr[1]
                     : nameArr[0]
-                }_History.csv`}
+                }_All_History.csv`}
                 className="csvBtnAllHistory csvBtn">
-                Score History
+                All Score History
               </CSVLink>
             </button>
           </div>
