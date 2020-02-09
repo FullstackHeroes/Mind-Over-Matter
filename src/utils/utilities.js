@@ -1,6 +1,5 @@
 import axios from "axios";
 import store from "../store";
-import { tsv } from "d3";
 
 // VARIABLE DRIVERS
 const rounding = 10 ** 5; // DECIMAL ROUNDING
@@ -298,6 +297,3 @@ export const getAllUserStats = async userId => {
     console.error(error);
   }
 };
-
-//AVERAGE 15 MINS OF SNAPSHOTS
-export const averageLocalStorageSnaps = snaps => {};
