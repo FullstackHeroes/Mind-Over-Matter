@@ -95,7 +95,7 @@ class VideoInput extends Component {
               this.props.postCurrentRunningSentiment(
                 (RunningTrueScore / mostRecentNormalized) * 100
               );
-            } else console.error("WAHH -- no current detection");
+            } else console.error("Oh oh, no current webcam detection");
           }
         );
       }
