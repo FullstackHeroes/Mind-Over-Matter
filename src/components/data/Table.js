@@ -92,7 +92,7 @@ class Table extends Component {
           <div className="csvFullDiv">
             <span className="csvHeaderText">Download My Results</span>
 
-            <button>
+            <button className="csvBtnLimitHistory csvBtn">
               <CSVLink
                 data={fullScoreObj.slice(-15).reverse()}
                 headers={headers}
@@ -100,13 +100,12 @@ class Table extends Component {
                   nameArr.length > 1
                     ? nameArr[0] + "_" + nameArr[1]
                     : nameArr[0]
-                }_Last_15.csv`}
-                className="csvBtnLimitHistory csvBtn">
+                }_Last_15.csv`}>
                 Last 15 Score History
               </CSVLink>
             </button>
 
-            <button>
+            <button className="csvBtnAllHistory csvBtn">
               <CSVLink
                 data={fullScoreObj.reverse()}
                 headers={headers}
@@ -114,8 +113,7 @@ class Table extends Component {
                   nameArr.length > 1
                     ? nameArr[0] + "_" + nameArr[1]
                     : nameArr[0]
-                }_All_History.csv`}
-                className="csvBtnAllHistory csvBtn">
+                }_All_History.csv`}>
                 All Score History
               </CSVLink>
             </button>
