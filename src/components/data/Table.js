@@ -2,26 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setFullScoreObj } from "../../store";
 import TableRow from "./TableRow";
-import { makeCsvTable, getAllUserStats } from "../../utils/utilities";
 import { CSVLink } from "react-csv";
 
 class Table extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      allResults: []
-    };
-  }
-
   async componentDidMount() {
     const { user } = this.props;
     if (user && user.id) this.props.setFullScoreObj(user.id);
-
-    //GET ALL USER HISTORY DATA
-    // const results = await getAllUserStats(user.id);
-    // console.log("!!!USER:", user)
-    // console.log("!!!!!!!!!RESULTS:", results);
-    // this.setState({ allResults: makeCsvTable(results) });
   }
 
   componentDidUpdate(prevProps) {
@@ -50,18 +36,6 @@ class Table extends Component {
         { label: "Sad %", key: "sad" }
       ];
 
-    //GET MOST RECENT DATA FOR USER SNAPSHOT
-    // let tenResults,
-    //   csvTenArr = [];
-    // if (fullScoreObj) tenResults = fullScoreObj.slice(-10).reverse();
-    // if (tenResults) csvTenArr = makeCsvTable(tenResults);
-
-    // let userDataResults,
-    //   userDataArr = [];
-    // if (fullScoreObj) userDataResults = fullScoreObj.reverse();
-    // if (userDataResults) userDataArr = makeCsvTable(userDataResults);
-
-    // console.log("TableAllResults", this.state.allResults);
     return (
       <div className="tableFullDiv">
         <table className="tableElement">
@@ -122,22 +96,6 @@ class Table extends Component {
             </button>
           </div>
         ) : null}
-
-        {/* <button>
-            <CSVLink
-              data={csvTenArr}
-              filename={`${this.props.user.name}_last_10.csv`}>
-              Current Snapshot
-            </CSVLink>
-          </button>
-
-          <button>
-            <CSVLink
-              data={this.state.allResults}
-              filename={`${this.props.user.name}_all.csv`}>
-              Download User History
-            </CSVLink>
-          </button> */}
       </div>
     );
   }
