@@ -55,11 +55,11 @@ class Dashboard extends Component {
 
         <div className="dashboardRowOne dashboardRow">
           <div className="dashboardTable">
-            <ScreenTimeToday todaysScreenMins={this.props.todaysScreenMins} />
+            <ScreenTimeToday todaysScreenHours={this.props.todaysScreenMins} />
           </div>
           <div className="dashboardTable">
             <h3>Screen Time</h3>
-            Today: {this.props.todaysScreenMins} mins
+            Today: {this.props.todaysScreenMins} hours
             <br />
             Yesterday: {this.props.yesterdaysScreenMins} mins
             <br />
