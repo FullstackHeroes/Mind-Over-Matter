@@ -33,9 +33,9 @@ const trueScoreGen = count => {
         Math.random()
       ],
       totalRand = numArr.reduce((acm, val) => (acm += val), 0);
-    for (let i = 0; i < emotions.length; i++) {
-      const emotion = emotions[i];
-      obj[emotion] = numArr[i] / totalRand;
+    for (let idx in emotions) {
+      const emotion = emotions[idx];
+      obj[emotion] = numArr[idx] / totalRand;
     }
     trueRes.push(obj);
     count--;
