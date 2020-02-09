@@ -81,13 +81,13 @@ class Table extends Component {
               Current Snapshot
             </CSVLink>
           </button>
-          {/* <button>
+          <button>
             <CSVLink
-              data={userDataArr}
+              data={this.state.allResults}
               filename={`${this.props.user.name}_all.csv`}>
               Download User History
             </CSVLink>
-          </button> */}
+          </button>
         </div>
       </div>
     );

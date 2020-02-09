@@ -226,35 +226,46 @@ export const calcWeightedTrueScore = async userId => {
 //THIS FUNCTION TAKES AN ARRAY OF OBJECTS AND BREAKS IT DOWN INTO A 2D ARR TO BE USED TO OUTPUT DATA FOR A CSV FILE
 export const makeCsvTable = dataObjArr => {
   const headRow = [
-      "True Score",
-      "Screen Score %",
-      "Happy %",
-      "Surprised %",
-      "Neutral %",
-      "Disgusted %",
-      "Fearful %",
-      "Angry %",
-      "Sad %"
-    ],
-    decimal = 1;
+    "True Score",
+    "Screen Score %",
+    "Happy %",
+    "Surprised %",
+    "Neutral %",
+    "Disgusted %",
+    "Fearful %",
+    "Angry %",
+    "Sad %"
+  ];
+  // decimal = 1;
 
   let csvData = [headRow];
   dataObjArr.forEach(obj => {
-    if (obj["trueScore"] === undefined) {
-      console.log(obj);
-    }
     csvData.push([
-      Number((obj["trueScore"] * 1).toFixed(decimal)),
-      Number((obj["screenScore"] * 100).toFixed(decimal)),
-      Number((obj["happy"] * 100).toFixed(decimal)),
-      Number((obj["surprised"] * 100).toFixed(decimal)),
-      Number((obj["neutral"] * 100).toFixed(decimal)),
-      Number(obj["disgusted"] * (100).toFixed(decimal)),
-      Number(obj["fearful"] * (100).toFixed(decimal)),
-      Number(obj["angry"] * (100).toFixed(decimal)),
-      Number(obj["sad"] * (100).toFixed(decimal))
+      obj.trueScore,
+      obj.screenScore,
+      obj.happy,
+      obj.surprised,
+      obj.neutral,
+      obj.disgusted,
+      obj.fearful,
+      obj.angry,
+      obj.sad
     ]);
+
+    //INCOMING DATA IS INCONSISTENT WHERE SOMETIMES IT IS NAN
+    // csvData.push([
+    //   Number((obj["trueScore"] * 1).toFixed(decimal)),
+    //   Number((obj["screenScore"] * 100).toFixed(decimal)),
+    //   Number((obj["happy"] * 100).toFixed(decimal)),
+    //   Number((obj["surprised"] * 100).toFixed(decimal)),
+    //   Number((obj["neutral"] * 100).toFixed(decimal)),
+    //   Number((obj["disgusted"] * 100).toFixed(decimal)),
+    //   Number((obj["fearful"] * 100).toFixed(decimal)),
+    //   Number((obj["angry"] * 100).toFixed(decimal)),
+    //   Number((obj["sad"] * 100).toFixed(decimal))
+    // ]);
   });
+  console.log("csvData", csvData);
   return csvData;
 };
 
@@ -262,8 +273,6 @@ export const makeCsvTable = dataObjArr => {
 export const getAllUserStats = async userId => {
   try {
     const { data } = await axios.get(`/api/hours/${userId}`);
-    // console.log("data from get all users", data)
-    // console.log(makeCsvTable(data));
     return makeCsvTable(data);
   } catch (error) {
     console.error(error);
