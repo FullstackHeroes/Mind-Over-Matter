@@ -19,9 +19,10 @@ class Table extends Component {
 
     //GET ALL USER HISTORY DATA
     const results = await getAllUserStats(user.id);
+    console.log("!!!!!!!!!RESULTS:", results);
     this.setState({ allResults: makeCsvTable(results) });
   }
-  make;
+
   componentDidUpdate(prevProps) {
     const { fullScoreObj, user } = this.props;
     if (fullScoreObj.length !== prevProps.fullScoreObj.length) {

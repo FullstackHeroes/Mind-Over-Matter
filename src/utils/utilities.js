@@ -259,6 +259,7 @@ export const makeCsvTable = dataObjArr => {
 //FUNCTION THAT USES THE makeCsvTable FUNCTION TO FORMAL ALL USER DATA
 export const getAllUserStats = async userId => {
   const { data } = await axios.get(`/api/hours/${userId}`);
+  console.log("axios user data:", data);
   return makeCsvTable(data);
 };
 
