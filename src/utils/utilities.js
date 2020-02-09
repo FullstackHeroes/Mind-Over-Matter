@@ -240,8 +240,11 @@ export const makeCsvTable = dataObjArr => {
 
   let csvData = [headRow];
   dataObjArr.forEach(obj => {
+    if (obj["trueScore"] === undefined) {
+      console.log(obj);
+    }
     csvData.push([
-      Number(obj["trueScore"].toFixed(decimal)),
+      Number((obj["trueScore"] * 1).toFixed(decimal)),
       Number((obj["screenScore"] * 100).toFixed(decimal)),
       Number((obj["happy"] * 100).toFixed(decimal)),
       Number((obj["surprised"] * 100).toFixed(decimal)),
@@ -257,10 +260,14 @@ export const makeCsvTable = dataObjArr => {
 
 //FUNCTION THAT USES THE makeCsvTable FUNCTION TO FORMAL ALL USER DATA
 export const getAllUserStats = async userId => {
-  const { data } = await axios.get(`/api/hours/${userId}`);
-  // console.log("data from get all users", data)
-  // console.log(makeCsvTable(data));
-  return makeCsvTable(data);
+  try {
+    const { data } = await axios.get(`/api/hours/${userId}`);
+    // console.log("data from get all users", data)
+    // console.log(makeCsvTable(data));
+    return makeCsvTable(data);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 //AVERAGE 15 MINS OF SNAPSHOTS
