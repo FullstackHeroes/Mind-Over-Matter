@@ -104,6 +104,35 @@ class SentiStackD3 {
       // .on("end", d => vis.update(d));
       .on("end", vis.update);
 
+    // LEGEND CREATION
+    const size = 20;
+    vis.g
+      .selectAll("myrect")
+      .data(vis.keys)
+      .enter()
+      .append("rect")
+      .attr("x", 400)
+      .attr("y", (d, i) => 10 + i * (size + 5))
+      .attr("width", size)
+      .attr("height", size)
+      .style("fill", (d, i) => vis.ownColor[i])
+      .on("mouseover", vis.highlight)
+      .on("mouseleave", vis.noHighlight);
+
+    vis.g
+      .selectAll("mylabels")
+      .data(keys)
+      .enter()
+      .append("text")
+      .attr("x", 400 + size * 1.2)
+      .attr("y", (d, i) => 10 + i * (size + 5) + size / 2)
+      .style("fill", (d, i) => vis.ownColor[i])
+      .text(d => d)
+      .attr("text-anchor", "left")
+      .style("alignment-baseline", "middle")
+      .on("mouseover", vis.highlight)
+      .on("mouseleave", vis.noHighlight);
+
     vis.update(data);
   }
 
