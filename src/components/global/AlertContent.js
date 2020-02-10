@@ -9,12 +9,11 @@ export default class AlertContent extends Component {
   helpMessage = status => {
     console.log(status);
     const currentDate = dateCreate();
-    console.log(currentDate);
-    if (currentDate - this.props.lastAlert > 60000) {
+    if (currentDate - this.props.lastAlert > 70000) {
       if (status <= 65) {
         return (
           <div className="alertContainer">
-            <div>
+            <div className="modal-dialog">
               <h6>
                 Woah there Buddy! Step away from your desk and put those hands
                 up! Take 10-15 mins to yourself and walk it off
@@ -28,15 +27,19 @@ export default class AlertContent extends Component {
                 }
               />
             </div>
-            <button className="alertButton" onClick={this.onClose}>
-              Got it
-            </button>
+            <div className="modal-footer d-flex justify-content-center">
+              <button
+                className="align-self-center btn btn-secondary"
+                onClick={this.onClose}>
+                Got it
+              </button>
+            </div>
           </div>
         );
       } else if (status <= 73) {
         return (
           <div className="alertContainer">
-            <div>
+            <div className="modal-dialog">
               <h6>
                 Looking Steamy! Stretch those legs and go hang out with your
                 buddy Cuppa Joe!
@@ -50,15 +53,19 @@ export default class AlertContent extends Component {
                 }
               />
             </div>
-            <button className="alertButton" onClick={this.onClose}>
-              Got it
-            </button>
+            <div className="modal-footer d-flex justify-content-center">
+              <button
+                className="align-self-center btn btn-secondary"
+                onClick={this.onClose}>
+                Got it
+              </button>
+            </div>
           </div>
         );
       } else if (status <= 78) {
         return (
           <div className="alertContainer">
-            <div>
+            <div className="modal-dialog">
               <h6>Here is a cute picture, Hope it makes your day!</h6>
             </div>
             <div className="alertImgDiv">
@@ -69,9 +76,13 @@ export default class AlertContent extends Component {
                 }
               />
             </div>
-            <button className="alertButton" onClick={this.onClose}>
-              Got it
-            </button>
+            <div className="modal-footer d-flex justify-content-center">
+              <button
+                className="align-self-center btn btn-secondary"
+                onClick={this.onClose}>
+                Got it
+              </button>
+            </div>
           </div>
         );
       } else {
@@ -81,10 +92,6 @@ export default class AlertContent extends Component {
   };
 
   render() {
-    return (
-      <div className="modalFrame">
-        {this.helpMessage(this.props.currentSentiment)}
-      </div>
-    );
+    return <div>{this.helpMessage(this.props.currentSentiment)}</div>;
   }
 }
