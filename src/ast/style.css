@@ -133,10 +133,13 @@ h6 {
 .navBarLink {
   font-size: 20px;
   font-weight: bold;
+  padding: 0 5px;
 }
 
 .selectedNavLink {
-  color: rgba(0, 152, 195, 0.8);
+  border-color: rgba(0, 152, 195, 0.8);
+  border-style: dashed;
+  border-width: 1px;
 }
 
 /* ------------------ VIDEO INPUT ELEMENT ------------------ */
