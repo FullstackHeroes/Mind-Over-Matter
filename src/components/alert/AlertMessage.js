@@ -27,7 +27,8 @@ const AlertMessage = ({ status, onClose }) => {
     console.log("inside alert msg -", status, i);
     if (status <= tiers[i]) {
       return (
-        <div className="alertBackdrop d-flex justify-content-center">
+        // <div className="alertBackdrop d-flex justify-content-center">
+        <div className="alertFullDiv">
           <div className="alertContainer">
             <div className="modal-dialog">
               <h6>{alertOptions[i].message}</h6>

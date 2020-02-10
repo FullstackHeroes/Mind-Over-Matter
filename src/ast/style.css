@@ -401,6 +401,16 @@ img {
 }
 
 /* ------------------ ALERT ELEMENT ------------------ */
+.alertFullDiv {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(234, 234, 234, 0.3);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+}
+
 .alertContainer {
   width: 600px;
   height: 420px;

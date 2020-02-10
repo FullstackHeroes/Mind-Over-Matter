@@ -170,7 +170,7 @@ class VideoInput extends Component {
           />
         </div>
 
-        <PopUp sentimentDiff={this.props.sentimentDiff.slice(-1)} />
+        {/* <PopUp sentimentDiff={this.props.sentimentDiff.slice(-1)} /> */}
       </div>
     );
   }
