@@ -179,7 +179,11 @@ h6 {
   justify-content: space-evenly;
   width: 100vw;
   min-height: 100vh;
-  padding-top: 15vh;
+  padding-top: 11vh;
+  margin-top: 0%;
+  margin-bottom: 0em;
+  padding-bottom: 0%;
+  overflow: hidden;
 }
 
 /* ------------------ TABLE ELEMENT ------------------ */
@@ -265,7 +269,7 @@ h6 {
   min-height: 60vh;
   padding: 15px;
   border-radius: 5px;
-  margin-bottom: 25px;
+  margin-bottom: 18px;
   align-items: center;
 }
 
