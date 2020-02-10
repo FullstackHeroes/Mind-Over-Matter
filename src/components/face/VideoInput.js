@@ -137,7 +137,7 @@ class VideoInput extends Component {
       height: HEIGHT,
       facingMode: "user"
     };
-
+    console.log(this.props.currentRunningSentiment);
     return (
       <div className="videoInputDiv">
         <div className="cameraDiv">
