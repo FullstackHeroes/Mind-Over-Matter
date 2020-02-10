@@ -121,7 +121,7 @@ router.get("/:userId/year", async (req, res, next) => {
 });
 
 router.get("/:userId/yesterday", async (req, res, next) => {
-  const text = `SELECT hours."screenTime" FROM hours WHERE date(hours."timeStamp") = CURRENT_DATE - INTERVAL '1 day' AND hours."userId" = ${req.params.userId}`;
+  const text = `SELECT weightedscore."screenTime" FROM weightedscore WHERE date(weightedscore."timeStamp") = CURRENT_DATE - INTERVAL '1 day' AND weightedscore."userId" = ${req.params.userId}`;
   const userHours = await db.query(text);
   const screenTimeArr = userHours[0];
   if (screenTimeArr.length) {
@@ -133,7 +133,7 @@ router.get("/:userId/yesterday", async (req, res, next) => {
 });
 
 router.get("/:userId/week", async (req, res, next) => {
-  const text = `SELECT hours."screenTime" FROM hours WHERE date("timeStamp") >= CURRENT_DATE - INTERVAL '7 days' AND hours."userId" = ${req.params.userId}`;
+  const text = `SELECT weightedscore."screenTime" FROM weightedscore WHERE date("timeStamp") >= CURRENT_DATE - INTERVAL '7 days' AND weightedscore."userId" = ${req.params.userId}`;
   const userHours = await db.query(text);
   const screenTimeArr = userHours[0];
   if (screenTimeArr.length) {
