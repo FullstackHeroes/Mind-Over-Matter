@@ -11,7 +11,7 @@ class ScreenTimeWeek extends Component {
         labels: [`Hours Worked : ${this.props.weeksScreenHours}`],
         datasets: [
           {
-            barPercentage: 0.5,
+            barPercentage: 0.6,
             backgroundColor: function(context) {
               const index = context.dataIndex;
               const value = context.dataset.data[index];
@@ -30,7 +30,7 @@ class ScreenTimeWeek extends Component {
         labels: [`Hours Worked: ${this.props.weeksScreenHours}`],
         datasets: [
           {
-            barPercentage: 0.5,
+            barPercentage: 0.6,
             backgroundColor: function(context) {
               const index = context.dataIndex;
               const value = context.dataset.data[index];
@@ -52,7 +52,7 @@ class ScreenTimeWeek extends Component {
           labels: [`Hours Worked: ${this.props.weeksScreenHours}`],
           datasets: [
             {
-              barPercentage: 0.5,
+              barPercentage: 0.6,
               backgroundColor: function(context) {
                 const index = context.dataIndex;
                 const value = context.dataset.data[index];
