@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import AlertContent from "./AlertContent";
 import { connect } from "react-redux";
 import { dateCreate } from "../../utils/utilities";
@@ -27,6 +26,7 @@ class PopUp extends Component {
   };
 
   render() {
+    console.log("pop up render -", this.props);
     return (
       <div>
         <AlertContent
@@ -50,4 +50,5 @@ const mapDispatchToProps = dispatch => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PopUp);
+// export default connect(mapStateToProps, mapDispatchToProps)(PopUp);
+export default PopUp;

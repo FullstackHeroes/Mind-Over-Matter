@@ -33,13 +33,13 @@ class VideoInput extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const { snapInterval, dbInterval, user } = this.props;
+    const { snapInterval, dbInterval } = this.props;
     if (
       snapInterval !== prevProps.snapInterval ||
       dbInterval !== prevProps.dbInterval
     ) {
       this.startCapture();
-      this.startDatabase();
+      // this.startDatabase();
     }
   }
 
@@ -54,10 +54,18 @@ class VideoInput extends Component {
       const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
       currSnapshot.push(snapshot);
       localStorage.setItem("snapshots", JSON.stringify(currSnapshot));
-      this.props.setFullScoreObj(userId);
+      // this.props.setFullScoreObj(userId);
+
+      // PUSHING TO DATABASE FUNCTIONALITY
+      this.props.postLSScoreObj(userId);
+      this.props.postNormalizedScore(userId);
     } else {
       localStorage.setItem("snapshots", JSON.stringify([snapshot]));
-      this.props.setFullScoreObj(userId);
+      // this.props.setFullScoreObj(userId);
+
+      // PUSHING TO DATABASE FUNCTIONALITY
+      this.props.postLSScoreObj(userId);
+      this.props.postNormalizedScore(userId);
     }
   };
 
@@ -86,6 +94,15 @@ class VideoInput extends Component {
 
               // APPENDING LOCAL STORAGE
               this.appendLocalStorage(fullScoreObj, userId);
+
+              // // PUSHING TO DATABASE FUNCTIONALITY
+              // const currSnapshot = JSON.parse(
+              //   localStorage.getItem("snapshots")
+              // );
+              // if (currSnapshot && currSnapshot.length) {
+              //   await this.props.postNormalizedScore(userId);
+              //   await this.props.postLSScoreObj(userId);
+              // }
 
               //USER DATA AND CALCULATIONS
               const { normalizedScore } = this.props,
@@ -150,6 +167,7 @@ class VideoInput extends Component {
             videoConstraints={videoConstraints}
           />
         </div>
+
         <PopUp currentSentiment={this.props.currentRunningSentiment} />
       </div>
     );
