@@ -446,3 +446,36 @@ button:active {
   text-align: center;
   height: 10%;
 }
+
+/*------------------ HELP BUTTON ELEMENT --------------------*/
+.helpButton {
+  position: fixed;
+  right: 1%;
+  bottom: 2%;
+  display: block;
+  height: 75px;
+  width: 75px;
+  z-index: 1;
+}
+
+/*------------------ HELPBAR ELEMENT --------------------*/
+.sidebar {
+  height: 90%;
+  width: 0%;
+  position: fixed;
+  z-index: 2;
+  top: 10%;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  font-size: 12;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  font-size: 36px;
+}

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { CSVLink } from "react-csv";
 import { setFullScoreObj } from "../../store";
 import TableRow from "./TableRow";
+import HelpBar from "../global/HelpBar";
 
 class Table extends Component {
   async componentDidMount() {
@@ -92,6 +93,7 @@ class Table extends Component {
             </button>
           </div>
         ) : null}
+        <HelpBar />
       </div>
     );
   }
