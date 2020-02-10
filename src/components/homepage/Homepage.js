@@ -27,8 +27,10 @@ const Homepage = () => (
       </div>
     </div>
 
-    <div>
-      <img src="https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=375&w=630"></img>
+    <div className="bookTextDiv">
+      <img
+        className="bookImage"
+        src="https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=375&w=630"></img>
       <div className="homepageText">
         <h3>How Can We Help?</h3>
         <p>
