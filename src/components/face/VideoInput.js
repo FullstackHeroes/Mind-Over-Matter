@@ -150,7 +150,7 @@ class VideoInput extends Component {
             videoConstraints={videoConstraints}
           />
         </div>
-        {/* <PopUp currentSentiment={this.props.currentRunningSentiment} /> */}
+        <PopUp currentSentiment={this.props.currentRunningSentiment} />
       </div>
     );
   }

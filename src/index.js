@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./ast/style.css";
+import "bootstrap";
 import App from "./components/App";
 import * as serviceWorker from "./ast/serviceWorker";
 import history from "./history";
