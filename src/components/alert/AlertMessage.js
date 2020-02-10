@@ -30,13 +30,17 @@ const AlertMessage = ({ status, onClose, last }) => {
         <div className="alertFullDiv">
           <div className="alertContainer">
             <div className="alertTextImgDiv">
-              <h6>{alertOptions[i].message}</h6>
+              <div className="alertTextDiv">
+                <h6>{alertOptions[i].message}</h6>
+              </div>
               <img className="alertImg" src={alertOptions[i].image} />
             </div>
 
-            <div className="alertBtn">
-              <button onClick={onClose}>Got it</button>
-            </div>
+            {/* <div className="alertButton"> */}
+            <button onClick={onClose} className="alertButton">
+              Got it
+            </button>
+            {/* </div> */}
           </div>
         </div>
       );

@@ -406,20 +406,20 @@ img {
 } */
 
 .alertFullDiv {
-  background-color: rgba(245, 245, 245, 0.3);
-  width: 100vw;
-  height: 100vh;
+  background-color: rgba(245, 245, 245, 0.4);
+  min-width: 100vw;
+  min-height: 100vh;
   z-index: 100;
   display: flex;
   justify-content: center;
   position: fixed;
-  padding-top: 15vh;
+  padding-top: 12vh;
 }
 
 .alertContainer {
   background-color: #d3d3d3;
-  min-width: 600px;
-  min-height: 275px;
+  min-width: 300px;
+  min-height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -437,12 +437,11 @@ img {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  width: 90%;
 }
 
-.alertImgDiv {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+.alertTextDiv {
+  width: 35%;
 }
 
 .alertImg {
@@ -452,7 +451,7 @@ img {
 
 .alertButton {
   width: 100px;
-  padding: 20px;
+  padding: 0 20px;
   margin: 0 auto;
   border-radius: 5px;
 }

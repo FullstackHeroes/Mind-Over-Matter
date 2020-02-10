@@ -51,7 +51,7 @@ class PopUp extends Component {
         {sentimentDiff &&
         sentimentDiff.length &&
         this.showPopUp &&
-        currentDate - this.state.lastAlert > 5000
+        currentDate - this.state.lastAlert > 10000
           ? this.showHelp(sentimentDiff[0].sentimentDiff * 100)
           : null}
       </div>
