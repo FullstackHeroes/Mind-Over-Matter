@@ -11,7 +11,12 @@ class ScreenTimeWeek extends Component {
         labels: [`Hours Worked : ${this.props.weeksScreenHours}`],
         datasets: [
           {
-            backgroundColor: ["rgba(0,204,153,1)", "rgba(255,153,51,1)"],
+            backgroundColor: function(context) {
+              const index = context.dataIndex;
+              const value = context.dataset.data[index];
+              return value > 40 ? "red" : "rgba(0,204,153,1)";
+            },
+            // ["rgba(0,204,153,1)"]
             data: [this.props.weeksScreenHours]
           }
         ]
@@ -25,7 +30,11 @@ class ScreenTimeWeek extends Component {
         labels: [`Hours Worked: ${this.props.weeksScreenHours}`],
         datasets: [
           {
-            backgroundColor: ["rgba(0,204,153,1)", "rgba(255,153,51,1)"],
+            backgroundColor: function(context) {
+              const index = context.dataIndex;
+              const value = context.dataset.data[index];
+              return value > 40 ? "red" : "rgba(0,204,153,1)";
+            },
             data: [this.props.weeksScreenHours]
           }
         ]
@@ -42,11 +51,12 @@ class ScreenTimeWeek extends Component {
           labels: [`Hours Worked: ${this.props.weeksScreenHours}`],
           datasets: [
             {
-              backgroundColor: ["rgba(0,204,153,1)", "rgba(255,153,51,1)"],
-              data: [
-                this.props.weeksScreenHours,
-                24 - this.props.weeksScreenHours
-              ]
+              backgroundColor: function(context) {
+                const index = context.dataIndex;
+                const value = context.dataset.data[index];
+                return value > 40 ? "red" : "rgba(0,204,153,1)";
+              },
+              data: [this.props.weeksScreenHours]
             }
           ]
         }
