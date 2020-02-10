@@ -430,7 +430,8 @@ img {
   border-style: outset;
   border-radius: 8px;
   color: rgba(18, 89, 155, 0.925);
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: bold;
   box-shadow: 7px 7px 15px rgba(100, 100, 100, 0.9);
 }
 
@@ -451,11 +452,12 @@ img {
 }
 
 .alertButton {
-  width: 100px;
-  padding: 0 20px;
+  width: 125px;
+  height: 35px;
   border-radius: 5px;
   border-color: black;
   border-width: 2px;
+  font-size: 15px;
   font-weight: bold;
 }
 

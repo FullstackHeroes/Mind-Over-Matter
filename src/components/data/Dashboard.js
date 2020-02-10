@@ -93,12 +93,13 @@ class Dashboard extends Component {
               {runningScore.length
                 ? runningScore[runningScore.length - 1].runningScore.toFixed(3)
                 : "Loading"}
-              {"  /  "}
+              &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
               {sentimentDiff.length
                 ? (
                     sentimentDiff[sentimentDiff.length - 1].sentimentDiff * 100
-                  ).toFixed(1) + "%"
+                  ).toFixed(1)
                 : null}
+              %
             </span>
           </div>
 

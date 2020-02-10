@@ -7,7 +7,6 @@ import {
   calcWeightedTrueScore,
   dateCreate
 } from "../../utils/utilities";
-import PopUp from "../alert/PopUp";
 import {
   setNormalizedScore,
   postCurrentRunningSentiment,
@@ -95,23 +94,14 @@ class VideoInput extends Component {
               // APPENDING LOCAL STORAGE
               this.appendLocalStorage(fullScoreObj, userId);
 
-              // // PUSHING TO DATABASE FUNCTIONALITY
-              // const currSnapshot = JSON.parse(
-              //   localStorage.getItem("snapshots")
+              // USER DATA AND CALCULATIONS
+              // const { normalizedScore } = this.props,
+              //   mostRecentNormalized =
+              //     normalizedScore[normalizedScore.length - 1].normalizeScore,
+              //   RunningTrueScore = await calcWeightedTrueScore(userId);
+              // this.props.postCurrentRunningSentiment(
+              //   (RunningTrueScore / mostRecentNormalized) * 100
               // );
-              // if (currSnapshot && currSnapshot.length) {
-              //   await this.props.postNormalizedScore(userId);
-              //   await this.props.postLSScoreObj(userId);
-              // }
-
-              //USER DATA AND CALCULATIONS
-              const { normalizedScore } = this.props,
-                mostRecentNormalized =
-                  normalizedScore[normalizedScore.length - 1].normalizeScore,
-                RunningTrueScore = await calcWeightedTrueScore(userId);
-              this.props.postCurrentRunningSentiment(
-                (RunningTrueScore / mostRecentNormalized) * 100
-              );
             } else console.error("Oh oh, no current webcam detection");
           }
         );
@@ -155,8 +145,6 @@ class VideoInput extends Component {
       facingMode: "user"
     };
 
-    // console.log("rendering -", this.props);
-
     return (
       <div className="videoInputDiv">
         <div className="cameraDiv">
@@ -169,8 +157,6 @@ class VideoInput extends Component {
             videoConstraints={videoConstraints}
           />
         </div>
-
-        {/* <PopUp sentimentDiff={this.props.sentimentDiff.slice(-1)} /> */}
       </div>
     );
   }
