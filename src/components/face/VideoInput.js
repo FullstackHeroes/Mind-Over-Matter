@@ -7,7 +7,7 @@ import {
   calcWeightedTrueScore,
   dateCreate
 } from "../../utils/utilities";
-import PopUp from "../global/PopUp";
+import PopUp from "../alert/PopUp";
 import {
   setNormalizedScore,
   postCurrentRunningSentiment,

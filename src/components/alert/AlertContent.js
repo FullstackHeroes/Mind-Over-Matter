@@ -8,15 +8,9 @@ class AlertContent extends Component {
 
   helpMessage = status => {
     const currentDate = dateCreate();
-    console.log(
-      "help msg - ",
-      status,
-      currentDate - this.props.lastAlert,
-      currentDate,
-      this.props.lastAlert
-    );
+    console.log("help msg - ", status, currentDate - this.props.lastAlert);
 
-    if (currentDate - this.props.lastAlert > 600000) {
+    if (currentDate - this.props.lastAlert > 10000) {
       if (status <= 65) {
         return (
           <div className="alertBackdrop d-flex justify-content-center">
@@ -76,6 +70,7 @@ class AlertContent extends Component {
           </div>
         );
       } else if (status <= 78) {
+        console.log("HELLO ALERT");
         return (
           <div className="alertBackdrop d-flex justify-content-center">
             <div className="alertContainer">
@@ -111,7 +106,7 @@ class AlertContent extends Component {
       else {
         return null;
       }
-    }
+    } else return null;
   };
 
   render() {
