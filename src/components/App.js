@@ -12,6 +12,7 @@ import PopUp from "./alert/PopUp";
 class App extends Component {
   componentDidMount() {
     this.props.loadInitial();
+    this.props.getSentimentDiff();
     if (this.props.user.id && this.props.match.path === "/")
       this.props.history.push("/Dashboard");
   }
@@ -21,22 +22,32 @@ class App extends Component {
     //   if (this.props.match.path === "/") this.props.history.push("/Dashboard");
     // }
 
-    if (this.props.sentimentDiff !== prevProps.sentimentDiff) {
-      this.props.getSentimentDiff();
-    }
+    this.props.getSentimentDiff();
+
+    // const { sentimentDiff } = this.props;
+    // if (sentimentDiff) {
+    //   console.log("hmm -", sentimentDiff);
+    //   if (sentimentDiff.length !== prevProps.sentimentDiff.length) {
+    //     console.log("updating!!");
+    //   }
+    // }
   }
 
   render() {
     const { user, sentimentDiff } = this.props;
-
+    console.log("render -", sentimentDiff);
     return (
       <div className="appFullDiv">
         <NavBar />
 
         {/* <div className="appInsideDiv d-flex justify-content-center"> */}
         <div className="appInsideDiv">
-          <PopUp sentimentDiff={sentimentDiff.slice(-1)} />
+          {sentimentDiff && sentimentDiff.length ? (
+            <PopUp sentimentDiff={sentimentDiff.slice(-1)} />
+          ) : null}
+
           {user && user.id ? <VideoInput /> : null}
+
           <Routes />
         </div>
       </div>
