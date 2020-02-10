@@ -210,6 +210,7 @@ h6 {
 .tableData {
   display: flex;
   justify-content: space-evenly;
+  color: whitesmoke;
 }
 
 .tableDataRow {
@@ -428,6 +429,10 @@ img {
   margin-left: auto;
   margin-right: auto;
   border-radius: 2px 2px 2px 2px;
+}
+
+.alertButton:hover {
+  background-color: lightskyblue;
 }
 
 button:active {

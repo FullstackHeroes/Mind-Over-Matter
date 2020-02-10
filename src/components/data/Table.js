@@ -34,7 +34,8 @@ class Table extends Component {
 
     return (
       <div className="tableFullDiv">
-        <table className="tableElement">
+        {/* <table className="tableElement"> */}
+        <table className="table tableElement">
           <thead>
             <tr className="tableHeader">
               <th className="tableHeaderRow">True Score</th>
