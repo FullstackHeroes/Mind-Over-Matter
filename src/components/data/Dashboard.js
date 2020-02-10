@@ -14,6 +14,9 @@ import ChartRSLine from "../chart/ChartRSLine";
 import ChartTSLine from "../chart/ChartTSLine";
 import ChartSentiStack from "../chart/ChartSentiStack";
 import ScreenTimeToday from "../chart/ScreenTimeToday";
+import ScreenTimeYesterday from "../chart/ScreenTimeYesterday";
+import ScreenTimeWeek from "../chart/ScreenTimeWeek";
+
 import HelpBar from "../global/HelpBar";
 
 class Dashboard extends Component {
@@ -60,17 +63,13 @@ class Dashboard extends Component {
         <div className="dashboardRowOne dashboardRow">
           <div className="dashboardTable">
             <ScreenTimeToday todaysScreenHours={this.props.todaysScreenMins} />
+            <ScreenTimeYesterday
+              yesterdaysScreenHours={this.props.yesterdaysScreenMins}
+            />
           </div>
 
           <div className="dashboardTable">
-            <h3>Screen Time</h3>
-            Today: {this.props.todaysScreenMins} hours
-            <br />
-            Yesterday: {this.props.yesterdaysScreenMins} mins
-            <br />
-            This Week: {this.props.weeksScreenHours} hours
-            {/* <br />
-            This Month: {this.props.monthsScreenHours} hours */}
+            <ScreenTimeWeek weeksScreenHours={this.props.weeksScreenHours} />
           </div>
         </div>
 

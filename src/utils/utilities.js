@@ -8,7 +8,7 @@ const countWeight = 1 - screenWeight;
 export const normalizedLen = 3000; // LENGTH FOR NORMALIZED CALC
 const wtdAvgCount = 50; // WEIGHTED AVERAGE COUNT LIMIT
 export const snapIntDefault = 3000;
-export const dbIntDefault = 120000;
+export const dbIntDefault = 3000;
 
 // DATE CREATION FUNCTION
 export const dateCreate = () => {
