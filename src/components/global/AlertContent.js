@@ -108,6 +108,8 @@ export default class AlertContent extends Component {
   };
 
   render() {
-    return <div>{this.helpMessage(this.props.sentimentDiff)}</div>;
+    const { sentimentDiff } = this.props;
+    console.log("alert render -", sentimentDiff);
+    return <div>{this.helpMessage(sentimentDiff * 100)}</div>;
   }
 }
