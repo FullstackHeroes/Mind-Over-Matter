@@ -4,7 +4,7 @@ const AlertMessage = ({ status, onClose, last }) => {
   const tiers = [last * 0.9, last * 0.95, last];
 
   const alertOptions = {
-    2: {
+    0: {
       message:
         "Woah there Buddy! Step away from your desk and put those hands up! Take 10-15 mins to yourself and walk it off",
       image:
@@ -16,7 +16,7 @@ const AlertMessage = ({ status, onClose, last }) => {
       image:
         "https://i.pinimg.com/236x/fe/e9/e0/fee9e0741c5199b830273f88a6c4f8f3--coffee-cafe-cup-of-coffee.jpg"
     },
-    0: {
+    2: {
       message: "Here is a cute picture, Hope it makes your day!",
       image:
         "https://static.boredpanda.com/blog/wp-content/uploads/2016/08/cute-kittens-29-57b30ad229af3__605.jpg"
