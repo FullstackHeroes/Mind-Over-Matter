@@ -11,12 +11,12 @@ class ScreenTimeWeek extends Component {
         labels: [`Hours Worked : ${this.props.weeksScreenHours}`],
         datasets: [
           {
+            barPercentage: 0.5,
             backgroundColor: function(context) {
               const index = context.dataIndex;
               const value = context.dataset.data[index];
-              return value > 40 ? "red" : "rgba(0,204,153,1)";
+              return value > 40 ? "rgba(255,51,51,1)" : "rgba(0,204,153,1)";
             },
-            // ["rgba(0,204,153,1)"]
             data: [this.props.weeksScreenHours]
           }
         ]
@@ -30,10 +30,11 @@ class ScreenTimeWeek extends Component {
         labels: [`Hours Worked: ${this.props.weeksScreenHours}`],
         datasets: [
           {
+            barPercentage: 0.5,
             backgroundColor: function(context) {
               const index = context.dataIndex;
               const value = context.dataset.data[index];
-              return value > 40 ? "red" : "rgba(0,204,153,1)";
+              return value > 40 ? "rgba(255,51,51,1)" : "rgba(0,204,153,1)";
             },
             data: [this.props.weeksScreenHours]
           }
@@ -51,10 +52,11 @@ class ScreenTimeWeek extends Component {
           labels: [`Hours Worked: ${this.props.weeksScreenHours}`],
           datasets: [
             {
+              barPercentage: 0.5,
               backgroundColor: function(context) {
                 const index = context.dataIndex;
                 const value = context.dataset.data[index];
-                return value > 40 ? "red" : "rgba(0,204,153,1)";
+                return value > 40 ? "rgba(255,51,51,1)" : "rgba(0,204,153,1)";
               },
               data: [this.props.weeksScreenHours]
             }
@@ -73,7 +75,19 @@ class ScreenTimeWeek extends Component {
               display: true,
               text: "Working Time This Week"
             },
-            responsive: true
+            responsive: true,
+            scales: {
+              xAxes: [
+                {
+                  stacked: true
+                }
+              ],
+              yAxes: [
+                {
+                  stacked: true
+                }
+              ]
+            }
           }}
           data={this.state.data}
         />
