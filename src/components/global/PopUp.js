@@ -25,7 +25,7 @@ class PopUp extends Component {
   };
 
   render() {
-    console.log("pop up render -", this.props);
+    // console.log("pop up render -", this.props);
     return (
       <div>
         <AlertContent

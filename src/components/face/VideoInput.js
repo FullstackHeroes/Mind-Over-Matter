@@ -75,7 +75,7 @@ class VideoInput extends Component {
     if (user && user.id) {
       this.intervalSnap = setInterval(() => {
         this.capture(user.id);
-        this.props.setNormalizedScore(user.id);
+        // this.props.setNormalizedScore(user.id);
       }, this.props.snapInterval);
     }
   };
@@ -155,6 +155,8 @@ class VideoInput extends Component {
       facingMode: "user"
     };
 
+    console.log("rendering -", this.props);
+
     return (
       <div className="videoInputDiv">
         <div className="cameraDiv">
@@ -180,6 +182,7 @@ const mapStateToProps = state => {
     snapInterval: state.score.snapInterval,
     dbInterval: state.score.dbInterval,
     normalizedScore: state.score.normalizedScore,
+    sentimentDiff: state.score.sentimentDiff,
     currentRunningSentiment: state.score.currentRunningSentiment
   };
 };
