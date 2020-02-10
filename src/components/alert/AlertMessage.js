@@ -24,7 +24,6 @@ const AlertMessage = ({ status, onClose, last }) => {
   };
 
   for (let i = 0; i < tiers.length; i++) {
-    console.log("inside alert msg -", status, i);
     if (status <= tiers[i]) {
       return (
         <div className="alertFullDiv">
