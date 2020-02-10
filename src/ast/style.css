@@ -1,14 +1,9 @@
 /* ------------------ GLOBAL ELEMENTS ------------------ */
 body {
-  margin: 0 0 0 0;
+  margin: 0;
   font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-html,
-body {
-  height: 100%;
-  width: 100%;
 }
 
 h1 {
@@ -184,11 +179,7 @@ h6 {
   justify-content: space-evenly;
   width: 100vw;
   min-height: 100vh;
-  padding-top: 11vh;
-  margin-top: 0%;
-  margin-bottom: 0em;
-  padding-bottom: 0%;
-  overflow: hidden;
+  padding-top: 15vh;
 }
 
 /* ------------------ TABLE ELEMENT ------------------ */
@@ -212,10 +203,8 @@ h6 {
   border-style: solid;
   border-color: black;
   color: black;
-  border-width: 1.5px;
-  width: 85px;
-  display: flex;
-  justify-content: space-around;
+  border-width: 1px;
+  width: 80px;
 }
 
 .tableData {
@@ -276,7 +265,7 @@ h6 {
   min-height: 60vh;
   padding: 15px;
   border-radius: 5px;
-  margin-bottom: 18px;
+  margin-bottom: 25px;
   align-items: center;
 }
 
@@ -314,7 +303,7 @@ h6 {
 
 /* ------------------ HOMEPAGE ELEMENT ------------------ */
 .homepageText {
-  margin: 150px;
+  margin: 60px;
   text-align: center;
 }
 
@@ -324,13 +313,7 @@ h6 {
   width: 100%;
 }
 
-/* .carousel {
-  display: flex;
-  justify-content: center;
-  margin: auto;
-} */
-
-img {
+.bookImage {
   width: 75vh;
   max-height: auto;
   float: left;
@@ -338,6 +321,25 @@ img {
   margin-right: 5%;
 }
 
+.carousel {
+  display: flex;
+  justify-content: center;
+  height: 500;
+}
+
+.carousel-item,
+.carousel-inner {
+  height: 495px;
+  width: 880px;
+}
+
+.carousel-inner img {
+  width: 500;
+  height: auto;
+}
+.bookTextDiv {
+  min-height: 525px;
+}
 /* ------------------ CHART DIV ELEMENT ------------------ */
 .chartWrapDiv {
   min-width: 30%;
@@ -399,35 +401,27 @@ img {
 /* ------------------ ALERT ELEMENT ------------------ */
 .alertContainer {
   width: 600px;
-  height: 420px;
+  height: 400px;
   position: absolute;
   top: calc(50% - 250px);
   left: calc(50% - 250px);
-  background-color: #d3d3d3;
+  background-color: white;
   border-width: 3px;
   border-style: outset;
   border-radius: 8px 8px 8px 8px;
   color: rgba(18, 89, 155, 0.925);
   align-items: center;
   text-align: center;
-  z-index: 5px;
-  /* box-shadow: 3px 3px 5px rgba(110, 109, 109, 0.781); */
 }
 
 .alertContainer > h6 {
   margin: 5px;
+  box-shadow: 10px 10px 5px rgb(110, 109, 109);
 }
-.alertBackdrop {
-  /* change position to static in order to get grey-out effect */
-  /* known bug: will offset the centering of the items inside */
-  position: static;
-  margin-top: 0px;
-  margin-left: 0px;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(101, 112, 134, 0.726);
-  z-index: 4px;
-  box-sizing: border-box;
+
+.modalFrame {
+  z-index: 5px;
+  border-radius: 20px 20px 20px 20px;
 }
 
 .alertImgDiv {
@@ -437,8 +431,8 @@ img {
 }
 
 .alertImg3 {
-  width: auto;
-  height: 250px;
+  width: 250px;
+  height: auto;
 }
 
 .alertButton {
@@ -448,10 +442,6 @@ img {
   margin-left: auto;
   margin-right: auto;
   border-radius: 2px 2px 2px 2px;
-}
-
-.alertButton:hover {
-  background-color: lightskyblue;
 }
 
 button:active {
@@ -502,4 +492,15 @@ button:active {
   top: 5px;
   left: 10px;
   font-size: 36px;
+}
+
+.sidebarText {
+  margin-left: 15px;
+  margin-right: 15px;
+  color: white;
+}
+
+.sidebarHeader {
+  text-align: center;
+  color: white;
 }

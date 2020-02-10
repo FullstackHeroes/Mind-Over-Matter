@@ -67,6 +67,9 @@ class AuthForm extends Component {
           </div>
 
           {error && error.response && <div> {error.response.data} </div>}
+          <a target="_self" href="/auth/google">
+            {displayName} with Google
+          </a>
         </form>
 
         {/* <a href="/auth/google" className="linkText">

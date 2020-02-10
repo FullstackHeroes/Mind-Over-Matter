@@ -94,7 +94,14 @@ export default class AlertContent extends Component {
             </div>
           </div>
         );
-      } else {
+      }
+      // else if (
+      //   this.props.threeHourSnapCount >=
+      //   (this.props.snapInterval / 1000) * 3600
+      // ) {
+      //   return <div>{this.props.snapInterval}</div>;
+      // }
+      else {
         return null;
       }
     }
