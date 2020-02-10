@@ -29,19 +29,19 @@ const AlertMessage = ({ status, onClose, last }) => {
       return (
         <div className="alertFullDiv">
           <div className="alertContainer">
-            <div className="modal-dialog">
-              <h6>{alertOptions[i].message}</h6>
-            </div>
+            {/* <div className="modal-dialog"> */}
+            <h6>{alertOptions[i].message}</h6>
+            {/* </div> */}
 
-            <div className="alertImgDiv">
-              <img className="alertImg3" src={alertOptions[i].image} />
-            </div>
+            {/* <div className="alertImgDiv"> */}
+            <img className="alertImg3" src={alertOptions[i].image} />
+            {/* </div> */}
 
-            <div className="modal-footer d-flex justify-content-center">
-              <button className="alertBtn" onClick={onClose}>
-                Got it
-              </button>
-            </div>
+            {/* <div className="modal-footer d-flex justify-content-center"> */}
+            <button className="alertBtn" onClick={onClose}>
+              Got it
+            </button>
+            {/* </div> */}
           </div>
         </div>
       );
