@@ -28,7 +28,7 @@ h6 {
 
 .linkText:hover {
   text-decoration: underline;
-  color: purple;
+  color: peru;
 }
 
 /* ----------------- AUTH FORM ELEMENT ----------------- */
@@ -92,6 +92,7 @@ h6 {
   width: 150px;
   height: 25px;
   padding: 0;
+  font-size: 15px;
 }
 
 /* ------------------ NAVBAR ELEMENT ------------------ */
@@ -99,7 +100,7 @@ h6 {
   position: fixed;
   z-index: 2;
   width: 100vw;
-  height: 10vh;
+  height: 12vh;
   background-color: rgba(234, 234, 234, 1);
   display: flex;
   align-items: center;
@@ -115,7 +116,6 @@ h6 {
 }
 
 .navBarRight {
-  width: 20%;
   display: flex;
   justify-content: space-around;
   padding: 0 15px;
@@ -123,15 +123,19 @@ h6 {
 
 .navBarHeader {
   font-size: 35px;
+  font-weight: bold;
 }
 
 .navBarLink {
   font-size: 20px;
   font-weight: bold;
+  padding: 0 10px;
 }
 
 .selectedNavLink {
-  color: rgba(0, 152, 195, 0.8);
+  border-color: rgba(0, 152, 195, 0.8);
+  border-style: dashed;
+  border-width: 1px;
 }
 
 /* ------------------ VIDEO INPUT ELEMENT ------------------ */
@@ -146,9 +150,10 @@ h6 {
 
 /* ------------------ MAIN APP ELEMENT ------------------ */
 .appLogo {
-  height: 7vmin;
-  width: 7vmin;
+  height: 9vmin;
+  width: 9vmin;
   pointer-events: none;
+  margin: 0 5px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -176,10 +181,13 @@ h6 {
 
 .appInsideDiv {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   width: 100vw;
   min-height: 100vh;
-  padding-top: 15vh;
+  padding-top: 12vh;
+  margin-top: 0%;
+  margin-bottom: 0em;
+  padding-bottom: 0%;
 }
 
 /* ------------------ TABLE ELEMENT ------------------ */
@@ -261,7 +269,7 @@ h6 {
   background-color: lightgray;
   display: flex;
   flex-direction: column;
-  min-width: 75vw;
+  width: 90vw;
   min-height: 60vh;
   padding: 15px;
   border-radius: 5px;
@@ -284,7 +292,7 @@ h6 {
 .dashboardTable {
   background-color: #282c34;
   margin: 10px;
-  width: 40%;
+  width: 30%;
   min-height: 100px;
   display: flex;
   flex-direction: column;
@@ -399,57 +407,64 @@ h6 {
 }
 
 /* ------------------ ALERT ELEMENT ------------------ */
+.alertFullDiv {
+  background-color: rgba(245, 245, 245, 0.4);
+  min-width: 100vw;
+  min-height: 100vh;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  padding-top: 12vh;
+}
+
 .alertContainer {
+  background-color: rgb(211, 211, 211);
   width: 600px;
-  height: 400px;
-  position: absolute;
-  top: calc(50% - 250px);
-  left: calc(50% - 250px);
-  background-color: white;
-  border-width: 3px;
-  border-style: outset;
-  border-radius: 8px 8px 8px 8px;
-  color: rgba(18, 89, 155, 0.925);
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
   text-align: center;
+  border-width: 3px;
+  border-color: black;
+  border-style: outset;
+  border-radius: 8px;
+  color: rgba(18, 89, 155, 0.925);
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 7px 7px 15px rgba(100, 100, 100, 0.9);
 }
 
-.alertContainer > h6 {
-  margin: 5px;
-  box-shadow: 10px 10px 5px rgb(110, 109, 109);
-}
-
-.modalFrame {
-  z-index: 5px;
-  border-radius: 20px 20px 20px 20px;
-}
-
-.alertImgDiv {
+.alertTextImgDiv {
   display: flex;
+  justify-content: space-evenly;
   align-items: center;
-  justify-content: space-around;
+  width: 90%;
 }
 
-.alertImg3 {
-  width: 250px;
-  height: auto;
+.alertTextDiv {
+  width: 35%;
+}
+
+.alertImg {
+  width: auto;
+  height: 150px;
 }
 
 .alertButton {
-  position: absolute;
-  bottom: 0;
-  padding: 20;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 2px 2px 2px 2px;
+  width: 125px;
+  height: 35px;
+  border-radius: 5px;
+  border-color: black;
+  border-width: 2px;
+  font-size: 15px;
+  font-weight: bold;
 }
 
-button:active {
-  background: #b9b8b8;
-  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
-  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
-  box-shadow: inset 0px 0px 5px #c1c1c1;
-  outline: none;
+.alertButton:hover {
+  background-color: lightskyblue;
 }
 
 /*------------------ FOOTER ELEMENT --------------------*/

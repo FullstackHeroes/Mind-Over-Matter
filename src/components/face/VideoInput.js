@@ -7,7 +7,6 @@ import {
   calcWeightedTrueScore,
   dateCreate
 } from "../../utils/utilities";
-import PopUp from "../global/PopUp";
 import {
   setNormalizedScore,
   postCurrentRunningSentiment,
@@ -33,13 +32,13 @@ class VideoInput extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const { snapInterval, dbInterval, user } = this.props;
+    const { snapInterval, dbInterval } = this.props;
     if (
       snapInterval !== prevProps.snapInterval ||
       dbInterval !== prevProps.dbInterval
     ) {
       this.startCapture();
-      this.startDatabase();
+      // this.startDatabase();
     }
   }
 
@@ -54,10 +53,18 @@ class VideoInput extends Component {
       const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
       currSnapshot.push(snapshot);
       localStorage.setItem("snapshots", JSON.stringify(currSnapshot));
-      this.props.setFullScoreObj(userId);
+      // this.props.setFullScoreObj(userId);
+
+      // PUSHING TO DATABASE FUNCTIONALITY
+      this.props.postLSScoreObj(userId);
+      this.props.postNormalizedScore(userId);
     } else {
       localStorage.setItem("snapshots", JSON.stringify([snapshot]));
-      this.props.setFullScoreObj(userId);
+      // this.props.setFullScoreObj(userId);
+
+      // PUSHING TO DATABASE FUNCTIONALITY
+      this.props.postLSScoreObj(userId);
+      this.props.postNormalizedScore(userId);
     }
   };
 
@@ -67,7 +74,7 @@ class VideoInput extends Component {
     if (user && user.id) {
       this.intervalSnap = setInterval(() => {
         this.capture(user.id);
-        this.props.setNormalizedScore(user.id);
+        // this.props.setNormalizedScore(user.id);
       }, this.props.snapInterval);
     }
   };
@@ -87,14 +94,14 @@ class VideoInput extends Component {
               // APPENDING LOCAL STORAGE
               this.appendLocalStorage(fullScoreObj, userId);
 
-              //USER DATA AND CALCULATIONS
-              const { normalizedScore } = this.props,
-                mostRecentNormalized =
-                  normalizedScore[normalizedScore.length - 1].normalizeScore,
-                RunningTrueScore = await calcWeightedTrueScore(userId);
-              this.props.postCurrentRunningSentiment(
-                (RunningTrueScore / mostRecentNormalized) * 100
-              );
+              // USER DATA AND CALCULATIONS
+              // const { normalizedScore } = this.props,
+              //   mostRecentNormalized =
+              //     normalizedScore[normalizedScore.length - 1].normalizeScore,
+              //   RunningTrueScore = await calcWeightedTrueScore(userId);
+              // this.props.postCurrentRunningSentiment(
+              //   (RunningTrueScore / mostRecentNormalized) * 100
+              // );
             } else console.error("Oh oh, no current webcam detection");
           }
         );
@@ -150,7 +157,6 @@ class VideoInput extends Component {
             videoConstraints={videoConstraints}
           />
         </div>
-        <PopUp currentSentiment={this.props.currentRunningSentiment} />
       </div>
     );
   }
@@ -162,6 +168,7 @@ const mapStateToProps = state => {
     snapInterval: state.score.snapInterval,
     dbInterval: state.score.dbInterval,
     normalizedScore: state.score.normalizedScore,
+    sentimentDiff: state.score.sentimentDiff,
     currentRunningSentiment: state.score.currentRunningSentiment
   };
 };
