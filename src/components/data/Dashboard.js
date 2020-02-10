@@ -14,6 +14,7 @@ import ChartRSLine from "../chart/ChartRSLine";
 import ChartTSLine from "../chart/ChartTSLine";
 import ChartSentiStack from "../chart/ChartSentiStack";
 import ScreenTimeToday from "../chart/ScreenTimeToday";
+import HelpBar from "../global/HelpBar";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -121,6 +122,8 @@ class Dashboard extends Component {
             <ChartSentiStack fullScoreObj={fullScoreObj.slice(-10)} />
           ) : null}
         </div>
+
+        <HelpBar />
       </div>
     );
   }
