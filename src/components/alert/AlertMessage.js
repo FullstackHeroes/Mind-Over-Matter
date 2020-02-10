@@ -1,7 +1,7 @@
 import React from "react";
 
-const AlertMessage = ({ status, onClose, noMoreAlert }) => {
-  const tiers = [65, 70, 80];
+const AlertMessage = ({ status, onClose, last }) => {
+  const tiers = [last * 0.9, last * 0.95, last];
 
   const alertOptions = {
     0: {
@@ -26,9 +26,7 @@ const AlertMessage = ({ status, onClose, noMoreAlert }) => {
   for (let i = 0; i < tiers.length; i++) {
     console.log("inside alert msg -", status, i);
     if (status <= tiers[i]) {
-      noMoreAlert();
       return (
-        // <div className="alertBackdrop d-flex justify-content-center">
         <div className="alertFullDiv">
           <div className="alertContainer">
             <div className="modal-dialog">
@@ -39,11 +37,11 @@ const AlertMessage = ({ status, onClose, noMoreAlert }) => {
               <img className="alertImg3" src={alertOptions[i].image} />
             </div>
 
-            {/* <div className="modal-footer d-flex justify-content-center"> */}
-            <button className="alertBtn" onClick={onClose}>
-              Got it
-            </button>
-            {/* </div> */}
+            <div className="modal-footer d-flex justify-content-center">
+              <button className="alertBtn" onClick={onClose}>
+                Got it
+              </button>
+            </div>
           </div>
         </div>
       );
