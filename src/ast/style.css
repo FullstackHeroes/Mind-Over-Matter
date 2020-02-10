@@ -401,10 +401,15 @@ img {
 }
 
 /* ------------------ ALERT ELEMENT ------------------ */
+.popUpFullDiv {
+  margin: 0;
+}
+
 .alertFullDiv {
   width: 100vw;
   height: 100vh;
-  background-color: rgba(234, 234, 234, 0.3);
+  /* background-color: rgba(234, 234, 234, 0.3); */
+  background-color: red;
   z-index: 100;
   display: flex;
   justify-content: center;
@@ -414,9 +419,9 @@ img {
 .alertContainer {
   width: 600px;
   height: 420px;
-  position: absolute;
-  top: calc(50% - 250px);
-  left: calc(50% - 250px);
+  /* position: absolute; */
+  /* top: calc(50% - 250px);
+  left: calc(50% - 250px); */
   background-color: #d3d3d3;
   border-width: 3px;
   border-style: outset;
@@ -424,13 +429,14 @@ img {
   color: rgba(18, 89, 155, 0.925);
   align-items: center;
   text-align: center;
-  z-index: 5px;
+  z-index: 105px;
   /* box-shadow: 3px 3px 5px rgba(110, 109, 109, 0.781); */
 }
 
 .alertContainer > h6 {
   margin: 5px;
 }
+
 .alertBackdrop {
   /* change position to static in order to get grey-out effect */
   /* known bug: will offset the centering of the items inside */

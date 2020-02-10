@@ -4,8 +4,6 @@ import {
   setFullScoreObj,
   setNormalizedScore,
   getTodaysScreenTime,
-  getMonthsScreenTime,
-  getYearsScreenTime,
   getYesterdaysScreenTime,
   getWeeksScreenTime,
   getThreeHourSnapCount
@@ -131,8 +129,6 @@ const mapStateToProps = state => {
     normalizedScore: state.score.normalizedScore,
     runningScore: state.score.runningScore,
     todaysScreenMins: state.time.screenMinsToday,
-    monthsScreenHours: state.time.screenHoursThisMonth,
-    yearsScreenHours: state.time.screenHoursThisYear,
     yesterdaysScreenMins: state.time.screenMinsYesterday,
     weeksScreenHours: state.time.screenHoursWeek
   };
@@ -143,8 +139,6 @@ const mapDispatchToProps = dispatch => {
     setFullScoreObj: userId => dispatch(setFullScoreObj(userId)),
     setNormalizedScore: userId => dispatch(setNormalizedScore(userId)),
     getTime: userId => dispatch(getTodaysScreenTime(userId)),
-    getMonth: userId => dispatch(getMonthsScreenTime(userId)),
-    getYear: userId => dispatch(getYearsScreenTime(userId)),
     getYesterday: userId => dispatch(getYesterdaysScreenTime(userId)),
     getWeek: userId => dispatch(getWeeksScreenTime(userId)),
     getSnaps: userId => dispatch(getThreeHourSnapCount(userId))

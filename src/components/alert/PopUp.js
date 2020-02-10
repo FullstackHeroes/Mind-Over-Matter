@@ -8,20 +8,26 @@ class PopUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showPopUp: false,
+      showPopUp: true,
       lastAlert: dateCreate()
     };
     this.showHelp = this.showHelp.bind(this);
     this.hideHelp = this.hideHelp.bind(this);
   }
 
-  showHelp = () => {
-    this.setState({ showPopUp: true });
+  showHelp = sentimentDiff => {
+    this.setState({ showPopUp: false });
+    return (
+      <AlertMessage
+        onClose={this.hideHelp}
+        status={sentimentDiff[0].sentimentDiff * 100}
+      />
+    );
   };
 
   hideHelp = () => {
     this.setState({
-      showPopUp: false,
+      showPopUp: true,
       lastAlert: dateCreate()
     });
   };
@@ -34,15 +40,10 @@ class PopUp extends Component {
       <div className="popUpFullDiv">
         {sentimentDiff &&
         sentimentDiff.length &&
-        currentDate - this.state.lastAlert > 5000 ? (
-          <AlertMessage
-            onClose={this.hideHelp}
-            status={sentimentDiff[0].sentimentDiff * 100}
-            // lastAlert={this.state.lastAlert}
-            // snapInterval={this.props.snapInterval}
-            // threeHourSnapCount={this.props.threeHourSnapCount}
-          />
-        ) : null}
+        this.state.showPopUp &&
+        currentDate - this.state.lastAlert > 5000
+          ? this.showHelp(sentimentDiff)
+          : null}
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { me, getSentimentDiff } from "../store";
+import { me } from "../store";
 
 // IMPORTING COMPONENTS
 import Routes from "./Routes";
@@ -12,41 +12,28 @@ import PopUp from "./alert/PopUp";
 class App extends Component {
   componentDidMount() {
     this.props.loadInitial();
-    // this.props.getSentimentDiff();
     if (this.props.user.id && this.props.match.path === "/")
       this.props.history.push("/Dashboard");
   }
 
   componentDidUpdate(prevProps) {
-    // if (this.props.user.id !== prevProps.user.id) {
-    //   if (this.props.match.path === "/") this.props.history.push("/Dashboard");
-    // }
-    // this.props.getSentimentDiff();
-    // const { sentimentDiff } = this.props;
-    // if (!prevProps.sentimentDiff) {
-    //   this.props.getSentimentDiff();
-    // } else if (sentimentDiff) {
-    //   console.log("hmm -", sentimentDiff);
-    //   if (sentimentDiff.length !== prevProps.sentimentDiff.length) {
-    //     console.log("updating!!");
-    //     this.props.getSentimentDiff();
-    //   }
-    // }
+    if (this.props.user.id !== prevProps.user.id) {
+      if (this.props.match.path === "/") this.props.history.push("/Dashboard");
+    }
   }
 
   render() {
     const { user, sentimentDiff } = this.props;
-    console.log("render -", sentimentDiff.length);
+    // console.log("render -", sentimentDiff.length);
     return (
       <div className="appFullDiv">
         <NavBar />
 
-        {/* <div className="appInsideDiv d-flex justify-content-center"> */}
-        <div className="appInsideDiv">
-          {sentimentDiff && sentimentDiff.length ? (
-            <PopUp sentimentDiff={sentimentDiff.slice(-1)} />
-          ) : null}
+        {sentimentDiff && sentimentDiff.length ? (
+          <PopUp sentimentDiff={sentimentDiff.slice(-1)} />
+        ) : null}
 
+        <div className="appInsideDiv">
           {user && user.id ? <VideoInput /> : null}
 
           <Routes />
@@ -65,8 +52,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadInitial: () => dispatch(me()),
-    getSentimentDiff: () => dispatch(getSentimentDiff())
+    loadInitial: () => dispatch(me())
   };
 };
 

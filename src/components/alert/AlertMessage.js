@@ -38,13 +38,11 @@ const AlertMessage = ({ status, onClose }) => {
               <img className="alertImg3" src={alertOptions[i].image} />
             </div>
 
-            <div className="modal-footer d-flex justify-content-center">
-              <button
-                className="align-self-center btn btn-secondary"
-                onClick={onClose}>
-                Got it
-              </button>
-            </div>
+            {/* <div className="modal-footer d-flex justify-content-center"> */}
+            <button className="alertBtn" onClick={onClose}>
+              Got it
+            </button>
+            {/* </div> */}
           </div>
         </div>
       );
