@@ -429,25 +429,13 @@ img {
   border-style: outset;
   border-radius: 8px 8px 8px 8px;
   color: rgba(18, 89, 155, 0.925);
-  /* z-index: 105px; */
   box-shadow: 3px 3px 5px rgba(110, 109, 109, 0.781);
 }
 
-.alertContainer > h6 {
-  margin: 5px;
-}
-
-.alertBackdrop {
-  /* change position to static in order to get grey-out effect */
-  /* known bug: will offset the centering of the items inside */
-  position: static;
-  margin-top: 0px;
-  margin-left: 0px;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(101, 112, 134, 0.726);
-  z-index: 4px;
-  box-sizing: border-box;
+.alertTextImgDiv {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .alertImgDiv {
@@ -456,18 +444,17 @@ img {
   justify-content: space-around;
 }
 
-.alertImg3 {
+.alertImg {
   width: auto;
   height: 250px;
 }
 
 .alertButton {
-  position: absolute;
-  bottom: 0;
+  width: 100px;
   padding: 20;
   margin-left: auto;
   margin-right: auto;
-  border-radius: 2px 2px 2px 2px;
+  border-radius: 3px;
 }
 
 .alertButton:hover {
