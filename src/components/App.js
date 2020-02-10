@@ -24,7 +24,7 @@ class App extends Component {
 
   render() {
     const { user, sentimentDiff } = this.props;
-    // console.log("render -", sentimentDiff.length);
+
     return (
       <div className="appFullDiv">
         <NavBar />

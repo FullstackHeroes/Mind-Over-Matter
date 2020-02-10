@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import AlertContent from "./AlertContent";
 import AlertMessage from "./AlertMessage";
 import { dateCreate } from "../../utils/utilities";
 import { connect } from "react-redux";
@@ -7,18 +6,25 @@ import { connect } from "react-redux";
 class PopUp extends Component {
   constructor(props) {
     super(props);
+    this.showPopUp = true;
     this.state = {
-      showPopUp: true,
       lastAlert: dateCreate()
     };
     this.showHelp = this.showHelp.bind(this);
     this.hideHelp = this.hideHelp.bind(this);
   }
 
+  shouldComponentUpdate() {
+    if (!this.showPopUp) return false;
+    return true;
+  }
+
+  shouldShowPopUp = () => ({ showPopUp: false });
+
   showHelp = sentimentDiff => {
     const last = 75;
     if (sentimentDiff <= last) {
-      this.setState({ showPopUp: false });
+      this.showPopUp = false;
       return (
         <AlertMessage
           onClose={this.hideHelp}
@@ -29,15 +35,9 @@ class PopUp extends Component {
     }
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log("hello?");
-    if (!nextState.showPopUp) return false;
-    return true;
-  }
-
   hideHelp = () => {
+    this.showPopUp = true;
     this.setState({
-      showPopUp: true,
       lastAlert: dateCreate()
     });
   };
@@ -50,7 +50,7 @@ class PopUp extends Component {
       <div className="popUpFullDiv">
         {sentimentDiff &&
         sentimentDiff.length &&
-        this.state.showPopUp &&
+        this.showPopUp &&
         currentDate - this.state.lastAlert > 5000
           ? this.showHelp(sentimentDiff[0].sentimentDiff * 100)
           : null}
