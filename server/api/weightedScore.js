@@ -1,15 +1,15 @@
 const router = require("express").Router();
 const db = require("../db");
 const { isAdmin } = require("./routeProtectors");
-const { User, Hour } = require("../db/models");
+const { User, WeightedScore } = require("../db/models");
 
-//=======GET ALL HOURS==========
+//=======GET ALL WEIGHTEDSCORES==========
 router.get("/", async (req, res, next) => {
   try {
-    const hours = await Hour.findAll({
+    const score = await WeightedScore.findAll({
       include: [{ model: User, as: "user" }]
     });
-    res.json(hours);
+    res.json(score);
   } catch (error) {
     next(error);
   }
@@ -33,7 +33,7 @@ router.post("/", async function(req, res, next) {
       screenScore,
       screenTime
     } = req.body;
-    await Hour.create({
+    await WeightedScore.create({
       trueScore,
       userId,
       happy,
@@ -48,7 +48,7 @@ router.post("/", async function(req, res, next) {
       screenScore,
       screenTime
     });
-    const newFullScoreObj = await Hour.findAll({
+    const newFullScoreObj = await WeightedScore.findAll({
       where: {
         userId: userId
       }
@@ -61,7 +61,7 @@ router.post("/", async function(req, res, next) {
 
 //=======GET HOURS BY USER ID==========
 router.get("/:userId", async (req, res, next) => {
-  const userHours = await Hour.findAll({
+  const userHours = await WeightedScore.findAll({
     where: {
       userId: req.params.userId
     }
@@ -71,9 +71,9 @@ router.get("/:userId", async (req, res, next) => {
 
 //NEED A CONDITIONAL. HANGS IF THERE IS NO DATA FOR TODAY
 router.get("/:userId/today", async (req, res, next) => {
-  const text = `SELECT hours."screenTime"
-  FROM hours
-  WHERE date(hours."timeStamp") = CURRENT_DATE AND hours."userId" = ${req.params.userId}`;
+  const text = `SELECT weightedscore."screenTime"
+  FROM weightedscore
+  WHERE date(weightedscore."timeStamp") = CURRENT_DATE AND weightedscore."userId" = ${req.params.userId}`;
   const userHours = await db.query(text);
   const screenTimeArr = userHours[0];
   if (screenTimeArr.length) {
@@ -85,7 +85,7 @@ router.get("/:userId/today", async (req, res, next) => {
 });
 
 router.get("/:userId/threehours", async (req, res, next) => {
-  const text = `SELECT hours."count" FROM hours WHERE date(hours."timeStamp") >= CURRENT_DATE - INTERVAL '3 hours' AND hours."userId" = ${req.params.userId}`;
+  const text = `SELECT weightedscore."count" FROM weightedscore WHERE date(weightedscore."timeStamp") >= CURRENT_DATE - INTERVAL '3 hours' AND weightedscore."userId" = ${req.params.userId}`;
   const userSnapCount = await db.query(text);
   const snapCountArr = userSnapCount[0];
   if (snapCountArr.length) {
@@ -97,7 +97,7 @@ router.get("/:userId/threehours", async (req, res, next) => {
 });
 
 router.get("/:userId/month", async (req, res, next) => {
-  const text = `SELECT hours."screenTime" FROM hours where DATE_PART('month', date(hours."timeStamp")) = DATE_PART('month', CURRENT_DATE) AND hours."userId" = ${req.params.userId}`;
+  const text = `SELECT weightedscore."screenTime" FROM weightedscore where DATE_PART('month', date(weightedscore."timeStamp")) = DATE_PART('month', CURRENT_DATE) AND weightedscore."userId" = ${req.params.userId}`;
   const userHours = await db.query(text);
   const screenTimeArr = userHours[0];
   if (screenTimeArr.length) {
@@ -109,7 +109,7 @@ router.get("/:userId/month", async (req, res, next) => {
 });
 
 router.get("/:userId/year", async (req, res, next) => {
-  const text = `SELECT hours."screenTime" FROM hours where DATE_PART('year', date(hours."timeStamp")) = DATE_PART('year', CURRENT_DATE) AND hours."userId" = ${req.params.userId}`;
+  const text = `SELECT weightedscore."screenTime" FROM weightedscore where DATE_PART('year', date(weightedscore."timeStamp")) = DATE_PART('year', CURRENT_DATE) AND weightedscore."userId" = ${req.params.userId}`;
   const userHours = await db.query(text);
   const screenTimeArr = userHours[0];
   if (screenTimeArr.length) {
