@@ -401,10 +401,6 @@ img {
 }
 
 /* ------------------ ALERT ELEMENT ------------------ */
-/* .popUpFullDiv {
-  margin: 0;
-} */
-
 .alertFullDiv {
   background-color: rgba(245, 245, 245, 0.4);
   min-width: 100vw;
@@ -463,14 +459,6 @@ img {
 
 .alertButton:hover {
   background-color: lightskyblue;
-}
-
-button:active {
-  background: #b9b8b8;
-  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
-  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
-  box-shadow: inset 0px 0px 5px #c1c1c1;
-  outline: none;
 }
 
 /*------------------ FOOTER ELEMENT --------------------*/

@@ -36,11 +36,9 @@ const AlertMessage = ({ status, onClose, last }) => {
               <img className="alertImg" src={alertOptions[i].image} />
             </div>
 
-            {/* <div className="alertButton"> */}
             <button onClick={onClose} className="alertButton">
               Got it
             </button>
-            {/* </div> */}
           </div>
         </div>
       );

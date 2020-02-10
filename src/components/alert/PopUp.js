@@ -57,18 +57,12 @@ class PopUp extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    user: state.user,
-    normalizedScore: state.score.normalizedScore
-    // snapInterval: state.score.snapInterval,
-    // threeHourSnapCount: state.time.threeHourSnapCount
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     // snapInterval: state.score.snapInterval,
+//     // threeHourSnapCount: state.time.threeHourSnapCount
+//   };
+// };
 
-const mapDispatchToProps = dispatch => {
-  return {};
-};
-
-// export default connect(mapStateToProps, mapDispatchToProps)(PopUp);
+// // export default connect(mapStateToProps)(PopUp);
 export default PopUp;
