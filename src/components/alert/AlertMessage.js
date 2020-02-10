@@ -4,10 +4,11 @@ const AlertMessage = ({ status, onClose, last }) => {
   const tiers = [last * 0.9, last * 0.95, last];
 
   const alertOptions = {
-    0: {
-      message: "Here is a cute picture, Hope it makes your day!",
+    2: {
+      message:
+        "Woah there Buddy! Step away from your desk and put those hands up! Take 10-15 mins to yourself and walk it off",
       image:
-        "https://static.boredpanda.com/blog/wp-content/uploads/2016/08/cute-kittens-29-57b30ad229af3__605.jpg"
+        "https://i.pinimg.com/736x/df/81/9d/df819dadcce0ce5a6929f25da03a8025--funny-stuff-funny-things.jpg"
     },
     1: {
       message:
@@ -15,11 +16,10 @@ const AlertMessage = ({ status, onClose, last }) => {
       image:
         "https://i.pinimg.com/236x/fe/e9/e0/fee9e0741c5199b830273f88a6c4f8f3--coffee-cafe-cup-of-coffee.jpg"
     },
-    2: {
-      message:
-        "Woah there Buddy! Step away from your desk and put those hands up! Take 10-15 mins to yourself and walk it off",
+    0: {
+      message: "Here is a cute picture, Hope it makes your day!",
       image:
-        "https://i.pinimg.com/736x/df/81/9d/df819dadcce0ce5a6929f25da03a8025--funny-stuff-funny-things.jpg"
+        "https://static.boredpanda.com/blog/wp-content/uploads/2016/08/cute-kittens-29-57b30ad229af3__605.jpg"
     }
   };
 

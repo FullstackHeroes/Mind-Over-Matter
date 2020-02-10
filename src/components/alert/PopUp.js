@@ -18,7 +18,7 @@ class PopUp extends Component {
   showHelp = sentimentDiff => {
     const last = 75;
     if (sentimentDiff <= last) {
-      // this.setState({ showPopUp: false });
+      this.setState({ showPopUp: false });
       return (
         <AlertMessage
           onClose={this.hideHelp}
@@ -28,6 +28,12 @@ class PopUp extends Component {
       );
     }
   };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("hello?");
+    if (!nextState.showPopUp) return false;
+    return true;
+  }
 
   hideHelp = () => {
     this.setState({
@@ -44,7 +50,7 @@ class PopUp extends Component {
       <div className="popUpFullDiv">
         {sentimentDiff &&
         sentimentDiff.length &&
-        // this.state.showPopUp &&
+        this.state.showPopUp &&
         currentDate - this.state.lastAlert > 5000
           ? this.showHelp(sentimentDiff[0].sentimentDiff * 100)
           : null}
