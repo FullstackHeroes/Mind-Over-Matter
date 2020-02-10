@@ -408,13 +408,12 @@ img {
 .alertFullDiv {
   width: 100vw;
   height: 100vh;
-  background-color: rgba(245, 245, 245, 0.5);
-  /* background-color: red; */
+  background-color: rgba(245, 245, 245, 0.3);
   z-index: 100;
   display: flex;
   justify-content: center;
   position: fixed;
-  padding: 20px;
+  padding-top: 35px;
 }
 
 .alertContainer {
