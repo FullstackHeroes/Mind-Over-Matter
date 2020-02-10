@@ -184,7 +184,7 @@ h6 {
   justify-content: center;
   width: 100vw;
   min-height: 100vh;
-  padding-top: 12vh;
+  padding-top: 20vh;
   margin-top: 0%;
   margin-bottom: 0em;
   padding-bottom: 0%;
@@ -194,9 +194,11 @@ h6 {
 .tableFullDiv {
   display: flex;
   justify-content: space-evenly;
-  width: 60%;
+  width: 80%;
   padding: 0 15px;
   text-align: center;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 .tableHeader {
