@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const users = require("./users");
-const hours = require("./hours");
+const weightedScore = require("./weightedScore");
 const normalizeScore = require("./normalizeScore");
 
-router.use("/hours", hours);
+router.use("/weightedScore", weightedScore);
 router.use("/users", users);
 router.use("/normalizeScore", normalizeScore);
 
