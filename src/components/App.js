@@ -12,7 +12,7 @@ import PopUp from "./alert/PopUp";
 class App extends Component {
   componentDidMount() {
     this.props.loadInitial();
-    this.props.getSentimentDiff();
+    // this.props.getSentimentDiff();
     if (this.props.user.id && this.props.match.path === "/")
       this.props.history.push("/Dashboard");
   }
@@ -21,21 +21,22 @@ class App extends Component {
     // if (this.props.user.id !== prevProps.user.id) {
     //   if (this.props.match.path === "/") this.props.history.push("/Dashboard");
     // }
-
-    this.props.getSentimentDiff();
-
+    // this.props.getSentimentDiff();
     // const { sentimentDiff } = this.props;
-    // if (sentimentDiff) {
+    // if (!prevProps.sentimentDiff) {
+    //   this.props.getSentimentDiff();
+    // } else if (sentimentDiff) {
     //   console.log("hmm -", sentimentDiff);
     //   if (sentimentDiff.length !== prevProps.sentimentDiff.length) {
     //     console.log("updating!!");
+    //     this.props.getSentimentDiff();
     //   }
     // }
   }
 
   render() {
     const { user, sentimentDiff } = this.props;
-    console.log("render -", sentimentDiff);
+    console.log("render -", sentimentDiff.length);
     return (
       <div className="appFullDiv">
         <NavBar />
