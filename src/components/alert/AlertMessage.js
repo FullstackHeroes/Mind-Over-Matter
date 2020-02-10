@@ -23,9 +23,39 @@ const AlertMessage = ({ status, onClose }) => {
     }
   };
 
-  tiers.map((tier, idx) => {
+  for (let i = 0; i < tiers.length; i++) {
+    console.log("inside alert msg -", status, i);
+    if (status <= tiers[i]) {
+      return (
+        <div className="alertBackdrop d-flex justify-content-center">
+          <div className="alertContainer">
+            <div className="modal-dialog">
+              <h6>{alertOptions[i].message}</h6>
+            </div>
+
+            <div className="alertImgDiv">
+              <img className="alertImg3" src={alertOptions[i].image} />
+            </div>
+
+            <div className="modal-footer d-flex justify-content-center">
+              <button
+                className="align-self-center btn btn-secondary"
+                onClick={onClose}>
+                Got it
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  return null;
+
+  tiers.forEach((tier, idx) => {
     if (status <= tier) {
       console.log("inside alert msg -", status);
+      return "hello!";
       return (
         <div className="alertBackdrop d-flex justify-content-center">
           <div className="alertContainer">
