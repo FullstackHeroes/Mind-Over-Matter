@@ -32,8 +32,8 @@ class PopUp extends Component {
           onClose={this.hideHelp}
           currentSentiment={this.props.currentSentiment}
           lastAlert={this.state.lastAlert}
-          snapInterval={this.props.snapInterval}
-          threeHourSnapCount={this.props.threeHourSnapCount}
+          // snapInterval={this.props.snapInterval}
+          // threeHourSnapCount={this.props.threeHourSnapCount}
         />
       </div>
     );
@@ -43,9 +43,9 @@ class PopUp extends Component {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    normalizedScore: state.score.normalizedScore,
-    snapInterval: state.score.snapInterval,
-    threeHourSnapCount: state.time.threeHourSnapCount
+    normalizedScore: state.score.normalizedScore
+    // snapInterval: state.score.snapInterval,
+    // threeHourSnapCount: state.time.threeHourSnapCount
   };
 };
 

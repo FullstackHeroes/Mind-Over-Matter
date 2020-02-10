@@ -68,8 +68,8 @@ class Dashboard extends Component {
             Yesterday: {this.props.yesterdaysScreenMins} mins
             <br />
             This Week: {this.props.weeksScreenHours} hours
-            <br />
-            {/* This Month: {this.props.monthsScreenHours} hours */}
+            {/* <br />
+            This Month: {this.props.monthsScreenHours} hours */}
           </div>
         </div>
 
