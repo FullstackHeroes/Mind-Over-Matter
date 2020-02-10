@@ -19,8 +19,6 @@ class PopUp extends Component {
     return true;
   }
 
-  shouldShowPopUp = () => ({ showPopUp: false });
-
   showHelp = sentimentDiff => {
     const last = 75;
     if (sentimentDiff <= last) {

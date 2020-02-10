@@ -48,7 +48,13 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { user, fullScoreObj, normalizedScore, runningScore } = this.props;
+    const {
+      user,
+      fullScoreObj,
+      normalizedScore,
+      runningScore,
+      sentimentDiff
+    } = this.props;
 
     return (
       <div className="dashboardFullDiv">
@@ -85,6 +91,12 @@ class Dashboard extends Component {
               {runningScore.length
                 ? runningScore[runningScore.length - 1].runningScore.toFixed(3)
                 : "Loading"}
+              {" & "}
+              {sentimentDiff.length
+                ? (
+                    sentimentDiff[sentimentDiff.length - 1].sentimentDiff * 100
+                  ).toFixed(1) + "%"
+                : null}
             </span>
           </div>
 
@@ -128,6 +140,7 @@ const mapStateToProps = state => {
     fullScoreObj: state.score.fullScoreObj,
     normalizedScore: state.score.normalizedScore,
     runningScore: state.score.runningScore,
+    sentimentDiff: state.score.sentimentDiff,
     todaysScreenMins: state.time.screenMinsToday,
     yesterdaysScreenMins: state.time.screenMinsYesterday,
     weeksScreenHours: state.time.screenHoursWeek

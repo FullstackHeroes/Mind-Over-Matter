@@ -418,8 +418,8 @@ img {
 
 .alertContainer {
   background-color: #d3d3d3;
-  min-width: 300px;
-  min-height: 150px;
+  width: 550px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -446,14 +446,15 @@ img {
 
 .alertImg {
   width: auto;
-  height: 200px;
+  height: 150px;
 }
 
 .alertButton {
   width: 100px;
   padding: 0 20px;
-  margin: 0 auto;
   border-radius: 5px;
+  border-color: black;
+  border-width: 2px;
 }
 
 .alertButton:hover {
