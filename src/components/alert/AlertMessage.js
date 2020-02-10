@@ -1,7 +1,6 @@
 import React from "react";
 
 const AlertMessage = ({ status, onClose }) => {
-  console.log("alert msg -", status);
   const tiers = [65, 70, 80];
 
   const alertOptions = {
@@ -26,6 +25,7 @@ const AlertMessage = ({ status, onClose }) => {
 
   tiers.map((tier, idx) => {
     if (status <= tier) {
+      console.log("inside alert msg -", status);
       return (
         <div className="alertBackdrop d-flex justify-content-center">
           <div className="alertContainer">

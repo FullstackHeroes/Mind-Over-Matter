@@ -9,11 +9,10 @@ class AlertContent extends Component {
 
   helpMessage = status => {
     const currentDate = dateCreate();
-    console.log("help msg - ", status, currentDate - this.props.lastAlert);
 
-    if (currentDate - this.props.lastAlert > 10000) {
-      <AlertMessage status={status} onClose={this.onClose} />;
-    }
+    if (currentDate - this.props.lastAlert > 5000) {
+      return <AlertMessage status={status} onClose={this.onClose} />;
+    } else return null;
     // if (currentDate - this.props.lastAlert > 10000) {
     //   if (status <= 65) {
     //     return (

@@ -28,19 +28,31 @@ class PopUp extends Component {
   render() {
     const { sentimentDiff } = this.props;
 
-    return (
-      <div className="popUpFullDiv">
-        {sentimentDiff && sentimentDiff.length ? (
-          <AlertContent
-            onClose={this.hideHelp}
-            sentimentDiff={sentimentDiff[0].sentimentDiff}
-            lastAlert={this.state.lastAlert}
-            // snapInterval={this.props.snapInterval}
-            // threeHourSnapCount={this.props.threeHourSnapCount}
-          />
-        ) : null}
-      </div>
-    );
+    {
+      sentimentDiff && sentimentDiff.length ? (
+        <AlertContent
+          onClose={this.hideHelp}
+          sentimentDiff={sentimentDiff[0].sentimentDiff}
+          lastAlert={this.state.lastAlert}
+          // snapInterval={this.props.snapInterval}
+          // threeHourSnapCount={this.props.threeHourSnapCount}
+        />
+      ) : null;
+    }
+
+    // return (
+    //   // <div className="popUpFullDiv">
+    //     {sentimentDiff && sentimentDiff.length ? (
+    //        <AlertContent
+    //         onClose={this.hideHelp}
+    //         sentimentDiff={sentimentDiff[0].sentimentDiff}
+    //         lastAlert={this.state.lastAlert}
+    //         // snapInterval={this.props.snapInterval}
+    //         // threeHourSnapCount={this.props.threeHourSnapCount}
+    //       />
+    //     ) :  null}
+    //   // </div>
+    // );
   }
 }
 
