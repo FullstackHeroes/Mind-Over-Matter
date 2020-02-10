@@ -84,7 +84,9 @@ export const setFullScoreObj = userId => {
             ? LSDataExtract.filter(snap => snap.userId === userId)
             : [];
 
-      const { data: dbScoreObj } = await axios.get(`/api/hours/${userId}`),
+      const { data: dbScoreObj } = await axios.get(
+          `/api/weightedScore/${userId}`
+        ),
         adjFullScoreObj = dbScoreObj.concat(targetLSDataObj);
 
       if (adjFullScoreObj.length) dispatch(getFullScoreObj(adjFullScoreObj));
@@ -108,7 +110,7 @@ export const postLSScoreObj = userId => {
       adjLSDataObj.timeStamp.setHours(hoursDiff);
 
       // INTERACT WITH DATABASE
-      const newWtdScore = await axios.post("/api/hours", adjLSDataObj);
+      const newWtdScore = await axios.post("/api/weightedScore", adjLSDataObj);
 
       dispatch(getFullScoreObj(newWtdScore.data));
       localStorage.clear();

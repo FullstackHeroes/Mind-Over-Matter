@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-//=======POST HOURS============
+//=======POST WEIGHTEDSCORES============
 router.post("/", async function(req, res, next) {
   try {
     const {
