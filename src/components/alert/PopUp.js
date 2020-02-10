@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AlertContent from "./AlertContent";
+import AlertMessage from "./AlertMessage";
 import { dateCreate } from "../../utils/utilities";
 import { connect } from "react-redux";
 
@@ -26,33 +27,24 @@ class PopUp extends Component {
   };
 
   render() {
-    const { sentimentDiff } = this.props;
+    const { sentimentDiff } = this.props,
+      currentDate = dateCreate();
 
-    {
-      sentimentDiff && sentimentDiff.length ? (
-        <AlertContent
-          onClose={this.hideHelp}
-          sentimentDiff={sentimentDiff[0].sentimentDiff}
-          lastAlert={this.state.lastAlert}
-          // snapInterval={this.props.snapInterval}
-          // threeHourSnapCount={this.props.threeHourSnapCount}
-        />
-      ) : null;
-    }
-
-    // return (
-    //   // <div className="popUpFullDiv">
-    //     {sentimentDiff && sentimentDiff.length ? (
-    //        <AlertContent
-    //         onClose={this.hideHelp}
-    //         sentimentDiff={sentimentDiff[0].sentimentDiff}
-    //         lastAlert={this.state.lastAlert}
-    //         // snapInterval={this.props.snapInterval}
-    //         // threeHourSnapCount={this.props.threeHourSnapCount}
-    //       />
-    //     ) :  null}
-    //   // </div>
-    // );
+    return (
+      <div className="popUpFullDiv">
+        {sentimentDiff &&
+        sentimentDiff.length &&
+        currentDate - this.state.lastAlert > 5000 ? (
+          <AlertMessage
+            onClose={this.hideHelp}
+            status={sentimentDiff[0].sentimentDiff * 100}
+            // lastAlert={this.state.lastAlert}
+            // snapInterval={this.props.snapInterval}
+            // threeHourSnapCount={this.props.threeHourSnapCount}
+          />
+        ) : null}
+      </div>
+    );
   }
 }
 
