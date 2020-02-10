@@ -401,19 +401,20 @@ img {
 }
 
 /* ------------------ ALERT ELEMENT ------------------ */
-.popUpFullDiv {
+/* .popUpFullDiv {
   margin: 0;
-}
+} */
 
 .alertFullDiv {
   width: 100vw;
   height: 100vh;
-  /* background-color: rgba(234, 234, 234, 0.3); */
-  background-color: red;
+  background-color: rgba(245, 245, 245, 0.5);
+  /* background-color: red; */
   z-index: 100;
   display: flex;
   justify-content: center;
   position: fixed;
+  padding: 20px;
 }
 
 .alertContainer {
