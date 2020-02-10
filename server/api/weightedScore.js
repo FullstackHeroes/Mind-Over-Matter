@@ -33,7 +33,7 @@ router.post("/", async function(req, res, next) {
       screenScore,
       screenTime
     } = req.body;
-    await WeightedScore.create({
+    await weightedScore.create({
       trueScore,
       userId,
       happy,
@@ -69,11 +69,11 @@ router.get("/:userId", async (req, res, next) => {
   res.json(userHours);
 });
 
-//NEED A CONDITIONAL. HANGS IF THERE IS NO DATA FOR TODAY
+// //NEED A CONDITIONAL. HANGS IF THERE IS NO DATA FOR TODAY
 router.get("/:userId/today", async (req, res, next) => {
-  const text = `SELECT weightedscore."screenTime"
-  FROM weightedscore
-  WHERE date(weightedscore."timeStamp") = CURRENT_DATE AND weightedscore."userId" = ${req.params.userId}`;
+  const text = `SELECT weighteds."screenTime"
+  FROM weighteds
+  WHERE date(weighteds."timeStamp") = CURRENT_DATE AND weighteds."userId" = ${req.params.userId}`;
   const userHours = await db.query(text);
   const screenTimeArr = userHours[0];
   if (screenTimeArr.length) {
@@ -85,7 +85,7 @@ router.get("/:userId/today", async (req, res, next) => {
 });
 
 router.get("/:userId/threehours", async (req, res, next) => {
-  const text = `SELECT weightedscore."count" FROM weightedscore WHERE date(weightedscore."timeStamp") >= CURRENT_DATE - INTERVAL '3 hours' AND weightedscore."userId" = ${req.params.userId}`;
+  const text = `SELECT weighteds."count" FROM weighteds WHERE date(weighteds."timeStamp") >= CURRENT_DATE - INTERVAL '3 hours' AND weighteds."userId" = ${req.params.userId}`;
   const userSnapCount = await db.query(text);
   const snapCountArr = userSnapCount[0];
   if (snapCountArr.length) {
@@ -97,7 +97,7 @@ router.get("/:userId/threehours", async (req, res, next) => {
 });
 
 router.get("/:userId/month", async (req, res, next) => {
-  const text = `SELECT weightedscore."screenTime" FROM weightedscore where DATE_PART('month', date(weightedscore."timeStamp")) = DATE_PART('month', CURRENT_DATE) AND weightedscore."userId" = ${req.params.userId}`;
+  const text = `SELECT weighteds."screenTime" FROM weighteds where DATE_PART('month', date(weighteds."timeStamp")) = DATE_PART('month', CURRENT_DATE) AND weighteds."userId" = ${req.params.userId}`;
   const userHours = await db.query(text);
   const screenTimeArr = userHours[0];
   if (screenTimeArr.length) {
@@ -108,20 +108,20 @@ router.get("/:userId/month", async (req, res, next) => {
   } else res.json(0);
 });
 
-router.get("/:userId/year", async (req, res, next) => {
-  const text = `SELECT weightedscore."screenTime" FROM weightedscore where DATE_PART('year', date(weightedscore."timeStamp")) = DATE_PART('year', CURRENT_DATE) AND weightedscore."userId" = ${req.params.userId}`;
-  const userHours = await db.query(text);
-  const screenTimeArr = userHours[0];
-  if (screenTimeArr.length) {
-    const dailyScreenTime = screenTimeArr.reduce((a, b) => ({
-      screenTime: a.screenTime + b.screenTime
-    }));
-    res.json(Math.floor(dailyScreenTime.screenTime / 3600));
-  } else res.json(0);
-});
+// router.get("/:userId/year", async (req, res, next) => {
+//   const text = `SELECT weighteds."screenTime" FROM weighteds where DATE_PART('year', date(weighteds."timeStamp")) = DATE_PART('year', CURRENT_DATE) AND weighteds."userId" = ${req.params.userId}`;
+//   const userHours = await db.query(text);
+//   const screenTimeArr = userHours[0];
+//   if (screenTimeArr.length) {
+//     const dailyScreenTime = screenTimeArr.reduce((a, b) => ({
+//       screenTime: a.screenTime + b.screenTime
+//     }));
+//     res.json(Math.floor(dailyScreenTime.screenTime / 3600));
+//   } else res.json(0);
+// });
 
 router.get("/:userId/yesterday", async (req, res, next) => {
-  const text = `SELECT weightedscore."screenTime" FROM weightedscore WHERE date(weightedscore."timeStamp") = CURRENT_DATE - INTERVAL '1 day' AND weightedscore."userId" = ${req.params.userId}`;
+  const text = `SELECT weighteds."screenTime" FROM weighteds WHERE date(weighteds."timeStamp") = CURRENT_DATE - INTERVAL '1 day' AND weighteds."userId" = ${req.params.userId}`;
   const userHours = await db.query(text);
   const screenTimeArr = userHours[0];
   if (screenTimeArr.length) {
@@ -133,7 +133,7 @@ router.get("/:userId/yesterday", async (req, res, next) => {
 });
 
 router.get("/:userId/week", async (req, res, next) => {
-  const text = `SELECT weightedscore."screenTime" FROM weightedscore WHERE date("timeStamp") >= CURRENT_DATE - INTERVAL '7 days' AND weightedscore."userId" = ${req.params.userId}`;
+  const text = `SELECT weighteds."screenTime" FROM weighteds WHERE date("timeStamp") >= CURRENT_DATE - INTERVAL '7 days' AND weighteds."userId" = ${req.params.userId}`;
   const userHours = await db.query(text);
   const screenTimeArr = userHours[0];
   if (screenTimeArr.length) {

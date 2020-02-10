@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const { db } = require("../db");
 
-const WeightedScore = db.define("WeightedScore", {
+const WeightedScore = db.define("weighted", {
   trueScore: {
     type: Sequelize.FLOAT
   },

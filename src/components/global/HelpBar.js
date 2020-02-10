@@ -30,7 +30,7 @@ export default () => (
         <h6>My Question is: </h6>
         <textarea rows="7" cols="75"></textarea>
         <br></br>
-        <button type="submit" class="submit">
+        <button type="submit" className="submit">
           Submit Question
         </button>
       </form>
