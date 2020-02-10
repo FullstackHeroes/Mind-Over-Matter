@@ -26,8 +26,6 @@ class Dashboard extends Component {
       this.props.setFullScoreObj(user.id);
       this.props.setNormalizedScore(user.id);
       this.props.getTime(user.id);
-      this.props.getMonth(user.id);
-      this.props.getYear(user.id);
       this.props.getYesterday(user.id);
       this.props.getWeek(user.id);
       this.props.getSnaps(user.id);
@@ -44,8 +42,6 @@ class Dashboard extends Component {
         this.props.setFullScoreObj(user.id);
         this.props.setNormalizedScore(user.id);
         this.props.getTime(user.id);
-        this.props.getMonth(user.id);
-        this.props.getYear(user.id);
         this.props.getYesterday(user.id);
         this.props.getWeek(user.id);
         this.props.getSnaps(user.id);
