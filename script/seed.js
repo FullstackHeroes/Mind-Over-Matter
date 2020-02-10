@@ -1,5 +1,5 @@
 const db = require("../server/db");
-const { User, Hour, NormalizeScore } = require("../server/db/models");
+const { User, WeightedScore, NormalizeScore } = require("../server/db/models");
 
 // ATTEMPT TO IMPORT MATERIAL FROM CLIENT SIDE
 const share = require("../src/utils/share"),
@@ -108,7 +108,7 @@ const normalScoreGen = (userId, count) => {
   return normRes;
 };
 
-const hourSeed = [
+const WeightedScoreSeed = [
   {
     userId: 1,
     trueScore: 7,
@@ -1321,7 +1321,7 @@ const seed = async () => {
   await User.bulkCreate(userSeed);
   // await Hour.bulkCreate(hourSeed);
   // await NormalizeScore.bulkCreate(normalizeScoreSeed);
-  await Hour.bulkCreate(trueScoreGen(1, 100));
+  await WeightedScore.bulkCreate(trueScoreGen(1, 100));
   await NormalizeScore.bulkCreate(normalScoreGen(1, 100));
 
   console.log(`seeded successfully`);
