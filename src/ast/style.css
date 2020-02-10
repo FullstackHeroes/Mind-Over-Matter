@@ -5,6 +5,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
 
 h1 {
   margin: 0;
@@ -407,6 +412,15 @@ img {
   text-align: center;
   z-index: 5px;
   box-shadow: 3px 3px 5px rgba(110, 109, 109, 0.781);
+}
+
+.alertBackdrop {
+  position: absolute;
+  width: 100%;
+  min-height: 50px;
+  height: 100%;
+  background-color: rgba(101, 112, 134, 0.726);
+  z-index: 4px;
 }
 
 .alertContainer > h6 {
