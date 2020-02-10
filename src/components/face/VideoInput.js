@@ -155,7 +155,7 @@ class VideoInput extends Component {
       facingMode: "user"
     };
 
-    console.log("rendering -", this.props);
+    // console.log("rendering -", this.props);
 
     return (
       <div className="videoInputDiv">
@@ -170,7 +170,7 @@ class VideoInput extends Component {
           />
         </div>
 
-        <PopUp currentSentiment={this.props.currentRunningSentiment} />
+        <PopUp sentimentDiff={this.props.sentimentDiff.slice(-1)} />
       </div>
     );
   }

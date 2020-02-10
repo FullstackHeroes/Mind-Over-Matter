@@ -108,6 +108,6 @@ export default class AlertContent extends Component {
   };
 
   render() {
-    return <div>{this.helpMessage(this.props.currentSentiment)}</div>;
+    return <div>{this.helpMessage(this.props.sentimentDiff)}</div>;
   }
 }

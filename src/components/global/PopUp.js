@@ -25,12 +25,13 @@ class PopUp extends Component {
   };
 
   render() {
-    // console.log("pop up render -", this.props);
+    const { sentimentDiff } = this.props;
+    console.log("pop up render -", sentimentDiff);
     return (
       <div>
         <AlertContent
           onClose={this.hideHelp}
-          currentSentiment={this.props.currentSentiment}
+          sentimentDiff={sentimentDiff}
           lastAlert={this.state.lastAlert}
           // snapInterval={this.props.snapInterval}
           // threeHourSnapCount={this.props.threeHourSnapCount}
