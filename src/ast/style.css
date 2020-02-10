@@ -121,7 +121,6 @@ h6 {
 }
 
 .navBarRight {
-  width: 20%;
   display: flex;
   justify-content: space-around;
   padding: 0 15px;
@@ -134,7 +133,7 @@ h6 {
 .navBarLink {
   font-size: 20px;
   font-weight: bold;
-  padding: 0 5px;
+  padding: 0 10px;
 }
 
 .selectedNavLink {
