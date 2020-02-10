@@ -184,14 +184,13 @@ h6 {
 
 .appInsideDiv {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   width: 100vw;
   min-height: 100vh;
   padding-top: 11vh;
   margin-top: 0%;
   margin-bottom: 0em;
   padding-bottom: 0%;
-  overflow: hidden;
 }
 
 /* ------------------ TABLE ELEMENT ------------------ */
@@ -275,7 +274,7 @@ h6 {
   background-color: lightgray;
   display: flex;
   flex-direction: column;
-  min-width: 75vw;
+  width: 90vw;
   min-height: 60vh;
   padding: 15px;
   border-radius: 5px;
@@ -298,7 +297,7 @@ h6 {
 .dashboardTable {
   background-color: #282c34;
   margin: 10px;
-  width: 40%;
+  width: 30%;
   min-height: 100px;
   display: flex;
   flex-direction: column;

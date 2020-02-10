@@ -28,7 +28,8 @@ class App extends Component {
       <div className="appFullDiv">
         <NavBar />
 
-        <div className="appInsideDiv d-flex justify-content-center">
+        {/* <div className="appInsideDiv d-flex justify-content-center"> */}
+        <div className="appInsideDiv">
           {user && user.id ? <VideoInput /> : null}
           <Routes />
         </div>
