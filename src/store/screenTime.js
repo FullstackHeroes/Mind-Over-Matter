@@ -55,7 +55,7 @@ export const gotWeeksScreenTime = screenHoursWeek => {
 export const getTodaysScreenTime = userId => {
   return async dispatch => {
     try {
-      const screenTime = await axios.get(`/api/hours/${userId}/today`);
+      const screenTime = await axios.get(`/api/weightedScore/${userId}/today`);
       dispatch(gotTodaysScreenTime(screenTime.data));
     } catch (error) {
       console.error(error);
@@ -66,7 +66,7 @@ export const getTodaysScreenTime = userId => {
 export const getMonthsScreenTime = userId => {
   return async dispatch => {
     try {
-      const screenTime = await axios.get(`/api/hours/${userId}/month`);
+      const screenTime = await axios.get(`/api/weightedScore/${userId}/month`);
       dispatch(gotMonthsScreenTime(screenTime.data));
     } catch (error) {
       console.error(error);
@@ -77,7 +77,7 @@ export const getMonthsScreenTime = userId => {
 export const getYearsScreenTime = userId => {
   return async dispatch => {
     try {
-      const screenTime = await axios.get(`/api/hours/${userId}/year`);
+      const screenTime = await axios.get(`/api/weightedScore/${userId}/year`);
       dispatch(gotYearsScreenTime(screenTime.data));
     } catch (error) {
       console.error(error);
@@ -88,7 +88,9 @@ export const getYearsScreenTime = userId => {
 export const getYesterdaysScreenTime = userId => {
   return async dispatch => {
     try {
-      const screenTime = await axios.get(`/api/hours/${userId}/yesterday`);
+      const screenTime = await axios.get(
+        `/api/weightedScore/${userId}/yesterday`
+      );
       dispatch(gotYesterdaysScreenTime(screenTime.data));
     } catch (error) {
       console.error(error);
@@ -99,7 +101,7 @@ export const getYesterdaysScreenTime = userId => {
 export const getWeeksScreenTime = userId => {
   return async dispatch => {
     try {
-      const screenTime = await axios.get(`/api/hours/${userId}/week`);
+      const screenTime = await axios.get(`/api/weightedScore/${userId}/week`);
       dispatch(gotWeeksScreenTime(screenTime.data));
     } catch (error) {
       console.error(error);
