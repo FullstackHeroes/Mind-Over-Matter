@@ -1,14 +1,21 @@
 import React, { Component } from "react";
 import { dateCreate } from "../../utils/utilities";
 
-export default class AlertContent extends Component {
+class AlertContent extends Component {
   onClose = () => {
     this.props.onClose && this.props.onClose();
   };
 
   helpMessage = status => {
-    // console.log(status); REINSTATE TO SHOW % IN CONSOLE FOR EASY TRACKING
     const currentDate = dateCreate();
+    console.log(
+      "help msg - ",
+      status,
+      currentDate - this.props.lastAlert,
+      currentDate,
+      this.props.lastAlert
+    );
+
     if (currentDate - this.props.lastAlert > 600000) {
       if (status <= 65) {
         return (
@@ -109,7 +116,12 @@ export default class AlertContent extends Component {
 
   render() {
     const { sentimentDiff } = this.props;
-    console.log("alert render -", sentimentDiff);
-    return <div>{this.helpMessage(sentimentDiff * 100)}</div>;
+    return (
+      <div className="alertFullDiv">
+        {this.helpMessage(sentimentDiff * 100)}
+      </div>
+    );
   }
 }
+
+export default AlertContent;
