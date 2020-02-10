@@ -9,10 +9,10 @@ export default class AlertContent extends Component {
   helpMessage = status => {
     console.log(status);
     const currentDate = dateCreate();
-    if (currentDate - this.props.lastAlert > 10000) {
+    if (currentDate - this.props.lastAlert > 1000) {
       if (status <= 63) {
         return (
-          <div className="alertBackdrop">
+          <div className="alertBackdrop d-flex justify-content-center">
             <div className="alertContainer">
               <div className="modal-dialog">
                 <h6>
@@ -41,7 +41,7 @@ export default class AlertContent extends Component {
         );
       } else if (status <= 73) {
         return (
-          <div className="alertBackdrop">
+          <div className="alertBackdrop d-flex justify-content-center">
             <div className="alertContainer">
               <div className="modal-dialog">
                 <h6>
@@ -70,7 +70,7 @@ export default class AlertContent extends Component {
         );
       } else if (status <= 78) {
         return (
-          <div className="alertBackdrop">
+          <div className="alertBackdrop d-flex justify-content-center">
             <div className="alertContainer">
               <div className="modal-dialog">
                 <h6>Here is a cute picture, Hope it makes your day!</h6>
