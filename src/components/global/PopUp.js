@@ -54,12 +54,3 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PopUp);
-
-//spitballing css
-// .modal {
-//   width: 600px;
-//   background: white;
-//   border: 1px solid #ccc;
-//   transition: 1.1s ease-out;
-//   box-shadow:
-//     -2rem 2rem 2rem
