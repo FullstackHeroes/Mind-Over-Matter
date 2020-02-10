@@ -7,10 +7,10 @@ export default class AlertContent extends Component {
   };
 
   helpMessage = status => {
-    console.log(status);
+    // console.log(status); REINSTATE TO SHOW % IN CONSOLE FOR EASY TRACKING
     const currentDate = dateCreate();
-    if (currentDate - this.props.lastAlert > 1000) {
-      if (status <= 63) {
+    if (currentDate - this.props.lastAlert > 600000) {
+      if (status <= 65) {
         return (
           <div className="alertBackdrop d-flex justify-content-center">
             <div className="alertContainer">
@@ -39,7 +39,7 @@ export default class AlertContent extends Component {
             </div>
           </div>
         );
-      } else if (status <= 73) {
+      } else if (status <= 70) {
         return (
           <div className="alertBackdrop d-flex justify-content-center">
             <div className="alertContainer">
