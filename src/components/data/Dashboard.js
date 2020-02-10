@@ -4,8 +4,6 @@ import {
   setFullScoreObj,
   setNormalizedScore,
   getTodaysScreenTime,
-  getMonthsScreenTime,
-  getYearsScreenTime,
   getYesterdaysScreenTime,
   getWeeksScreenTime,
   getThreeHourSnapCount
@@ -50,7 +48,13 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { user, fullScoreObj, normalizedScore, runningScore } = this.props;
+    const {
+      user,
+      fullScoreObj,
+      normalizedScore,
+      runningScore,
+      sentimentDiff
+    } = this.props;
 
     return (
       <div className="dashboardFullDiv">
@@ -82,11 +86,20 @@ class Dashboard extends Component {
           </div>
 
           <div className="dashboardTable">
-            <span className="dashboardLabel">Running True Score</span>
+            <span className="dashboardLabel">
+              Running True Score {"&"} Variance
+            </span>
             <span className="dashboardContent">
               {runningScore.length
                 ? runningScore[runningScore.length - 1].runningScore.toFixed(3)
                 : "Loading"}
+              &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+              {sentimentDiff.length
+                ? (
+                    sentimentDiff[sentimentDiff.length - 1].sentimentDiff * 100
+                  ).toFixed(1)
+                : null}
+              %
             </span>
           </div>
 
@@ -130,9 +143,8 @@ const mapStateToProps = state => {
     fullScoreObj: state.score.fullScoreObj,
     normalizedScore: state.score.normalizedScore,
     runningScore: state.score.runningScore,
+    sentimentDiff: state.score.sentimentDiff,
     todaysScreenMins: state.time.screenMinsToday,
-    monthsScreenHours: state.time.screenHoursThisMonth,
-    yearsScreenHours: state.time.screenHoursThisYear,
     yesterdaysScreenMins: state.time.screenMinsYesterday,
     weeksScreenHours: state.time.screenHoursWeek
   };
@@ -143,8 +155,6 @@ const mapDispatchToProps = dispatch => {
     setFullScoreObj: userId => dispatch(setFullScoreObj(userId)),
     setNormalizedScore: userId => dispatch(setNormalizedScore(userId)),
     getTime: userId => dispatch(getTodaysScreenTime(userId)),
-    getMonth: userId => dispatch(getMonthsScreenTime(userId)),
-    getYear: userId => dispatch(getYearsScreenTime(userId)),
     getYesterday: userId => dispatch(getYesterdaysScreenTime(userId)),
     getWeek: userId => dispatch(getWeeksScreenTime(userId)),
     getSnaps: userId => dispatch(getThreeHourSnapCount(userId))

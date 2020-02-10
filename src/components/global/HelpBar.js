@@ -47,6 +47,7 @@ export default () => (
         the weighted average of your true scores.
       </h6>
       <br></br>
+
       <h6 className="sidebarHeader">Still have questions? Message us!</h6>
       <form className="sidebarText">
         <div className="form-group">

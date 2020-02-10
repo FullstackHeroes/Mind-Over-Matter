@@ -7,6 +7,7 @@ import { me } from "../store";
 import Routes from "./Routes";
 import VideoInput from "./face/VideoInput";
 import NavBar from "./global/NavBar";
+import PopUp from "./alert/PopUp";
 
 class App extends Component {
   componentDidMount() {
@@ -22,14 +23,19 @@ class App extends Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { user, sentimentDiff } = this.props;
 
     return (
       <div className="appFullDiv">
         <NavBar />
 
-        <div className="appInsideDiv d-flex justify-content-center">
+        {sentimentDiff && sentimentDiff.length ? (
+          <PopUp sentimentDiff={sentimentDiff.slice(-1)} />
+        ) : null}
+
+        <div className="appInsideDiv">
           {user && user.id ? <VideoInput /> : null}
+
           <Routes />
         </div>
       </div>
@@ -39,7 +45,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    sentimentDiff: state.score.sentimentDiff
   };
 };
 
