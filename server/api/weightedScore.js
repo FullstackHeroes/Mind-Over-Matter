@@ -33,7 +33,7 @@ router.post("/", async function(req, res, next) {
       screenScore,
       screenTime
     } = req.body;
-    await weightedScore.create({
+    await WeightedScore.create({
       trueScore,
       userId,
       happy,
@@ -108,17 +108,17 @@ router.get("/:userId/month", async (req, res, next) => {
   } else res.json(0);
 });
 
-// router.get("/:userId/year", async (req, res, next) => {
-//   const text = `SELECT weighteds."screenTime" FROM weighteds where DATE_PART('year', date(weighteds."timeStamp")) = DATE_PART('year', CURRENT_DATE) AND weighteds."userId" = ${req.params.userId}`;
-//   const userHours = await db.query(text);
-//   const screenTimeArr = userHours[0];
-//   if (screenTimeArr.length) {
-//     const dailyScreenTime = screenTimeArr.reduce((a, b) => ({
-//       screenTime: a.screenTime + b.screenTime
-//     }));
-//     res.json(Math.floor(dailyScreenTime.screenTime / 3600));
-//   } else res.json(0);
-// });
+router.get("/:userId/year", async (req, res, next) => {
+  const text = `SELECT weighteds."screenTime" FROM weighteds where DATE_PART('year', date(weighteds."timeStamp")) = DATE_PART('year', CURRENT_DATE) AND weighteds."userId" = ${req.params.userId}`;
+  const userHours = await db.query(text);
+  const screenTimeArr = userHours[0];
+  if (screenTimeArr.length) {
+    const dailyScreenTime = screenTimeArr.reduce((a, b) => ({
+      screenTime: a.screenTime + b.screenTime
+    }));
+    res.json(Math.floor(dailyScreenTime.screenTime / 3600));
+  } else res.json(0);
+});
 
 router.get("/:userId/yesterday", async (req, res, next) => {
   const text = `SELECT weighteds."screenTime" FROM weighteds WHERE date(weighteds."timeStamp") = CURRENT_DATE - INTERVAL '1 day' AND weighteds."userId" = ${req.params.userId}`;
