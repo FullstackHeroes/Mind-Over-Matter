@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Chart from "chart.js";
-import { Bar, Line, Pie, Doughnut } from "react-chartjs-2";
+import { Bar, Line, Pie, Doughnut, HorizontalBar } from "react-chartjs-2";
 
 class ScreenTimeWeek extends Component {
   constructor(props) {
@@ -69,7 +69,7 @@ class ScreenTimeWeek extends Component {
   render() {
     return (
       <div>
-        <Bar
+        <HorizontalBar
           options={{
             title: {
               display: true,
