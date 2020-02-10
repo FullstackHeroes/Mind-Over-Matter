@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Chart from "chart.js";
-import { Bar, Line, Pie, Doughnut } from "react-chartjs-2";
+import { Bar, Line, Pie, Doughnut, HorizontalBar } from "react-chartjs-2";
 
 class ScreenTimeWeek extends Component {
   constructor(props) {
@@ -11,7 +11,12 @@ class ScreenTimeWeek extends Component {
         labels: [`Hours Worked : ${this.props.weeksScreenHours}`],
         datasets: [
           {
-            backgroundColor: ["rgba(0,204,153,1)", "rgba(255,153,51,1)"],
+            barPercentage: 0.6,
+            backgroundColor: function(context) {
+              const index = context.dataIndex;
+              const value = context.dataset.data[index];
+              return value > 40 ? "rgba(255,51,51,1)" : "rgba(0,204,153,1)";
+            },
             data: [this.props.weeksScreenHours]
           }
         ]
@@ -25,7 +30,12 @@ class ScreenTimeWeek extends Component {
         labels: [`Hours Worked: ${this.props.weeksScreenHours}`],
         datasets: [
           {
-            backgroundColor: ["rgba(0,204,153,1)", "rgba(255,153,51,1)"],
+            barPercentage: 0.6,
+            backgroundColor: function(context) {
+              const index = context.dataIndex;
+              const value = context.dataset.data[index];
+              return value > 40 ? "rgba(255,51,51,1)" : "rgba(0,204,153,1)";
+            },
             data: [this.props.weeksScreenHours]
           }
         ]
@@ -42,11 +52,13 @@ class ScreenTimeWeek extends Component {
           labels: [`Hours Worked: ${this.props.weeksScreenHours}`],
           datasets: [
             {
-              backgroundColor: ["rgba(0,204,153,1)", "rgba(255,153,51,1)"],
-              data: [
-                this.props.weeksScreenHours,
-                24 - this.props.weeksScreenHours
-              ]
+              barPercentage: 0.6,
+              backgroundColor: function(context) {
+                const index = context.dataIndex;
+                const value = context.dataset.data[index];
+                return value > 40 ? "rgba(255,51,51,1)" : "rgba(0,204,153,1)";
+              },
+              data: [this.props.weeksScreenHours]
             }
           ]
         }
@@ -57,13 +69,25 @@ class ScreenTimeWeek extends Component {
   render() {
     return (
       <div>
-        <Bar
+        <HorizontalBar
           options={{
             title: {
               display: true,
               text: "Working Time This Week"
             },
-            responsive: true
+            responsive: true,
+            scales: {
+              xAxes: [
+                {
+                  stacked: true
+                }
+              ],
+              yAxes: [
+                {
+                  stacked: true
+                }
+              ]
+            }
           }}
           data={this.state.data}
         />
