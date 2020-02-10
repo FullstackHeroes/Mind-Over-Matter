@@ -86,12 +86,14 @@ class Dashboard extends Component {
           </div>
 
           <div className="dashboardTable">
-            <span className="dashboardLabel">Running True Score</span>
+            <span className="dashboardLabel">
+              Running True Score {"&"} Variance
+            </span>
             <span className="dashboardContent">
               {runningScore.length
                 ? runningScore[runningScore.length - 1].runningScore.toFixed(3)
                 : "Loading"}
-              {" & "}
+              {"  /  "}
               {sentimentDiff.length
                 ? (
                     sentimentDiff[sentimentDiff.length - 1].sentimentDiff * 100

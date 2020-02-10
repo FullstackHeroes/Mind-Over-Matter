@@ -418,7 +418,7 @@ img {
 
 .alertContainer {
   background-color: #d3d3d3;
-  width: 550px;
+  width: 600px;
   height: 300px;
   display: flex;
   flex-direction: column;
@@ -430,7 +430,8 @@ img {
   border-style: outset;
   border-radius: 8px;
   color: rgba(18, 89, 155, 0.925);
-  box-shadow: 7px 7px 10px rgba(100, 100, 100, 0.9);
+  font-size: 14px;
+  box-shadow: 7px 7px 15px rgba(100, 100, 100, 0.9);
 }
 
 .alertTextImgDiv {
@@ -455,6 +456,7 @@ img {
   border-radius: 5px;
   border-color: black;
   border-width: 2px;
+  font-weight: bold;
 }
 
 .alertButton:hover {
