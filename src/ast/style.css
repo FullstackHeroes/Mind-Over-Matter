@@ -418,18 +418,19 @@ img {
 
 .alertContainer {
   background-color: #d3d3d3;
-  width: 600px;
-  height: 420px;
+  min-width: 600px;
+  min-height: 275px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   text-align: center;
   border-width: 3px;
+  border-color: black;
   border-style: outset;
-  border-radius: 8px 8px 8px 8px;
+  border-radius: 8px;
   color: rgba(18, 89, 155, 0.925);
-  box-shadow: 3px 3px 5px rgba(110, 109, 109, 0.781);
+  box-shadow: 7px 7px 10px rgba(100, 100, 100, 0.9);
 }
 
 .alertTextImgDiv {
@@ -446,15 +447,14 @@ img {
 
 .alertImg {
   width: auto;
-  height: 250px;
+  height: 200px;
 }
 
 .alertButton {
   width: 100px;
-  padding: 20;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 3px;
+  padding: 20px;
+  margin: 0 auto;
+  border-radius: 5px;
 }
 
 .alertButton:hover {

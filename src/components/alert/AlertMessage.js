@@ -34,9 +34,9 @@ const AlertMessage = ({ status, onClose, last }) => {
               <img className="alertImg" src={alertOptions[i].image} />
             </div>
 
-            <button className="alertBtn" onClick={onClose}>
-              Got it
-            </button>
+            <div className="alertBtn">
+              <button onClick={onClose}>Got it</button>
+            </div>
           </div>
         </div>
       );
