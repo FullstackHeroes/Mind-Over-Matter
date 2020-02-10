@@ -7,7 +7,8 @@ import {
   getMonthsScreenTime,
   getYearsScreenTime,
   getYesterdaysScreenTime,
-  getWeeksScreenTime
+  getWeeksScreenTime,
+  getThreeHourSnapCount
 } from "../../store";
 import ChartRSLine from "../chart/ChartRSLine";
 import ChartTSLine from "../chart/ChartTSLine";
@@ -25,6 +26,7 @@ class Dashboard extends Component {
       this.props.getYear(user.id);
       this.props.getYesterday(user.id);
       this.props.getWeek(user.id);
+      this.props.getSnaps(user.id);
     }
   }
 
@@ -42,6 +44,7 @@ class Dashboard extends Component {
         this.props.getYear(user.id);
         this.props.getYesterday(user.id);
         this.props.getWeek(user.id);
+        this.props.getSnaps(user.id);
       }
     }
   }
@@ -145,7 +148,8 @@ const mapDispatchToProps = dispatch => {
     getMonth: userId => dispatch(getMonthsScreenTime(userId)),
     getYear: userId => dispatch(getYearsScreenTime(userId)),
     getYesterday: userId => dispatch(getYesterdaysScreenTime(userId)),
-    getWeek: userId => dispatch(getWeeksScreenTime(userId))
+    getWeek: userId => dispatch(getWeeksScreenTime(userId)),
+    getSnaps: userId => dispatch(getThreeHourSnapCount(userId))
   };
 };
 

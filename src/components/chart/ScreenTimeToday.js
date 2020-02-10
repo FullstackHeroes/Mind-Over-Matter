@@ -35,7 +35,10 @@ class ScreenTimeToday extends Component {
               "rgba(0, 255, 0, 0.75)",
               "rgba(255, 0, 255, 0.75)"
             ],
-            data: [this.props.todaysScreenHours, 24]
+            data: [
+              this.props.todaysScreenHours,
+              24 - this.props.todaysScreenHours
+            ]
           }
         ]
       }
@@ -55,7 +58,10 @@ class ScreenTimeToday extends Component {
                 "rgba(0, 255, 0, 0.75)",
                 "rgba(255, 0, 255, 0.75)"
               ],
-              data: [this.props.todaysScreenHours, 24]
+              data: [
+                this.props.todaysScreenHours,
+                24 - this.props.todaysScreenHours
+              ]
             }
           ]
         }

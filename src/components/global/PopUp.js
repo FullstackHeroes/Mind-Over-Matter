@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import AlertContent from "./AlertContent";
 import { connect } from "react-redux";
-import { dateCreate } from "../../utils/utilities";
 
 class PopUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showPopUp: false,
-      lastAlert: dateCreate()
+      lastAlert: new Date()
     };
     this.showHelp = this.showHelp.bind(this);
     this.hideHelp = this.hideHelp.bind(this);
@@ -22,7 +21,7 @@ class PopUp extends Component {
   hideHelp = () => {
     this.setState({
       showPopUp: false,
-      lastAlert: dateCreate()
+      lastAlert: new Date()
     });
   };
 
@@ -33,6 +32,8 @@ class PopUp extends Component {
           onClose={this.hideHelp}
           currentSentiment={this.props.currentSentiment}
           lastAlert={this.state.lastAlert}
+          snapInterval={this.props.snapInterval}
+          threeHourSnapCount={this.props.threeHourSnapCount}
         />
       </div>
     );
@@ -42,7 +43,9 @@ class PopUp extends Component {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    normalizedScore: state.score.normalizedScore
+    normalizedScore: state.score.normalizedScore,
+    snapInterval: state.score.snapInterval,
+    threeHourSnapCount: state.time.threeHourSnapCount
   };
 };
 
