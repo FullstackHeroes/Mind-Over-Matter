@@ -21,7 +21,7 @@ class PopUp extends Component {
     return true;
   }
 
-  showHelp = sentimentDiff => {
+  showHelp = (sentimentDiff, threeHourSnapCount) => {
     const last = 75;
     if (sentimentDiff <= last) {
       this.showPopUp = false;
@@ -30,8 +30,8 @@ class PopUp extends Component {
           onClose={this.hideHelp}
           status={sentimentDiff}
           last={last}
-          time={timeSnap}
-          timeCap={this.props.threeHourSnapCount}
+          time={threeHourSnapCount}
+          timeCap={this.state.timeCap}
         />
       );
     }
@@ -46,7 +46,7 @@ class PopUp extends Component {
   };
 
   render() {
-    const { sentimentDiff } = this.props,
+    const { sentimentDiff, threeHourSnapCount } = this.props,
       currentDate = dateCreate();
 
     return (
@@ -56,19 +56,22 @@ class PopUp extends Component {
           this.showPopUp &&
           currentDate - this.state.lastAlert > 10000) ||
         currentDate - this.state.timeAlert > this.state.timeCap
-          ? this.showHelp(sentimentDiff[0].sentimentDiff * 100)
+          ? this.showHelp(
+              sentimentDiff[0].sentimentDiff * 100,
+              threeHourSnapCount
+            )
           : null}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    // snapInterval: state.score.snapInterval,
-    threeHourSnapCount: state.time.threeHourSnapCount //num of captures that happen in 3 hrs / 1000 * 60 ~ mins present
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     // snapInterval: state.score.snapInterval,
+//     threeHourSnapCount: state.time.threeHourSnapCount //num of captures that happen in 3 hrs / 1000 * 60 ~ mins present
+//   };
+// };
 
-export default connect(mapStateToProps, null)(PopUp);
-// export default PopUp;
+// export default connect(mapStateToProps, null)(PopUp);
+export default PopUp;
