@@ -9,16 +9,16 @@ export default class ManilaTab extends Component {
         <div className="navBarRight">
           <NavLink
             to="/Dashboard"
-            className="linkText navBarLink"
-            activeClassName="selectedNavLink"
+            className="linkText manilaTab"
+            activeClassName="selectedManilaTab"
             exact>
             Dashboard
           </NavLink>
 
           <NavLink
             to="/Table"
-            className="linkText navBarLink"
-            activeClassName="selectedNavLink"
+            className="linkText manilaTab"
+            activeClassName="selectedManilaTab"
             exact>
             Table
           </NavLink>

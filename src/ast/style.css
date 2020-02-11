@@ -156,6 +156,18 @@ h6 {
   border-width: 1px;
 }
 
+.manilaTab {
+  border-color: rgba(0, 152, 195, 0.8);
+  border-style: dashed;
+  border-width: 1px;
+}
+
+.selectedManilaTab {
+  border-color: rgba(0, 152, 195, 0.8);
+  border-style: dashed;
+  border-width: 1px;
+}
+
 /* ------------------ VIDEO INPUT ELEMENT ------------------ */
 .cameraDiv {
   width: 0.1px;
