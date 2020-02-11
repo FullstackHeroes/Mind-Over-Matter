@@ -5,7 +5,7 @@ import {
   snapIntDefault,
   dbIntDefault,
   calcSentimentDiff,
-  fullScreenTimeCalcs
+  buildIndScoreObj
 } from "../utils/utilities";
 
 // INITIAL STATE
@@ -180,42 +180,52 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
 
       await axios.post(`/api/weightedScore`, newScoreObj);
 
-      newScoreObj.timeStamp = new Date(newScoreObj.clientTimeStamp);
+      console.log(
+        "time -",
+        newScoreObj.clientTimeStamp.toISOString(),
+        Date(newScoreObj.clientTimeStamp)
+      );
+      // newScoreObj.timeStamp = new Date(newScoreObj.clientTimeStamp);
+      newScoreObj.timeStamp = newScoreObj.timeStamp.toISOString();
+      fullScoreObj.push(newScoreObj);
       const {
+        normalizeScoreArr,
+        runningScoreArr,
+        sentimentDiffArr,
         threeHourSnapCount,
         screenMinsToday,
         screenMinsYesterday,
         screenHoursWeek
-      } = fullScreenTimeCalcs(fullScoreObj.concat(newScoreObj));
+      } = buildIndScoreObj(fullScoreObj);
 
-      console.log("INSIDE -", newScoreObj, newScoreObj.timeStamp);
+      // console.log("INSIDE -", newScoreObj, newScoreObj.timeStamp);
 
-      dispatch(addFullScoreObj(newScoreObj));
-      dispatch(
-        addNormalizedScore({
-          normalizeScore,
-          timeStamp: newScoreObj.timeStamp,
-          userId: newScoreObj.userId
-        })
-      );
-      dispatch(
-        addRunningScore({
-          runningScore,
-          timeStamp: newScoreObj.timeStamp,
-          userId: newScoreObj.userId
-        })
-      );
-      dispatch(
-        addSentimentDiff({
-          sentimentDiff,
-          timeStamp: newScoreObj.timeStamp,
-          userId: newScoreObj.userId
-        })
-      );
-      // dispatch(getFullScoreObj(userWtdObj));
-      // dispatch(getNormalizedScore(normalizeScoreArr));
-      // dispatch(getRunningScore(runningScoreArr));
-      // dispatch(getSentimentDiff(sentimentDiffArr));
+      // dispatch(addFullScoreObj(newScoreObj));
+      // dispatch(
+      //   addNormalizedScore({
+      //     normalizeScore,
+      //     timeStamp: newScoreObj.timeStamp,
+      //     userId: newScoreObj.userId
+      //   })
+      // );
+      // dispatch(
+      //   addRunningScore({
+      //     runningScore,
+      //     timeStamp: newScoreObj.timeStamp,
+      //     userId: newScoreObj.userId
+      //   })
+      // );
+      // dispatch(
+      //   addSentimentDiff({
+      //     sentimentDiff,
+      //     timeStamp: newScoreObj.timeStamp,
+      //     userId: newScoreObj.userId
+      //   })
+      // );
+      dispatch(getFullScoreObj(fullScoreObj));
+      dispatch(getNormalizedScore(normalizeScoreArr));
+      dispatch(getRunningScore(runningScoreArr));
+      dispatch(getSentimentDiff(sentimentDiffArr));
       dispatch(gotThreeHoursnapCount(threeHourSnapCount));
       dispatch(gotTodaysScreenTime(screenMinsToday));
       dispatch(gotYesterdaysScreenTime(screenMinsYesterday));

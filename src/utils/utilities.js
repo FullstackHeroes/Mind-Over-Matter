@@ -160,7 +160,7 @@ export const calcSentimentDiff = (running, normal) => {
 // CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
 export const calcScreenTime = (length, interval) => (interval * length) / 1000;
 
-export const fullScreenTimeCalcs = userWtdObj => {
+export const buildIndScoreObj = userWtdObj => {
   // SETTING UP THE TIME INGREDIENTS
   const currentDate = dateCreate(),
     hoursDiff = currentDate.getHours() - currentDate.getTimezoneOffset() / 60;
@@ -178,13 +178,37 @@ export const fullScreenTimeCalcs = userWtdObj => {
     weekStart = new Date(todayStart - twoFourHourMilli * 7);
 
   // SETTING UP ALL TIME VARIABLES TO SEND BACK
-  let threeHourSnapCount = 0,
+  let normalizeScoreArr = [],
+    runningScoreArr = [],
+    sentimentDiffArr = [],
+    threeHourSnapCount = 0,
     screenMinsToday = 0,
     screenMinsYesterday = 0,
     screenHoursWeek = 0;
 
   // LOOPING THROUGH OBJECT TO PARSE THROUGH WHAT TO PUT BACK
   for (const ele of userWtdObj.slice((-twoFourHourMilli * 31) / 1000)) {
+    // NORMALIZE SCORE RESPONSE
+    const normalizeScoreObj = {};
+    normalizeScoreObj.normalizeScore = ele.normalizeScore;
+    normalizeScoreObj.timeStamp = ele.timeStamp;
+    normalizeScoreObj.userId = ele.userId;
+    normalizeScoreArr.push(normalizeScoreObj);
+
+    // RUNNING SCORE RESPONSE
+    const runningScoreObj = {};
+    runningScoreObj.runningScore = ele.runningScore;
+    runningScoreObj.timeStamp = ele.timeStamp;
+    runningScoreObj.userId = ele.userId;
+    runningScoreArr.push(runningScoreObj);
+
+    // SENTIMENT DIFF RESPONSE
+    const sentimentDiffObj = {};
+    sentimentDiffObj.sentimentDiff = ele.sentimentDiff;
+    sentimentDiffObj.timeStamp = ele.timeStamp;
+    sentimentDiffObj.userId = ele.userId;
+    sentimentDiffArr.push(sentimentDiffObj);
+
     // VALUE TIME REFERENCE POINTS
     const valDate = new Date(ele.timeStamp),
       minDiff = (currentDate - valDate) / 1000;
@@ -205,6 +229,9 @@ export const fullScreenTimeCalcs = userWtdObj => {
   }
 
   return {
+    normalizeScoreArr,
+    runningScoreArr,
+    sentimentDiffArr,
     threeHourSnapCount,
     screenMinsToday,
     screenMinsYesterday,

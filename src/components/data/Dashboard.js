@@ -12,12 +12,12 @@ import ScreenTimeWeek from "../chart/ScreenTimeWeek";
 import HelpBar from "../global/HelpBar";
 
 class Dashboard extends Component {
-  componentDidMount() {
-    const { user } = this.props;
-    if (user && user.id) {
-      this.props.setFullScoreObj(user.id);
-    }
-  }
+  // componentDidMount() {
+  //   const { user } = this.props;
+  //   if (user && user.id) {
+  //     this.props.setFullScoreObj(user.id);
+  //   }
+  // }
 
   render() {
     const {
@@ -31,7 +31,7 @@ class Dashboard extends Component {
       weeksScreenHours
     } = this.props;
     // console.log("RENDER !", this.props);
-    // console.log("RENDER !", fullScoreObj, normalizedScore);
+    console.log("RENDER !", fullScoreObj, normalizedScore);
 
     return (
       <div className="dashboardFullDiv">
