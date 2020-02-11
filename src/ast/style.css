@@ -60,10 +60,16 @@ h6 {
   background-color: lightskyblue;
 }
 
+.authBtnDiv {
+  width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .authSignInBtn {
   font-size: 15px;
   border-radius: 5px;
-  width: 100px;
+  width: 125px;
   height: 25px;
 }
 
