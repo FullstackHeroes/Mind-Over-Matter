@@ -209,7 +209,8 @@ export const calcWeightedTrueScore = async userId => {
     userLocalData && userLocalData.length
       ? condenseScoreObj(userLocalData, userId)
       : [];
-  const { data: userDbData } = await axios.get(`api/weightedScore/${userId}`);
+  const { data } = await axios.get(`api/weightedScore/${userId}`),
+    { userWtdObj: userDbData } = data;
 
   // APPEND LS DATA TO DB SCORE OBJ
   if (condensedLSData.length) userDbData.push(condensedLSData);
