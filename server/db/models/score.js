@@ -5,6 +5,15 @@ const WeightedScore = db.define("weighted", {
   trueScore: {
     type: Sequelize.FLOAT
   },
+  normalizeScore: {
+    type: Sequelize.FLOAT
+  },
+  runningScore: {
+    type: Sequelize.FLOAT
+  },
+  sentimentDiff: {
+    type: Sequelize.FLOAT
+  },
   happy: {
     type: Sequelize.FLOAT
   },
@@ -40,19 +49,4 @@ const WeightedScore = db.define("weighted", {
   }
 });
 
-const NormalizeScore = db.define("normalizeScore", {
-  normalizeScore: {
-    type: Sequelize.FLOAT
-  },
-  runningScore: {
-    type: Sequelize.FLOAT
-  },
-  sentimentDiff: {
-    type: Sequelize.FLOAT
-  },
-  timeStamp: {
-    type: Sequelize.DATE
-  }
-});
-
-module.exports = { WeightedScore, NormalizeScore };
+module.exports = { WeightedScore };

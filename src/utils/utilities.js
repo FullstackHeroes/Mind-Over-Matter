@@ -1,4 +1,3 @@
-import axios from "axios";
 import store from "../store";
 
 // VARIABLE DRIVERS
@@ -91,7 +90,7 @@ export const sentimentAlgo = (screenScore, expressions) => {
       const multiplierEffect = spectrumInput.multiplier / totalMultScore,
         rawScorePercent =
           (rawFaceScore * multiplierEffect) / totalExpressionScore;
-      fullScoreObj[sent] = rawScorePercent;
+      fullScoreObj[sent] = Math.floor(rawScorePercent * rounding) / rounding;
 
       // IMPACTING TRUE SCORE AFTER WEIGHTING EACH SENTIMENT SCORE
       fullScoreObj.trueScore += rawScorePercent * spectrumInput.spectrumScore;
@@ -101,6 +100,69 @@ export const sentimentAlgo = (screenScore, expressions) => {
   return fullScoreObj;
 };
 
+export const calcNormalizeUtility = fullScoreObj => {
+  // GETTING BASIS FOR WEIGHTED AVERAGE CALC
+  const shortenFullScore = fullScoreObj.slice(-normalizedLen);
+  let totalScreenScore = 0,
+    totalCount = 0;
+  for (let val of shortenFullScore) {
+    totalScreenScore += val.screenScore;
+    totalCount += val.count;
+  }
+
+  const calcNormalScore = shortenFullScore.reduce((acm, val) => {
+    const screenWtdAvg = (val.screenScore / totalScreenScore) * screenWeight,
+      countWtdAvg = (val.count / totalCount) * countWeight,
+      blendedWtdAvg = screenWtdAvg + countWtdAvg;
+    return (acm += val.trueScore * blendedWtdAvg);
+  }, 0);
+
+  // CALCULATING AVERAGED (WEIGHTED) NORMALIZE SCORE
+  return Math.round(calcNormalScore * rounding) / rounding;
+};
+
+// CALCULATE CURRENT MENTAL STATE USING AXIOS REQUESTS AND STORAGE DATA
+export const calcWeightedTrueScore = fullScoreObj => {
+  // ORDER FROM NEW TO OLD
+  const orderArr = fullScoreObj.reverse();
+
+  // BASE DATA FOR WEIGHTED AVG CALC
+  let totalScreenScore = 0,
+    totalCount = 0,
+    i = 0;
+
+  while (i < orderArr.length && totalCount < wtdAvgCount) {
+    const obj = orderArr[i];
+    totalCount += obj.count;
+    totalScreenScore += obj.screenScore;
+    i++;
+  }
+
+  // SHORTEN OBJ ARR INTO RELEVANT SIZE (wtdAvgCount)
+  const shortOrderArr = orderArr.slice(0, i);
+
+  // BEGIN WEIGHTED CALCULATIONS
+  const calcNormalScore = shortOrderArr.reduce((acm, data) => {
+    const screenWtdAvg = (data.screenScore / totalScreenScore) * screenWeight,
+      countWtdAvg = (data.count / totalCount) * countWeight,
+      blendedWtdAvg = screenWtdAvg + countWtdAvg;
+    return (acm += data.trueScore * blendedWtdAvg);
+  }, 0);
+
+  return Math.floor(calcNormalScore * rounding) / rounding;
+};
+
+// CALCULATING SENTIMENT DIFF WITH GLOBAL ROUNDING CONSISTENTCY
+export const calcSentimentDiff = (running, normal) => {
+  return Math.floor((running / normal) * rounding) / rounding;
+};
+
+// CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
+export const calcScreenTime = (length, interval) => (interval * length) / 1000;
+
+// ---------------------------------- NOT USED ! ---------------------------------- //
+
+// CONDENSING FUNCTION WHEN LEVERAGING LS (NOT USED CURRENTLY)
 export const condenseScoreObj = (targetScoreObj, userId) => {
   if (targetScoreObj && targetScoreObj.length) {
     const condensedLSObj = {
@@ -168,80 +230,4 @@ export const condenseScoreObj = (targetScoreObj, userId) => {
 
     return condensedLSObj;
   } else return {};
-};
-
-export const calcNormalizeUtility = async userId => {
-  // RETRIEVE BOTH LS AND DB DATAPOINTS AND CONDENSING LS BASE
-  const LSScoreObj = JSON.parse(localStorage.getItem("snapshots")),
-    { data } = await axios.get(`/api/weightedScore/${userId}`),
-    { userWtdObj: dbScoreObj } = data,
-    condensedLSObj = condenseScoreObj(LSScoreObj, userId);
-
-  // APPEND LS DATA TO DB SCORE OBJ
-  if (Object.keys(condensedLSObj).length) dbScoreObj.push(condensedLSObj);
-
-  // GETTING BASIS FOR WEIGHTED AVERAGE CALC
-  const shortenFullScore = dbScoreObj.slice(-normalizedLen);
-  let totalScreenScore = 0,
-    totalCount = 0;
-  for (let val of shortenFullScore) {
-    totalScreenScore += val.screenScore;
-    totalCount += val.count;
-  }
-
-  const calcNormalScore = shortenFullScore.reduce((acm, val) => {
-    const screenWtdAvg = (val.screenScore / totalScreenScore) * screenWeight,
-      countWtdAvg = (val.count / totalCount) * countWeight,
-      blendedWtdAvg = screenWtdAvg + countWtdAvg;
-    return (acm += val.trueScore * blendedWtdAvg);
-  }, 0);
-
-  // CALCULATING AVERAGED (WEIGHTED) NORMALIZE SCORE
-  return Math.round(calcNormalScore * rounding) / rounding;
-};
-
-// CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
-export const calcScreenTime = (length, interval) => (interval * length) / 1000;
-
-// CALCULATE CURRENT MENTAL STATE USING AXIOS REQUESTS AND STORAGE DATA
-export const calcWeightedTrueScore = async userId => {
-  // RETRIEVE LS DATA AND DB SCORE OBJECTS AND CONDENSE LS DATA INTO SINGLE OBJ
-  const userLocalData = JSON.parse(localStorage.getItem("snapshots"));
-  const condensedLSData =
-    userLocalData && userLocalData.length
-      ? condenseScoreObj(userLocalData, userId)
-      : [];
-  const { data } = await axios.get(`api/weightedScore/${userId}`),
-    { userWtdObj: userDbData } = data;
-
-  // APPEND LS DATA TO DB SCORE OBJ
-  if (condensedLSData.length) userDbData.push(condensedLSData);
-
-  // ORDER aggUserDataObjArr FROM NEW TO OLD
-  const orderArr = userDbData.reverse();
-
-  // BASE DATA FOR WEIGHTED AVG CALC
-  let totalScreenScore = 0,
-    totalCount = 0,
-    i = 0;
-
-  while (i < orderArr.length && totalCount < wtdAvgCount) {
-    const obj = orderArr[i];
-    totalCount += obj.count;
-    totalScreenScore += obj.screenScore;
-    i++;
-  }
-
-  // SHORTEN OBJ ARR INTO RELEVANT SIZE (wtdAvgCount)
-  const shortOrderArr = orderArr.slice(0, i);
-
-  // BEGIN WEIGHTED CALCULATIONS
-  const calcNormalScore = shortOrderArr.reduce((acm, data) => {
-    const screenWtdAvg = (data.screenScore / totalScreenScore) * screenWeight,
-      countWtdAvg = (data.count / totalCount) * countWeight,
-      blendedWtdAvg = screenWtdAvg + countWtdAvg;
-    return (acm += data.trueScore * blendedWtdAvg);
-  }, 0);
-
-  return Math.floor(calcNormalScore * rounding) / rounding;
 };
