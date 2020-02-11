@@ -8,7 +8,10 @@ class ScreenTimeToday extends Component {
 
     this.state = {
       data: {
-        labels: [`Hours Worked: ${this.props.todaysScreenHours}`, "Today"],
+        labels: [
+          `Hours Worked: ${Math.round(this.props.todaysScreenHours / 60)}`,
+          "Today"
+        ],
         datasets: [
           {
             backgroundColor: [
@@ -16,8 +19,8 @@ class ScreenTimeToday extends Component {
               "rgba(255, 0, 255, 0.75)"
             ],
             data: [
-              this.props.todaysScreenHours,
-              24 - this.props.todaysScreenHours
+              this.props.todaysScreenHours / 60,
+              24 - this.props.todaysScreenHours / 60
             ]
           }
         ]
@@ -28,7 +31,10 @@ class ScreenTimeToday extends Component {
   componentDidMount() {
     this.setState({
       data: {
-        labels: [`Hours Worked: ${this.props.todaysScreenHours}`, "Today"],
+        labels: [
+          `Hours Worked: ${Math.round(this.props.todaysScreenHours / 60)}`,
+          "Today"
+        ],
         datasets: [
           {
             backgroundColor: [
@@ -36,8 +42,8 @@ class ScreenTimeToday extends Component {
               "rgba(255, 0, 255, 0.75)"
             ],
             data: [
-              this.props.todaysScreenHours,
-              24 - this.props.todaysScreenHours
+              this.props.todaysScreenHours / 60,
+              24 - this.props.todaysScreenHours / 60
             ]
           }
         ]
@@ -51,7 +57,10 @@ class ScreenTimeToday extends Component {
     if (todaysScreenHours !== prevProps.todaysScreenHours) {
       this.setState({
         data: {
-          labels: [`Hours Worked: ${this.props.todaysScreenHours}`, "Today"],
+          labels: [
+            `Hours Worked: ${Math.round(this.props.todaysScreenHours / 60)}`,
+            "Today"
+          ],
           datasets: [
             {
               backgroundColor: [
@@ -59,8 +68,8 @@ class ScreenTimeToday extends Component {
                 "rgba(255, 0, 255, 0.75)"
               ],
               data: [
-                this.props.todaysScreenHours,
-                24 - this.props.todaysScreenHours
+                this.props.todaysScreenHours / 60,
+                24 - this.props.todaysScreenHours / 60
               ]
             }
           ]

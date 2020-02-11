@@ -66,11 +66,10 @@ class AuthForm extends Component {
               {displayName}
             </button>
 
-            <button
-              className="authSignInBtn"
-              target="_self"
-              href="/auth/google">
-              Google {displayName}
+            <button className="authSignInBtn">
+              <a target="_self" href="/auth/google">
+                Google {displayName}
+              </a>
             </button>
           </div>
 
