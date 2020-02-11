@@ -129,19 +129,6 @@ export const setFullScoreObj = userId => {
           screenHoursWeek
         } = data,
         adjFullScoreObj = userWtdObj.concat(targetLSDataObj);
-      // const { data: dbScoreObj } = await axios.get(
-      //     `/api/weightedScore/${userId}`
-      //   ),
-      //   adjFullScoreObj = dbScoreObj.concat(targetLSDataObj);
-
-      console.log(
-        "TEST -",
-        adjFullScoreObj,
-        threeHourSnapCount,
-        screenMinsToday,
-        screenMinsYesterday,
-        screenHoursWeek
-      );
 
       if (adjFullScoreObj.length) {
         dispatch(getFullScoreObj(adjFullScoreObj));
