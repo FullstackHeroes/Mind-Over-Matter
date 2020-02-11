@@ -29,3 +29,9 @@ const Doctor = () => (
 );
 
 export default Doctor;
+
+// THIS IS THE LINK TO HIT ZIPCODEAPI WITH OUR API KEY. NEED TO PASS IN ZIP CODE
+// https://www.zipcodeapi.com/rest/ED2tcUuoAJb49nZJSqhQ3bSMJGitLzYBm1kYNNqGmTTmsozq8afTsvp8zXdbnMdq/info.json/{zip}/degrees
+
+// THIS IS THE LINK TO HIT BETTERDOCTOR WITH OUR API KEY. NEED TO PASS IN LON/LAT COORDINATES
+// https://api.betterdoctor.com/2016-03-01/doctors?specialty_uid=psychiatrist%2C%20psychologist&location={lat}%2C{lon}%2C100&user_location={lat}%2C{lon}&skip=0&limit=15&user_key=b00def43163e9bcc5fef549144df8432
