@@ -23,26 +23,35 @@ class VideoInput extends Component {
     await loadModels();
     this.props.getTimeInterval();
     const { user } = this.props;
-    if (user && user.id) {
-      this.props.setFullScoreObj(user.id);
-    }
+    if (user && user.id) this.props.setFullScoreObj(user.id);
   };
 
   componentDidUpdate(prevProps) {
     const { snapInterval } = this.props;
     if (snapInterval !== prevProps.snapInterval) {
-      console.log("UPDATING!!");
       this.startCapture();
     }
   }
 
   // TIME INTERVAL FOR CAPTURING SNAPSHOTS
   startCapture = () => {
-    const { user } = this.props;
+    const { user, snapInterval } = this.props,
+      startDate = dateCreate();
+    let firstTrigger = true;
+
     if (user && user.id) {
       this.intervalSnap = setInterval(async () => {
-        await this.capture(user.id);
-      }, this.props.snapInterval);
+        if (this.webcam.current && firstTrigger) {
+          await getFaceDescr(this.webcam.current.getScreenshot(), inputSize);
+          firstTrigger = false;
+        }
+
+        const currDate = dateCreate();
+        if (currDate - startDate >= 12000 && !firstTrigger) {
+          // console.log("hit hit", currDate - startDate, currDate, startDate);
+          this.capture(user.id);
+        }
+      }, snapInterval);
     }
   };
 
