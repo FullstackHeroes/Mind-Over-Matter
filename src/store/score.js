@@ -330,9 +330,9 @@ const scoreReducer = (state = initialState, action) => {
       return {
         ...state,
         fullScoreObj: action.fullScoreObj,
-        normalizedScore: action.normalizedScore,
-        runningScore: action.runningScore,
-        sentimentDiff: action.sentimentDiff,
+        normalizedScore: action.normalizedScoreArr,
+        runningScore: action.runningScoreArr,
+        sentimentDiff: action.sentimentDiffArr,
         threeHourSnapCount: action.threeHourSnapCount,
         screenMinsToday: action.screenMinsToday,
         screenMinsYesterday: action.screenMinsYesterday,
