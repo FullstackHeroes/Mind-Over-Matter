@@ -15,14 +15,17 @@ class App extends Component {
   }
 
   render() {
-    const { user, sentimentDiff } = this.props;
+    const { user, sentimentDiff, threeHourSnapCount } = this.props;
 
     return (
       <div className="appFullDiv">
         <NavBar />
 
         {sentimentDiff && sentimentDiff.length ? (
-          <PopUp sentimentDiff={sentimentDiff.slice(-1)} />
+          <PopUp
+            sentimentDiff={sentimentDiff.slice(-1)}
+            threeHourSnapCount={threeHourSnapCount}
+          />
         ) : null}
 
         <div className="appInsideDiv">
@@ -38,7 +41,8 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    sentimentDiff: state.score.sentimentDiff
+    sentimentDiff: state.score.sentimentDiff,
+    threeHourSnapCount: state.score.threeHourSnapCount
   };
 };
 
