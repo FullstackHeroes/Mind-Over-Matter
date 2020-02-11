@@ -178,57 +178,37 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
       newScoreObj.runningScore = runningScore;
       newScoreObj.sentimentDiff = sentimentDiff;
 
-      // console.log("POSTING !!", fullScoreObj, newScoreObj);
       await axios.post(`/api/weightedScore`, newScoreObj);
 
-      // const { data } = await axios.post(`/api/weightedScore`, newScoreObj),
-      //   {
-      //     userWtdObj,
-      //     normalizeScoreArr,
-      //     runningScoreArr,
-      //     sentimentDiffArr,
-      //     threeHourSnapCount,
-      //     screenMinsToday,
-      //     screenMinsYesterday,
-      //     screenHoursWeek
-      //   } = data;
-
-      newScoreObj.timeStamp = newScoreObj.clientTimeStamp;
-      fullScoreObj.push(newScoreObj);
+      newScoreObj.timeStamp = new Date(newScoreObj.clientTimeStamp);
       const {
         threeHourSnapCount,
         screenMinsToday,
         screenMinsYesterday,
         screenHoursWeek
-      } = fullScreenTimeCalcs(fullScoreObj);
+      } = fullScreenTimeCalcs(fullScoreObj.concat(newScoreObj));
 
-      console.log(
-        "POST POST ! -",
-        threeHourSnapCount,
-        screenMinsToday,
-        screenMinsYesterday,
-        screenHoursWeek
-      );
+      console.log("INSIDE -", newScoreObj, newScoreObj.timeStamp);
 
       dispatch(addFullScoreObj(newScoreObj));
       dispatch(
         addNormalizedScore({
           normalizeScore,
-          timeStamp: newScoreObj.clientTimeStamp,
+          timeStamp: newScoreObj.timeStamp,
           userId: newScoreObj.userId
         })
       );
       dispatch(
         addRunningScore({
           runningScore,
-          timeStamp: newScoreObj.clientTimeStamp,
+          timeStamp: newScoreObj.timeStamp,
           userId: newScoreObj.userId
         })
       );
       dispatch(
         addSentimentDiff({
           sentimentDiff,
-          timeStamp: newScoreObj.clientTimeStamp,
+          timeStamp: newScoreObj.timeStamp,
           userId: newScoreObj.userId
         })
       );

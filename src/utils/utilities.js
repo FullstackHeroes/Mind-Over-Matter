@@ -161,7 +161,6 @@ export const calcSentimentDiff = (running, normal) => {
 export const calcScreenTime = (length, interval) => (interval * length) / 1000;
 
 export const fullScreenTimeCalcs = userWtdObj => {
-  console.log("INSIDE -", userWtdObj);
   // SETTING UP THE TIME INGREDIENTS
   const currentDate = dateCreate(),
     hoursDiff = currentDate.getHours() - currentDate.getTimezoneOffset() / 60;
@@ -185,9 +184,7 @@ export const fullScreenTimeCalcs = userWtdObj => {
     screenHoursWeek = 0;
 
   // LOOPING THROUGH OBJECT TO PARSE THROUGH WHAT TO PUT BACK
-  for (const { dataValues: ele } of userWtdObj.slice(
-    (-twoFourHourMilli * 31) / 1000
-  )) {
+  for (const ele of userWtdObj.slice((-twoFourHourMilli * 31) / 1000)) {
     // VALUE TIME REFERENCE POINTS
     const valDate = new Date(ele.timeStamp),
       minDiff = (currentDate - valDate) / 1000;
