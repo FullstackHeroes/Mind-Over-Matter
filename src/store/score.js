@@ -4,7 +4,8 @@ import {
   calcWeightedTrueScore,
   snapIntDefault,
   dbIntDefault,
-  calcSentimentDiff
+  calcSentimentDiff,
+  fullScreenTimeCalcs
 } from "../utils/utilities";
 
 // INITIAL STATE
@@ -177,21 +178,29 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
       newScoreObj.runningScore = runningScore;
       newScoreObj.sentimentDiff = sentimentDiff;
 
-      console.log("POSTING !!", newScoreObj);
+      console.log("POSTING !!", fullScoreObj, newScoreObj);
+      await axios.post(`/api/weightedScore`, newScoreObj);
 
-      const { data } = await axios.post(`/api/weightedScore`, newScoreObj),
-        {
-          userWtdObj,
-          normalizeScoreArr,
-          runningScoreArr,
-          sentimentDiffArr,
-          threeHourSnapCount,
-          screenMinsToday,
-          screenMinsYesterday,
-          screenHoursWeek
-        } = data;
+      // const { data } = await axios.post(`/api/weightedScore`, newScoreObj),
+      //   {
+      //     userWtdObj,
+      //     normalizeScoreArr,
+      //     runningScoreArr,
+      //     sentimentDiffArr,
+      //     threeHourSnapCount,
+      //     screenMinsToday,
+      //     screenMinsYesterday,
+      //     screenHoursWeek
+      //   } = data;
 
       newScoreObj.timeStamp = newScoreObj.clientTimeStamp;
+      fullScoreObj.push(newScoreObj);
+      const {
+        threeHourSnapCount,
+        screenMinsToday,
+        screenMinsYesterday,
+        screenHoursWeek
+      } = fullScreenTimeCalcs(fullScoreObj);
 
       dispatch(addFullScoreObj(newScoreObj));
       dispatch(

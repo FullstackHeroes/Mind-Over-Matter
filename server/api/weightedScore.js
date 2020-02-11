@@ -170,30 +170,31 @@ router.post("/", async function(req, res, next) {
       screenScore,
       screenTime
     });
-    const userWtdObj = await WeightedScore.findAll({
-      where: {
-        userId: userId
-      }
-    });
-    const {
-      threeHourSnapCount,
-      screenMinsToday,
-      screenMinsYesterday,
-      screenHoursWeek,
-      normalizeScoreArr,
-      runningScoreArr,
-      sentimentDiffArr
-    } = buildIndScoreObj(userWtdObj);
-    res.json({
-      userWtdObj,
-      normalizeScoreArr,
-      runningScoreArr,
-      sentimentDiffArr,
-      threeHourSnapCount,
-      screenMinsToday,
-      screenMinsYesterday,
-      screenHoursWeek
-    });
+    // const userWtdObj = await WeightedScore.findAll({
+    //   where: {
+    //     userId: userId
+    //   }
+    // });
+    // const {
+    //   threeHourSnapCount,
+    //   screenMinsToday,
+    //   screenMinsYesterday,
+    //   screenHoursWeek,
+    //   normalizeScoreArr,
+    //   runningScoreArr,
+    //   sentimentDiffArr
+    // } = buildIndScoreObj(userWtdObj);
+    // res.json({
+    //   userWtdObj,
+    //   normalizeScoreArr,
+    //   runningScoreArr,
+    //   sentimentDiffArr,
+    //   threeHourSnapCount,
+    //   screenMinsToday,
+    //   screenMinsYesterday,
+    //   screenHoursWeek
+    // });
+    res.status(201);
   } catch (err) {
     next(err);
   }
