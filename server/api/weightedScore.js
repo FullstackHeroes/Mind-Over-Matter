@@ -124,6 +124,8 @@ router.get("/:userId", async (req, res, next) => {
         if (valDate >= weekStart && valDate < todayStart)
           screenHoursWeek += Math.round(ele.screenTime / 3600);
       }
+
+      // LET'S SEND IT BACK!
       res.json({
         userWtdObj,
         threeHourSnapCount,
