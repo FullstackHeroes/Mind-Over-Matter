@@ -6,7 +6,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import user from "./user";
 import score from "./score";
 
-const reducer = combineReducers({ user, score, time });
+const reducer = combineReducers({ user, score });
 
 const middleware = composeWithDevTools(
   // applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
