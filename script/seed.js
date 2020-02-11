@@ -22,6 +22,11 @@ const userSeed = [
     name: "Steven Strange",
     email: "steve@a.com",
     password: "123"
+  },
+  {
+    name: "Tony Stark",
+    email: "tony@a.com",
+    password: "123"
   }
 ];
 

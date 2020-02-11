@@ -1,12 +1,20 @@
 const router = require("express").Router();
-const { User, Hour, NormalizeScore } = require("../db/models");
+const { User, WeightedScore, NormalizeScore } = require("../db/models");
 module.exports = router;
+
+const dateCreate = () => {
+  const date = new Date().toLocaleString("en-US", {
+    timeZone: "America/New_York"
+  });
+  return new Date(date);
+};
 
 router.post("/login", async (req, res, next) => {
   try {
     const { email, password } = req.body;
     // FINDING USER IN DB
     const user = await User.findOne({ where: { email: email } });
+
     // CHECKING USER EXISTENCE AND CRITERIA
     if (!user) {
       console.log("No such user found:", email);
@@ -28,6 +36,30 @@ router.post("/signup", async (req, res, next) => {
     // CREATE USER IN DB AND SEND TO FRONTEND
     const { name, email, password } = req.body;
     const user = await User.create({ name, email, password });
+
+    // SET UP TIME OBJECT
+    const currentDate = dateCreate(),
+      hoursDiff = currentDate.getHours() - currentDate.getTimezoneOffset() / 60;
+    currentDate.setHours(hoursDiff);
+
+    // CREATE INITIAL STANDARD SCORING OBJECT FOR NEW USER AND POST INTO DB
+    const initialScoreObj = {
+      trueScore: 5,
+      userId: user.dataValues.id,
+      happy: 0.143,
+      surprised: 0.143,
+      neutral: 0.143,
+      disgusted: 0.143,
+      fearful: 0.143,
+      angry: 0.143,
+      sad: 0.142,
+      timeStamp: currentDate,
+      count: 100,
+      screenScore: 0.95,
+      screenTime: 100
+    };
+    await WeightedScore.create(initialScoreObj);
+
     req.login(user, err => (err ? next(err) : res.json(user)));
   } catch (err) {
     if (err.name === "SequelizeUniqueConstraintError") {
@@ -55,7 +87,7 @@ router.post("/logout", async (req, res) => {
       screenScore,
       screenTime
     } = req.body;
-    await Hour.create({
+    await WeightedScore.create({
       trueScore,
       userId,
       happy,

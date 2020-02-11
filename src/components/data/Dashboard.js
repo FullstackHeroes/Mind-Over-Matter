@@ -1,20 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  setFullScoreObj,
-  setNormalizedScore,
-  getTodaysScreenTime,
-  getYesterdaysScreenTime,
-  getWeeksScreenTime,
-  getThreeHourSnapCount
-} from "../../store";
+import { setFullScoreObj, setNormalizedScore } from "../../store";
+
 import ChartRSLine from "../chart/ChartRSLine";
 import ChartTSLine from "../chart/ChartTSLine";
 import ChartSentiStack from "../chart/ChartSentiStack";
 import ScreenTimeToday from "../chart/ScreenTimeToday";
 import ScreenTimeYesterday from "../chart/ScreenTimeYesterday";
 import ScreenTimeWeek from "../chart/ScreenTimeWeek";
-
 import HelpBar from "../global/HelpBar";
 
 class Dashboard extends Component {
@@ -23,27 +16,6 @@ class Dashboard extends Component {
     if (user && user.id) {
       this.props.setFullScoreObj(user.id);
       this.props.setNormalizedScore(user.id);
-      // this.props.getTime(user.id);
-      // this.props.getYesterday(user.id);
-      // this.props.getWeek(user.id);
-      // this.props.getSnaps(user.id);
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { fullScoreObj, user } = this.props;
-    if (user && user.id) {
-      if (
-        fullScoreObj.length !== prevProps.fullScoreObj.length ||
-        user.id !== prevProps.user.id
-      ) {
-        // this.props.setFullScoreObj(user.id);
-        // this.props.setNormalizedScore(user.id);
-        // this.props.getTime(user.id);
-        // this.props.getYesterday(user.id);
-        // this.props.getWeek(user.id);
-        // this.props.getSnaps(user.id);
-      }
     }
   }
 
@@ -154,11 +126,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     setFullScoreObj: userId => dispatch(setFullScoreObj(userId)),
-    setNormalizedScore: userId => dispatch(setNormalizedScore(userId)),
-    getTime: userId => dispatch(getTodaysScreenTime(userId)),
-    getYesterday: userId => dispatch(getYesterdaysScreenTime(userId)),
-    getWeek: userId => dispatch(getWeeksScreenTime(userId)),
-    getSnaps: userId => dispatch(getThreeHourSnapCount(userId))
+    setNormalizedScore: userId => dispatch(setNormalizedScore(userId))
   };
 };
 
