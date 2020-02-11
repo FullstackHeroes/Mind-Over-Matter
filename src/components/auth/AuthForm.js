@@ -71,11 +71,6 @@ class AuthForm extends Component {
               href="/auth/google">
               Google {displayName}
             </button>
-            {/* <button className="authSignInBtn">
-              <a target="_self" href="/auth/google">
-                Google {displayName}
-              </a>
-            </button> */}
           </div>
 
           {error && error.response && <div> {error.response.data} </div>}
