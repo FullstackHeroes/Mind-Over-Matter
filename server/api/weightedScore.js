@@ -138,7 +138,7 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
-// -------------------------------- PRIOR TIME ROUTES -------------------------------- //
+// ---------------------------- PRIOR TIME ROUTES (NOT USED) ---------------------------- //
 
 // NEED A CONDITIONAL. HANGS IF THERE IS NO DATA FOR TODAY
 router.get("/:userId/today", async (req, res, next) => {

@@ -34,9 +34,24 @@ const trueScoreGen = (userId, count) => {
   const trueRes = [];
   while (count) {
     const rounding = 10 ** 5,
+      normScoreMin = 5,
+      normScoreMax = 8,
+      runScoreMin = 5,
+      runScoreMax = 8,
       obj = {
         userId,
         trueScore: 0,
+        normalizeScore:
+          Math.floor(
+            (Math.random() * (normScoreMax - normScoreMin) + normScoreMin) *
+              rounding
+          ) / rounding,
+        runningScore:
+          Math.floor(
+            (Math.random() * (runScoreMax - runScoreMin) + runScoreMin) *
+              rounding
+          ) / rounding,
+        sentimentDiff: 0,
         timeStamp: dateCreate(),
         count: dbIntDefault / snapIntDefault,
         screenScore:
@@ -62,6 +77,8 @@ const trueScoreGen = (userId, count) => {
     }
 
     // ADJUST EACH OF THE OTHER ATTRIBUTES
+    obj.sentimentDiff =
+      Math.floor((obj.runningScore / obj.normalizeScore) * rounding) / rounding;
     obj.timeStamp.setHours(hoursDiff);
     if (count <= 10) {
       obj.timeStamp.setSeconds(obj.timeStamp.getSeconds() - count + 1);

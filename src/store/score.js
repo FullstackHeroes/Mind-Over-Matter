@@ -143,6 +143,38 @@ export const setFullScoreObj = userId => {
   };
 };
 
+export const postFullScoreObj = userId => {
+  return async dispatch => {
+    // try {
+    //   const LSDataExtract = JSON.parse(localStorage.getItem("snapshots")),
+    //     targetLSDataObj =
+    //       LSDataExtract && LSDataExtract.length
+    //         ? LSDataExtract.filter(snap => snap.userId === userId)
+    //         : [];
+    //   const { data } = await axios.get(`/api/weightedScore/${userId}`),
+    //     {
+    //       userWtdObj,
+    //       threeHourSnapCount,
+    //       screenMinsToday,
+    //       screenMinsYesterday,
+    //       screenHoursWeek
+    //     } = data,
+    //     adjFullScoreObj = userWtdObj.concat(targetLSDataObj);
+    //   if (adjFullScoreObj.length) {
+    //     dispatch(getFullScoreObj(adjFullScoreObj));
+    //     dispatch(gotThreeHoursnapCount(threeHourSnapCount));
+    //     dispatch(gotTodaysScreenTime(screenMinsToday));
+    //     dispatch(gotYesterdaysScreenTime(screenMinsYesterday));
+    //     dispatch(gotWeeksScreenTime(screenHoursWeek));
+    //   } else dispatch(getFullScoreObj([]));
+    // } catch (error) {
+    //   console.error(error);
+    // }
+  };
+};
+
+// ---------------------- OLD THUNKS (NOT USED) ---------------------- //
+
 export const postLSScoreObj = userId => {
   return async dispatch => {
     try {
