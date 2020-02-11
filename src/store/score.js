@@ -36,6 +36,7 @@ const ADD_FULL_SCORE_OBJ = "ADD_FULL_SCORE_OBJ";
 const ADD_NORMALIZED_SCORE = "ADD_NORMALIZED_SCORE";
 const ADD_RUNNING_SCORE = "ADD_RUNNING_SCORE";
 const ADD_SENTIMENT_DIFF = "ADD_SENTIMENT_DIFF";
+const UPDATE_ALL = "UPDATE_ALL";
 
 // ACTION CREATORS
 export const getTimeInterval = (
@@ -133,6 +134,30 @@ export const addSentimentDiff = sentimentDiff => {
   };
 };
 
+export const updateAll = AllObj => {
+  const {
+    fullScoreObj,
+    normalizeScoreArr,
+    runningScoreArr,
+    sentimentDiffArr,
+    threeHourSnapCount,
+    screenMinsToday,
+    screenMinsYesterday,
+    screenHoursWeek
+  } = AllObj;
+  return {
+    type: UPDATE_ALL,
+    fullScoreObj,
+    normalizeScoreArr,
+    runningScoreArr,
+    sentimentDiffArr,
+    threeHourSnapCount,
+    screenMinsToday,
+    screenMinsYesterday,
+    screenHoursWeek
+  };
+};
+
 // THUNKY THUNKS
 export const setFullScoreObj = userId => {
   return async dispatch => {
@@ -192,6 +217,19 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
         screenHoursWeek
       } = buildIndScoreObj(fullScoreObj);
 
+      dispatch(
+        updateAll({
+          fullScoreObj,
+          normalizeScoreArr,
+          runningScoreArr,
+          sentimentDiffArr,
+          threeHourSnapCount,
+          screenMinsToday,
+          screenMinsYesterday,
+          screenHoursWeek
+        })
+      );
+
       // console.log("INSIDE -", newScoreObj, newScoreObj.timeStamp);
 
       // dispatch(addFullScoreObj(newScoreObj));
@@ -216,14 +254,15 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
       //     userId: newScoreObj.userId
       //   })
       // );
-      dispatch(getFullScoreObj(fullScoreObj));
-      dispatch(getNormalizedScore(normalizeScoreArr));
-      dispatch(getRunningScore(runningScoreArr));
-      dispatch(getSentimentDiff(sentimentDiffArr));
-      dispatch(gotThreeHoursnapCount(threeHourSnapCount));
-      dispatch(gotTodaysScreenTime(screenMinsToday));
-      dispatch(gotYesterdaysScreenTime(screenMinsYesterday));
-      dispatch(gotWeeksScreenTime(screenHoursWeek));
+
+      // dispatch(getFullScoreObj(fullScoreObj));
+      // dispatch(getNormalizedScore(normalizeScoreArr));
+      // dispatch(getRunningScore(runningScoreArr));
+      // dispatch(getSentimentDiff(sentimentDiffArr));
+      // dispatch(gotThreeHoursnapCount(threeHourSnapCount));
+      // dispatch(gotTodaysScreenTime(screenMinsToday));
+      // dispatch(gotYesterdaysScreenTime(screenMinsYesterday));
+      // dispatch(gotWeeksScreenTime(screenHoursWeek));
     } catch (error) {
       console.error(error);
     }
@@ -286,6 +325,18 @@ const scoreReducer = (state = initialState, action) => {
       return {
         ...state,
         sentimentDiff: [...state.sentimentDiff, action.sentimentDiff]
+      };
+    case UPDATE_ALL:
+      return {
+        ...state,
+        fullScoreObj: action.fullScoreObj,
+        normalizedScore: action.normalizedScore,
+        runningScore: action.runningScore,
+        sentimentDiff: action.sentimentDiff,
+        threeHourSnapCount: action.threeHourSnapCount,
+        screenMinsToday: action.screenMinsToday,
+        screenMinsYesterday: action.screenMinsYesterday,
+        screenHoursWeek: action.screenHoursWeek
       };
     default:
       return state;
