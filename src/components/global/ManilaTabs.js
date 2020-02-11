@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 export default class ManilaTab extends Component {
   render() {
     return (
-      <div className="navBarFullDiv">
+      <div className="manilaTabFullDiv">
         <div className="navBarRight">
           <NavLink
             to="/Dashboard"

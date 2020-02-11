@@ -27,7 +27,6 @@ class App extends Component {
             threeHourSnapCount={threeHourSnapCount}
           />
         ) : null}
-
         <div className="appInsideDiv">
           {user && user.id ? <VideoInput /> : null}
 
