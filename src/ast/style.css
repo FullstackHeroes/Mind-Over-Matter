@@ -302,6 +302,12 @@ h6 {
   color: black;
 }
 
+.userImage {
+  max-width: 40px;
+  margin: 10px;
+  border-radius: 20px;
+}
+
 .dashboardRow {
   display: flex;
   justify-content: space-evenly;
