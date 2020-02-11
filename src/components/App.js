@@ -16,12 +16,6 @@ class App extends Component {
       this.props.history.push("/Dashboard");
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.user.id !== prevProps.user.id) {
-      if (this.props.match.path === "/") this.props.history.push("/Dashboard");
-    }
-  }
-
   render() {
     const { user, sentimentDiff } = this.props;
 
