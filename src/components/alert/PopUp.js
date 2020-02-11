@@ -51,13 +51,6 @@ class PopUp extends Component {
 
     return (
       <div className="popUpFullDiv">
-        {console.log("3hrsnap:", threeHourSnapCount)}
-        {console.log("currD-timeAlert:", currentDate - this.state.timeAlert)}
-        {console.log(
-          "time, time cap:",
-          this.props.threeHourSnapCount,
-          this.state.timeCap
-        )}
         {(sentimentDiff &&
           sentimentDiff.length &&
           this.showPopUp &&
