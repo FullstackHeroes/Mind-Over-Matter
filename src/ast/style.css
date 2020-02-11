@@ -146,7 +146,8 @@ h6 {
 .navBarLink {
   font-size: 20px;
   font-weight: bold;
-  padding: 0 20px;
+  padding: 0 10px;
+  margin: 0 5px;
 }
 
 .selectedNavLink {

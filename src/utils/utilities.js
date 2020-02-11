@@ -3,8 +3,8 @@ import store from "../store";
 
 // VARIABLE DRIVERS
 const rounding = 10 ** 5; // DECIMAL ROUNDING
-const screenWeight = 0.5;
-const countWeight = 1 - screenWeight;
+const screenWeight = 0.5; // ADDITIONAL DRIVERS WITHIN WEIGHTED CALCS
+const countWeight = 1 - screenWeight; // ADDITIONAL DRIVERS WITHIN WEIGHTED CALCS
 export const normalizedLen = 3000; // LENGTH FOR NORMALIZED CALC
 const wtdAvgCount = 50; // WEIGHTED AVERAGE COUNT LIMIT
 export const snapIntDefault = 2000;

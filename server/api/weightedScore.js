@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const db = require("../db");
-const chalk = require("chalk");
 const { isAdmin } = require("./routeProtectors");
 const { User, WeightedScore } = require("../db/models");
 
@@ -23,7 +22,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// MAIN POST ROUTE
+// ********** MAIN POST ROUTE ********** //
 router.post("/", async function(req, res, next) {
   try {
     const {
@@ -67,7 +66,7 @@ router.post("/", async function(req, res, next) {
   }
 });
 
-// MAIN GET ROUTE
+// ********** MAIN GET ROUTE ********** //
 router.get("/:userId", async (req, res, next) => {
   try {
     // RETRIEVE THE FULL OBJECT OF THE INDIVIDUAL'S PROFILE

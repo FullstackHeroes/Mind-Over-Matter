@@ -11,7 +11,7 @@ import PopUp from "./alert/PopUp";
 
 class App extends Component {
   componentDidMount() {
-    this.props.loadInitial();
+    this.props.me();
   }
 
   render() {
@@ -44,7 +44,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadInitial: () => dispatch(me())
+    me: () => dispatch(me())
   };
 };
 
