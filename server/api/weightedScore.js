@@ -42,26 +42,26 @@ const buildIndScoreObj = userWtdObj => {
   )) {
     // NORMALIZE SCORE RESPONSE
     const normalizeScoreObj = {};
-    normalizeScoreObj.id = entry.id;
-    normalizeScoreObj.normalizeScore = entry.normalizeScore;
-    normalizeScoreObj.timeStamp = entry.timeStamp;
-    normalizeScoreObj.userId = entry.userId;
+    normalizeScoreObj.id = ele.id;
+    normalizeScoreObj.normalizeScore = ele.normalizeScore;
+    normalizeScoreObj.timeStamp = ele.timeStamp;
+    normalizeScoreObj.userId = ele.userId;
     normalizeScoreArr.push(normalizeScoreObj);
 
     // RUNNING SCORE RESPONSE
     const runningScoreObj = {};
-    runningScoreObj.id = entry.id;
-    runningScoreObj.runningScore = entry.runningScore;
-    runningScoreObj.timeStamp = entry.timeStamp;
-    runningScoreObj.userId = entry.userId;
+    runningScoreObj.id = ele.id;
+    runningScoreObj.runningScore = ele.runningScore;
+    runningScoreObj.timeStamp = ele.timeStamp;
+    runningScoreObj.userId = ele.userId;
     runningScoreArr.push(runningScoreObj);
 
     // SENTIMENT DIFF RESPONSE
     const sentimentDiffObj = {};
-    sentimentDiffObj.id = entry.id;
-    sentimentDiffObj.sentimentDiff = entry.sentimentDiff;
-    sentimentDiffObj.timeStamp = entry.timeStamp;
-    sentimentDiffObj.userId = entry.userId;
+    sentimentDiffObj.id = ele.id;
+    sentimentDiffObj.sentimentDiff = ele.sentimentDiff;
+    sentimentDiffObj.timeStamp = ele.timeStamp;
+    sentimentDiffObj.userId = ele.userId;
     sentimentDiffArr.push(sentimentDiffObj);
 
     // VALUE TIME REFERENCE POINTS
@@ -105,8 +105,6 @@ router.get("/:userId", async (req, res, next) => {
       }
     });
 
-    console.log("WHOOP WHOOP -", userWtdObj);
-
     // LET'S START DOING THE MAGIC
     if (userWtdObj && userWtdObj.length) {
       const {
@@ -140,8 +138,11 @@ router.get("/:userId", async (req, res, next) => {
 router.post("/", async function(req, res, next) {
   try {
     const {
-      trueScore,
       userId,
+      normalizeScore,
+      runningScore,
+      sentimentDiff,
+      trueScore,
       happy,
       surprised,
       neutral,
@@ -155,8 +156,11 @@ router.post("/", async function(req, res, next) {
       screenTime
     } = req.body;
     await WeightedScore.create({
-      trueScore,
       userId,
+      normalizeScore,
+      runningScore,
+      sentimentDiff,
+      trueScore,
       happy,
       surprised,
       neutral,

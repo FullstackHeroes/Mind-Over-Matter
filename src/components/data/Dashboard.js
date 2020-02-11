@@ -31,6 +31,14 @@ class Dashboard extends Component {
       weeksScreenHours
     } = this.props;
 
+    console.log(
+      "render --",
+      fullScoreObj,
+      normalizedScore,
+      runningScore,
+      sentimentDiff
+    );
+
     return (
       <div className="dashboardFullDiv">
         <h3 className="dashboardHeader">Hi, {user.name}!</h3>
