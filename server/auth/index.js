@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, WeightedScore, NormalizeScore } = require("../db/models");
+const { User, WeightedScore } = require("../db/models");
 module.exports = router;
 
 const dateCreate = () => {
@@ -48,8 +48,11 @@ router.post("/signup", async (req, res, next) => {
 
       // CREATE INITIAL SCORING OBJECT FOR NEW USER AND POST INTO DB
       const initScore = {
-        trueScore: 5,
         userId: user.dataValues.id,
+        trueScore: 5,
+        normalizeScore: 5,
+        runningScore: 5,
+        sentimentDiff: 1,
         happy: 0.143,
         surprised: 0.143,
         neutral: 0.143,
@@ -81,38 +84,6 @@ router.post("/signup", async (req, res, next) => {
 });
 
 router.post("/logout", async (req, res) => {
-  if (req.body.trueScore) {
-    const {
-      trueScore,
-      userId,
-      happy,
-      surprised,
-      neutral,
-      disgusted,
-      fearful,
-      angry,
-      sad,
-      timeStamp,
-      count,
-      screenScore,
-      screenTime
-    } = req.body;
-    await WeightedScore.create({
-      trueScore,
-      userId,
-      happy,
-      surprised,
-      neutral,
-      disgusted,
-      fearful,
-      angry,
-      sad,
-      timeStamp,
-      count,
-      screenScore,
-      screenTime
-    });
-  }
   req.logout();
   req.session.destroy();
   res.redirect("/SignIn");

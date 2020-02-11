@@ -1,5 +1,5 @@
 const db = require("../server/db");
-const { User, WeightedScore, NormalizeScore } = require("../server/db/models");
+const { User, WeightedScore } = require("../server/db/models");
 
 // ATTEMPT TO IMPORT MATERIAL FROM CLIENT SIDE
 const share = require("../src/utils/share"),
@@ -34,9 +34,24 @@ const trueScoreGen = (userId, count) => {
   const trueRes = [];
   while (count) {
     const rounding = 10 ** 5,
+      normScoreMin = 5,
+      normScoreMax = 8,
+      runScoreMin = 5,
+      runScoreMax = 8,
       obj = {
         userId,
         trueScore: 0,
+        normalizeScore:
+          Math.floor(
+            (Math.random() * (normScoreMax - normScoreMin) + normScoreMin) *
+              rounding
+          ) / rounding,
+        runningScore:
+          Math.floor(
+            (Math.random() * (runScoreMax - runScoreMin) + runScoreMin) *
+              rounding
+          ) / rounding,
+        sentimentDiff: 0,
         timeStamp: dateCreate(),
         count: dbIntDefault / snapIntDefault,
         screenScore:
@@ -62,6 +77,8 @@ const trueScoreGen = (userId, count) => {
     }
 
     // ADJUST EACH OF THE OTHER ATTRIBUTES
+    obj.sentimentDiff =
+      Math.floor((obj.runningScore / obj.normalizeScore) * rounding) / rounding;
     obj.timeStamp.setHours(hoursDiff);
     if (count <= 10) {
       obj.timeStamp.setSeconds(obj.timeStamp.getSeconds() - count + 1);
@@ -79,53 +96,12 @@ const trueScoreGen = (userId, count) => {
   return trueRes;
 };
 
-const normalScoreGen = (userId, count) => {
-  const normRes = [];
-  while (count) {
-    const rounding = 10 ** 5,
-      normScoreMin = 5,
-      normScoreMax = 8,
-      runScoreMin = 5,
-      runScoreMax = 8,
-      obj = {
-        userId,
-        normalizeScore:
-          Math.floor(
-            (Math.random() * (normScoreMax - normScoreMin) + normScoreMin) *
-              rounding
-          ) / rounding,
-        runningScore:
-          Math.floor(
-            (Math.random() * (runScoreMax - runScoreMin) + runScoreMin) *
-              rounding
-          ) / rounding,
-        sentimentDiff: 0,
-        timeStamp: dateCreate()
-      },
-      hoursDiff =
-        obj.timeStamp.getHours() - obj.timeStamp.getTimezoneOffset() / 60;
-
-    // ADJUST EACH OF THE OTHER ATTRIBUTES
-    obj.timeStamp.setHours(hoursDiff);
-    obj.timeStamp.setSeconds(obj.timeStamp.getSeconds() - count + 1);
-    obj.sentimentDiff =
-      Math.floor((obj.runningScore / obj.normalizeScore) * rounding) / rounding;
-
-    // STORE EACH INSTANCE OBJ INTO PARENT ARRAY
-    normRes.push(obj);
-    count--;
-  }
-  return normRes;
-};
-
 const seed = async () => {
-  // await db.sync();
   await db.sync({ force: true });
   console.log("db synced !");
 
   await User.bulkCreate(userSeed);
   await WeightedScore.bulkCreate(trueScoreGen(1, 100));
-  await NormalizeScore.bulkCreate(normalScoreGen(1, 100));
 
   console.log(`seeded successfully`);
 };

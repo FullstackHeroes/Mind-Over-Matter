@@ -5,9 +5,8 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import user from "./user";
 import score from "./score";
-import time from "./screenTime";
 
-const reducer = combineReducers({ user, score, time });
+const reducer = combineReducers({ user, score });
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
@@ -19,4 +18,3 @@ const store = createStore(reducer, middleware);
 export default store;
 export * from "./user";
 export * from "./score";
-export * from "./screenTime";
