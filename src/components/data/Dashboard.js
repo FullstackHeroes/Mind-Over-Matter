@@ -23,10 +23,10 @@ class Dashboard extends Component {
     if (user && user.id) {
       this.props.setFullScoreObj(user.id);
       this.props.setNormalizedScore(user.id);
-      this.props.getTime(user.id);
-      this.props.getYesterday(user.id);
-      this.props.getWeek(user.id);
-      this.props.getSnaps(user.id);
+      // this.props.getTime(user.id);
+      // this.props.getYesterday(user.id);
+      // this.props.getWeek(user.id);
+      // this.props.getSnaps(user.id);
     }
   }
 
@@ -39,10 +39,10 @@ class Dashboard extends Component {
       ) {
         this.props.setFullScoreObj(user.id);
         this.props.setNormalizedScore(user.id);
-        this.props.getTime(user.id);
-        this.props.getYesterday(user.id);
-        this.props.getWeek(user.id);
-        this.props.getSnaps(user.id);
+        // this.props.getTime(user.id);
+        // this.props.getYesterday(user.id);
+        // this.props.getWeek(user.id);
+        // this.props.getSnaps(user.id);
       }
     }
   }
@@ -145,9 +145,9 @@ const mapStateToProps = state => {
     normalizedScore: state.score.normalizedScore,
     runningScore: state.score.runningScore,
     sentimentDiff: state.score.sentimentDiff,
-    todaysScreenMins: state.time.screenMinsToday,
-    yesterdaysScreenMins: state.time.screenMinsYesterday,
-    weeksScreenHours: state.time.screenHoursWeek
+    todaysScreenMins: state.score.screenMinsToday,
+    yesterdaysScreenMins: state.score.screenMinsYesterday,
+    weeksScreenHours: state.score.screenHoursWeek
   };
 };
 
