@@ -66,7 +66,7 @@ class VideoInput extends Component {
               newScoreObj.timeStamp = date;
               newScoreObj.clientTimeStamp = clientDate;
               newScoreObj.count = 1;
-              newScoreObj.screenTime = 1;
+              newScoreObj.screenTime = this.props.snapInterval;
 
               // POST INTO DB AND UPDATE GLOBAL STATE
               this.props.postFullScoreObj(this.props.fullScoreObj, newScoreObj);

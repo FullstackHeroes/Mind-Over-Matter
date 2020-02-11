@@ -180,12 +180,6 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
 
       await axios.post(`/api/weightedScore`, newScoreObj);
 
-      console.log(
-        "time -",
-        newScoreObj.clientTimeStamp.toISOString(),
-        Date(newScoreObj.clientTimeStamp)
-      );
-      // newScoreObj.timeStamp = new Date(newScoreObj.clientTimeStamp);
       newScoreObj.timeStamp = newScoreObj.timeStamp.toISOString();
       fullScoreObj.push(newScoreObj);
       const {

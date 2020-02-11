@@ -96,7 +96,8 @@ export const sentimentAlgo = (screenScore, expressions) => {
       fullScoreObj.trueScore += rawScorePercent * spectrumInput.spectrumScore;
     }
   }
-
+  fullScoreObj.trueScore =
+    Math.floor(fullScoreObj.trueScore * rounding) / rounding;
   return fullScoreObj;
 };
 
