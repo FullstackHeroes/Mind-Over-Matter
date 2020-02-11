@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   render() {
-    const { user, sentimentDiff } = this.props;
+    const { user, sentimentDiff, threeHourSnapCount } = this.props;
 
     return (
       <div className="appFullDiv">
@@ -24,7 +24,7 @@ class App extends Component {
         {sentimentDiff && sentimentDiff.length ? (
           <PopUp
             sentimentDiff={sentimentDiff.slice(-1)}
-            threeHourSnapCount={threeHourSnapCount.slice(-1)}
+            threeHourSnapCount={threeHourSnapCount}
           />
         ) : null}
 
