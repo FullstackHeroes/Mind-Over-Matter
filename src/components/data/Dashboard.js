@@ -90,7 +90,7 @@ class Dashboard extends Component {
           {runningScore.length ? (
             <ChartRSLine runningScore={runningScore.slice(-10)} />
           ) : (
-            <p>Loading</p>
+            <ChartRSLine runningScore={[]} />
           )}
 
           {fullScoreObj.length ? (

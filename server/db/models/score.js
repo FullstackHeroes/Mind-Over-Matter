@@ -27,7 +27,7 @@ const WeightedScore = db.define("weighted", {
     type: Sequelize.FLOAT
   },
   timeStamp: {
-    type: Sequelize.STRING
+    type: Sequelize.DATE
   },
   count: {
     type: Sequelize.INTEGER
@@ -51,7 +51,7 @@ const NormalizeScore = db.define("normalizeScore", {
     type: Sequelize.FLOAT
   },
   timeStamp: {
-    type: Sequelize.STRING
+    type: Sequelize.DATE
   }
 });
 

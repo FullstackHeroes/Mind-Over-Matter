@@ -37,28 +37,38 @@ router.post("/signup", async (req, res, next) => {
     const { name, email, password } = req.body;
     const user = await User.create({ name, email, password });
 
-    // SET UP TIME OBJECT
-    const currentDate = dateCreate(),
-      hoursDiff = currentDate.getHours() - currentDate.getTimezoneOffset() / 60;
-    currentDate.setHours(hoursDiff);
+    const initialArr = [];
+    let count = 10;
 
-    // CREATE INITIAL STANDARD SCORING OBJECT FOR NEW USER AND POST INTO DB
-    const initialScoreObj = {
-      trueScore: 5,
-      userId: user.dataValues.id,
-      happy: 0.143,
-      surprised: 0.143,
-      neutral: 0.143,
-      disgusted: 0.143,
-      fearful: 0.143,
-      angry: 0.143,
-      sad: 0.142,
-      timeStamp: currentDate,
-      count: 100,
-      screenScore: 0.95,
-      screenTime: 100
-    };
-    await WeightedScore.create(initialScoreObj);
+    while (count) {
+      // SET UP TIME OBJECT
+      const timeStamp = dateCreate(),
+        hoursDiff = timeStamp.getHours() - timeStamp.getTimezoneOffset() / 60;
+      timeStamp.setHours(hoursDiff);
+
+      // CREATE INITIAL SCORING OBJECT FOR NEW USER AND POST INTO DB
+      const initScore = {
+        trueScore: 5,
+        userId: user.dataValues.id,
+        happy: 0.143,
+        surprised: 0.143,
+        neutral: 0.143,
+        disgusted: 0.143,
+        fearful: 0.143,
+        angry: 0.143,
+        sad: 0.142,
+        timeStamp,
+        count: 100,
+        screenScore: 0.95,
+        screenTime: 100
+      };
+      initScore.timeStamp.setSeconds(
+        initScore.timeStamp.getSeconds() - count + 1
+      );
+      initialArr.push(initScore);
+      count--;
+    }
+    await WeightedScore.bulkCreate(initialArr);
 
     req.login(user, err => (err ? next(err) : res.json(user)));
   } catch (err) {

@@ -75,6 +75,7 @@ const trueScoreGen = (userId, count) => {
     trueRes.push(obj);
     count--;
   }
+
   return trueRes;
 };
 
@@ -123,8 +124,8 @@ const seed = async () => {
   console.log("db synced !");
 
   await User.bulkCreate(userSeed);
-  await WeightedScore.bulkCreate(trueScoreGen(1, 100));
-  await NormalizeScore.bulkCreate(normalScoreGen(1, 100));
+  await WeightedScore.bulkCreate(trueScoreGen(1, 2));
+  await NormalizeScore.bulkCreate(normalScoreGen(1, 2));
 
   console.log(`seeded successfully`);
 };
