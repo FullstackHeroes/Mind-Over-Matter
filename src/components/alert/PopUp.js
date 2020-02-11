@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AlertMessage from "./AlertMessage";
-import { dateCreate } from "../../utils/utilities";
+import { dateCreate, snapIntDefault } from "../../utils/utilities";
 import { connect } from "react-redux";
 
 class PopUp extends Component {
@@ -8,7 +8,9 @@ class PopUp extends Component {
     super(props);
     this.showPopUp = true;
     this.state = {
-      lastAlert: dateCreate()
+      lastAlert: dateCreate(),
+      timeAlert: dateCreate(),
+      timeCap: (10, 800 / (snapIntDefault / 1000)) //10,800 IS THE AMT OF SECONDS IN 3 HRS DIV BY THE SNAP INTERVAL MILLISECONDS  DIV BY 1000 T0 GET SECONDS VALUE
     };
     this.showHelp = this.showHelp.bind(this);
     this.hideHelp = this.hideHelp.bind(this);
@@ -28,6 +30,8 @@ class PopUp extends Component {
           onClose={this.hideHelp}
           status={sentimentDiff}
           last={last}
+          time={timeSnap}
+          timeCap={this.props.threeHourSnapCount}
         />
       );
     }
@@ -36,7 +40,8 @@ class PopUp extends Component {
   hideHelp = () => {
     this.showPopUp = true;
     this.setState({
-      lastAlert: dateCreate()
+      lastAlert: dateCreate(),
+      timeAlert: dateCreate()
     });
   };
 
@@ -46,10 +51,11 @@ class PopUp extends Component {
 
     return (
       <div className="popUpFullDiv">
-        {sentimentDiff &&
-        sentimentDiff.length &&
-        this.showPopUp &&
-        currentDate - this.state.lastAlert > 10000
+        {(sentimentDiff &&
+          sentimentDiff.length &&
+          this.showPopUp &&
+          currentDate - this.state.lastAlert > 10000) ||
+        currentDate - this.timeAlert > 10800 * 1000
           ? this.showHelp(sentimentDiff[0].sentimentDiff * 100)
           : null}
       </div>
@@ -57,12 +63,12 @@ class PopUp extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     // snapInterval: state.score.snapInterval,
-//     // threeHourSnapCount: state.time.threeHourSnapCount
-//   };
-// };
+const mapStateToProps = state => {
+  return {
+    // snapInterval: state.score.snapInterval,
+    threeHourSnapCount: state.time.threeHourSnapCount //num of captures that happen in 3 hrs / 1000 * 60 ~ mins present
+  };
+};
 
-// // export default connect(mapStateToProps)(PopUp);
-export default PopUp;
+export default connect(mapStateToProps, null)(PopUp);
+// export default PopUp;
