@@ -1,7 +1,7 @@
 import React from "react";
 
-const AlertMessage = ({ status, onClose, last }) => {
-  const tiers = [last * 0.9, last * 0.95, last];
+const AlertMessage = ({ status, onClose, last, time, timeCap }) => {
+  const tiers = [last * 0.9, last * 0.95, last, time];
 
   const alertOptions = {
     0: {
@@ -20,11 +20,20 @@ const AlertMessage = ({ status, onClose, last }) => {
       message: "Here is a cute picture, Hope it makes your day!",
       image:
         "https://static.boredpanda.com/blog/wp-content/uploads/2016/08/cute-kittens-29-57b30ad229af3__605.jpg"
+    },
+    3: {
+      message:
+        "Seems you have been here for a while! Go stretch those legs and get some  bloodflow",
+      image:
+        "https://ontariospca.ca/wp-content/uploads/2018/04/Cat-outside-small-600x399.png"
     }
   };
 
   for (let i = 0; i < tiers.length; i++) {
-    if (status <= tiers[i]) {
+    if (
+      (i < tiers.length - 1 && status <= tiers[i]) ||
+      (i === tiers.length - 1 && time >= timeCap)
+    ) {
       return (
         <div className="alertFullDiv">
           <div className="alertContainer">
