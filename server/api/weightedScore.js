@@ -79,54 +79,58 @@ router.get("/:userId", async (req, res, next) => {
 
     // LET'S START DOING THE MAGIC
     if (userWtdObj && userWtdObj.length) {
+      // SETTING UP THE TIME INGREDIENTS
       const currentDate = dateCreate(),
         hoursDiff =
           currentDate.getHours() - currentDate.getTimezoneOffset() / 60;
+
       currentDate.setHours(hoursDiff);
 
-      // SETTING UP ALL NECESSARY VARIABLES
-      const oneHour = 3600000,
-        twoFourHour = oneHour * 24,
+      const oneHourMilli = 3600000,
+        twoFourHourMilli = oneHourMilli * 24,
         todayStart = new Date(
           new Date(
             new Date(new Date(currentDate).setHours(0)).setMinutes(0)
           ).setSeconds(0)
         ),
-        yesterStart = new Date(todayStart - twoFourHour),
-        weekStart = new Date(todayStart - twoFourHour * 7),
+        yesterStart = new Date(todayStart - twoFourHourMilli),
+        weekStart = new Date(todayStart - twoFourHourMilli * 7);
+
+      // SETTING UP ALL TIME VARIABLES TO SEND BACK
+      let threeHourSnapCount = 0,
         screenMinsToday = 0,
         screenMinsYesterday = 0,
-        screenHoursWeek = 0,
-        threeHourSnapCount = 0,
-        curYear = currentDate.getFullYear(),
-        curMonth = currentDate.getMonth() + 1,
-        curDay = currentDate.getDate(),
-        curHour = currentDate.getHours();
+        screenHoursWeek = 0;
 
       // LOOPING THROUGH OBJECT TO PARSE THROUGH WHAT TO PUT BACK
-      for (const ele of userWtdObj) {
-        const valDate = new Date(ele.dataValues.timeStamp),
-          valYear = valDate.getFullYear(),
-          valMonth = valDate.getMonth() + 1,
-          valDay = valDate.getDate(),
-          valHour = valDate.getHours(),
+      for (const { dataValues: ele } of userWtdObj.slice(
+        (-twoFourHourMilli * 31) / 1000
+      )) {
+        const valDate = new Date(ele.timeStamp),
           minDiff = (currentDate - valDate) / 1000;
 
-        // console.log("INSIDE --", currentDate, todayMin);
+        // THREE HOUR SNAP COUNT
+        if (minDiff >= (oneHourMilli * 3) / 1000)
+          threeHourSnapCount += ele.count;
+
         // TODAY TIMING
-        if (valDate >= todayStart) {
-          console.log("TODAY INSIDE");
-        }
+        if (valDate >= todayStart) screenMinsToday += ele.screenTime;
 
         // YESTERDAY TIMING
-        if (valDate >= yesterStart && valDate < todayStart) {
-          console.log("YESTERDAY INSIDE");
-        }
+        if (valDate >= yesterStart && valDate < todayStart)
+          screenMinsYesterday += ele.screenTime;
 
-        // WEEK TIMING
+        // PAST 7 DAYS TIMING
+        if (valDate >= weekStart && valDate < todayStart)
+          screenHoursWeek += Math.round(ele.screenTime / 3600);
       }
-      // res.json({ userWtdObj });
-      res.json(userWtdObj);
+      res.json({
+        userWtdObj,
+        threeHourSnapCount,
+        screenMinsToday,
+        screenMinsYesterday,
+        screenHoursWeek
+      });
     } else res.json([]);
   } catch (error) {
     next(error);

@@ -84,12 +84,13 @@ export const setFullScoreObj = userId => {
             ? LSDataExtract.filter(snap => snap.userId === userId)
             : [];
 
-      const { data: dbScoreObj } = await axios.get(
-          `/api/weightedScore/${userId}`
-        ),
-        adjFullScoreObj = dbScoreObj.concat(targetLSDataObj);
+      const dbScoreObj = await axios.get(`/api/weightedScore/${userId}`);
+      // const { data: dbScoreObj } = await axios.get(
+      //     `/api/weightedScore/${userId}`
+      //   ),
+      //   adjFullScoreObj = dbScoreObj.concat(targetLSDataObj);
 
-      console.log("TEST -", dbScoreObj, targetLSDataObj);
+      console.log("TEST -", dbScoreObj);
 
       if (adjFullScoreObj.length) {
         const currentDate = dateCreate(),
