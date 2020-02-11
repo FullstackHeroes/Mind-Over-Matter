@@ -178,7 +178,7 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
       newScoreObj.runningScore = runningScore;
       newScoreObj.sentimentDiff = sentimentDiff;
 
-      console.log("POSTING !!", fullScoreObj, newScoreObj);
+      // console.log("POSTING !!", fullScoreObj, newScoreObj);
       await axios.post(`/api/weightedScore`, newScoreObj);
 
       // const { data } = await axios.post(`/api/weightedScore`, newScoreObj),
@@ -201,6 +201,14 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
         screenMinsYesterday,
         screenHoursWeek
       } = fullScreenTimeCalcs(fullScoreObj);
+
+      console.log(
+        "POST POST ! -",
+        threeHourSnapCount,
+        screenMinsToday,
+        screenMinsYesterday,
+        screenHoursWeek
+      );
 
       dispatch(addFullScoreObj(newScoreObj));
       dispatch(

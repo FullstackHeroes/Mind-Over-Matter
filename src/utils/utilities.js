@@ -161,6 +161,7 @@ export const calcSentimentDiff = (running, normal) => {
 export const calcScreenTime = (length, interval) => (interval * length) / 1000;
 
 export const fullScreenTimeCalcs = userWtdObj => {
+  console.log("INSIDE -", userWtdObj);
   // SETTING UP THE TIME INGREDIENTS
   const currentDate = dateCreate(),
     hoursDiff = currentDate.getHours() - currentDate.getTimezoneOffset() / 60;

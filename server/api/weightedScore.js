@@ -194,7 +194,7 @@ router.post("/", async function(req, res, next) {
     //   screenMinsYesterday,
     //   screenHoursWeek
     // });
-    res.status(201);
+    res.sendStatus(201);
   } catch (err) {
     next(err);
   }
