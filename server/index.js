@@ -50,8 +50,8 @@ const createApp = () => {
   app.use(passport.session());
 
   // ROUTING
-  app.use("/api", require("./api"));
   app.use("/auth", require("./auth"));
+  app.use("/api", require("./api"));
 
   // STATIC FILE-SERVING MIDDLEWARE
   app.use(express.static(path.join(__dirname, "../public")));
