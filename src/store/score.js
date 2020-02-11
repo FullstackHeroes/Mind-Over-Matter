@@ -156,6 +156,8 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
         normalizeScore
       );
 
+      console.log("POSTING !!", newScoreObj);
+
       const { data } = await axios.post(`/api/weightedScore`, newScoreObj),
         {
           userWtdObj,
