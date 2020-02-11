@@ -172,8 +172,8 @@ export const calcNormalizeUtility = async userId => {
   // RETRIEVE BOTH LS AND DB DATAPOINTS AND CONDENSING LS BASE
   const LSScoreObj = JSON.parse(localStorage.getItem("snapshots")),
     { data } = await axios.get(`/api/weightedScore/${userId}`),
-    { userWtdObj: dbScoreObj } = data;
-  condensedLSObj = condenseScoreObj(LSScoreObj, userId);
+    { userWtdObj: dbScoreObj } = data,
+    condensedLSObj = condenseScoreObj(LSScoreObj, userId);
 
   // APPEND LS DATA TO DB SCORE OBJ
   if (Object.keys(condensedLSObj).length) dbScoreObj.push(condensedLSObj);
