@@ -29,6 +29,7 @@ class Dashboard extends Component {
       yesterdaysScreenMins,
       weeksScreenHours
     } = this.props;
+    console.log("RENDER !", this.props);
 
     return (
       <div className="dashboardFullDiv">

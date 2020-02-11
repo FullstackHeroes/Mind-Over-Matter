@@ -33,6 +33,7 @@ const GOT_THREE_HOUR_SNAP_COUNT = "GOT_THREE_HOUR_SNAP_COUNT";
 const GOT_TODAYS_SCREENTIME = "GOT_TODAYS_SCREENTIME";
 const GOT_YESTERDAYS_SCREENTIME = "GOT_YESTERDAYS_SCREENTIME";
 const GOT_WEEKS_SCREENTIME = "GOT_WEEKS_SCREENTIME";
+const ADD_FULL_SCORE_OBJ = "ADD_FULL_SCORE_OBJ";
 
 // ACTION CREATORS
 export const getTimeInterval = (
@@ -109,6 +110,13 @@ export const gotWeeksScreenTime = screenHoursWeek => {
   };
 };
 
+export const addFullScoreObj = fullScoreObj => {
+  return {
+    type: ADD_FULL_SCORE_OBJ,
+    fullScoreObj
+  };
+};
+
 // THUNKY THUNKS
 export const setFullScoreObj = userId => {
   return async dispatch => {
@@ -170,7 +178,8 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
           screenHoursWeek
         } = data;
 
-      dispatch(getFullScoreObj(userWtdObj));
+      dispatch(addFullScoreObj(newScoreObj));
+      // dispatch(getFullScoreObj(userWtdObj));
       dispatch(getNormalizedScore(normalizeScoreArr));
       dispatch(getRunningScore(runningScoreArr));
       dispatch(getSentimentDiff(sentimentDiffArr));
@@ -222,6 +231,11 @@ const scoreReducer = (state = initialState, action) => {
       return {
         ...state,
         screenHoursWeek: action.screenHoursWeek
+      };
+    case ADD_FULL_SCORE_OBJ:
+      return {
+        ...state,
+        fullScoreObj: [...state.fullScoreObj, action.fullScoreObj]
       };
     default:
       return state;
