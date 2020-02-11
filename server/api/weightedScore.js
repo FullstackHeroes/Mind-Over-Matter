@@ -102,6 +102,8 @@ router.get("/:userId", async (req, res, next) => {
       }
     });
 
+    console.log("WHOOP WHOOP -", userWtdObj);
+
     // LET'S START DOING THE MAGIC
     if (userWtdObj && userWtdObj.length) {
       const {

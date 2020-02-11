@@ -42,19 +42,19 @@ export const auth = userObj => async dispatch => {
 
 export const logout = userId => async dispatch => {
   try {
-    const LSDataObj = JSON.parse(localStorage.getItem("snapshots"));
-    if (LSDataObj && LSDataObj.length) {
-      const targetLSDataObj = LSDataObj.filter(snap => snap.userId === userId),
-        adjLSDataObj = condenseScoreObj(targetLSDataObj, userId),
-        hoursDiff =
-          adjLSDataObj.timeStamp.getHours() -
-          adjLSDataObj.timeStamp.getTimezoneOffset() / 60;
-      adjLSDataObj.timeStamp.setHours(hoursDiff);
-      await axios.post("/auth/logout", adjLSDataObj);
-    } else await axios.post("/auth/logout");
-
+    // const LSDataObj = JSON.parse(localStorage.getItem("snapshots"));
+    // if (LSDataObj && LSDataObj.length) {
+    //   const targetLSDataObj = LSDataObj.filter(snap => snap.userId === userId),
+    //     adjLSDataObj = condenseScoreObj(targetLSDataObj, userId),
+    //     hoursDiff =
+    //       adjLSDataObj.timeStamp.getHours() -
+    //       adjLSDataObj.timeStamp.getTimezoneOffset() / 60;
+    //   adjLSDataObj.timeStamp.setHours(hoursDiff);
+    //   await axios.post("/auth/logout", adjLSDataObj);
+    // } else await axios.post("/auth/logout");
+    // localStorage.clear();
+    await axios.post("/auth/logout");
     dispatch(removeUser());
-    localStorage.clear();
     history.push("/SignIn");
   } catch (err) {
     console.error(err);

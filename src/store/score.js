@@ -179,7 +179,7 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj, userId) => {
       newScoreObj.runningScore = runningScore;
       newScoreObj.sentimentDiff = calcSentimentDiff(
         runningScore,
-        normalizedScore
+        normalizeScore
       );
 
       const { data } = await axios.post(`/api/weightedScore`, newScoreObj),
