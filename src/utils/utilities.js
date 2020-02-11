@@ -90,7 +90,7 @@ export const sentimentAlgo = (screenScore, expressions) => {
       const multiplierEffect = spectrumInput.multiplier / totalMultScore,
         rawScorePercent =
           (rawFaceScore * multiplierEffect) / totalExpressionScore;
-      fullScoreObj[sent] = rawScorePercent;
+      fullScoreObj[sent] = Math.floor(rawScorePercent * rounding) / rounding;
 
       // IMPACTING TRUE SCORE AFTER WEIGHTING EACH SENTIMENT SCORE
       fullScoreObj.trueScore += rawScorePercent * spectrumInput.spectrumScore;
