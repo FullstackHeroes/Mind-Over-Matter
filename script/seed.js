@@ -58,7 +58,11 @@ const trueScoreGen = (userId, count) => {
 
     // ADJUST EACH OF THE OTHER ATTRIBUTES
     obj.timeStamp.setHours(hoursDiff);
-    obj.timeStamp.setSeconds(obj.timeStamp.getSeconds() - count * 5000 + 1);
+    if (count <= 10) {
+      obj.timeStamp.setSeconds(obj.timeStamp.getSeconds() - count + 1);
+    } else {
+      obj.timeStamp.setSeconds(obj.timeStamp.getSeconds() - count * 5000 + 1);
+    }
     obj.count -= Math.round(Math.random() * obj.count * 0.3);
     obj.screenTime = calcScreenTime(obj.count, snapIntDefault);
 

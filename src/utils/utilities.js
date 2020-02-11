@@ -10,7 +10,7 @@ const wtdAvgCount = 50; // WEIGHTED AVERAGE COUNT LIMIT
 export const snapIntDefault = 2000;
 export const dbIntDefault = 2000;
 export const d3Height = 400;
-export const d3Width = 300;
+export const d3Width = 400;
 
 // DATE CREATION FUNCTION
 export const dateCreate = () => {

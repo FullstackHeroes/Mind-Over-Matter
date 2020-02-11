@@ -29,6 +29,10 @@ class VideoInput extends Component {
   componentDidMount = async () => {
     await loadModels();
     this.props.getTimeInterval();
+    const { user } = this.props;
+    if (user && user.id) {
+      this.props.setFullScoreObj(user.id);
+    }
   };
 
   componentDidUpdate(prevProps) {
