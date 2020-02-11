@@ -1,9 +1,9 @@
 import * as d3 from "d3";
-import { emotions } from "../utils/utilities";
+import { emotions, d3Height, d3Width } from "../utils/utilities";
 
-const MARGIN = { TOP: 10, BOTTOM: 80, LEFT: 70, RIGHT: 150 };
-const WIDTH = 550 - MARGIN.LEFT - MARGIN.RIGHT;
-const HEIGHT = 400 - MARGIN.TOP - MARGIN.BOTTOM;
+const MARGIN = { TOP: 10, BOTTOM: 80, LEFT: 70, RIGHT: 140 };
+const WIDTH = d3Width + 70 - MARGIN.LEFT - MARGIN.RIGHT;
+const HEIGHT = d3Height - MARGIN.TOP - MARGIN.BOTTOM;
 
 class SentiStackD3 {
   constructor(element, data) {

@@ -29,6 +29,10 @@ class VideoInput extends Component {
   componentDidMount = async () => {
     await loadModels();
     this.props.getTimeInterval();
+    const { user } = this.props;
+    if (user && user.id) {
+      this.props.setFullScoreObj(user.id);
+    }
   };
 
   componentDidUpdate(prevProps) {
@@ -44,11 +48,14 @@ class VideoInput extends Component {
 
   // LOCAL STORAGE MANAGER
   appendLocalStorage = (snapshot, userId) => {
+    // SET APPROPRIATE DATE AND FIELDS ONTO OBJECT
     const date = dateCreate(),
       hoursDiff = date.getHours() - date.getTimezoneOffset() / 60;
     date.setHours(hoursDiff);
     snapshot.timeStamp = date;
     snapshot.userId = userId;
+
+    // CHECK FOR EXISTING LOCAL STORAGE USAGE
     if (localStorage.getItem("snapshots")) {
       const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
       currSnapshot.push(snapshot);
@@ -82,16 +89,16 @@ class VideoInput extends Component {
   // CAPTURING SNAPSHOT AND APPENDING LOCAL STORAGE
   capture = async userId => {
     try {
-      if (!!this.webcam.current) {
+      if (this.webcam.current) {
         await getFaceDescr(this.webcam.current.getScreenshot(), inputSize).then(
           async fullDesc => {
-            if (!!fullDesc && fullDesc.length) {
+            if (fullDesc && fullDesc.length) {
               const desc = fullDesc[0],
                 screenScore = desc.detection._score,
                 expressions = desc.expressions,
                 fullScoreObj = sentimentAlgo(screenScore, expressions);
 
-              // APPENDING LOCAL STORAGE
+              // APPENDING LOCAL STORAGE AND UPDATE GLOBAL STATE
               this.appendLocalStorage(fullScoreObj, userId);
 
               // USER DATA AND CALCULATIONS
@@ -135,7 +142,7 @@ class VideoInput extends Component {
 
   componentWillUnmount() {
     clearInterval(this.intervalSnap);
-    clearInterval(this.intervalDB);
+    // clearInterval(this.intervalDB);
   }
 
   render() {

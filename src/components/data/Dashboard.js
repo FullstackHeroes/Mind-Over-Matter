@@ -1,20 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  setFullScoreObj,
-  setNormalizedScore,
-  getTodaysScreenTime,
-  getYesterdaysScreenTime,
-  getWeeksScreenTime,
-  getThreeHourSnapCount
-} from "../../store";
+import { setFullScoreObj, setNormalizedScore } from "../../store";
+
 import ChartRSLine from "../chart/ChartRSLine";
 import ChartTSLine from "../chart/ChartTSLine";
 import ChartSentiStack from "../chart/ChartSentiStack";
 import ScreenTimeToday from "../chart/ScreenTimeToday";
 import ScreenTimeYesterday from "../chart/ScreenTimeYesterday";
 import ScreenTimeWeek from "../chart/ScreenTimeWeek";
-
 import HelpBar from "../global/HelpBar";
 
 class Dashboard extends Component {
@@ -23,27 +16,6 @@ class Dashboard extends Component {
     if (user && user.id) {
       this.props.setFullScoreObj(user.id);
       this.props.setNormalizedScore(user.id);
-      this.props.getTime(user.id);
-      this.props.getYesterday(user.id);
-      this.props.getWeek(user.id);
-      this.props.getSnaps(user.id);
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { fullScoreObj, user } = this.props;
-    if (user && user.id) {
-      if (
-        fullScoreObj.length !== prevProps.fullScoreObj.length ||
-        user.id !== prevProps.user.id
-      ) {
-        this.props.setFullScoreObj(user.id);
-        this.props.setNormalizedScore(user.id);
-        this.props.getTime(user.id);
-        this.props.getYesterday(user.id);
-        this.props.getWeek(user.id);
-        this.props.getSnaps(user.id);
-      }
     }
   }
 
@@ -53,7 +25,10 @@ class Dashboard extends Component {
       fullScoreObj,
       normalizedScore,
       runningScore,
-      sentimentDiff
+      sentimentDiff,
+      todaysScreenMins,
+      yesterdaysScreenMins,
+      weeksScreenHours
     } = this.props;
 
     return (
@@ -62,14 +37,12 @@ class Dashboard extends Component {
 
         <div className="dashboardRowOne dashboardRow">
           <div className="dashboardTable">
-            <ScreenTimeToday todaysScreenHours={this.props.todaysScreenMins} />
-            <ScreenTimeYesterday
-              yesterdaysScreenHours={this.props.yesterdaysScreenMins}
-            />
+            <ScreenTimeToday todaysScreenHours={todaysScreenMins} />
+            <ScreenTimeYesterday yesterdaysScreenHours={yesterdaysScreenMins} />
           </div>
 
           <div className="dashboardTable">
-            <ScreenTimeWeek weeksScreenHours={this.props.weeksScreenHours} />
+            <ScreenTimeWeek weeksScreenHours={weeksScreenHours} />
           </div>
         </div>
 
@@ -117,7 +90,7 @@ class Dashboard extends Component {
           {runningScore.length ? (
             <ChartRSLine runningScore={runningScore.slice(-10)} />
           ) : (
-            <p>Loading</p>
+            <ChartRSLine runningScore={[]} />
           )}
 
           {fullScoreObj.length ? (
@@ -144,20 +117,16 @@ const mapStateToProps = state => {
     normalizedScore: state.score.normalizedScore,
     runningScore: state.score.runningScore,
     sentimentDiff: state.score.sentimentDiff,
-    todaysScreenMins: state.time.screenMinsToday,
-    yesterdaysScreenMins: state.time.screenMinsYesterday,
-    weeksScreenHours: state.time.screenHoursWeek
+    todaysScreenMins: state.score.screenMinsToday,
+    yesterdaysScreenMins: state.score.screenMinsYesterday,
+    weeksScreenHours: state.score.screenHoursWeek
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     setFullScoreObj: userId => dispatch(setFullScoreObj(userId)),
-    setNormalizedScore: userId => dispatch(setNormalizedScore(userId)),
-    getTime: userId => dispatch(getTodaysScreenTime(userId)),
-    getYesterday: userId => dispatch(getYesterdaysScreenTime(userId)),
-    getWeek: userId => dispatch(getWeeksScreenTime(userId)),
-    getSnaps: userId => dispatch(getThreeHourSnapCount(userId))
+    setNormalizedScore: userId => dispatch(setNormalizedScore(userId))
   };
 };
 

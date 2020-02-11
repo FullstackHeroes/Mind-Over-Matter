@@ -34,22 +34,27 @@ h6 {
 /* ----------------- AUTH FORM ELEMENT ----------------- */
 .signInFullDiv {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 75vw;
   color: black;
 }
 
 .authFormDiv {
-  margin: 20px auto;
+  margin-top: 35px;
   min-width: 450px;
   width: 35%;
   height: 50vh;
   min-height: 300px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
   border-radius: 10px;
+}
+
+.authFormHeader {
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 25px;
 }
 
 .login-authFormDiv {
@@ -60,11 +65,22 @@ h6 {
   background-color: lightskyblue;
 }
 
+.authBtnDiv {
+  width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .authSignInBtn {
   font-size: 15px;
+  font-weight: bold;
   border-radius: 5px;
-  width: 100px;
-  height: 25px;
+  width: 135px;
+  height: 30px;
+}
+
+.authSignInBtn:hover {
+  background-color: lightseagreen;
 }
 
 .authForm {
@@ -86,6 +102,7 @@ h6 {
 
 .authFormLabel {
   width: 150px;
+  margin: 0;
 }
 
 .authInputBox {
@@ -130,6 +147,7 @@ h6 {
   font-size: 20px;
   font-weight: bold;
   padding: 0 10px;
+  margin: 0 5px;
 }
 
 .selectedNavLink {

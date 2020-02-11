@@ -11,9 +11,7 @@ import PopUp from "./alert/PopUp";
 
 class App extends Component {
   componentDidMount() {
-    this.props.loadInitial();
-    if (this.props.user.id && this.props.match.path === "/")
-      this.props.history.push("/Dashboard");
+    this.props.me();
   }
 
   render() {
@@ -46,7 +44,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadInitial: () => dispatch(me())
+    me: () => dispatch(me())
   };
 };
 

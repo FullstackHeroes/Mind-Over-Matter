@@ -3,12 +3,14 @@ import store from "../store";
 
 // VARIABLE DRIVERS
 const rounding = 10 ** 5; // DECIMAL ROUNDING
-const screenWeight = 0.5;
-const countWeight = 1 - screenWeight;
+const screenWeight = 0.5; // ADDITIONAL DRIVERS WITHIN WEIGHTED CALCS
+const countWeight = 1 - screenWeight; // ADDITIONAL DRIVERS WITHIN WEIGHTED CALCS
 export const normalizedLen = 3000; // LENGTH FOR NORMALIZED CALC
 const wtdAvgCount = 50; // WEIGHTED AVERAGE COUNT LIMIT
 export const snapIntDefault = 2000;
 export const dbIntDefault = 2000;
+export const d3Height = 400;
+export const d3Width = 400;
 
 // DATE CREATION FUNCTION
 export const dateCreate = () => {
@@ -171,7 +173,8 @@ export const condenseScoreObj = (targetScoreObj, userId) => {
 export const calcNormalizeUtility = async userId => {
   // RETRIEVE BOTH LS AND DB DATAPOINTS AND CONDENSING LS BASE
   const LSScoreObj = JSON.parse(localStorage.getItem("snapshots")),
-    { data: dbScoreObj } = await axios.get(`/api/hours/${userId}`),
+    { data } = await axios.get(`/api/weightedScore/${userId}`),
+    { userWtdObj: dbScoreObj } = data,
     condensedLSObj = condenseScoreObj(LSScoreObj, userId);
 
   // APPEND LS DATA TO DB SCORE OBJ
@@ -208,7 +211,8 @@ export const calcWeightedTrueScore = async userId => {
     userLocalData && userLocalData.length
       ? condenseScoreObj(userLocalData, userId)
       : [];
-  const { data: userDbData } = await axios.get(`api/hours/${userId}`);
+  const { data } = await axios.get(`api/weightedScore/${userId}`),
+    { userWtdObj: userDbData } = data;
 
   // APPEND LS DATA TO DB SCORE OBJ
   if (condensedLSData.length) userDbData.push(condensedLSData);

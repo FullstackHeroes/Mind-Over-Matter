@@ -26,6 +26,14 @@ class NavBar extends Component {
         {userId ? (
           <div className="navBarRight">
             <NavLink
+              to="/"
+              className="linkText navBarLink"
+              activeClassName="selectedNavLink"
+              exact>
+              HomePage
+            </NavLink>
+
+            <NavLink
               to="/Dashboard"
               className="linkText navBarLink"
               activeClassName="selectedNavLink"

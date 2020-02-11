@@ -8,7 +8,13 @@ class ScreenTimeWeek extends Component {
 
     this.state = {
       data: {
-        labels: [`Hours Worked : ${this.props.weeksScreenHours}`],
+        labels: [
+          `Hours Worked : ${
+            this.props.weeksScreenHours
+              ? this.props.weeksScreenHours.toFixed(2)
+              : 0
+          }`
+        ],
         datasets: [
           {
             barPercentage: 0.6,
@@ -27,7 +33,13 @@ class ScreenTimeWeek extends Component {
   componentDidMount() {
     this.setState({
       data: {
-        labels: [`Hours Worked: ${this.props.weeksScreenHours}`],
+        labels: [
+          `Hours Worked : ${
+            this.props.weeksScreenHours
+              ? this.props.weeksScreenHours.toFixed(2)
+              : 0
+          }`
+        ],
         datasets: [
           {
             barPercentage: 0.6,
@@ -43,13 +55,19 @@ class ScreenTimeWeek extends Component {
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     const { weeksScreenHours } = this.props;
 
     if (weeksScreenHours !== prevProps.weeksScreenHours) {
       this.setState({
         data: {
-          labels: [`Hours Worked: ${this.props.weeksScreenHours}`],
+          labels: [
+            `Hours Worked : ${
+              this.props.weeksScreenHours
+                ? this.props.weeksScreenHours.toFixed(2)
+                : 0
+            }`
+          ],
           datasets: [
             {
               barPercentage: 0.6,
