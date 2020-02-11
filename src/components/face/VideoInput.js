@@ -35,20 +35,19 @@ class VideoInput extends Component {
 
   // TIME INTERVAL FOR CAPTURING SNAPSHOTS
   startCapture = () => {
-    const { user, snapInterval } = this.props,
-      startDate = dateCreate();
-    let firstTrigger = true;
+    const { user, snapInterval } = this.props;
+    let startDate = 0;
 
     if (user && user.id) {
       this.intervalSnap = setInterval(async () => {
-        if (this.webcam.current && firstTrigger) {
+        if (this.webcam.current && !startDate) {
           await getFaceDescr(this.webcam.current.getScreenshot(), inputSize);
-          firstTrigger = false;
+          console.log("INITIAL");
+          startDate = dateCreate();
         }
 
-        const currDate = dateCreate();
-        if (currDate - startDate >= 12000 && !firstTrigger) {
-          // console.log("hit hit", currDate - startDate, currDate, startDate);
+        if (dateCreate() - startDate >= 12000) {
+          console.log("hit hit", dateCreate() - startDate, dateCreate());
           this.capture(user.id);
         }
       }, snapInterval);
@@ -60,7 +59,7 @@ class VideoInput extends Component {
     try {
       if (this.webcam.current) {
         await getFaceDescr(this.webcam.current.getScreenshot(), inputSize).then(
-          async fullDesc => {
+          fullDesc => {
             if (fullDesc && fullDesc.length) {
               const desc = fullDesc[0],
                 screenScore = desc.detection._score,
