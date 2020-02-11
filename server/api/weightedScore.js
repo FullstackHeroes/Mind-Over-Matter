@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const db = require("../db");
+const chalk = require("chalk");
 const { isAdmin } = require("./routeProtectors");
 const { User, WeightedScore } = require("../db/models");
 
@@ -66,20 +67,23 @@ router.get("/:userId", async (req, res, next) => {
       userId: req.params.userId
     }
   });
+  console.log("WOAH WOAH WOAH -", userHours.dataValues);
   res.json(userHours);
 });
 
-// //NEED A CONDITIONAL. HANGS IF THERE IS NO DATA FOR TODAY
+// NEED A CONDITIONAL. HANGS IF THERE IS NO DATA FOR TODAY
 router.get("/:userId/today", async (req, res, next) => {
   const text = `SELECT weighteds."screenTime"
   FROM weighteds
   WHERE date(weighteds."timeStamp") = CURRENT_DATE AND weighteds."userId" = ${req.params.userId}`;
   const userHours = await db.query(text);
   const screenTimeArr = userHours[0];
+  console.log("ONE -", userHours, screenTimeArr);
   if (screenTimeArr.length) {
     const dailyScreenTime = screenTimeArr.reduce((a, b) => ({
       screenTime: a.screenTime + b.screenTime
     }));
+    console.log("TWO -", dailyScreenTime);
     res.json(Math.round(dailyScreenTime.screenTime / 3600));
   } else res.json(0);
 });

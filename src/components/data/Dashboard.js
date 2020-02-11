@@ -53,7 +53,10 @@ class Dashboard extends Component {
       fullScoreObj,
       normalizedScore,
       runningScore,
-      sentimentDiff
+      sentimentDiff,
+      todaysScreenMins,
+      yesterdaysScreenMins,
+      weeksScreenHours
     } = this.props;
 
     return (
@@ -62,14 +65,12 @@ class Dashboard extends Component {
 
         <div className="dashboardRowOne dashboardRow">
           <div className="dashboardTable">
-            <ScreenTimeToday todaysScreenHours={this.props.todaysScreenMins} />
-            <ScreenTimeYesterday
-              yesterdaysScreenHours={this.props.yesterdaysScreenMins}
-            />
+            <ScreenTimeToday todaysScreenHours={todaysScreenMins} />
+            <ScreenTimeYesterday yesterdaysScreenHours={yesterdaysScreenMins} />
           </div>
 
           <div className="dashboardTable">
-            <ScreenTimeWeek weeksScreenHours={this.props.weeksScreenHours} />
+            <ScreenTimeWeek weeksScreenHours={weeksScreenHours} />
           </div>
         </div>
 

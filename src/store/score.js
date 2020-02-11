@@ -89,8 +89,19 @@ export const setFullScoreObj = userId => {
         ),
         adjFullScoreObj = dbScoreObj.concat(targetLSDataObj);
 
-      if (adjFullScoreObj.length) dispatch(getFullScoreObj(adjFullScoreObj));
-      else dispatch(getFullScoreObj([]));
+      console.log("TEST -", dbScoreObj, targetLSDataObj);
+
+      if (adjFullScoreObj.length) {
+        const currentDate = dateCreate(),
+          screenMinsToday = 0,
+          screenMinsYesterday = 0,
+          screenHoursWeek = 0,
+          threeHourSnapCount = 0;
+        for (const ele of adjFullScoreObj) {
+          const valDate = ele.timeStamp;
+        }
+        dispatch(getFullScoreObj(adjFullScoreObj));
+      } else dispatch(getFullScoreObj([]));
     } catch (error) {
       console.error(error);
     }
