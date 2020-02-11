@@ -159,16 +159,16 @@ h6 {
 /* ------------------ Manila Tabs ------------------ */
 
 .manilaTab {
+  border-radius: 5px 5px 0px 0px;
   background-color: rgb(182, 171, 140);
-  /* border-color: rgba(0, 152, 195, 0.8); */
-  border-style: dashed;
+  border-color: black;
   border-width: 1px;
 }
 
 .selectedManilaTab {
+  border-radius: 5px 5px 0px 0px;
   background-color: rgb(221, 209, 176);
   border-color: rgba(0, 152, 195, 0.8);
-  border-style: dashed;
   border-width: 1px;
 }
 
@@ -177,6 +177,7 @@ h6 {
   z-index: 2;
   width: 100vw;
   height: 12vh;
+  background-color: rgba(234, 234, 234, 1);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -185,7 +186,7 @@ h6 {
 
 .navBarRight {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   padding: 0 15px;
 }
 
