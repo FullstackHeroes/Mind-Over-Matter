@@ -92,6 +92,7 @@ h6 {
 
 .authFormLabel {
   width: 150px;
+  margin: 0;
 }
 
 .authInputBox {
