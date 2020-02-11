@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { NormalizeScore } = require("../db/models");
+const { NormalizeScore } = require("../../server/db/models");
 
 router.get("/:userId", async function(req, res, next) {
   try {
