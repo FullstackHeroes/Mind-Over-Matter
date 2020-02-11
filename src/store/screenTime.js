@@ -121,7 +121,9 @@ export const getWeeksScreenTime = userId => {
 export const getThreeHourSnapCount = userId => {
   return async dispatch => {
     try {
-      const snapCount = await axios.get(`/api/hours/${userId}/threeHours`);
+      const snapCount = await axios.get(
+        `/api/weightedScore/${userId}/threeHours`
+      );
       dispatch(gotThreeHoursnapCount(snapCount.data));
     } catch (error) {
       console.error(error);
