@@ -157,12 +157,14 @@ h6 {
 }
 
 .manilaTab {
-  border-color: rgba(0, 152, 195, 0.8);
+  background-color: rgb(182, 171, 140);
+  /* border-color: rgba(0, 152, 195, 0.8); */
   border-style: dashed;
   border-width: 1px;
 }
 
 .selectedManilaTab {
+  background-color: rgb(221, 209, 176);
   border-color: rgba(0, 152, 195, 0.8);
   border-style: dashed;
   border-width: 1px;
@@ -254,6 +256,7 @@ h6 {
 }
 
 .tableDataRow {
+  background-color: #282c34;
   font-size: 14px;
   width: 80px;
   border-style: solid;
