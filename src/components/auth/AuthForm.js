@@ -34,6 +34,7 @@ class AuthForm extends Component {
     return (
       <div className={`${formName}-authFormDiv authFormDiv`}>
         <h3 className="authFormHeader">{displayName}</h3>
+
         <form onSubmit={this.handleSignIn} name={formName} className="authForm">
           <div className="authInputDiv">
             <label htmlFor="email" className="authFormLabel">

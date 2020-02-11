@@ -12,8 +12,6 @@ import PopUp from "./alert/PopUp";
 class App extends Component {
   componentDidMount() {
     this.props.loadInitial();
-    if (this.props.user.id && this.props.match.path === "/")
-      this.props.history.push("/Dashboard");
   }
 
   render() {
