@@ -41,6 +41,7 @@ const buildIndScoreObj = userWtdObj => {
     (-twoFourHourMilli * 31) / 1000
   )) {
     // NORMALIZE SCORE RESPONSE
+    const normalizeScoreArr = [];
     normalizeScoreObj.id = entry.id;
     normalizeScoreObj.normalizeScore = entry.normalizeScore;
     normalizeScoreObj.timeStamp = entry.timeStamp;
@@ -48,6 +49,7 @@ const buildIndScoreObj = userWtdObj => {
     normalizeScoreArr.push(normalizeScoreObj);
 
     // RUNNING SCORE RESPONSE
+    const runningScoreArr = [];
     runningScoreObj.id = entry.id;
     runningScoreObj.runningScore = entry.runningScore;
     runningScoreObj.timeStamp = entry.timeStamp;
@@ -55,6 +57,7 @@ const buildIndScoreObj = userWtdObj => {
     runningScoreArr.push(runningScoreObj);
 
     // SENTIMENT DIFF RESPONSE
+    const sentimentDiffArr = [];
     sentimentDiffObj.id = entry.id;
     sentimentDiffObj.sentimentDiff = entry.sentimentDiff;
     sentimentDiffObj.timeStamp = entry.timeStamp;
