@@ -46,7 +46,7 @@ class VideoInput extends Component {
           startDate = dateCreate();
         }
 
-        if (dateCreate() - startDate >= 12000) {
+        if (dateCreate() - startDate >= 5000) {
           console.log("hit hit", dateCreate() - startDate, dateCreate());
           this.capture(user.id);
         }
