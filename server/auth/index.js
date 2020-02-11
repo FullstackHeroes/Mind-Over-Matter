@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, WeightedScore, NormalizeScore } = require("../db/models");
+const { User, WeightedScore } = require("../db/models");
 module.exports = router;
 
 const dateCreate = () => {

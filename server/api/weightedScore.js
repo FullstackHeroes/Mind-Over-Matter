@@ -10,6 +10,87 @@ const dateCreate = () => {
   return new Date(date);
 };
 
+const buildIndScoreObj = userWtdObj => {
+  // SETTING UP THE TIME INGREDIENTS
+  const currentDate = dateCreate(),
+    hoursDiff = currentDate.getHours() - currentDate.getTimezoneOffset() / 60;
+
+  currentDate.setHours(hoursDiff);
+
+  const oneHourMilli = 3600000,
+    twoFourHourMilli = oneHourMilli * 24,
+    todayStart = new Date(
+      new Date(
+        new Date(new Date(currentDate).setHours(0)).setMinutes(0)
+      ).setSeconds(0)
+    ),
+    yesterStart = new Date(todayStart - twoFourHourMilli),
+    weekStart = new Date(todayStart - twoFourHourMilli * 7);
+
+  // SETTING UP ALL TIME VARIABLES TO SEND BACK
+  let normalizeScoreArr = [],
+    runningScoreArr = [],
+    sentimentDiffArr = [],
+    threeHourSnapCount = 0,
+    screenMinsToday = 0,
+    screenMinsYesterday = 0,
+    screenHoursWeek = 0;
+
+  // LOOPING THROUGH OBJECT TO PARSE THROUGH WHAT TO PUT BACK
+  for (const { dataValues: ele } of userWtdObj.slice(
+    (-twoFourHourMilli * 31) / 1000
+  )) {
+    // NORMALIZE SCORE RESPONSE
+    normalizeScoreObj.id = entry.id;
+    normalizeScoreObj.normalizeScore = entry.normalizeScore;
+    normalizeScoreObj.timeStamp = entry.timeStamp;
+    normalizeScoreObj.userId = entry.userId;
+    normalizeScoreArr.push(normalizeScoreObj);
+
+    // RUNNING SCORE RESPONSE
+    runningScoreObj.id = entry.id;
+    runningScoreObj.runningScore = entry.runningScore;
+    runningScoreObj.timeStamp = entry.timeStamp;
+    runningScoreObj.userId = entry.userId;
+    runningScoreArr.push(runningScoreObj);
+
+    // SENTIMENT DIFF RESPONSE
+    sentimentDiffObj.id = entry.id;
+    sentimentDiffObj.sentimentDiff = entry.sentimentDiff;
+    sentimentDiffObj.timeStamp = entry.timeStamp;
+    sentimentDiffObj.userId = entry.userId;
+    sentimentDiffArr.push(sentimentDiffObj);
+
+    // VALUE TIME REFERENCE POINTS
+    const valDate = new Date(ele.timeStamp),
+      minDiff = (currentDate - valDate) / 1000;
+
+    // THREE HOUR SNAP COUNT
+    if (minDiff >= (oneHourMilli * 3) / 1000) threeHourSnapCount += ele.count;
+
+    // TODAY TIMING
+    if (valDate >= todayStart) screenMinsToday += ele.screenTime;
+
+    // YESTERDAY TIMING
+    if (valDate >= yesterStart && valDate < todayStart)
+      screenMinsYesterday += ele.screenTime;
+
+    // PAST 7 DAYS TIMING
+    if (valDate >= weekStart && valDate < todayStart)
+      screenHoursWeek += Math.round((ele.screenTime / 3600) * 100) / 100;
+  }
+
+  return {
+    normalizeScoreArr,
+    runningScoreArr,
+    sentimentDiffArr,
+    threeHourSnapCount,
+    screenMinsToday,
+    screenMinsYesterday,
+    screenHoursWeek
+  };
+};
+
 // GETTING ALL SCORES FOR ALL USERS (NOT USED)
 router.get("/", async (req, res, next) => {
   try {
@@ -78,55 +159,22 @@ router.get("/:userId", async (req, res, next) => {
 
     // LET'S START DOING THE MAGIC
     if (userWtdObj && userWtdObj.length) {
-      // SETTING UP THE TIME INGREDIENTS
-      const currentDate = dateCreate(),
-        hoursDiff =
-          currentDate.getHours() - currentDate.getTimezoneOffset() / 60;
-
-      currentDate.setHours(hoursDiff);
-
-      const oneHourMilli = 3600000,
-        twoFourHourMilli = oneHourMilli * 24,
-        todayStart = new Date(
-          new Date(
-            new Date(new Date(currentDate).setHours(0)).setMinutes(0)
-          ).setSeconds(0)
-        ),
-        yesterStart = new Date(todayStart - twoFourHourMilli),
-        weekStart = new Date(todayStart - twoFourHourMilli * 7);
-
-      // SETTING UP ALL TIME VARIABLES TO SEND BACK
-      let threeHourSnapCount = 0,
-        screenMinsToday = 0,
-        screenMinsYesterday = 0,
-        screenHoursWeek = 0;
-
-      // LOOPING THROUGH OBJECT TO PARSE THROUGH WHAT TO PUT BACK
-      for (const { dataValues: ele } of userWtdObj.slice(
-        (-twoFourHourMilli * 31) / 1000
-      )) {
-        const valDate = new Date(ele.timeStamp),
-          minDiff = (currentDate - valDate) / 1000;
-
-        // THREE HOUR SNAP COUNT
-        if (minDiff >= (oneHourMilli * 3) / 1000)
-          threeHourSnapCount += ele.count;
-
-        // TODAY TIMING
-        if (valDate >= todayStart) screenMinsToday += ele.screenTime;
-
-        // YESTERDAY TIMING
-        if (valDate >= yesterStart && valDate < todayStart)
-          screenMinsYesterday += ele.screenTime;
-
-        // PAST 7 DAYS TIMING
-        if (valDate >= weekStart && valDate < todayStart)
-          screenHoursWeek += Math.round((ele.screenTime / 3600) * 100) / 100;
-      }
+      const {
+        threeHourSnapCount,
+        screenMinsToday,
+        screenMinsYesterday,
+        screenHoursWeek,
+        normalizeScoreArr,
+        runningScoreArr,
+        sentimentDiffArr
+      } = buildIndScoreObj(userWtdObj);
 
       // LET'S SEND IT BACK!
       res.json({
         userWtdObj,
+        normalizeScoreArr,
+        runningScoreArr,
+        sentimentDiffArr,
         threeHourSnapCount,
         screenMinsToday,
         screenMinsYesterday,

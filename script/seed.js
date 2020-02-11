@@ -136,7 +136,6 @@ const normalScoreGen = (userId, count) => {
 };
 
 const seed = async () => {
-  // await db.sync();
   await db.sync({ force: true });
   console.log("db synced !");
 

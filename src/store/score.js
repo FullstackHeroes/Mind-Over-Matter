@@ -123,6 +123,9 @@ export const setFullScoreObj = userId => {
       const { data } = await axios.get(`/api/weightedScore/${userId}`),
         {
           userWtdObj,
+          normalizeScoreArr,
+          runningScoreArr,
+          sentimentDiffArr,
           threeHourSnapCount,
           screenMinsToday,
           screenMinsYesterday,
@@ -132,6 +135,9 @@ export const setFullScoreObj = userId => {
 
       if (adjFullScoreObj.length) {
         dispatch(getFullScoreObj(adjFullScoreObj));
+        dispatch(getNormalizedScore(normalizeScoreArr));
+        dispatch(getRunningScore(runningScoreArr));
+        dispatch(getSentimentDiff(sentimentDiffArr));
         dispatch(gotThreeHoursnapCount(threeHourSnapCount));
         dispatch(gotTodaysScreenTime(screenMinsToday));
         dispatch(gotYesterdaysScreenTime(screenMinsYesterday));
