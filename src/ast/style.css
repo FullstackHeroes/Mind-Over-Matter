@@ -34,13 +34,13 @@ h6 {
 /* ----------------- AUTH FORM ELEMENT ----------------- */
 .signInFullDiv {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 75vw;
   color: black;
 }
 
 .authFormDiv {
-  margin: 20px auto;
+  margin-top: 35px;
   min-width: 450px;
   width: 35%;
   height: 50vh;
