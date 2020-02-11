@@ -37,8 +37,8 @@ class Dashboard extends Component {
         fullScoreObj.length !== prevProps.fullScoreObj.length ||
         user.id !== prevProps.user.id
       ) {
-        this.props.setFullScoreObj(user.id);
-        this.props.setNormalizedScore(user.id);
+        // this.props.setFullScoreObj(user.id);
+        // this.props.setNormalizedScore(user.id);
         // this.props.getTime(user.id);
         // this.props.getYesterday(user.id);
         // this.props.getWeek(user.id);
@@ -58,6 +58,13 @@ class Dashboard extends Component {
       yesterdaysScreenMins,
       weeksScreenHours
     } = this.props;
+
+    console.log(
+      "dashboard render -",
+      todaysScreenMins,
+      yesterdaysScreenMins,
+      weeksScreenHours
+    );
 
     return (
       <div className="dashboardFullDiv">
