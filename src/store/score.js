@@ -16,7 +16,11 @@ const initialState = {
   normalizedScore: [],
   runningScore: [],
   sentimentDiff: [],
-  currentRunningSentiment: null
+  currentRunningSentiment: null,
+  threeHourSnapCount: 0,
+  screenMinsToday: 0,
+  screenMinsYesterday: 0,
+  screenHoursWeek: 0
 };
 
 // ACTION TYPES
@@ -26,6 +30,10 @@ const GET_NORMALIZED_SCORE = "GET_NORMALIZED_SCORE";
 const GET_RUNNING_SCORE = "GET_RUNNING_SCORE";
 const GET_SENTIMENT_DIFF = "GET_SENTIMENT_DIFF";
 const GET_CURRENT_RUNNING_SENTIMENT = "GET_CURRENT_RUNNING_SENTIMENT";
+const GOT_THREE_HOUR_SNAP_COUNT = "GOT_THREE_HOUR_SNAP_COUNT";
+const GOT_TODAYS_SCREENTIME = "GOT_TODAYS_SCREENTIME";
+const GOT_YESTERDAYS_SCREENTIME = "GOT_YESTERDAYS_SCREENTIME";
+const GOT_WEEKS_SCREENTIME = "GOT_WEEKS_SCREENTIME";
 
 // ACTION CREATORS
 export const getTimeInterval = (
@@ -71,6 +79,34 @@ export const getCurrentRunningSentiment = runningSentiment => {
   return {
     type: GET_CURRENT_RUNNING_SENTIMENT,
     runningSentiment
+  };
+};
+
+export const gotThreeHoursnapCount = threeHourSnapCount => {
+  return {
+    type: GOT_THREE_HOUR_SNAP_COUNT,
+    threeHourSnapCount
+  };
+};
+
+export const gotTodaysScreenTime = screenMinsToday => {
+  return {
+    type: GOT_TODAYS_SCREENTIME,
+    screenMinsToday
+  };
+};
+
+export const gotYesterdaysScreenTime = screenMinsYesterday => {
+  return {
+    type: GOT_YESTERDAYS_SCREENTIME,
+    screenMinsYesterday
+  };
+};
+
+export const gotWeeksScreenTime = screenHoursWeek => {
+  return {
+    type: GOT_WEEKS_SCREENTIME,
+    screenHoursWeek
   };
 };
 
@@ -206,6 +242,26 @@ const scoreReducer = (state = initialState, action) => {
       return { ...state, sentimentDiff: action.sentimentDiff };
     case GET_CURRENT_RUNNING_SENTIMENT:
       return { ...state, currentRunningSentiment: action.runningSentiment };
+    case GOT_THREE_HOUR_SNAP_COUNT:
+      return {
+        ...state,
+        threeHourSnapCount: action.threeHourSnapCount
+      };
+    case GOT_TODAYS_SCREENTIME:
+      return {
+        ...state,
+        screenMinsToday: action.screenMinsToday
+      };
+    case GOT_YESTERDAYS_SCREENTIME:
+      return {
+        ...state,
+        screenMinsYesterday: action.screenMinsYesterday
+      };
+    case GOT_WEEKS_SCREENTIME:
+      return {
+        ...state,
+        screenHoursWeek: action.screenHoursWeek
+      };
     default:
       return state;
   }
