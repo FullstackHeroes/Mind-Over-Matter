@@ -218,11 +218,11 @@ export const buildIndScoreObj = userWtdObj => {
     if (minDiff >= (oneHourMilli * 3) / 1000) threeHourSnapCount += ele.count;
 
     // TODAY TIMING
-    if (valDate >= todayStart) screenMinsToday += ele.screenTime;
+    if (valDate >= todayStart) screenMinsToday += ele.screenTime / 60;
 
     // YESTERDAY TIMING
     if (valDate >= yesterStart && valDate < todayStart)
-      screenMinsYesterday += ele.screenTime;
+      screenMinsYesterday += ele.screenTime / 60;
 
     // PAST 7 DAYS TIMING
     if (valDate >= weekStart && valDate < todayStart)

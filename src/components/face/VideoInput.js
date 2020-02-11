@@ -31,6 +31,7 @@ class VideoInput extends Component {
   componentDidUpdate(prevProps) {
     const { snapInterval } = this.props;
     if (snapInterval !== prevProps.snapInterval) {
+      console.log("UPDATING!!");
       this.startCapture();
     }
   }
@@ -39,8 +40,8 @@ class VideoInput extends Component {
   startCapture = () => {
     const { user } = this.props;
     if (user && user.id) {
-      this.intervalSnap = setInterval(() => {
-        this.capture(user.id);
+      this.intervalSnap = setInterval(async () => {
+        await this.capture(user.id);
       }, this.props.snapInterval);
     }
   };
