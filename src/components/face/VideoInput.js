@@ -61,8 +61,10 @@ class VideoInput extends Component {
 
               // SETTING REMAINING ATTRIBUTES
               date.setHours(hoursDiff);
-              newScoreObj.timeStamp = date;
               newScoreObj.userId = userId;
+              newScoreObj.timeStamp = date;
+              newScoreObj.count = 1;
+              newScoreObj.screenTime = 1;
 
               // POST INTO DB AND UPDATE GLOBAL STATE
               this.props.postFullScoreObj(this.props.fullScoreObj, newScoreObj);

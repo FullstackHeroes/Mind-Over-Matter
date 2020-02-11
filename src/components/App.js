@@ -22,7 +22,10 @@ class App extends Component {
         <NavBar />
 
         {sentimentDiff && sentimentDiff.length ? (
-          <PopUp sentimentDiff={sentimentDiff.slice(-1)} />
+          <PopUp
+            sentimentDiff={sentimentDiff.slice(-1)}
+            threeHourSnapCount={threeHourSnapCount.slice(-1)}
+          />
         ) : null}
 
         <div className="appInsideDiv">
@@ -38,7 +41,8 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    sentimentDiff: state.score.sentimentDiff
+    sentimentDiff: state.score.sentimentDiff,
+    threeHourSnapCount: state.score.threeHourSnapCount
   };
 };
 
