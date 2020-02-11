@@ -11,7 +11,7 @@ const dateCreate = () => {
   return new Date(date);
 };
 
-//=======GET ALL WEIGHTEDSCORES==========
+// GETTING ALL SCORES FOR ALL USERS (NOT USED)
 router.get("/", async (req, res, next) => {
   try {
     const score = await WeightedScore.findAll({
@@ -23,7 +23,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-//=======POST WEIGHTEDSCORES============
+// MAIN POST ROUTE
 router.post("/", async function(req, res, next) {
   try {
     const {
@@ -67,7 +67,7 @@ router.post("/", async function(req, res, next) {
   }
 });
 
-//=======GET HOURS BY USER ID==========
+// MAIN GET ROUTE
 router.get("/:userId", async (req, res, next) => {
   try {
     // RETRIEVE THE FULL OBJECT OF THE INDIVIDUAL'S PROFILE
@@ -122,7 +122,7 @@ router.get("/:userId", async (req, res, next) => {
 
         // PAST 7 DAYS TIMING
         if (valDate >= weekStart && valDate < todayStart)
-          screenHoursWeek += Math.round(ele.screenTime / 3600);
+          screenHoursWeek += Math.round((ele.screenTime / 3600) * 100) / 100;
       }
 
       // LET'S SEND IT BACK!
@@ -138,6 +138,8 @@ router.get("/:userId", async (req, res, next) => {
     next(error);
   }
 });
+
+// -------------------------------- PRIOR TIME ROUTES -------------------------------- //
 
 // NEED A CONDITIONAL. HANGS IF THERE IS NO DATA FOR TODAY
 router.get("/:userId/today", async (req, res, next) => {
