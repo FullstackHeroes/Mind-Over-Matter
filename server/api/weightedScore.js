@@ -80,13 +80,50 @@ router.get("/:userId", async (req, res, next) => {
     // LET'S START DOING THE MAGIC
     if (userWtdObj && userWtdObj.length) {
       const currentDate = dateCreate(),
+        hoursDiff =
+          currentDate.getHours() - currentDate.getTimezoneOffset() / 60;
+      currentDate.setHours(hoursDiff);
+
+      // SETTING UP ALL NECESSARY VARIABLES
+      const oneHour = 3600000,
+        twoFourHour = oneHour * 24,
+        todayStart = new Date(
+          new Date(
+            new Date(new Date(currentDate).setHours(0)).setMinutes(0)
+          ).setSeconds(0)
+        ),
+        yesterStart = new Date(todayStart - twoFourHour),
+        weekStart = new Date(todayStart - twoFourHour * 7),
         screenMinsToday = 0,
         screenMinsYesterday = 0,
         screenHoursWeek = 0,
-        threeHourSnapCount = 0;
+        threeHourSnapCount = 0,
+        curYear = currentDate.getFullYear(),
+        curMonth = currentDate.getMonth() + 1,
+        curDay = currentDate.getDate(),
+        curHour = currentDate.getHours();
+
+      // LOOPING THROUGH OBJECT TO PARSE THROUGH WHAT TO PUT BACK
       for (const ele of userWtdObj) {
-        const valDate = ele.timeStamp;
-        console.log("INSIDE !! -", currentDate - valDate, ele);
+        const valDate = new Date(ele.dataValues.timeStamp),
+          valYear = valDate.getFullYear(),
+          valMonth = valDate.getMonth() + 1,
+          valDay = valDate.getDate(),
+          valHour = valDate.getHours(),
+          minDiff = (currentDate - valDate) / 1000;
+
+        // console.log("INSIDE --", currentDate, todayMin);
+        // TODAY TIMING
+        if (valDate >= todayStart) {
+          console.log("TODAY INSIDE");
+        }
+
+        // YESTERDAY TIMING
+        if (valDate >= yesterStart && valDate < todayStart) {
+          console.log("YESTERDAY INSIDE");
+        }
+
+        // WEEK TIMING
       }
       // res.json({ userWtdObj });
       res.json(userWtdObj);
