@@ -40,7 +40,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
       const fullName = profile.displayName;
       User.findOrCreate({
         where: { googleId },
-        defaults: { email }
+        defaults: { email, imgUrl, firstName, lastName, fullName }
       })
         .then(([user]) => done(null, user))
         .catch(done);
