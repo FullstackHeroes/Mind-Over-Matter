@@ -4,12 +4,12 @@ import Webcam from "react-webcam";
 import { loadModels, getFaceDescr } from "../../utils/faceBase";
 import { sentimentAlgo, dateCreate } from "../../utils/utilities";
 import {
-  setNormalizedScore,
-  setFullScoreObj,
-  postNormalizedScore,
-  postLSScoreObj,
   getTimeInterval,
+  setFullScoreObj,
   postFullScoreObj
+  // setNormalizedScore,
+  // postNormalizedScore,
+  // postLSScoreObj,
 } from "../../store";
 
 const WIDTH = 420;
@@ -98,7 +98,11 @@ class VideoInput extends Component {
               newScoreObj.timeStamp = date;
               newScoreObj.userId = userId;
 
-              this.props.postFullScoreObj(newScoreObj, userId);
+              this.props.postFullScoreObj(
+                this.props.fullScoreObj,
+                newScoreObj,
+                userId
+              );
               // APPENDING LOCAL STORAGE AND UPDATE GLOBAL STATE
               // this.appendLocalStorage(fullScoreObj, userId);
             } else console.error("Oh oh, no current webcam detection");
@@ -165,21 +169,20 @@ const mapStateToProps = state => {
   return {
     user: state.user,
     snapInterval: state.score.snapInterval,
-    normalizedScore: state.score.normalizedScore,
-    sentimentDiff: state.score.sentimentDiff
+    fullScoreObj: state.score.fullScoreObj
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    setFullScoreObj: userId => dispatch(setFullScoreObj(userId)),
-    postNormalizedScore: userId => dispatch(postNormalizedScore(userId)),
-    postLSScoreObj: userId => dispatch(postLSScoreObj(userId)),
     getTimeInterval: (snapInterval, dbInterval) =>
       dispatch(getTimeInterval(snapInterval, dbInterval)),
-    setNormalizedScore: userId => dispatch(setNormalizedScore(userId)),
+    setFullScoreObj: userId => dispatch(setFullScoreObj(userId)),
     postFullScoreObj: (newScoreObj, userId) =>
       dispatch(postFullScoreObj(newScoreObj, userId))
+    // postNormalizedScore: userId => dispatch(postNormalizedScore(userId)),
+    // postLSScoreObj: userId => dispatch(postLSScoreObj(userId)),
+    // setNormalizedScore: userId => dispatch(setNormalizedScore(userId))
   };
 };
 

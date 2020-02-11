@@ -170,18 +170,18 @@ export const condenseScoreObj = (targetScoreObj, userId) => {
   } else return {};
 };
 
-export const calcNormalizeUtility = async userId => {
-  // RETRIEVE BOTH LS AND DB DATAPOINTS AND CONDENSING LS BASE
-  const LSScoreObj = JSON.parse(localStorage.getItem("snapshots")),
-    { data } = await axios.get(`/api/weightedScore/${userId}`),
-    { userWtdObj: dbScoreObj } = data,
-    condensedLSObj = condenseScoreObj(LSScoreObj, userId);
+export const calcNormalizeUtility = fullScoreObj => {
+  // // RETRIEVE BOTH LS AND DB DATAPOINTS AND CONDENSING LS BASE
+  // const LSScoreObj = JSON.parse(localStorage.getItem("snapshots")),
+  //   { data } = await axios.get(`/api/weightedScore/${userId}`),
+  //   { userWtdObj: dbScoreObj } = data,
+  //   condensedLSObj = condenseScoreObj(LSScoreObj, userId);
 
-  // APPEND LS DATA TO DB SCORE OBJ
-  if (Object.keys(condensedLSObj).length) dbScoreObj.push(condensedLSObj);
+  // // APPEND LS DATA TO DB SCORE OBJ
+  // if (Object.keys(condensedLSObj).length) dbScoreObj.push(condensedLSObj);
 
   // GETTING BASIS FOR WEIGHTED AVERAGE CALC
-  const shortenFullScore = dbScoreObj.slice(-normalizedLen);
+  const shortenFullScore = fullScoreObj.slice(-normalizedLen);
   let totalScreenScore = 0,
     totalCount = 0;
   for (let val of shortenFullScore) {
@@ -200,25 +200,22 @@ export const calcNormalizeUtility = async userId => {
   return Math.round(calcNormalScore * rounding) / rounding;
 };
 
-// CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
-export const calcScreenTime = (length, interval) => (interval * length) / 1000;
-
 // CALCULATE CURRENT MENTAL STATE USING AXIOS REQUESTS AND STORAGE DATA
-export const calcWeightedTrueScore = async userId => {
-  // RETRIEVE LS DATA AND DB SCORE OBJECTS AND CONDENSE LS DATA INTO SINGLE OBJ
-  const userLocalData = JSON.parse(localStorage.getItem("snapshots"));
-  const condensedLSData =
-    userLocalData && userLocalData.length
-      ? condenseScoreObj(userLocalData, userId)
-      : [];
-  const { data } = await axios.get(`api/weightedScore/${userId}`),
-    { userWtdObj: userDbData } = data;
+export const calcWeightedTrueScore = fullScoreObj => {
+  // // RETRIEVE LS DATA AND DB SCORE OBJECTS AND CONDENSE LS DATA INTO SINGLE OBJ
+  // const userLocalData = JSON.parse(localStorage.getItem("snapshots"));
+  // const condensedLSData =
+  //   userLocalData && userLocalData.length
+  //     ? condenseScoreObj(userLocalData, userId)
+  //     : [];
+  // const { data } = await axios.get(`api/weightedScore/${userId}`),
+  //   { userWtdObj: userDbData } = data;
 
-  // APPEND LS DATA TO DB SCORE OBJ
-  if (condensedLSData.length) userDbData.push(condensedLSData);
+  // // APPEND LS DATA TO DB SCORE OBJ
+  // if (condensedLSData.length) userDbData.push(condensedLSData);
 
-  // ORDER aggUserDataObjArr FROM NEW TO OLD
-  const orderArr = userDbData.reverse();
+  // ORDER FROM NEW TO OLD
+  const orderArr = fullScoreObj.reverse();
 
   // BASE DATA FOR WEIGHTED AVG CALC
   let totalScreenScore = 0,
@@ -245,3 +242,11 @@ export const calcWeightedTrueScore = async userId => {
 
   return Math.floor(calcNormalScore * rounding) / rounding;
 };
+
+// CALCULATING SENTIMENT DIFF WITH GLOBAL ROUNDING CONSISTENTCY
+export const calcSentimentDiff = (running, normal) => {
+  return Math.floor((running / normal) * rounding) / rounding;
+};
+
+// CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
+export const calcScreenTime = (length, interval) => (interval * length) / 1000;
