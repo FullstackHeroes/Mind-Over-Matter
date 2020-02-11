@@ -4,6 +4,13 @@ const chalk = require("chalk");
 const { isAdmin } = require("./routeProtectors");
 const { User, WeightedScore } = require("../db/models");
 
+const dateCreate = () => {
+  const date = new Date().toLocaleString("en-US", {
+    timeZone: "America/New_York"
+  });
+  return new Date(date);
+};
+
 //=======GET ALL WEIGHTEDSCORES==========
 router.get("/", async (req, res, next) => {
   try {
@@ -62,13 +69,31 @@ router.post("/", async function(req, res, next) {
 
 //=======GET HOURS BY USER ID==========
 router.get("/:userId", async (req, res, next) => {
-  const userHours = await WeightedScore.findAll({
-    where: {
-      userId: req.params.userId
-    }
-  });
-  console.log("WOAH WOAH WOAH -", userHours.dataValues);
-  res.json(userHours);
+  try {
+    // RETRIEVE THE FULL OBJECT OF THE INDIVIDUAL'S PROFILE
+    const userWtdObj = await WeightedScore.findAll({
+      where: {
+        userId: req.params.userId
+      }
+    });
+
+    // LET'S START DOING THE MAGIC
+    if (userWtdObj && userWtdObj.length) {
+      const currentDate = dateCreate(),
+        screenMinsToday = 0,
+        screenMinsYesterday = 0,
+        screenHoursWeek = 0,
+        threeHourSnapCount = 0;
+      for (const ele of userWtdObj) {
+        const valDate = ele.timeStamp;
+        console.log("INSIDE !! -", currentDate - valDate, ele);
+      }
+      // res.json({ userWtdObj });
+      res.json(userWtdObj);
+    } else res.json([]);
+  } catch (error) {
+    next(error);
+  }
 });
 
 // NEED A CONDITIONAL. HANGS IF THERE IS NO DATA FOR TODAY
@@ -78,12 +103,10 @@ router.get("/:userId/today", async (req, res, next) => {
   WHERE date(weighteds."timeStamp") = CURRENT_DATE AND weighteds."userId" = ${req.params.userId}`;
   const userHours = await db.query(text);
   const screenTimeArr = userHours[0];
-  console.log("ONE -", userHours, screenTimeArr);
   if (screenTimeArr.length) {
     const dailyScreenTime = screenTimeArr.reduce((a, b) => ({
       screenTime: a.screenTime + b.screenTime
     }));
-    console.log("TWO -", dailyScreenTime);
     res.json(Math.round(dailyScreenTime.screenTime / 3600));
   } else res.json(0);
 });
