@@ -149,7 +149,7 @@ export const setFullScoreObj = userId => {
   };
 };
 
-export const postFullScoreObj = userId => {
+export const postFullScoreObj = (newScoreObj, userId) => {
   return async dispatch => {
     // try {
     //   const LSDataExtract = JSON.parse(localStorage.getItem("snapshots")),
