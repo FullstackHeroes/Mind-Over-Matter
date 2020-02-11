@@ -56,6 +56,7 @@ class VideoInput extends Component {
                 screenScore = desc.detection._score,
                 expressions = desc.expressions,
                 newScoreObj = sentimentAlgo(screenScore, expressions),
+                clientDate = dateCreate(),
                 date = dateCreate(),
                 hoursDiff = date.getHours() - date.getTimezoneOffset() / 60;
 
@@ -63,6 +64,7 @@ class VideoInput extends Component {
               date.setHours(hoursDiff);
               newScoreObj.userId = userId;
               newScoreObj.timeStamp = date;
+              newScoreObj.clientTimeStamp = clientDate;
               newScoreObj.count = 1;
               newScoreObj.screenTime = 1;
 

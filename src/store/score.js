@@ -15,7 +15,6 @@ const initialState = {
   normalizedScore: [],
   runningScore: [],
   sentimentDiff: [],
-  currentRunningSentiment: null,
   threeHourSnapCount: 0,
   screenMinsToday: 0,
   screenMinsYesterday: 0,
@@ -28,12 +27,14 @@ const GET_FULL_SCORE_OBJ = "GET_FULL_SCORE_OBJ";
 const GET_NORMALIZED_SCORE = "GET_NORMALIZED_SCORE";
 const GET_RUNNING_SCORE = "GET_RUNNING_SCORE";
 const GET_SENTIMENT_DIFF = "GET_SENTIMENT_DIFF";
-const GET_CURRENT_RUNNING_SENTIMENT = "GET_CURRENT_RUNNING_SENTIMENT";
 const GOT_THREE_HOUR_SNAP_COUNT = "GOT_THREE_HOUR_SNAP_COUNT";
 const GOT_TODAYS_SCREENTIME = "GOT_TODAYS_SCREENTIME";
 const GOT_YESTERDAYS_SCREENTIME = "GOT_YESTERDAYS_SCREENTIME";
 const GOT_WEEKS_SCREENTIME = "GOT_WEEKS_SCREENTIME";
 const ADD_FULL_SCORE_OBJ = "ADD_FULL_SCORE_OBJ";
+const ADD_NORMALIZED_SCORE = "ADD_NORMALIZED_SCORE";
+const ADD_RUNNING_SCORE = "ADD_RUNNING_SCORE";
+const ADD_SENTIMENT_DIFF = "ADD_SENTIMENT_DIFF";
 
 // ACTION CREATORS
 export const getTimeInterval = (
@@ -75,13 +76,6 @@ export const getSentimentDiff = sentimentDiff => {
   };
 };
 
-export const getCurrentRunningSentiment = runningSentiment => {
-  return {
-    type: GET_CURRENT_RUNNING_SENTIMENT,
-    runningSentiment
-  };
-};
-
 export const gotThreeHoursnapCount = threeHourSnapCount => {
   return {
     type: GOT_THREE_HOUR_SNAP_COUNT,
@@ -114,6 +108,27 @@ export const addFullScoreObj = fullScoreObj => {
   return {
     type: ADD_FULL_SCORE_OBJ,
     fullScoreObj
+  };
+};
+
+export const addNormalizedScore = normalizedScore => {
+  return {
+    type: ADD_NORMALIZED_SCORE,
+    normalizedScore
+  };
+};
+
+export const addRunningScore = runningScore => {
+  return {
+    type: ADD_RUNNING_SCORE,
+    runningScore
+  };
+};
+
+export const addSentimentDiff = sentimentDiff => {
+  return {
+    type: ADD_SENTIMENT_DIFF,
+    sentimentDiff
   };
 };
 
@@ -154,15 +169,13 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
     try {
       // CALCULATING NORMALIZE AND RUNNING SCORE WITH UTILITY FUNCTIONS
       const normalizeScore = calcNormalizeUtility(fullScoreObj),
-        runningScore = calcWeightedTrueScore(fullScoreObj);
+        runningScore = calcWeightedTrueScore(fullScoreObj),
+        sentimentDiff = calcSentimentDiff(runningScore, normalizeScore);
 
       // APPENDING NEW SCORES ONTO OBJECT FOR DB
       newScoreObj.normalizeScore = normalizeScore;
       newScoreObj.runningScore = runningScore;
-      newScoreObj.sentimentDiff = calcSentimentDiff(
-        runningScore,
-        normalizeScore
-      );
+      newScoreObj.sentimentDiff = sentimentDiff;
 
       console.log("POSTING !!", newScoreObj);
 
@@ -178,11 +191,34 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
           screenHoursWeek
         } = data;
 
+      newScoreObj.timeStamp = newScoreObj.clientTimeStamp;
+
       dispatch(addFullScoreObj(newScoreObj));
+      dispatch(
+        addNormalizedScore({
+          normalizeScore,
+          timeStamp: newScoreObj.clientTimeStamp,
+          userId: newScoreObj.userId
+        })
+      );
+      dispatch(
+        addRunningScore({
+          runningScore,
+          timeStamp: newScoreObj.clientTimeStamp,
+          userId: newScoreObj.userId
+        })
+      );
+      dispatch(
+        addSentimentDiff({
+          sentimentDiff,
+          timeStamp: newScoreObj.clientTimeStamp,
+          userId: newScoreObj.userId
+        })
+      );
       // dispatch(getFullScoreObj(userWtdObj));
-      dispatch(getNormalizedScore(normalizeScoreArr));
-      dispatch(getRunningScore(runningScoreArr));
-      dispatch(getSentimentDiff(sentimentDiffArr));
+      // dispatch(getNormalizedScore(normalizeScoreArr));
+      // dispatch(getRunningScore(runningScoreArr));
+      // dispatch(getSentimentDiff(sentimentDiffArr));
       dispatch(gotThreeHoursnapCount(threeHourSnapCount));
       dispatch(gotTodaysScreenTime(screenMinsToday));
       dispatch(gotYesterdaysScreenTime(screenMinsYesterday));
@@ -210,8 +246,6 @@ const scoreReducer = (state = initialState, action) => {
       return { ...state, runningScore: action.runningScore };
     case GET_SENTIMENT_DIFF:
       return { ...state, sentimentDiff: action.sentimentDiff };
-    case GET_CURRENT_RUNNING_SENTIMENT:
-      return { ...state, currentRunningSentiment: action.runningSentiment };
     case GOT_THREE_HOUR_SNAP_COUNT:
       return {
         ...state,
@@ -236,6 +270,21 @@ const scoreReducer = (state = initialState, action) => {
       return {
         ...state,
         fullScoreObj: [...state.fullScoreObj, action.fullScoreObj]
+      };
+    case ADD_NORMALIZED_SCORE:
+      return {
+        ...state,
+        normalizedScore: [...state.normalizedScore, action.normalizedScore]
+      };
+    case ADD_RUNNING_SCORE:
+      return {
+        ...state,
+        runningScore: [...state.runningScore, action.runningScore]
+      };
+    case ADD_SENTIMENT_DIFF:
+      return {
+        ...state,
+        sentimentDiff: [...state.sentimentDiff, action.sentimentDiff]
       };
     default:
       return state;
