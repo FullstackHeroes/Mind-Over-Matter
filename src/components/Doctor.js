@@ -1,6 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
 import HelpBar from "./global/HelpBar";
+import zipcodes from "zipcodes";
 
 const Doctor = () => (
   <div className="dashboardFullDiv">
@@ -27,6 +28,8 @@ const Doctor = () => (
     <HelpBar />
   </div>
 );
+
+const lookupZip = zip => {};
 
 export default Doctor;
 
