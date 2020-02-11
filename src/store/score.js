@@ -84,23 +84,29 @@ export const setFullScoreObj = userId => {
             ? LSDataExtract.filter(snap => snap.userId === userId)
             : [];
 
-      const dbScoreObj = await axios.get(`/api/weightedScore/${userId}`);
+      const { data } = await axios.get(`/api/weightedScore/${userId}`),
+        {
+          userWtdObj,
+          threeHourSnapCount,
+          screenMinsToday,
+          screenMinsYesterday,
+          screenHoursWeek
+        } = data;
       // const { data: dbScoreObj } = await axios.get(
       //     `/api/weightedScore/${userId}`
       //   ),
       //   adjFullScoreObj = dbScoreObj.concat(targetLSDataObj);
 
-      console.log("TEST -", dbScoreObj);
+      console.log(
+        "TEST -",
+        userWtdObj,
+        threeHourSnapCount,
+        screenMinsToday,
+        screenMinsYesterday,
+        screenHoursWeek
+      );
 
-      if (adjFullScoreObj.length) {
-        const currentDate = dateCreate(),
-          screenMinsToday = 0,
-          screenMinsYesterday = 0,
-          screenHoursWeek = 0,
-          threeHourSnapCount = 0;
-        for (const ele of adjFullScoreObj) {
-          const valDate = ele.timeStamp;
-        }
+      if (userWtdObj.length) {
         dispatch(getFullScoreObj(adjFullScoreObj));
       } else dispatch(getFullScoreObj([]));
     } catch (error) {
