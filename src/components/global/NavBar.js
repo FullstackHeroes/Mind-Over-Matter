@@ -6,7 +6,7 @@ import { logout } from "../../store";
 
 class NavBar extends Component {
   loggingOut = () => {
-    this.props.logout(this.props.user.id);
+    this.props.logout();
   };
 
   render() {
@@ -84,7 +84,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    logout: userId => dispatch(logout(userId))
+    logout: () => dispatch(logout())
   };
 };
 
