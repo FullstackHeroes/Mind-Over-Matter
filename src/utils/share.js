@@ -3,7 +3,7 @@
   exports.utilShare = function() {
     return {
       snapIntDefault: 1000,
-      dbIntDefault: 120000,
+      dbIntDefault: 10000,
       dateCreate: (dateCreate = () => {
         const date = new Date().toLocaleString("en-US", {
           timeZone: "America/New_York"
