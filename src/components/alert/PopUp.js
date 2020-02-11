@@ -10,7 +10,7 @@ class PopUp extends Component {
     this.state = {
       lastAlert: dateCreate(),
       timeAlert: dateCreate(),
-      timeCap: 1 //10800 / snapIntDefault //10,800 IS THE AMT OF SECONDS IN 3 HRS DIV BY THE SNAP INTERVAL MILLISECONDS  DIV BY 1000 T0 GET SECONDS VALUE
+      timeCap: 10800 / snapIntDefault //10,800 IS THE AMT OF SECONDS IN 3 HRS DIV BY THE SNAP INTERVAL MILLISECONDS  DIV BY 1000 T0 GET SECONDS VALUE
     };
     this.showHelp = this.showHelp.bind(this);
     this.hideHelp = this.hideHelp.bind(this);
@@ -23,14 +23,14 @@ class PopUp extends Component {
 
   showHelp = (sentimentDiff, threeHourSnapCount) => {
     const last = 75;
-    if (sentimentDiff <= last) {
+    if (sentimentDiff <= last || threeHourSnapCount >= this.state.timeCap) {
       this.showPopUp = false;
       return (
         <AlertMessage
           onClose={this.hideHelp}
           status={sentimentDiff}
           last={last}
-          time={this.props.threeHourSnapCount}
+          time={threeHourSnapCount}
           timeCap={this.state.timeCap}
         />
       );
@@ -62,7 +62,7 @@ class PopUp extends Component {
           sentimentDiff.length &&
           this.showPopUp &&
           currentDate - this.state.lastAlert > 10000) ||
-        currentDate - this.state.timeAlert > 1 //this.state.timeCap
+        currentDate - this.state.timeAlert > this.state.timeCap
           ? this.showHelp(
               sentimentDiff[0].sentimentDiff * 100,
               threeHourSnapCount
