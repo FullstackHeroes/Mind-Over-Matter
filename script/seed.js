@@ -16,7 +16,9 @@ const userSeed = [
   {
     name: "Peter Parker",
     email: "peter@a.com",
-    password: "123"
+    password: "123",
+    imgUrl:
+      "https://www.patchcollection.com/media/catalog/product/cache/1/image/1200x/040ec09b1e35df139433887a97daa66f/s/p/spiderman-head_3.jpg"
   },
   {
     name: "Steven Strange",
