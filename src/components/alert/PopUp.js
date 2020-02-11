@@ -10,7 +10,7 @@ class PopUp extends Component {
     this.state = {
       lastAlert: dateCreate(),
       timeAlert: dateCreate(),
-      timeCap: 10800 / snapIntDefault //10,800 IS THE AMT OF SECONDS IN 3 HRS DIV BY THE SNAP INTERVAL MILLISECONDS  DIV BY 1000 T0 GET SECONDS VALUE
+      timeCap: 1 //10800 / snapIntDefault //10,800 IS THE AMT OF SECONDS IN 3 HRS DIV BY THE SNAP INTERVAL MILLISECONDS  DIV BY 1000 T0 GET SECONDS VALUE
     };
     this.showHelp = this.showHelp.bind(this);
     this.hideHelp = this.hideHelp.bind(this);
@@ -30,7 +30,7 @@ class PopUp extends Component {
           onClose={this.hideHelp}
           status={sentimentDiff}
           last={last}
-          time={threeHourSnapCount}
+          time={this.props.threeHourSnapCount}
           timeCap={this.state.timeCap}
         />
       );
@@ -51,11 +51,12 @@ class PopUp extends Component {
 
     return (
       <div className="popUpFullDiv">
+        console.log()
         {(sentimentDiff &&
           sentimentDiff.length &&
           this.showPopUp &&
           currentDate - this.state.lastAlert > 10000) ||
-        currentDate - this.state.timeAlert > this.state.timeCap
+        currentDate - this.state.timeAlert > 1 //this.state.timeCap
           ? this.showHelp(
               sentimentDiff[0].sentimentDiff * 100,
               threeHourSnapCount

@@ -30,6 +30,7 @@ const AlertMessage = ({ status, onClose, last, time, timeCap }) => {
   };
 
   for (let i = 0; i < tiers.length; i++) {
+    console.log(i);
     if (
       (i < tiers.length - 1 && status <= tiers[i]) ||
       (i === tiers.length - 1 && time >= timeCap)
