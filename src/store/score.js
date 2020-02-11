@@ -114,11 +114,11 @@ export const gotWeeksScreenTime = screenHoursWeek => {
 export const setFullScoreObj = userId => {
   return async dispatch => {
     try {
-      const LSDataExtract = JSON.parse(localStorage.getItem("snapshots")),
-        targetLSDataObj =
-          LSDataExtract && LSDataExtract.length
-            ? LSDataExtract.filter(snap => snap.userId === userId)
-            : [];
+      // const LSDataExtract = JSON.parse(localStorage.getItem("snapshots")),
+      //   targetLSDataObj =
+      //     LSDataExtract && LSDataExtract.length
+      //       ? LSDataExtract.filter(snap => snap.userId === userId)
+      //       : [];
 
       const { data } = await axios.get(`/api/weightedScore/${userId}`),
         {
@@ -130,11 +130,11 @@ export const setFullScoreObj = userId => {
           screenMinsToday,
           screenMinsYesterday,
           screenHoursWeek
-        } = data,
-        adjFullScoreObj = userWtdObj.concat(targetLSDataObj);
+        } = data;
+      // adjFullScoreObj = userWtdObj.concat(targetLSDataObj);
 
-      if (adjFullScoreObj.length) {
-        dispatch(getFullScoreObj(adjFullScoreObj));
+      if (userWtdObj.length) {
+        dispatch(getFullScoreObj(userWtdObj));
         dispatch(getNormalizedScore(normalizeScoreArr));
         dispatch(getRunningScore(runningScoreArr));
         dispatch(getSentimentDiff(sentimentDiffArr));

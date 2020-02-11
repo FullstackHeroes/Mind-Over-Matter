@@ -91,62 +91,7 @@ const buildIndScoreObj = userWtdObj => {
   };
 };
 
-// GETTING ALL SCORES FOR ALL USERS (NOT USED)
-router.get("/", async (req, res, next) => {
-  try {
-    const score = await WeightedScore.findAll({
-      include: [{ model: User, as: "user" }]
-    });
-    res.json(score);
-  } catch (error) {
-    next(error);
-  }
-});
-
-// ********** MAIN POST ROUTE ********** //
-router.post("/", async function(req, res, next) {
-  try {
-    const {
-      trueScore,
-      userId,
-      happy,
-      surprised,
-      neutral,
-      disgusted,
-      fearful,
-      angry,
-      sad,
-      timeStamp,
-      count,
-      screenScore,
-      screenTime
-    } = req.body;
-    await WeightedScore.create({
-      trueScore,
-      userId,
-      happy,
-      surprised,
-      neutral,
-      disgusted,
-      fearful,
-      angry,
-      sad,
-      timeStamp,
-      count,
-      screenScore,
-      screenTime
-    });
-    const newFullScoreObj = await WeightedScore.findAll({
-      where: {
-        userId: userId
-      }
-    });
-    res.json(newFullScoreObj);
-  } catch (err) {
-    next(err);
-  }
-});
-
+// -------------------------- MAIN FUNCTIONING ROUTES -------------------------- //
 // ********** MAIN GET ROUTE ********** //
 router.get("/:userId", async (req, res, next) => {
   try {
@@ -186,7 +131,80 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
-// ---------------------------- PRIOR TIME ROUTES (NOT USED) ---------------------------- //
+// ********** MAIN POST ROUTE ********** //
+router.post("/", async function(req, res, next) {
+  try {
+    const {
+      trueScore,
+      userId,
+      happy,
+      surprised,
+      neutral,
+      disgusted,
+      fearful,
+      angry,
+      sad,
+      timeStamp,
+      count,
+      screenScore,
+      screenTime
+    } = req.body;
+    await WeightedScore.create({
+      trueScore,
+      userId,
+      happy,
+      surprised,
+      neutral,
+      disgusted,
+      fearful,
+      angry,
+      sad,
+      timeStamp,
+      count,
+      screenScore,
+      screenTime
+    });
+    const userWtdObj = await WeightedScore.findAll({
+      where: {
+        userId: userId
+      }
+    });
+    const {
+      threeHourSnapCount,
+      screenMinsToday,
+      screenMinsYesterday,
+      screenHoursWeek,
+      normalizeScoreArr,
+      runningScoreArr,
+      sentimentDiffArr
+    } = buildIndScoreObj(userWtdObj);
+    res.json({
+      userWtdObj,
+      normalizeScoreArr,
+      runningScoreArr,
+      sentimentDiffArr,
+      threeHourSnapCount,
+      screenMinsToday,
+      screenMinsYesterday,
+      screenHoursWeek
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// ---------------------------- PRIOR GET ALL AND TIME ROUTES (NOT USED) ---------------------------- //
+// GETTING ALL SCORES FOR ALL USERS
+router.get("/", async (req, res, next) => {
+  try {
+    const score = await WeightedScore.findAll({
+      include: [{ model: User, as: "user" }]
+    });
+    res.json(score);
+  } catch (error) {
+    next(error);
+  }
+});
 
 // NEED A CONDITIONAL. HANGS IF THERE IS NO DATA FOR TODAY
 router.get("/:userId/today", async (req, res, next) => {
