@@ -56,7 +56,7 @@ class PopUp extends Component {
           sentimentDiff.length &&
           this.showPopUp &&
           currentDate - this.state.lastAlert > 10000) ||
-        currentDate - this.state.timeAlert > this.state.timeCap
+        (currentDate - this.state.timeAlert) / 1000 > this.state.timeCap
           ? this.showHelp(
               sentimentDiff[0].sentimentDiff * 100,
               threeHourSnapCount
