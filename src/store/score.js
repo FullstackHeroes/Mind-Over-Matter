@@ -1,9 +1,7 @@
 import axios from "axios";
 import {
-  condenseScoreObj,
   calcNormalizeUtility,
   calcWeightedTrueScore,
-  dateCreate,
   snapIntDefault,
   dbIntDefault,
   calcSentimentDiff
@@ -115,12 +113,6 @@ export const gotWeeksScreenTime = screenHoursWeek => {
 export const setFullScoreObj = userId => {
   return async dispatch => {
     try {
-      // const LSDataExtract = JSON.parse(localStorage.getItem("snapshots")),
-      //   targetLSDataObj =
-      //     LSDataExtract && LSDataExtract.length
-      //       ? LSDataExtract.filter(snap => snap.userId === userId)
-      //       : [];
-
       const { data } = await axios.get(`/api/weightedScore/${userId}`),
         {
           userWtdObj,
@@ -132,7 +124,6 @@ export const setFullScoreObj = userId => {
           screenMinsYesterday,
           screenHoursWeek
         } = data;
-      // adjFullScoreObj = userWtdObj.concat(targetLSDataObj);
 
       if (userWtdObj.length) {
         dispatch(getFullScoreObj(userWtdObj));
@@ -150,31 +141,14 @@ export const setFullScoreObj = userId => {
   };
 };
 
-export const postFullScoreObj = (fullScoreObj, newScoreObj, userId) => {
+export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
   return async dispatch => {
     try {
-      // const LSDataExtract = JSON.parse(localStorage.getItem("snapshots")),
-      //   targetLSDataObj =
-      //     LSDataExtract && LSDataExtract.length
-      //       ? LSDataExtract.filter(snap => snap.userId === userId)
-      //       : [];
-
-      // const { data } = await axios.get(`/api/weightedScore/${userId}`),
-      //   {
-      //     userWtdObj,
-      //     threeHourSnapCount,
-      //     screenMinsToday,
-      //     screenMinsYesterday,
-      //     screenHoursWeek
-      //   } = data,
-      //   adjFullScoreObj = userWtdObj.concat(targetLSDataObj);
-
+      // CALCULATING NORMALIZE AND RUNNING SCORE WITH UTILITY FUNCTIONS
       const normalizeScore = calcNormalizeUtility(fullScoreObj),
         runningScore = calcWeightedTrueScore(fullScoreObj);
-      //   timeStamp = dateCreate(),
-      //   hoursDiff = timeStamp.getHours() - timeStamp.getTimezoneOffset() / 60;
-      // timeStamp.setHours(hoursDiff);
 
+      // APPENDING NEW SCORES ONTO OBJECT FOR DB
       newScoreObj.normalizeScore = normalizeScore;
       newScoreObj.runningScore = runningScore;
       newScoreObj.sentimentDiff = calcSentimentDiff(
@@ -207,80 +181,6 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj, userId) => {
     }
   };
 };
-
-// ---------------------- OLD THUNKS (NOT USED) ---------------------- //
-
-// export const postLSScoreObj = userId => {
-//   return async dispatch => {
-//     try {
-//       // ADJUSTING LS SCORE OBJ FOR BACKEND DIGESTION
-//       const LSDataObj = JSON.parse(localStorage.getItem("snapshots")),
-//         targetLSDataObj = LSDataObj.filter(snap => snap.userId === userId),
-//         adjLSDataObj = condenseScoreObj(targetLSDataObj, userId),
-//         hoursDiff =
-//           adjLSDataObj.timeStamp.getHours() -
-//           adjLSDataObj.timeStamp.getTimezoneOffset() / 60;
-//       adjLSDataObj.timeStamp.setHours(hoursDiff);
-
-//       // INTERACT WITH DATABASE
-//       const newWtdScore = await axios.post("/api/weightedScore", adjLSDataObj);
-
-//       dispatch(getFullScoreObj(newWtdScore.data));
-//       localStorage.clear();
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-// };
-
-// export const setNormalizedScore = userId => {
-//   return async dispatch => {
-//     try {
-//       const { data } = await axios.get(`/api/normalizeScore/${userId}`),
-//         { normalizeScoreArr, runningScoreArr, sentimentDiffArr } = data;
-//       dispatch(getNormalizedScore(normalizeScoreArr));
-//       dispatch(getRunningScore(runningScoreArr));
-//       dispatch(getSentimentDiff(sentimentDiffArr));
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-// };
-
-// export const postNormalizedScore = userId => {
-//   return async dispatch => {
-//     try {
-//       const normalizeScore = await calcNormalizeUtility(userId),
-//         runningScore = await calcWeightedTrueScore(userId),
-//         timeStamp = dateCreate(),
-//         hoursDiff = timeStamp.getHours() - timeStamp.getTimezoneOffset() / 60;
-//       timeStamp.setHours(hoursDiff);
-//       const { data } = await axios.post(`/api/normalizeScore`, {
-//           userId,
-//           normalizeScore,
-//           runningScore,
-//           sentimentDiff: runningScore / normalizeScore,
-//           timeStamp
-//         }),
-//         { normalizeScoreArr, runningScoreArr, sentimentDiffArr } = data;
-//       dispatch(getNormalizedScore(normalizeScoreArr));
-//       dispatch(getRunningScore(runningScoreArr));
-//       dispatch(getSentimentDiff(sentimentDiffArr));
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-// };
-
-// export const postCurrentRunningSentiment = sentimentScore => {
-//   return dispatch => {
-//     try {
-//       dispatch(getCurrentRunningSentiment(sentimentScore));
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-// };
 
 // REDUCER
 const scoreReducer = (state = initialState, action) => {

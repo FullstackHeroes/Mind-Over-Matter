@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setFullScoreObj, setNormalizedScore } from "../../store";
+import { setFullScoreObj } from "../../store";
 
 import ChartRSLine from "../chart/ChartRSLine";
 import ChartTSLine from "../chart/ChartTSLine";
@@ -15,7 +15,6 @@ class Dashboard extends Component {
     const { user } = this.props;
     if (user && user.id) {
       this.props.setFullScoreObj(user.id);
-      // this.props.setNormalizedScore(user.id);
     }
   }
 
@@ -30,14 +29,6 @@ class Dashboard extends Component {
       yesterdaysScreenMins,
       weeksScreenHours
     } = this.props;
-
-    console.log(
-      "render --",
-      fullScoreObj,
-      normalizedScore,
-      runningScore,
-      sentimentDiff
-    );
 
     return (
       <div className="dashboardFullDiv">
@@ -134,7 +125,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     setFullScoreObj: userId => dispatch(setFullScoreObj(userId))
-    // setNormalizedScore: userId => dispatch(setNormalizedScore(userId))
   };
 };
 

@@ -7,9 +7,6 @@ import {
   getTimeInterval,
   setFullScoreObj,
   postFullScoreObj
-  // setNormalizedScore,
-  // postNormalizedScore,
-  // postLSScoreObj,
 } from "../../store";
 
 const WIDTH = 420;
@@ -35,38 +32,8 @@ class VideoInput extends Component {
     const { snapInterval } = this.props;
     if (snapInterval !== prevProps.snapInterval) {
       this.startCapture();
-      // this.startDatabase();
     }
   }
-
-  // // LOCAL STORAGE MANAGER
-  // appendLocalStorage = (snapshot, userId) => {
-  //   // SET APPROPRIATE DATE AND FIELDS ONTO OBJECT
-  //   const date = dateCreate(),
-  //     hoursDiff = date.getHours() - date.getTimezoneOffset() / 60;
-  //   date.setHours(hoursDiff);
-  //   snapshot.timeStamp = date;
-  //   snapshot.userId = userId;
-
-  //   // CHECK FOR EXISTING LOCAL STORAGE USAGE
-  //   if (localStorage.getItem("snapshots")) {
-  //     const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
-  //     currSnapshot.push(snapshot);
-  //     localStorage.setItem("snapshots", JSON.stringify(currSnapshot));
-  //     // this.props.setFullScoreObj(userId);
-
-  //     // PUSHING TO DATABASE FUNCTIONALITY
-  //     this.props.postLSScoreObj(userId);
-  //     this.props.postNormalizedScore(userId);
-  //   } else {
-  //     localStorage.setItem("snapshots", JSON.stringify([snapshot]));
-  //     // this.props.setFullScoreObj(userId);
-
-  //     // PUSHING TO DATABASE FUNCTIONALITY
-  //     this.props.postLSScoreObj(userId);
-  //     this.props.postNormalizedScore(userId);
-  //   }
-  // };
 
   // TIME INTERVAL FOR CAPTURING SNAPSHOTS
   startCapture = () => {
@@ -74,7 +41,6 @@ class VideoInput extends Component {
     if (user && user.id) {
       this.intervalSnap = setInterval(() => {
         this.capture(user.id);
-        // this.props.setNormalizedScore(user.id);
       }, this.props.snapInterval);
     }
   };
@@ -98,13 +64,8 @@ class VideoInput extends Component {
               newScoreObj.timeStamp = date;
               newScoreObj.userId = userId;
 
-              this.props.postFullScoreObj(
-                this.props.fullScoreObj,
-                newScoreObj,
-                userId
-              );
-              // APPENDING LOCAL STORAGE AND UPDATE GLOBAL STATE
-              // this.appendLocalStorage(fullScoreObj, userId);
+              // POST INTO DB AND UPDATE GLOBAL STATE
+              this.props.postFullScoreObj(this.props.fullScoreObj, newScoreObj);
             } else console.error("Oh oh, no current webcam detection");
           }
         );
@@ -114,31 +75,8 @@ class VideoInput extends Component {
     }
   };
 
-  // TIME INTERVAL FOR NORMALIZED SCORE AND DB INTERACTION
-  // startDatabase = () => {
-  //   const { user } = this.props;
-  //   if (user && user.id) {
-  //     this.intervalDB = setInterval(() => {
-  //       this.pushToDatabase(user.id);
-  //     }, this.props.dbInterval);
-  //   }
-  // };
-
-  // pushToDatabase = userId => {
-  //   try {
-  //     const currSnapshot = JSON.parse(localStorage.getItem("snapshots"));
-  //     if (currSnapshot && currSnapshot.length) {
-  //       this.props.postNormalizedScore(userId);
-  //       this.props.postLSScoreObj(userId);
-  //     }
-  //   } catch (error) {
-  //     console.error("WAHH --", error);
-  //   }
-  // };
-
   componentWillUnmount() {
     clearInterval(this.intervalSnap);
-    // clearInterval(this.intervalDB);
   }
 
   render() {
@@ -178,11 +116,8 @@ const mapDispatchToProps = dispatch => {
     getTimeInterval: (snapInterval, dbInterval) =>
       dispatch(getTimeInterval(snapInterval, dbInterval)),
     setFullScoreObj: userId => dispatch(setFullScoreObj(userId)),
-    postFullScoreObj: (newScoreObj, userId) =>
-      dispatch(postFullScoreObj(newScoreObj, userId))
-    // postNormalizedScore: userId => dispatch(postNormalizedScore(userId)),
-    // postLSScoreObj: userId => dispatch(postLSScoreObj(userId)),
-    // setNormalizedScore: userId => dispatch(setNormalizedScore(userId))
+    postFullScoreObj: (fullScoreObj, newScoreObj) =>
+      dispatch(postFullScoreObj(fullScoreObj, newScoreObj))
   };
 };
 

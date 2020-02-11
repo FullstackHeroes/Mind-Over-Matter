@@ -6,11 +6,7 @@ import { logout } from "../../store";
 
 class NavBar extends Component {
   loggingOut = () => {
-    const userId = this.props.user.id;
-    // POST A NEW GROUPED TRUE SCORE / DATA SET WHEN LOGGING OUT
-    this.props.logout(userId);
-    // POST A NEW NORMALIZED SCORE INTO DATABASE WHEN LOGGING OUT
-    // this.props.postNormalizedScore(userId);
+    this.props.logout(this.props.user.id);
   };
 
   render() {
@@ -89,7 +85,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     logout: userId => dispatch(logout(userId))
-    // postNormalizedScore: userId => dispatch(postNormalizedScore(userId))
   };
 };
 
