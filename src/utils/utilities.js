@@ -9,6 +9,8 @@ export const normalizedLen = 3000; // LENGTH FOR NORMALIZED CALC
 const wtdAvgCount = 50; // WEIGHTED AVERAGE COUNT LIMIT
 export const snapIntDefault = 2000;
 export const dbIntDefault = 2000;
+export const d3Height = 400;
+export const d3Width = 300;
 
 // DATE CREATION FUNCTION
 export const dateCreate = () => {
