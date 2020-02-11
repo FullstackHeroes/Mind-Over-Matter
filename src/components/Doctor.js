@@ -1,21 +1,30 @@
 import React from "react";
 import { render } from "react-dom";
+import HelpBar from "./global/HelpBar";
 
 const Doctor = () => (
   <div className="dashboardFullDiv">
-    <div align="center">
+    <div className="doctorHeader">
       <h1>Find A Doctor</h1>
-      <br></br>
     </div>
 
-    <form align="center">
-      Enter Your Zip Code: <br></br>
-      <input type="text" maxLength="5"></input>
+    <form className="doctorForm">
+      <label>
+        <small>Enter Your Zip Code: </small>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Zip Code"
+          maxLength="5"></input>
+      </label>
       <br></br>
-      <input type="submit" value="Search"></input>
+      <input className="btn btn-dark" type="search" value="Search"></input>
     </form>
 
+    <div className="doctorsList"></div>
+
     <div></div>
+    <HelpBar />
   </div>
 );
 
