@@ -9,15 +9,15 @@ class ScreenTimeYesterday extends Component {
     this.state = {
       data: {
         labels: [
-          `Hours Worked : ${this.props.yesterdaysScreenHours}`,
+          `Hours Worked : ${Math.round(this.props.yesterdaysScreenHours / 60)}`,
           "Yesterday"
         ],
         datasets: [
           {
             backgroundColor: ["rgba(0,204,153,1)", "rgba(255,153,51,1)"],
             data: [
-              this.props.yesterdaysScreenHours,
-              24 - this.props.yesterdaysScreenHours
+              this.props.yesterdaysScreenHours / 60,
+              24 - this.props.yesterdaysScreenHours / 60
             ]
           }
         ]
@@ -29,15 +29,15 @@ class ScreenTimeYesterday extends Component {
     this.setState({
       data: {
         labels: [
-          `Hours Worked: ${this.props.yesterdaysScreenHours}`,
+          `Hours Worked: ${Math.round(this.props.yesterdaysScreenHours / 60)}`,
           "Yesterday"
         ],
         datasets: [
           {
             backgroundColor: ["rgba(0,204,153,1)", "rgba(255,153,51,1)"],
             data: [
-              this.props.yesterdaysScreenHours,
-              24 - this.props.yesterdaysScreenHours
+              this.props.yesterdaysScreenHours / 60,
+              24 - this.props.yesterdaysScreenHours / 60
             ]
           }
         ]
@@ -52,15 +52,17 @@ class ScreenTimeYesterday extends Component {
       this.setState({
         data: {
           labels: [
-            `Hours Worked: ${this.props.yesterdaysScreenHours}`,
+            `Hours Worked: ${Math.round(
+              this.props.yesterdaysScreenHours / 60
+            )}`,
             "Yesterday"
           ],
           datasets: [
             {
               backgroundColor: ["rgba(0,204,153,1)", "rgba(255,153,51,1)"],
               data: [
-                this.props.yesterdaysScreenHours,
-                24 - this.props.yesterdaysScreenHours
+                this.props.yesterdaysScreenHours / 60,
+                24 - this.props.yesterdaysScreenHours / 60
               ]
             }
           ]
