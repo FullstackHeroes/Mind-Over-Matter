@@ -219,8 +219,7 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
 
       newScoreObj.timeStamp = newScoreObj.timeStamp.toISOString();
       fullScoreObj.push(newScoreObj);
-      const date1 = new Date();
-      // console.log("hit hit -", date1.toISOString(), fullScoreObj);
+
       const {
         normalizeScoreArr,
         runningScoreArr,
@@ -230,6 +229,8 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
         screenMinsYesterday,
         screenHoursWeek
       } = buildIndScoreObj(fullScoreObj);
+
+      // console.log("HMMM -", fullScoreObj);
 
       dispatch(
         updateAll({

@@ -42,12 +42,10 @@ class VideoInput extends Component {
       this.intervalSnap = setInterval(async () => {
         if (this.webcam.current && !startDate) {
           await getFaceDescr(this.webcam.current.getScreenshot(), inputSize);
-          console.log("INITIAL");
           startDate = dateCreate();
         }
 
-        if (dateCreate() - startDate >= 5000) {
-          console.log("hit hit", dateCreate() - startDate, dateCreate());
+        if (dateCreate() - startDate >= 7000) {
           this.capture(user.id);
         }
       }, snapInterval);

@@ -103,7 +103,7 @@ const seed = async () => {
   console.log("db synced !");
 
   await User.bulkCreate(userSeed);
-  await WeightedScore.bulkCreate(trueScoreGen(1, 2));
+  await WeightedScore.bulkCreate(trueScoreGen(1, 15));
 
   console.log(`seeded successfully`);
 };

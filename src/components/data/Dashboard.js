@@ -24,7 +24,7 @@ class Dashboard extends Component {
       weeksScreenHours
     } = this.props;
 
-    console.log("RENDER !", fullScoreObj, normalizedScore);
+    console.log("RENDER !", fullScoreObj.slice(-10));
 
     return (
       <div className="dashboardFullDiv">
@@ -94,12 +94,14 @@ class Dashboard extends Component {
           {fullScoreObj.length ? (
             <ChartTSLine fullScoreObj={fullScoreObj.slice(-10)} />
           ) : (
-            <p>Loading</p>
+            <ChartTSLine fullScoreObj={[]} />
           )}
 
           {fullScoreObj.length ? (
             <ChartSentiStack fullScoreObj={fullScoreObj.slice(-10)} />
-          ) : null}
+          ) : (
+            <ChartSentiStack fullScoreObj={[]} />
+          )}
         </div>
 
         <HelpBar />
