@@ -33,7 +33,7 @@ class Dashboard extends Component {
 
     return (
       <div className="dashboardFullDiv">
-        <img className="userImage" src={user.imgUrl} alt="" />
+        {/* <img className="userImage" src={user.imgUrl} alt="" /> */}
         <h3 className="dashboardHeader">Hi, {user.name}!</h3>
 
         <div className="dashboardRowOne dashboardRow">
