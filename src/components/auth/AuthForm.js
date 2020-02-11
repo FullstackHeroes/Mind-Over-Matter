@@ -65,16 +65,13 @@ class AuthForm extends Component {
             <button type="submit" className="authSignInBtn">
               {displayName}
             </button>
-
-            <button className="authSignInBtn">
-              <a target="_self" href="/auth/google">
-                Google {displayName}
-              </a>
-            </button>
           </div>
 
           {error && error.response && <div> {error.response.data} </div>}
         </form>
+        <a target="_self" href="/auth/google">
+          <button className="authSignInBtn">Google {displayName}</button>
+        </a>
       </div>
     );
   }
