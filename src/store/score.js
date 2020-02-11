@@ -164,7 +164,7 @@ export const setFullScoreObj = userId => {
     try {
       const { data } = await axios.get(`/api/weightedScore/${userId}`),
         {
-          userWtdObj,
+          fullScoreObj,
           normalizeScoreArr,
           runningScoreArr,
           sentimentDiffArr,
@@ -174,15 +174,27 @@ export const setFullScoreObj = userId => {
           screenHoursWeek
         } = data;
 
-      if (userWtdObj.length) {
-        dispatch(getFullScoreObj(userWtdObj));
-        dispatch(getNormalizedScore(normalizeScoreArr));
-        dispatch(getRunningScore(runningScoreArr));
-        dispatch(getSentimentDiff(sentimentDiffArr));
-        dispatch(gotThreeHoursnapCount(threeHourSnapCount));
-        dispatch(gotTodaysScreenTime(screenMinsToday));
-        dispatch(gotYesterdaysScreenTime(screenMinsYesterday));
-        dispatch(gotWeeksScreenTime(screenHoursWeek));
+      if (fullScoreObj.length) {
+        dispatch(
+          updateAll({
+            fullScoreObj,
+            normalizeScoreArr,
+            runningScoreArr,
+            sentimentDiffArr,
+            threeHourSnapCount,
+            screenMinsToday,
+            screenMinsYesterday,
+            screenHoursWeek
+          })
+        );
+        // dispatch(getFullScoreObj(userWtdObj));
+        // dispatch(getNormalizedScore(normalizeScoreArr));
+        // dispatch(getRunningScore(runningScoreArr));
+        // dispatch(getSentimentDiff(sentimentDiffArr));
+        // dispatch(gotThreeHoursnapCount(threeHourSnapCount));
+        // dispatch(gotTodaysScreenTime(screenMinsToday));
+        // dispatch(gotYesterdaysScreenTime(screenMinsYesterday));
+        // dispatch(gotWeeksScreenTime(screenHoursWeek));
       } else dispatch(getFullScoreObj([]));
     } catch (error) {
       console.error(error);

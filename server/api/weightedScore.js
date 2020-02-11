@@ -96,14 +96,14 @@ const buildIndScoreObj = userWtdObj => {
 router.get("/:userId", async (req, res, next) => {
   try {
     // RETRIEVE THE FULL OBJECT OF THE INDIVIDUAL'S PROFILE
-    const userWtdObj = await WeightedScore.findAll({
+    const fullScoreObj = await WeightedScore.findAll({
       where: {
         userId: req.params.userId
       }
     });
 
     // LET'S START DOING THE MAGIC
-    if (userWtdObj && userWtdObj.length) {
+    if (fullScoreObj && fullScoreObj.length) {
       const {
         threeHourSnapCount,
         screenMinsToday,
@@ -112,11 +112,11 @@ router.get("/:userId", async (req, res, next) => {
         normalizeScoreArr,
         runningScoreArr,
         sentimentDiffArr
-      } = buildIndScoreObj(userWtdObj);
+      } = buildIndScoreObj(fullScoreObj);
 
       // LET'S SEND IT BACK!
       res.json({
-        userWtdObj,
+        fullScoreObj,
         normalizeScoreArr,
         runningScoreArr,
         sentimentDiffArr,
