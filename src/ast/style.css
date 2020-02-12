@@ -643,26 +643,42 @@ h6 {
   justify-content: space-evenly;
 }
 
-.doctorTableDataRow {
-  font-size: 20px;
-  width: 12vw;
-  /* width: 180px; */
-  border-style: solid;
-  border-color: black;
-  border-width: 1px;
-  text-align: center;
+.doctorLabel {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-width: 300px;
+  margin-top: 25px;
+}
+
+.doctorLabelText {
+  min-width: 200px;
 }
 
 .doctorTableHeaderRow {
-  font-size: 22px;
-  background-color: rgba(234, 234, 234, 1);
+  font-size: 20px;
+  /* width: 13vw; */
+  width: 185px;
   border-style: solid;
   border-color: black;
-  color: black;
   border-width: 1px;
-  width: 12vw;
-  /* width: 180px; */
   text-align: center;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background-color: rgba(234, 234, 234, 1);
+  color: black;
+}
+
+.doctorTableDataRow {
+  font-size: 20px;
+  /* width: 13vw; */
+  width: 185px;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  text-align: center;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 /*------------------ ARTICLE LIST ELEMENT --------------------*/
