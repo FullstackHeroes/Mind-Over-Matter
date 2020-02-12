@@ -633,3 +633,31 @@ h6 {
 .doctorTable {
   color: black;
 }
+
+.doctorTableHeader {
+  border-spacing: 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.doctorTableDataRow {
+  font-size: 20px;
+  width: 12vw;
+  /* width: 180px; */
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  text-align: center;
+}
+
+.doctorTableHeaderRow {
+  font-size: 22px;
+  background-color: rgba(234, 234, 234, 1);
+  border-style: solid;
+  border-color: black;
+  color: black;
+  border-width: 1px;
+  width: 12vw;
+  /* width: 180px; */
+  text-align: center;
+}

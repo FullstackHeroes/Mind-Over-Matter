@@ -96,13 +96,13 @@ class Doctor extends Component {
         <div className="doctorList">
           <table className="tableElement">
             <thead>
-              <tr className="tableHeader">
-                <th className="tableHeaderRow">Name</th>
-                <th className="tableHeaderRow">Street</th>
-                <th className="tableHeaderRow">City</th>
-                <th className="tableHeaderRow">State</th>
-                <th className="tableHeaderRow">Zip</th>
-                <th className="tableHeaderRow">Phone Number</th>
+              <tr className="doctorTableHeader">
+                <th className="doctorTableHeaderRow">Name</th>
+                <th className="doctorTableHeaderRow">Street</th>
+                <th className="doctorTableHeaderRow">City</th>
+                <th className="doctorTableHeaderRow">State</th>
+                <th className="doctorTableHeaderRow">Zip</th>
+                <th className="doctorTableHeaderRow">Phone Number</th>
               </tr>
             </thead>
           </table>
@@ -112,14 +112,14 @@ class Doctor extends Component {
               <table className="doctorTable">
                 <tbody>
                   <tr>
-                    <td className="tableDataRow">
+                    <td className="doctorTableDataRow">
                       {doctor.firstName} {doctor.lastName}
                     </td>
-                    <td className="tableDataRow">{doctor.street}</td>
-                    <td className="tableDataRow">{doctor.city}</td>
-                    <td className="tableDataRow">{doctor.state}</td>
-                    <td className="tableDataRow">{doctor.zip}</td>
-                    <td className="tableDataRow">{doctor.phone}</td>
+                    <td className="doctorTableDataRow">{doctor.street}</td>
+                    <td className="doctorTableDataRow">{doctor.city}</td>
+                    <td className="doctorTableDataRow">{doctor.state}</td>
+                    <td className="doctorTableDataRow">{doctor.zip}</td>
+                    <td className="doctorTableDataRow">{doctor.phone}</td>
                   </tr>
                 </tbody>
               </table>
