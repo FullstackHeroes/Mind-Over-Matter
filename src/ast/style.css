@@ -624,3 +624,44 @@ h6 {
   left: 10%;
   top: 45%;
 }
+
+/*------------------ ARTICLE LIST ELEMENT --------------------*/
+.articleListFullDiv {
+  background-color: rgb(221, 209, 176);
+  width: 80vw;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  color: black;
+  margin-bottom: 35px;
+}
+
+.articleHeader {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 25px;
+  font-size: 35px;
+}
+
+.articleHeaderSpot {
+  color: rgba(0, 152, 195, 0.8);
+}
+
+.articleFullDiv {
+  margin-bottom: 10px;
+}
+
+.articleListText {
+  color: black;
+}
+
+.articleListText:hover {
+  font-weight: bolder;
+}
+
+.articleCredit {
+  margin-top: 30px;
+  text-align: right;
+  font-size: 16px;
+}

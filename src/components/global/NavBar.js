@@ -46,6 +46,14 @@ class NavBar extends Component {
               Table
             </NavLink>
 
+            <NavLink
+              to="/Article"
+              className="linkText navBarLink"
+              activeClassName="selectedNavLink"
+              exact>
+              Articles
+            </NavLink>
+
             <a
               href="#"
               onClick={this.loggingOut}
