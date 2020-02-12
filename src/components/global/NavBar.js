@@ -35,16 +35,16 @@ class NavBar extends Component {
               className="linkText navBarLink"
               activeClassName="selectedNavLink"
               exact>
-              Dashboard
+              Data
             </NavLink>
 
-            <NavLink
+            {/* <NavLink
               to="/Table"
               className="linkText navBarLink"
               activeClassName="selectedNavLink"
               exact>
               Table
-            </NavLink>
+            </NavLink> */}
 
             <a
               href="#"
