@@ -5,8 +5,9 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import user from "./user";
 import score from "./score";
+import article from "./article";
 
-const reducer = combineReducers({ user, score });
+const reducer = combineReducers({ user, score, article });
 
 const middleware = composeWithDevTools(
   // applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
@@ -18,3 +19,4 @@ const store = createStore(reducer, middleware);
 export default store;
 export * from "./user";
 export * from "./score";
+export * from "./article";

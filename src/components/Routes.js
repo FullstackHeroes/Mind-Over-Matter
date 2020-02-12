@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch } from "react-router-dom";
-import { Dashboard, Table, Login, Signup, Homepage, Doctor } from "./index";
+import {
+  Dashboard,
+  Table,
+  Login,
+  Signup,
+  Homepage,
+  Doctor,
+  ArticleList
+} from "./index";
 import { me } from "../store";
 
 class Routes extends Component {
@@ -16,6 +24,7 @@ class Routes extends Component {
         <Route path="/Dashboard" component={Dashboard} />
         <Route path="/Table" component={Table} />
         <Route path="/Doctor" component={Doctor} />
+        <Route path="/Article" component={ArticleList} />
         <Route
           path="/SignIn"
           render={() => (

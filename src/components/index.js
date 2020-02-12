@@ -5,3 +5,4 @@ export { default as Dashboard } from "./data/Dashboard";
 export { Login, Signup } from "./auth/AuthForm";
 export { default as Homepage } from "./homepage/Homepage";
 export { default as Doctor } from "./Doctor";
+export { default as ArticleList } from "./global/ArticleList";
