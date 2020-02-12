@@ -1,22 +1,134 @@
 import React from "react";
 import { render } from "react-dom";
+import HelpBar from "./global/HelpBar";
+import zipcodes from "zipcodes";
+import axios from "axios";
 
 const Doctor = () => (
   <div className="dashboardFullDiv">
-    <div align="center">
+    <div className="doctorHeader">
       <h1>Find A Doctor</h1>
-      <br></br>
     </div>
 
-    <form align="center">
-      Enter Your Zip Code: <br></br>
-      <input type="text" maxLength="5"></input>
+    <form className="doctorForm">
+      <label>
+        <small>Enter Your Zip Code</small>
+        <input
+          type="text"
+          id="zipInput"
+          className="form-control"
+          placeholder="Zip Code"
+          maxLength="5"></input>
+      </label>
       <br></br>
-      <input type="submit" value="Search"></input>
+      <button
+        type="button"
+        className="btn btn-dark"
+        onClick={() => getZipCode()}>
+        Search
+      </button>
     </form>
+    <br></br>
+
+    <div className="doctorsList">
+      <div className="row">
+        <div className="col-4">
+          <div className="list-group" id="list-tab" role="tablist">
+            <a
+              className="list-group-item list-group-item-action active"
+              id="list-home-list"
+              data-toggle="list"
+              href="#list-home"
+              role="tab"
+              aria-controls="home">
+              Doctor 1
+            </a>
+            <a
+              className="list-group-item list-group-item-action"
+              id="list-profile-list"
+              data-toggle="list"
+              href="#list-profile"
+              role="tab"
+              aria-controls="profile">
+              Doctor 2
+            </a>
+            <a
+              className="list-group-item list-group-item-action"
+              id="list-messages-list"
+              data-toggle="list"
+              href="#list-messages"
+              role="tab"
+              aria-controls="messages">
+              Doctor 3
+            </a>
+            <a
+              className="list-group-item list-group-item-action"
+              id="list-settings-list"
+              data-toggle="list"
+              href="#list-settings"
+              role="tab"
+              aria-controls="settings">
+              Doctor 4
+            </a>
+          </div>
+        </div>
+        <div className="col-8">
+          <div className="tab-content" id="nav-tabContent">
+            <div
+              className="tab-pane fade show active"
+              id="list-home"
+              role="tabpanel"
+              aria-labelledby="list-home-list">
+              Doctor 1 Info
+            </div>
+            <div
+              className="tab-pane fade"
+              id="list-profile"
+              role="tabpanel"
+              aria-labelledby="list-profile-list">
+              Doctor 2 Info
+            </div>
+            <div
+              className="tab-pane fade"
+              id="list-messages"
+              role="tabpanel"
+              aria-labelledby="list-messages-list">
+              Doctor 3 Info
+            </div>
+            <div
+              className="tab-pane fade"
+              id="list-settings"
+              role="tabpanel"
+              aria-labelledby="list-settings-list">
+              Doctor 4 Info
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div></div>
+    <HelpBar />
   </div>
 );
+
+function getZipCode() {
+  const zipCode = document.getElementById("zipInput").value;
+  var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipCode);
+  if (!isValidZip) {
+    window.alert("Not A Valid Zip Code: ", zipCode);
+  } else {
+    const lonlat = zipcodes.lookup(zipCode);
+    const lat = lonlat.latitude;
+    const lon = lonlat.longitude;
+    getDoctors(lat, lon);
+  }
+}
+
+async function getDoctors(lat, lon) {
+  const { data } = await axios.get(
+    `https://api.betterdoctor.com/2016-03-01/doctors?specialty_uid=psychiatrist%2C%20psychologist&location=${lat}%2C${lon}%2C100&user_location=${lat}%2C${lon}&skip=0&limit=10&user_key=b00def43163e9bcc5fef549144df8432`
+  );
+}
 
 export default Doctor;
