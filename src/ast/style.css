@@ -563,9 +563,15 @@ h6 {
 }
 
 .doctorsList {
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-  margin: 5px 0;
-  background-color: #282c34;
+  position: absolute;
+  border-top: 2px;
+  border-left: 2px;
+  border-right: 2px;
+  border-bottom: 2px;
+  border-color: white;
+  border-style: solid;
+  width: 50%;
+  height: 50%;
+  left: 10%;
+  top: 45%;
 }
