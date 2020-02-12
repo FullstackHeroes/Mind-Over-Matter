@@ -6,7 +6,7 @@ export default class ManilaTab extends Component {
   render() {
     return (
       <div className="manilaTabFullDiv">
-        <div className="navBarRight">
+        <div className="manilaTabs">
           <NavLink
             to="/Dashboard"
             className="linkText manilaTab"

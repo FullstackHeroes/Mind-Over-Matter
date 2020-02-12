@@ -8,6 +8,7 @@ import Routes from "./Routes";
 import VideoInput from "./face/VideoInput";
 import NavBar from "./global/NavBar";
 import PopUp from "./alert/PopUp";
+import ManilaTab from "./global/ManilaTabs";
 
 class App extends Component {
   componentDidMount() {
@@ -21,6 +22,7 @@ class App extends Component {
       <div className="appFullDiv">
         <NavBar />
 
+        <ManilaTab />
         {sentimentDiff && sentimentDiff.length ? (
           <PopUp
             sentimentDiff={sentimentDiff.slice(-1)}
