@@ -91,8 +91,7 @@ class ScreenMinsToday extends Component {
                 {
                   stacked: true,
                   ticks: {
-                    beginAtZero: true,
-                    padding: 10
+                    beginAtZero: true
                   },
                   max: 1440
                 }
