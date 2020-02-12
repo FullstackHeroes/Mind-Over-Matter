@@ -42,7 +42,6 @@ const buildIndScoreObj = userWtdObj => {
   )) {
     // NORMALIZE SCORE RESPONSE
     const normalizeScoreObj = {};
-    normalizeScoreObj.id = ele.id;
     normalizeScoreObj.normalizeScore = ele.normalizeScore;
     normalizeScoreObj.timeStamp = ele.timeStamp;
     normalizeScoreObj.userId = ele.userId;
@@ -50,7 +49,6 @@ const buildIndScoreObj = userWtdObj => {
 
     // RUNNING SCORE RESPONSE
     const runningScoreObj = {};
-    runningScoreObj.id = ele.id;
     runningScoreObj.runningScore = ele.runningScore;
     runningScoreObj.timeStamp = ele.timeStamp;
     runningScoreObj.userId = ele.userId;
@@ -58,7 +56,6 @@ const buildIndScoreObj = userWtdObj => {
 
     // SENTIMENT DIFF RESPONSE
     const sentimentDiffObj = {};
-    sentimentDiffObj.id = ele.id;
     sentimentDiffObj.sentimentDiff = ele.sentimentDiff;
     sentimentDiffObj.timeStamp = ele.timeStamp;
     sentimentDiffObj.userId = ele.userId;
@@ -72,11 +69,11 @@ const buildIndScoreObj = userWtdObj => {
     if (minDiff >= (oneHourMilli * 3) / 1000) threeHourSnapCount += ele.count;
 
     // TODAY TIMING
-    if (valDate >= todayStart) screenMinsToday += ele.screenTime;
+    if (valDate >= todayStart) screenMinsToday += ele.screenTime / 60;
 
     // YESTERDAY TIMING
     if (valDate >= yesterStart && valDate < todayStart)
-      screenMinsYesterday += ele.screenTime;
+      screenMinsYesterday += ele.screenTime / 60;
 
     // PAST 7 DAYS TIMING
     if (valDate >= weekStart && valDate < todayStart)
@@ -99,14 +96,14 @@ const buildIndScoreObj = userWtdObj => {
 router.get("/:userId", async (req, res, next) => {
   try {
     // RETRIEVE THE FULL OBJECT OF THE INDIVIDUAL'S PROFILE
-    const userWtdObj = await WeightedScore.findAll({
+    const fullScoreObj = await WeightedScore.findAll({
       where: {
         userId: req.params.userId
       }
     });
 
     // LET'S START DOING THE MAGIC
-    if (userWtdObj && userWtdObj.length) {
+    if (fullScoreObj && fullScoreObj.length) {
       const {
         threeHourSnapCount,
         screenMinsToday,
@@ -115,11 +112,11 @@ router.get("/:userId", async (req, res, next) => {
         normalizeScoreArr,
         runningScoreArr,
         sentimentDiffArr
-      } = buildIndScoreObj(userWtdObj);
+      } = buildIndScoreObj(fullScoreObj);
 
       // LET'S SEND IT BACK!
       res.json({
-        userWtdObj,
+        fullScoreObj,
         normalizeScoreArr,
         runningScoreArr,
         sentimentDiffArr,
@@ -173,30 +170,7 @@ router.post("/", async function(req, res, next) {
       screenScore,
       screenTime
     });
-    const userWtdObj = await WeightedScore.findAll({
-      where: {
-        userId: userId
-      }
-    });
-    const {
-      threeHourSnapCount,
-      screenMinsToday,
-      screenMinsYesterday,
-      screenHoursWeek,
-      normalizeScoreArr,
-      runningScoreArr,
-      sentimentDiffArr
-    } = buildIndScoreObj(userWtdObj);
-    res.json({
-      userWtdObj,
-      normalizeScoreArr,
-      runningScoreArr,
-      sentimentDiffArr,
-      threeHourSnapCount,
-      screenMinsToday,
-      screenMinsYesterday,
-      screenHoursWeek
-    });
+    res.sendStatus(201);
   } catch (err) {
     next(err);
   }

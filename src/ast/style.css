@@ -83,6 +83,15 @@ h6 {
   background-color: lightseagreen;
 }
 
+.oAuthText {
+  color: black;
+}
+
+.oAuthText:hover {
+  color: black;
+  text-decoration: none;
+}
+
 .authForm {
   width: 90%;
   height: 70%;
@@ -117,7 +126,7 @@ h6 {
   position: fixed;
   z-index: 2;
   width: 100vw;
-  height: 12vh;
+  height: 75px;
   background-color: rgba(234, 234, 234, 1);
   display: flex;
   align-items: center;
@@ -202,7 +211,7 @@ h6 {
   justify-content: center;
   width: 100vw;
   min-height: 100vh;
-  padding-top: 20vh;
+  padding-top: 90px;
   margin-top: 0%;
   margin-bottom: 0em;
   padding-bottom: 0%;
@@ -300,6 +309,12 @@ h6 {
 .dashboardHeader {
   text-align: center;
   color: black;
+}
+
+.userImage {
+  max-width: 40px;
+  margin: 10px;
+  border-radius: 20px;
 }
 
 .dashboardRow {

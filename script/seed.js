@@ -16,7 +16,9 @@ const userSeed = [
   {
     name: "Peter Parker",
     email: "peter@a.com",
-    password: "123"
+    password: "123",
+    imgUrl:
+      "https://www.patchcollection.com/media/catalog/product/cache/1/image/1200x/040ec09b1e35df139433887a97daa66f/s/p/spiderman-head_3.jpg"
   },
   {
     name: "Steven Strange",
@@ -80,7 +82,7 @@ const trueScoreGen = (userId, count) => {
     obj.sentimentDiff =
       Math.floor((obj.runningScore / obj.normalizeScore) * rounding) / rounding;
     obj.timeStamp.setHours(hoursDiff);
-    if (count <= 10) {
+    if (count <= 15) {
       obj.timeStamp.setSeconds(obj.timeStamp.getSeconds() - count + 1);
     } else {
       obj.timeStamp.setSeconds(obj.timeStamp.getSeconds() - count * 5000 + 1);
