@@ -13,7 +13,7 @@ class ArticleList extends Component {
     console.log("WHOO -", articles);
 
     return (
-      <div>
+      <div className="articleListFullDiv">
         {articles && articles.length ? (
           articles.map((article, idx) => (
             <Article key={article.id} article={article} idx={idx + 1} />

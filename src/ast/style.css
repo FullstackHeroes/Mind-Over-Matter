@@ -621,3 +621,9 @@ h6 {
   left: 10%;
   top: 45%;
 }
+
+/*------------------ ARTICLE LIST ELEMENT --------------------*/
+.articleListFullDiv {
+  display: flex;
+  flex-direction: column;
+}
