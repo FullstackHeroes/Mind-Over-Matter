@@ -2,6 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 import HelpBar from "./global/HelpBar";
 import zipcodes from "zipcodes";
+import axios from "axios";
 
 const Doctor = () => (
   <div className="dashboardFullDiv">
@@ -20,18 +21,21 @@ const Doctor = () => (
           maxLength="5"></input>
       </label>
       <br></br>
-      <button type="button" className="btn btn-dark">
+      <button
+        type="button"
+        className="btn btn-dark"
+        onClick={() => getZipCode()}>
         Search
       </button>
     </form>
     <br></br>
 
     <div className="doctorsList">
-      <div class="row">
-        <div class="col-4">
-          <div class="list-group" id="list-tab" role="tablist">
+      <div className="row">
+        <div className="col-4">
+          <div className="list-group" id="list-tab" role="tablist">
             <a
-              class="list-group-item list-group-item-action active"
+              className="list-group-item list-group-item-action active"
               id="list-home-list"
               data-toggle="list"
               href="#list-home"
@@ -40,7 +44,7 @@ const Doctor = () => (
               Doctor 1
             </a>
             <a
-              class="list-group-item list-group-item-action"
+              className="list-group-item list-group-item-action"
               id="list-profile-list"
               data-toggle="list"
               href="#list-profile"
@@ -49,7 +53,7 @@ const Doctor = () => (
               Doctor 2
             </a>
             <a
-              class="list-group-item list-group-item-action"
+              className="list-group-item list-group-item-action"
               id="list-messages-list"
               data-toggle="list"
               href="#list-messages"
@@ -58,7 +62,7 @@ const Doctor = () => (
               Doctor 3
             </a>
             <a
-              class="list-group-item list-group-item-action"
+              className="list-group-item list-group-item-action"
               id="list-settings-list"
               data-toggle="list"
               href="#list-settings"
@@ -68,31 +72,31 @@ const Doctor = () => (
             </a>
           </div>
         </div>
-        <div class="col-8">
-          <div class="tab-content" id="nav-tabContent">
+        <div className="col-8">
+          <div className="tab-content" id="nav-tabContent">
             <div
-              class="tab-pane fade show active"
+              className="tab-pane fade show active"
               id="list-home"
               role="tabpanel"
               aria-labelledby="list-home-list">
               Doctor 1 Info
             </div>
             <div
-              class="tab-pane fade"
+              className="tab-pane fade"
               id="list-profile"
               role="tabpanel"
               aria-labelledby="list-profile-list">
               Doctor 2 Info
             </div>
             <div
-              class="tab-pane fade"
+              className="tab-pane fade"
               id="list-messages"
               role="tabpanel"
               aria-labelledby="list-messages-list">
               Doctor 3 Info
             </div>
             <div
-              class="tab-pane fade"
+              className="tab-pane fade"
               id="list-settings"
               role="tabpanel"
               aria-labelledby="list-settings-list">
@@ -110,14 +114,36 @@ const Doctor = () => (
 
 function getZipCode() {
   const zipCode = document.getElementById("zipInput").value;
+  console.log(zipCode);
+  if (isNaN(zipCode) || zipCode === "") {
+    console.error("isNaN: ", isNaN(zipCode));
+    window.alert("Not A Valid Zip Code: ", zipCode);
+  } else {
+    const lonlat = zipcodes.lookup(zipCode);
+    const lat = lonlat.latitude;
+    const lon = lonlat.longitude;
+    console.log(lat);
+    console.log(lon);
+    getDoctors(lat, lon);
+  }
 }
 
-const lookupZip = zip => {};
+async function getDoctors(lat, lon) {
+  const { data } = await axios.get(
+    `https://api.betterdoctor.com/2016-03-01/doctors?specialty_uid=psychiatrist%2C%20psychologist&location=${lat}%2C${lon}%2C100&user_location=${lat}%2C${lon}&skip=0&limit=10&user_key=b00def43163e9bcc5fef549144df8432`
+  );
+  console.log(data);
+  console.log("Doctor 1: ", data.data[0]);
+  console.log("First Name: ", data.data[0].profile.first_name);
+  console.log("Last Name: ", data.data[0].profile.last_name);
+  console.log("Street: ", data.data[0].practices[0].visit_address.street);
+  console.log("City: ", data.data[0].practices[0].visit_address.city);
+  console.log("State: ", data.data[0].practices[0].visit_address.state);
+  console.log("Zip: ", data.data[0].practices[0].visit_address.zip);
+  console.log("Phone: ", data.data[0].practices[0].phones[0].number);
+}
 
 export default Doctor;
-
-// THIS IS THE LINK TO HIT ZIPCODEAPI WITH OUR API KEY. NEED TO PASS IN ZIP CODE
-// https://www.zipcodeapi.com/rest/ED2tcUuoAJb49nZJSqhQ3bSMJGitLzYBm1kYNNqGmTTmsozq8afTsvp8zXdbnMdq/info.json/{zip}/degrees
 
 // THIS IS THE LINK TO HIT BETTERDOCTOR WITH OUR API KEY. NEED TO PASS IN LON/LAT COORDINATES
 // https://api.betterdoctor.com/2016-03-01/doctors?specialty_uid=psychiatrist%2C%20psychologist&location={lat}%2C{lon}%2C100&user_location={lat}%2C{lon}&skip=0&limit=15&user_key=b00def43163e9bcc5fef549144df8432

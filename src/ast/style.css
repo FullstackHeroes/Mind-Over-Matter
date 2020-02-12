@@ -535,11 +535,11 @@ h6 {
 
 /*------------------ HELPBAR ELEMENT --------------------*/
 .sidebar {
-  height: 88%;
+  height: calc(100% - 75px);
   width: 0%;
   position: fixed;
   z-index: 2;
-  top: 12%;
+  top: 75px;
   right: 0;
   background-color: #111;
   overflow-x: hidden;
