@@ -18,7 +18,7 @@ class ArticleList extends Component {
     return (
       <div className="articleListFullDiv">
         <h3 className="articleHeader">
-          Come check out some top{" "}
+          Check out some top{" "}
           <span className="articleHeaderSpot">Mental Health</span> articles!
         </h3>
 
