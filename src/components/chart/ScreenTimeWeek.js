@@ -97,7 +97,11 @@ class ScreenTimeWeek extends Component {
             scales: {
               xAxes: [
                 {
-                  stacked: true
+                  stacked: true,
+                  ticks: {
+                    beginAtZero: true
+                  },
+                  max: 168
                 }
               ],
               yAxes: [

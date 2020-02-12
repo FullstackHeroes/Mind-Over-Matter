@@ -79,7 +79,7 @@ class ScreenMinsToday extends Component {
           options={{
             title: {
               display: true,
-              text: "Working Time This Week"
+              text: "Working Time Today"
             },
             responsive: true,
             scales: {
@@ -90,7 +90,11 @@ class ScreenMinsToday extends Component {
               ],
               yAxes: [
                 {
-                  stacked: true
+                  stacked: true,
+                  ticks: {
+                    beginAtZero: true
+                  },
+                  max: 1440
                 }
               ]
             }
