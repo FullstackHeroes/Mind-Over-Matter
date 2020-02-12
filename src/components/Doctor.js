@@ -115,7 +115,10 @@ const Doctor = () => (
 function getZipCode() {
   const zipCode = document.getElementById("zipInput").value;
   console.log(zipCode);
-  if (isNaN(zipCode) || zipCode === "") {
+  var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipCode);
+  console.log(isValidZip);
+  if (!isValidZip) {
+    // if (isNaN(zipCode) || zipCode === "") {
     console.error("isNaN: ", isNaN(zipCode));
     window.alert("Not A Valid Zip Code: ", zipCode);
   } else {
