@@ -508,6 +508,7 @@ padding-top: 90px;  movign this padding to manilaContainer
   display: flex;
   justify-content: center;
   border-radius: 10px;
+  padding: 10px;
 }
 
 .runningScoreLine {
@@ -528,6 +529,7 @@ padding-top: 90px;  movign this padding to manilaContainer
   display: flex;
   justify-content: center;
   border-radius: 10px;
+  padding: 10px;
 }
 
 .trueScoreLine {
@@ -548,6 +550,7 @@ padding-top: 90px;  movign this padding to manilaContainer
   display: flex;
   justify-content: center;
   border-radius: 10px;
+  padding: 10px;
 }
 
 .sentiStack {
