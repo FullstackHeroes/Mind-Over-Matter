@@ -24,7 +24,7 @@ class App extends Component {
         {sentimentDiff && sentimentDiff.length ? (
           <PopUp
             sentimentDiff={sentimentDiff.slice(-1)}
-            threeHourSnapCount={threeHourSnapCount}
+            threeHourSnapCount={threeHourSnapCount / 1000}
           />
         ) : null}
 
