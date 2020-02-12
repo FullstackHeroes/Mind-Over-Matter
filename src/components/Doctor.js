@@ -93,7 +93,7 @@ class Doctor extends Component {
 
         <br></br>
 
-        <div>
+        <div className="doctorList">
           <table className="tableElement">
             <thead>
               <tr className="tableHeader">

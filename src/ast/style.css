@@ -609,14 +609,14 @@ h6 {
 }
 
 .doctorsList {
-  /* position: absolute; */
+  position: relative;
   border-top: 2px;
   border-left: 2px;
   border-right: 2px;
   border-bottom: 2px;
   border-color: black;
   border-style: solid;
-  width: 50%;
+  width: 80vw;
   height: 70%;
   text-align: center;
   /* left: 10%;
