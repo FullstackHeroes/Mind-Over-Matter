@@ -202,26 +202,44 @@ padding-top: 90px;  movign this padding to manilaContainer
 }
 
 .manilaTabWidth {
-  width: 35%;
+  padding-left: 65px;
+  width: 52vw;
   display: flex;
+  flex-direction: row;
   align-items: flex-start;
   background-color: #282c34;
+  /* justify-content: space-around; */
 }
 
-.manilaTab {
+/* .manilaTabs {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-around;
+  
   border-radius: 5px 5px 0px 0px;
   background-color: rgb(182, 171, 140);
   border-color: black;
   border-width: 1px;
+  align-self: flex-start;
+} */
+
+.manilaTab {
+  padding: 0 30px;
+  border-radius: 5px 5px 0px 0px;
+  background-color: rgb(182, 171, 140);
+  border-color: black;
+  border-width: 1px;
+  align-self: flex-start;
 }
 
 .selectedManilaTab {
+  padding: 0 30px;
   border-radius: 5px 5px 0px 0px;
   background-color: rgb(221, 209, 176);
   border-color: rgba(0, 152, 195, 0.8);
   border-width: 1px;
 }
-
+/* 
 .manilaTabFullDiv {
   position: fixed;
   width: 100vw;
@@ -229,15 +247,9 @@ padding-top: 90px;  movign this padding to manilaContainer
   background-color: #282c34;
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   color: black;
-}
-
-.manilaTabs {
-  display: flex;
-  justify-content: flex-start;
-  padding: 0 15px;
-}
+} */
 
 /* ------------------ VIDEO INPUT ELEMENT ------------------ */
 .cameraDiv {
@@ -392,7 +404,7 @@ padding-top: 90px;  movign this padding to manilaContainer
   width: 90vw;
   min-height: 60vh;
   padding: 15px;
-  border-radius: 5px;
+  border-radius: 0px 5px 5px 5px;
   margin-bottom: 25px;
   align-items: center;
 }

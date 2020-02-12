@@ -6,7 +6,8 @@ export default class ManilaTab extends Component {
   render() {
     return (
       <div className="manilaTabWidth">
-        <div className="manilaTab">
+        <div className="manilaTabs">
+          {/* <div className="manilaTab" activeClassName="selectedManilaTab"> */}
           <NavLink
             to="/Dashboard"
             className="linkText manilaTab"
@@ -14,8 +15,8 @@ export default class ManilaTab extends Component {
             exact>
             Dashboard
           </NavLink>
-        </div>
-        <div className="manilaTab">
+          {/* </div>
+          <div className="manilaTab" activeClassName="selectedManilaTab"> */}
           <NavLink
             to="/Table"
             className="linkText manilaTab"
@@ -25,6 +26,7 @@ export default class ManilaTab extends Component {
           </NavLink>
         </div>
       </div>
+      // </div>
     );
   }
 }
