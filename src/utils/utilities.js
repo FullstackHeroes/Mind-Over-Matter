@@ -41,7 +41,7 @@ export const sentimentSpectrum = {
   },
   neutral: {
     spectrumScore: 5,
-    multiplier: 4
+    multiplier: 5
   },
   disgusted: {
     spectrumScore: 3,
@@ -215,7 +215,7 @@ export const buildIndScoreObj = userWtdObj => {
       minDiff = (currentDate - valDate) / 1000;
 
     // THREE HOUR SNAP COUNT
-    if (minDiff >= (oneHourMilli * 3) / 1000) threeHourSnapCount += ele.count;
+    if ((oneHourMilli * 3) / 1000 >= minDiff) threeHourSnapCount += ele.count;
 
     // TODAY TIMING
     if (valDate >= todayStart) screenMinsToday += ele.screenTime / 60;
