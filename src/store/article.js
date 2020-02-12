@@ -7,7 +7,6 @@ const initialState = {
 
 // ACTION TYPE
 const GET_ARTICLES = "GET_ARTICLES";
-const POST_ARTICLES = "POST_ARTICLES";
 
 // ACTION CREATOR
 export const getArticles = articles => {

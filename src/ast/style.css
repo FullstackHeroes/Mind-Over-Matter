@@ -629,9 +629,29 @@ h6 {
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  padding: 15px;
+  padding: 20px;
+  color: black;
+  margin-bottom: 35px;
+}
+
+.articleHeader {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.articleHeaderSpot {
+  color: rgba(0, 152, 195, 0.8);
+}
+
+.articleFullDiv {
+  margin-bottom: 10px;
 }
 
 .articleListText {
   color: black;
+}
+
+.articleListText:hover {
+  font-weight: bolder;
 }

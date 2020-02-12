@@ -14,12 +14,16 @@ class ArticleList extends Component {
 
     return (
       <div className="articleListFullDiv">
+        <h3 className="articleHeader">
+          Come check out some top{" "}
+          <span className="articleHeaderSpot">Mental Health</span> articles!
+        </h3>
         {articles && articles.length ? (
           articles.map((article, idx) => (
             <Article key={article.id} article={article} idx={idx + 1} />
           ))
         ) : (
-          <p>Come Back Later</p>
+          <p>Please come back later</p>
         )}
       </div>
     );

@@ -3,7 +3,7 @@ import React from "react";
 const Article = ({ article, idx }) => (
   <div className="articleFullDiv">
     <h4 className="articleListText">
-      {idx}.{" "}
+      {idx}.&nbsp;&nbsp;&nbsp;
       <a href={article.url} className="articleListText">
         {article.title.length > 85
           ? `${article.title.slice(0, 85)}...`
