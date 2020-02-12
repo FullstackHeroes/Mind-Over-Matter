@@ -80,6 +80,7 @@ class Dashboard extends Component {
             </span>
           </div>
         </div>
+        <HelpBar />
 
         <div className="dashboardRowThree dashboardRow">
           {runningScore.length ? (
@@ -100,8 +101,6 @@ class Dashboard extends Component {
             <ChartSentiStack fullScoreObj={[]} />
           )}
         </div>
-
-        <HelpBar />
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-// import logo from "../../images/logo.svg";
+import logo from "../../images/logo.svg";
 import { logout } from "../../store";
 
 class NavBar extends Component {
@@ -17,7 +17,7 @@ class NavBar extends Component {
         <div className="navBarLeft">
           <img className="userImage" src={this.props.user.imgUrl} alt="" />
           <h1 className="navBarHeader">Mind Over Matter</h1>
-          {/* <img src={logo} className="appLogo" alt="logo" /> */}
+          <img src={logo} className="appLogo" alt="logo" />
         </div>
 
         {userId ? (
@@ -35,16 +35,16 @@ class NavBar extends Component {
               className="linkText navBarLink"
               activeClassName="selectedNavLink"
               exact>
-              Dashboard
+              Data
             </NavLink>
 
-            <NavLink
+            {/* <NavLink
               to="/Table"
               className="linkText navBarLink"
               activeClassName="selectedNavLink"
               exact>
               Table
-            </NavLink>
+            </NavLink> */}
 
             <a
               href="#"
