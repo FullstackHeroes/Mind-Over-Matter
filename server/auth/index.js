@@ -63,7 +63,7 @@ router.post("/signup", async (req, res, next) => {
         timeStamp,
         count: 100,
         screenScore: 0.95,
-        screenTime: 100
+        screenTime: 0.01
       };
       initScore.timeStamp.setSeconds(
         initScore.timeStamp.getSeconds() - count + 1

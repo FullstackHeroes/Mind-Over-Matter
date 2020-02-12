@@ -24,11 +24,6 @@ const userSeed = [
     name: "Steven Strange",
     email: "steve@a.com",
     password: "123"
-  },
-  {
-    name: "Tony Stark",
-    email: "tony@a.com",
-    password: "123"
   }
 ];
 
@@ -104,6 +99,7 @@ const seed = async () => {
 
   await User.bulkCreate(userSeed);
   await WeightedScore.bulkCreate(trueScoreGen(1, 100));
+  await WeightedScore.bulkCreate(trueScoreGen(2, 15));
 
   console.log(`seeded successfully`);
 };
