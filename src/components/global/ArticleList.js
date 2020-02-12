@@ -8,9 +8,12 @@ class ArticleList extends Component {
     this.props.getArticleList();
   }
 
+  componentDidUpdate() {
+    if (!this.props.articles.length) this.props.getArticleList();
+  }
+
   render() {
     const { articles } = this.props;
-    console.log("WHOO -", articles);
 
     return (
       <div className="articleListFullDiv">
@@ -18,13 +21,20 @@ class ArticleList extends Component {
           Come check out some top{" "}
           <span className="articleHeaderSpot">Mental Health</span> articles!
         </h3>
+
         {articles && articles.length ? (
           articles.map((article, idx) => (
             <Article key={article.id} article={article} idx={idx + 1} />
           ))
         ) : (
-          <p>Please come back later</p>
+          <p>Sorry, please come back later</p>
         )}
+
+        {articles && articles.length ? (
+          <p className="articleCredit">
+            Thanks and credits to <strong>Science Daily</strong>
+          </p>
+        ) : null}
       </div>
     );
   }

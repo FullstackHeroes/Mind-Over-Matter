@@ -637,7 +637,7 @@ h6 {
 .articleHeader {
   text-align: center;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .articleHeaderSpot {
@@ -654,4 +654,10 @@ h6 {
 
 .articleListText:hover {
   font-weight: bolder;
+}
+
+.articleCredit {
+  margin-top: 30px;
+  text-align: right;
+  font-size: 16px;
 }
