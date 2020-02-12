@@ -11,7 +11,7 @@ class PopUp extends Component {
       timeAlert: dateCreate(),
       statusCap: 1000 * 10, // SECONDS
       timeCap: 1000 * 30, // SECONDS
-      timeCountCap: (60000 * 8) / snapIntDefault // COUNT CONVERSION IN MINS
+      timeCountCap: (60000 * 5) / snapIntDefault // COUNT CONVERSION IN MINS
     };
     this.showHelp = this.showHelp.bind(this);
     this.hideHelp = this.hideHelp.bind(this);
@@ -53,17 +53,6 @@ class PopUp extends Component {
   render() {
     const { sentimentDiff, threeHourSnapCount } = this.props,
       currentDate = dateCreate();
-    console.log(
-      this.showPopUp,
-      threeHourSnapCount,
-      this.state.timeCountCap,
-      "status",
-      currentDate - this.state.lastAlert,
-      this.state.statusCap,
-      "time",
-      currentDate - this.state.timeAlert,
-      this.state.timeCap
-    );
 
     return (
       <div className="popUpFullDiv">
