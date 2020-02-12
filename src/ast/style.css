@@ -202,12 +202,13 @@ padding-top: 90px;  movign this padding to manilaContainer
 }
 
 .manilaTabWidth {
-  padding-left: 65px;
   width: 52vw;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   background-color: #282c34;
+  height: 37px;
+  margin-left: 5vw;
   /* justify-content: space-around; */
 }
 
@@ -314,8 +315,8 @@ padding-top: 90px;  movign this padding to manilaContainer
   border-collapse: collapse;
   border-spacing: 10px;
   background-color: rgb(221, 209, 176);
-  border-radius: 5px;
-  margin-top: 100px;
+  border-radius: 0px 5px 5px 5px;
+  /* margin-top: 100px; */
   scroll-padding-top: 50px;
 }
 
