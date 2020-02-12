@@ -47,6 +47,14 @@ class NavBar extends Component {
             </NavLink>
 
             <NavLink
+              to="/Doctor"
+              className="linkText navBarLink"
+              activeClassName="selectedNavLink"
+              exact>
+              Doctors
+            </NavLink>
+
+            <NavLink
               to="/Article"
               className="linkText navBarLink"
               activeClassName="selectedNavLink"
