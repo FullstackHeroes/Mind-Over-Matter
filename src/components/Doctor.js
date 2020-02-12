@@ -46,6 +46,7 @@ class Doctor extends Component {
 
     for (let i = 0; i < res.data.data.length; i++) {
       const doctorObj = {};
+      doctorObj.id = i;
       doctorObj.firstName = res.data.data[i].profile.first_name;
       doctorObj.lastName = res.data.data[i].profile.last_name;
       doctorObj.street = res.data.data[i].practices[0].visit_address.street;
@@ -66,17 +67,18 @@ class Doctor extends Component {
         </div>
 
         <form className="doctorForm">
-          <label>
-            <small>Enter Your Zip Code</small>
+          <label className="doctorLabel">
+            <small className="doctorLabelText">Enter Zip Code:</small>
             <input
               type="text"
               id="zipInput"
               className="form-control"
               placeholder="Zip Code"
               name="zipcode"
-              // value={this.state.zipcode}
+              value={this.state.zipcode}
               onChange={this.handleZipCode}
-              maxLength="5"></input>
+              maxLength="5"
+            />
           </label>
           <br></br>
           <button
@@ -102,26 +104,24 @@ class Doctor extends Component {
               </tr>
             </thead>
           </table>
-          {this.state.doctorList.map(doctor => {
-            return (
-              <table className="doctorTable">
-                <tbody>
-                  <tr>
-                    <td className="doctorTableDataRow">
-                      {doctor.firstName} {doctor.lastName}
-                    </td>
-                    <td className="doctorTableDataRow">{doctor.street}</td>
-                    <td className="doctorTableDataRow">{doctor.city}</td>
-                    <td className="doctorTableDataRow">{doctor.state}</td>
-                    <td className="doctorTableDataRow">{doctor.zip}</td>
-                    <td className="doctorTableDataRow">{doctor.phone}</td>
-                  </tr>
-                </tbody>
-              </table>
-            );
-          })}
+          {this.state.doctorList.map(doctor => (
+            <table className="doctorTable" key={doctor.id}>
+              <tbody>
+                <tr>
+                  <td className="doctorTableDataRow">
+                    {doctor.firstName} {doctor.lastName}
+                  </td>
+                  <td className="doctorTableDataRow">{doctor.street}</td>
+                  <td className="doctorTableDataRow">{doctor.city}</td>
+                  <td className="doctorTableDataRow">{doctor.state}</td>
+                  <td className="doctorTableDataRow">{doctor.zip}</td>
+                  <td className="doctorTableDataRow">{doctor.phone}</td>
+                </tr>
+              </tbody>
+            </table>
+          ))}
         </div>
-        <div></div>
+
         <HelpBar />
       </div>
     );
