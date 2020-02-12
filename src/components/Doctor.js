@@ -23,18 +23,17 @@ class Doctor extends Component {
 
   getZipCode = async () => {
     const zipCode = this.state.zipcode;
-    console.log("entered zip code is : ", zipCode);
+
     var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipCode);
-    console.log(isValidZip);
+
     if (!isValidZip) {
       window.alert("Not A Valid Zip Code", zipCode);
     } else {
       const lonlat = await zipcodes.lookup(zipCode);
-      console.log("lonlat: ", lonlat);
+
       const lat = lonlat.latitude;
       const lon = lonlat.longitude;
-      console.log(lat);
-      console.log(lon);
+
       this.getDoctors(lat, lon);
     }
   };
@@ -43,7 +42,6 @@ class Doctor extends Component {
     const res = await axios.get(
       `https://api.betterdoctor.com/2016-03-01/doctors?specialty_uid=psychiatrist%2C%20psychologist&location=${lat}%2C${lon}%2C100&user_location=${lat}%2C${lon}&skip=0&limit=10&user_key=b00def43163e9bcc5fef549144df8432`
     );
-    console.log(res);
     const doctorArr = [];
 
     for (let i = 0; i < res.data.data.length; i++) {
@@ -57,12 +55,10 @@ class Doctor extends Component {
       doctorObj.phone = res.data.data[i].practices[0].phones[0].number;
       doctorArr.push(doctorObj);
     }
-    // console.log(doctorArr);
     this.setState({ doctorList: doctorArr, zipcode: "" });
   };
 
   render() {
-    console.log("RENDER --", this.state.doctorList);
     return (
       <div className="dashboardFullDiv">
         <div className="doctorHeader">
@@ -107,7 +103,6 @@ class Doctor extends Component {
             </thead>
           </table>
           {this.state.doctorList.map(doctor => {
-            console.log("INSIDE -", doctor);
             return (
               <table className="doctorTable">
                 <tbody>
