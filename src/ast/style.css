@@ -419,6 +419,7 @@ h6 {
   display: flex;
   justify-content: center;
   border-radius: 10px;
+  padding: 10px;
 }
 
 .runningScoreLine {
@@ -439,6 +440,7 @@ h6 {
   display: flex;
   justify-content: center;
   border-radius: 10px;
+  padding: 10px;
 }
 
 .trueScoreLine {
@@ -459,6 +461,7 @@ h6 {
   display: flex;
   justify-content: center;
   border-radius: 10px;
+  padding: 10px;
 }
 
 .sentiStack {
