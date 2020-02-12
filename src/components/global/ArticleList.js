@@ -10,13 +10,17 @@ class ArticleList extends Component {
 
   render() {
     const { articles } = this.props;
-    console.log("WHOO -", article);
+    console.log("WHOO -", articles);
 
     return (
       <div>
-        {articles.map(article => (
-          <Article key={article.id} article={article} />
-        ))}
+        {articles && articles.length ? (
+          articles.map((article, idx) => (
+            <Article key={article.id} article={article} idx={idx + 1} />
+          ))
+        ) : (
+          <p>Come Back Later</p>
+        )}
       </div>
     );
   }
@@ -24,7 +28,7 @@ class ArticleList extends Component {
 
 const mapStateToProps = state => {
   return {
-    articles: state.article
+    articles: state.article.articles
   };
 };
 

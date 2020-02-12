@@ -1,14 +1,14 @@
 const router = require("express").Router();
 const { Article } = require("../db/models");
-const fs = require("fs");
 const request = require("request");
 const cheerio = require("cheerio");
 
 const url = "https://www.sciencedaily.com/news/mind_brain/mental_health/";
+let jsonTab = [];
 
 request(url, (error, response, html) => {
-  const $ = cheerio.load(html),
-    jsonTab = [];
+  const $ = cheerio.load(html);
+  jsonTab = [];
 
   for (let i = 0; i < 10; i++) {
     const article = $(".latest-head")[i].children[0],
@@ -19,7 +19,7 @@ request(url, (error, response, html) => {
     jsonTab.push(artObj);
   }
 
-  return jsonTab;
+  // return jsonTab;
 });
 
 // ------------------------------ ROUTES ------------------------------ //
@@ -35,15 +35,15 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const articles = await request(url);
-    if (articles && articles.length) {
+    if (jsonTab.length) {
       Article.destroy({
         where: {},
         truncate: true
       });
-      await Article.bulkCreate(articles);
+      await Article.bulkCreate(jsonTab);
       const newArticles = await Article.findAll();
       if (!newArticles) return res.sendStatus(404);
+      console.log("INSIDE -", newArticles[0].dataValues);
       res.status(200).json(newArticles);
     } else res.json({ message: "No available articles !" });
   } catch (error) {

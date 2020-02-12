@@ -21,7 +21,6 @@ export const getArticles = articles => {
 export const getArticleList = () => {
   return async dispatch => {
     try {
-      // const { data: articles } = await axios.get(`/api/article`);
       const { data: articles } = await axios.post(`/api/article`);
       if (articles && articles.length) {
         dispatch(getArticles(articles));
