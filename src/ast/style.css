@@ -465,7 +465,7 @@ h6 {
 }
 
 .alertContainer {
-  background-color: rgb(211, 211, 211);
+  /* background-color: rgb(211, 211, 211); */
   width: 600px;
   height: 300px;
   display: flex;
@@ -481,6 +481,22 @@ h6 {
   font-size: 16px;
   font-weight: bold;
   box-shadow: 7px 7px 15px rgba(100, 100, 100, 0.9);
+}
+
+.t0-alertContainer {
+  background-color: rgba(214, 133, 133, 1);
+}
+
+.t1-alertContainer {
+  background-color: rgba(224, 206, 172, 1);
+}
+
+.t2-alertContainer {
+  background-color: rgba(171, 235, 235, 1);
+}
+
+.t3-alertContainer {
+  background-color: rgba(211, 211, 211, 1);
 }
 
 .alertTextImgDiv {

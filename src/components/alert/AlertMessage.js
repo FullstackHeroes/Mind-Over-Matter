@@ -37,7 +37,7 @@ const AlertMessage = ({ status, onClose, last, time, timeCap }) => {
     ) {
       return (
         <div className="alertFullDiv">
-          <div className={`${i}-alertContainer alertContainer`}>
+          <div className={`t${i}-alertContainer alertContainer`}>
             <div className="alertTextImgDiv">
               <div className="alertTextDiv">
                 <h6>{alertOptions[i].message}</h6>
