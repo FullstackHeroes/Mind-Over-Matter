@@ -28,13 +28,10 @@ class App extends Component {
             threeHourSnapCount={threeHourSnapCount}
           />
         ) : null}
-        <div className="manilaContainer">
-          <ManilaTab />
-          <div className="appInsideDiv">
-            {user && user.id ? <VideoInput /> : null}
+        <div className="appInsideDiv">
+          {user && user.id ? <VideoInput /> : null}
 
-            <Routes />
-          </div>
+          <Routes />
         </div>
       </div>
     );

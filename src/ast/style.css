@@ -182,6 +182,32 @@ h6 {
 
 /* ------------------ Manila Tabs ------------------ */
 
+/* .appInsideDiv {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  min-height: 100vh;
+padding-top: 90px;  movign this padding to manilaContainer
+  margin-top: 0%;
+  margin-bottom: 0em;
+  padding-bottom: 0%;
+} */
+.manilaContainer {
+  padding-top: 90px;
+  min-height: 100vh;
+  width: 100vw;
+  margin-top: 0%;
+  margin-bottom: 0em;
+  padding-bottom: 0%;
+}
+
+.manilaTabWidth {
+  width: 35%;
+  display: flex;
+  align-items: flex-start;
+  background-color: #282c34;
+}
+
 .manilaTab {
   border-radius: 5px 5px 0px 0px;
   background-color: rgb(182, 171, 140);
@@ -259,7 +285,7 @@ h6 {
   justify-content: center;
   width: 100vw;
   min-height: 100vh;
-  padding-top: 90px;
+  /* padding-top: 90px;  */ /* movign this padding to manilaContainer*/
   margin-top: 0%;
   margin-bottom: 0em;
   padding-bottom: 0%;
