@@ -17,6 +17,7 @@ class ScreenTimeWeek extends Component {
         ],
         datasets: [
           {
+            label: "Hours Worked",
             barPercentage: 0.6,
             backgroundColor: function(context) {
               const index = context.dataIndex;
@@ -42,6 +43,7 @@ class ScreenTimeWeek extends Component {
         ],
         datasets: [
           {
+            label: "Hours Worked",
             barPercentage: 0.6,
             backgroundColor: function(context) {
               const index = context.dataIndex;
@@ -70,13 +72,14 @@ class ScreenTimeWeek extends Component {
           ],
           datasets: [
             {
+              label: "Hours Worked",
               barPercentage: 0.6,
               backgroundColor: function(context) {
                 const index = context.dataIndex;
                 const value = context.dataset.data[index];
                 return value > 40 ? "rgba(255,51,51,1)" : "rgba(0,204,153,1)";
               },
-              data: [this.props.weeksScreenHours]
+              data: [this.props.weeksScreenHours.toFixed(2)]
             }
           ]
         }
@@ -91,13 +94,17 @@ class ScreenTimeWeek extends Component {
           options={{
             title: {
               display: true,
-              text: "Working Time This Week"
+              text: "Hours Worked This Week"
             },
             responsive: true,
             scales: {
               xAxes: [
                 {
-                  stacked: true
+                  stacked: true,
+                  ticks: {
+                    beginAtZero: true
+                  },
+                  max: 168
                 }
               ],
               yAxes: [

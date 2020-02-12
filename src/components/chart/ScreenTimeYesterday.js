@@ -9,15 +9,17 @@ class ScreenTimeYesterday extends Component {
     this.state = {
       data: {
         labels: [
-          `Hours Worked : ${Math.round(this.props.yesterdaysScreenHours / 60)}`,
+          `Hours Worked : ${(this.props.yesterdaysScreenHours / 60).toFixed(
+            2
+          )}`,
           "Yesterday"
         ],
         datasets: [
           {
             backgroundColor: ["rgba(0,204,153,1)", "rgba(255,153,51,1)"],
             data: [
-              this.props.yesterdaysScreenHours / 60,
-              24 - this.props.yesterdaysScreenHours / 60
+              (this.props.yesterdaysScreenHours / 60).toFixed(2),
+              (24 - this.props.yesterdaysScreenHours / 60).toFixed(2)
             ]
           }
         ]
@@ -29,15 +31,15 @@ class ScreenTimeYesterday extends Component {
     this.setState({
       data: {
         labels: [
-          `Hours Worked: ${Math.round(this.props.yesterdaysScreenHours / 60)}`,
+          `Hours Worked: ${(this.props.yesterdaysScreenHours / 60).toFixed(2)}`,
           "Yesterday"
         ],
         datasets: [
           {
             backgroundColor: ["rgba(0,204,153,1)", "rgba(255,153,51,1)"],
             data: [
-              this.props.yesterdaysScreenHours / 60,
-              24 - this.props.yesterdaysScreenHours / 60
+              (this.props.yesterdaysScreenHours / 60).toFixed(2),
+              (24 - this.props.yesterdaysScreenHours / 60).toFixed(2)
             ]
           }
         ]
@@ -52,8 +54,8 @@ class ScreenTimeYesterday extends Component {
       this.setState({
         data: {
           labels: [
-            `Hours Worked: ${Math.round(
-              this.props.yesterdaysScreenHours / 60
+            `Hours Worked: ${(this.props.yesterdaysScreenHours / 60).toFixed(
+              2
             )}`,
             "Yesterday"
           ],
@@ -61,8 +63,8 @@ class ScreenTimeYesterday extends Component {
             {
               backgroundColor: ["rgba(0,204,153,1)", "rgba(255,153,51,1)"],
               data: [
-                this.props.yesterdaysScreenHours / 60,
-                24 - this.props.yesterdaysScreenHours / 60
+                (this.props.yesterdaysScreenHours / 60).toFixed(2),
+                (24 - this.props.yesterdaysScreenHours / 60).toFixed(2)
               ]
             }
           ]
