@@ -83,6 +83,15 @@ h6 {
   background-color: lightseagreen;
 }
 
+.oAuthText {
+  color: black;
+}
+
+.oAuthText:hover {
+  color: black;
+  text-decoration: none;
+}
+
 .authForm {
   width: 90%;
   height: 70%;
@@ -117,7 +126,7 @@ h6 {
   position: fixed;
   z-index: 2;
   width: 100vw;
-  height: 12vh;
+  height: 75px;
   background-color: rgba(234, 234, 234, 1);
   display: flex;
   align-items: center;
@@ -236,7 +245,7 @@ h6 {
   justify-content: center;
   width: 100vw;
   min-height: 100vh;
-  padding-top: 20vh;
+  padding-top: 90px;
   margin-top: 0%;
   margin-bottom: 0em;
   padding-bottom: 0%;
@@ -407,6 +416,12 @@ h6 {
 .carousel-inner img {
   width: 500;
   height: auto;
+  border-top: 2px;
+  border-left: 2px;
+  border-right: 2px;
+  border-bottom: 2px;
+  border-color: white;
+  border-style: solid;
 }
 .bookTextDiv {
   min-height: 525px;
@@ -555,11 +570,11 @@ h6 {
 
 /*------------------ HELPBAR ELEMENT --------------------*/
 .sidebar {
-  height: 90%;
+  height: calc(100% - 75px);
   width: 0%;
   position: fixed;
   z-index: 2;
-  top: 10%;
+  top: 75px;
   right: 0;
   background-color: #111;
   overflow-x: hidden;
@@ -584,4 +599,29 @@ h6 {
 .sidebarHeader {
   text-align: center;
   color: white;
+}
+
+/*------------------ DOCTOR ELEMENT --------------------*/
+.doctorHeader {
+  text-align: center;
+  color: black;
+}
+
+.doctorForm {
+  text-align: center;
+  color: black;
+}
+
+.doctorsList {
+  position: absolute;
+  border-top: 2px;
+  border-left: 2px;
+  border-right: 2px;
+  border-bottom: 2px;
+  border-color: white;
+  border-style: solid;
+  width: 50%;
+  height: 50%;
+  left: 10%;
+  top: 45%;
 }

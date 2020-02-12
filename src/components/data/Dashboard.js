@@ -14,13 +14,6 @@ import ScreenTimeWeek from "../chart/ScreenTimeWeek";
 import HelpBar from "../global/HelpBar";
 
 class Dashboard extends Component {
-  componentDidMount() {
-    const { user } = this.props;
-    if (user && user.id) {
-      this.props.setFullScoreObj(user.id);
-    }
-  }
-
   render() {
     const {
       user,
@@ -97,6 +90,7 @@ class Dashboard extends Component {
               </span>
             </div>
           </div>
+          <HelpBar />
 
           <div className="dashboardRowThree dashboardRow">
             {runningScore.length ? (
@@ -108,15 +102,15 @@ class Dashboard extends Component {
             {fullScoreObj.length ? (
               <ChartTSLine fullScoreObj={fullScoreObj.slice(-10)} />
             ) : (
-              <p>Loading</p>
+              <ChartTSLine fullScoreObj={[]} />
             )}
 
             {fullScoreObj.length ? (
               <ChartSentiStack fullScoreObj={fullScoreObj.slice(-10)} />
-            ) : null}
+            ) : (
+              <ChartSentiStack fullScoreObj={[]} />
+            )}
           </div>
-
-          <HelpBar />
         </div>
       </div>
     );

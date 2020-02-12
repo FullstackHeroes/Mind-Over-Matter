@@ -82,7 +82,7 @@ const trueScoreGen = (userId, count) => {
     obj.sentimentDiff =
       Math.floor((obj.runningScore / obj.normalizeScore) * rounding) / rounding;
     obj.timeStamp.setHours(hoursDiff);
-    if (count <= 10) {
+    if (count <= 15) {
       obj.timeStamp.setSeconds(obj.timeStamp.getSeconds() - count + 1);
     } else {
       obj.timeStamp.setSeconds(obj.timeStamp.getSeconds() - count * 5000 + 1);
