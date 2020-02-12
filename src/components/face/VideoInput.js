@@ -23,9 +23,7 @@ class VideoInput extends Component {
     await loadModels();
     this.props.getTimeInterval();
     const { user } = this.props;
-    if (user && user.id) {
-      this.props.setFullScoreObj(user.id);
-    }
+    if (user && user.id) this.props.setFullScoreObj(user.id);
   };
 
   componentDidUpdate(prevProps) {
@@ -37,11 +35,20 @@ class VideoInput extends Component {
 
   // TIME INTERVAL FOR CAPTURING SNAPSHOTS
   startCapture = () => {
-    const { user } = this.props;
+    const { user, snapInterval } = this.props;
+    let startDate = 0;
+
     if (user && user.id) {
-      this.intervalSnap = setInterval(() => {
-        this.capture(user.id);
-      }, this.props.snapInterval);
+      this.intervalSnap = setInterval(async () => {
+        if (this.webcam.current && !startDate) {
+          await getFaceDescr(this.webcam.current.getScreenshot(), inputSize);
+          startDate = dateCreate();
+        }
+
+        if (dateCreate() - startDate >= 1000) {
+          this.capture(user.id);
+        }
+      }, snapInterval);
     }
   };
 
@@ -50,12 +57,13 @@ class VideoInput extends Component {
     try {
       if (this.webcam.current) {
         await getFaceDescr(this.webcam.current.getScreenshot(), inputSize).then(
-          async fullDesc => {
+          fullDesc => {
             if (fullDesc && fullDesc.length) {
               const desc = fullDesc[0],
                 screenScore = desc.detection._score,
                 expressions = desc.expressions,
                 newScoreObj = sentimentAlgo(screenScore, expressions),
+                clientDate = dateCreate(),
                 date = dateCreate(),
                 hoursDiff = date.getHours() - date.getTimezoneOffset() / 60;
 
@@ -63,8 +71,9 @@ class VideoInput extends Component {
               date.setHours(hoursDiff);
               newScoreObj.userId = userId;
               newScoreObj.timeStamp = date;
+              newScoreObj.clientTimeStamp = clientDate;
               newScoreObj.count = 1;
-              newScoreObj.screenTime = 1;
+              newScoreObj.screenTime = this.props.snapInterval / 1000;
 
               // POST INTO DB AND UPDATE GLOBAL STATE
               this.props.postFullScoreObj(this.props.fullScoreObj, newScoreObj);

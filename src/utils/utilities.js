@@ -41,7 +41,7 @@ export const sentimentSpectrum = {
   },
   neutral: {
     spectrumScore: 5,
-    multiplier: 2
+    multiplier: 4
   },
   disgusted: {
     spectrumScore: 3,
@@ -96,7 +96,8 @@ export const sentimentAlgo = (screenScore, expressions) => {
       fullScoreObj.trueScore += rawScorePercent * spectrumInput.spectrumScore;
     }
   }
-
+  fullScoreObj.trueScore =
+    Math.floor(fullScoreObj.trueScore * rounding) / rounding;
   return fullScoreObj;
 };
 
@@ -159,6 +160,85 @@ export const calcSentimentDiff = (running, normal) => {
 
 // CALCULATE SCREEN TIME FROM SNAPSHOT ARRAY AND CAPTURE INTERVAL
 export const calcScreenTime = (length, interval) => (interval * length) / 1000;
+
+export const buildIndScoreObj = userWtdObj => {
+  // SETTING UP THE TIME INGREDIENTS
+  const currentDate = dateCreate(),
+    hoursDiff = currentDate.getHours() - currentDate.getTimezoneOffset() / 60;
+
+  currentDate.setHours(hoursDiff);
+
+  const oneHourMilli = 3600000,
+    twoFourHourMilli = oneHourMilli * 24,
+    todayStart = new Date(
+      new Date(
+        new Date(new Date(currentDate).setHours(0)).setMinutes(0)
+      ).setSeconds(0)
+    ),
+    yesterStart = new Date(todayStart - twoFourHourMilli),
+    weekStart = new Date(todayStart - twoFourHourMilli * 7);
+
+  // SETTING UP ALL TIME VARIABLES TO SEND BACK
+  let normalizeScoreArr = [],
+    runningScoreArr = [],
+    sentimentDiffArr = [],
+    threeHourSnapCount = 0,
+    screenMinsToday = 0,
+    screenMinsYesterday = 0,
+    screenHoursWeek = 0;
+
+  // LOOPING THROUGH OBJECT TO PARSE THROUGH WHAT TO PUT BACK
+  for (const ele of userWtdObj.slice((-twoFourHourMilli * 31) / 1000)) {
+    // NORMALIZE SCORE RESPONSE
+    const normalizeScoreObj = {};
+    normalizeScoreObj.normalizeScore = ele.normalizeScore;
+    normalizeScoreObj.timeStamp = ele.timeStamp;
+    normalizeScoreObj.userId = ele.userId;
+    normalizeScoreArr.push(normalizeScoreObj);
+
+    // RUNNING SCORE RESPONSE
+    const runningScoreObj = {};
+    runningScoreObj.runningScore = ele.runningScore;
+    runningScoreObj.timeStamp = ele.timeStamp;
+    runningScoreObj.userId = ele.userId;
+    runningScoreArr.push(runningScoreObj);
+
+    // SENTIMENT DIFF RESPONSE
+    const sentimentDiffObj = {};
+    sentimentDiffObj.sentimentDiff = ele.sentimentDiff;
+    sentimentDiffObj.timeStamp = ele.timeStamp;
+    sentimentDiffObj.userId = ele.userId;
+    sentimentDiffArr.push(sentimentDiffObj);
+
+    // VALUE TIME REFERENCE POINTS
+    const valDate = new Date(ele.timeStamp),
+      minDiff = (currentDate - valDate) / 1000;
+
+    // THREE HOUR SNAP COUNT
+    if (minDiff >= (oneHourMilli * 3) / 1000) threeHourSnapCount += ele.count;
+
+    // TODAY TIMING
+    if (valDate >= todayStart) screenMinsToday += ele.screenTime / 60;
+
+    // YESTERDAY TIMING
+    if (valDate >= yesterStart && valDate < todayStart)
+      screenMinsYesterday += ele.screenTime / 60;
+
+    // PAST 7 DAYS TIMING
+    if (valDate >= weekStart && valDate < todayStart)
+      screenHoursWeek += Math.round((ele.screenTime / 3600) * 100) / 100;
+  }
+
+  return {
+    normalizeScoreArr,
+    runningScoreArr,
+    sentimentDiffArr,
+    threeHourSnapCount,
+    screenMinsToday,
+    screenMinsYesterday,
+    screenHoursWeek
+  };
+};
 
 // ---------------------------------- NOT USED ! ---------------------------------- //
 
