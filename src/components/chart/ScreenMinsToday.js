@@ -8,16 +8,17 @@ class ScreenMinsToday extends Component {
 
     this.state = {
       data: {
-        labels: [`Mins Worked : ${this.props.todaysScreenMins}`],
+        labels: [`Minutes Worked : ${this.props.todaysScreenMins.toFixed(2)}`],
         datasets: [
           {
+            label: "Mins Worked",
             barPercentage: 0.6,
             backgroundColor: function(context) {
               const index = context.dataIndex;
               const value = context.dataset.data[index];
               return value > 480 ? "rgba(255,51,51,1)" : "rgba(0,204,153,1)";
             },
-            data: [this.props.todaysScreenMins]
+            data: [this.props.todaysScreenMins.toFixed(2)]
           }
         ]
       }
@@ -27,16 +28,17 @@ class ScreenMinsToday extends Component {
   componentDidMount() {
     this.setState({
       data: {
-        labels: [`Mins Worked : ${this.props.todaysScreenMins}`],
+        labels: [`Minutes Worked : ${this.props.todaysScreenMins.toFixed(2)}`],
         datasets: [
           {
+            label: "Mins Worked",
             barPercentage: 0.6,
             backgroundColor: function(context) {
               const index = context.dataIndex;
               const value = context.dataset.data[index];
               return value > 480 ? "rgba(255,51,51,1)" : "rgba(0,204,153,1)";
             },
-            data: [this.props.todaysScreenMins]
+            data: [this.props.todaysScreenMins.toFixed(2)]
           }
         ]
       }
@@ -50,21 +52,18 @@ class ScreenMinsToday extends Component {
       this.setState({
         data: {
           labels: [
-            `Mins Worked : ${
-              this.props.todaysScreenMins
-                ? this.props.todaysScreenMins.toFixed(2)
-                : 0
-            }`
+            `Minutes Worked : ${this.props.todaysScreenMins.toFixed(2)}`
           ],
           datasets: [
             {
+              label: "Mins Worked",
               barPercentage: 0.6,
               backgroundColor: function(context) {
                 const index = context.dataIndex;
                 const value = context.dataset.data[index];
                 return value > 480 ? "rgba(255,51,51,1)" : "rgba(0,204,153,1)";
               },
-              data: [this.props.todaysScreenMins]
+              data: [this.props.todaysScreenMins.toFixed(2)]
             }
           ]
         }
@@ -79,7 +78,7 @@ class ScreenMinsToday extends Component {
           options={{
             title: {
               display: true,
-              text: "Working Time This Week"
+              text: "Minutes Worked Today"
             },
             responsive: true,
             scales: {
@@ -90,7 +89,11 @@ class ScreenMinsToday extends Component {
               ],
               yAxes: [
                 {
-                  stacked: true
+                  stacked: true,
+                  ticks: {
+                    beginAtZero: true
+                  },
+                  max: 1440
                 }
               ]
             }

@@ -1,8 +1,9 @@
 import React from "react";
 
 const AlertMessage = ({ status, onClose, last, time, timeCap }) => {
-  const tiers = [last * 0.9, last * 0.95, last, time];
+  const tiers = [last * 0.875, last * 0.925, last, time];
 
+  // LOWER KEY VALUES REPRESENTS WORSE TIERS EXCEPT LAST TIER WHICH IS TIME
   const alertOptions = {
     0: {
       message:
@@ -36,7 +37,7 @@ const AlertMessage = ({ status, onClose, last, time, timeCap }) => {
     ) {
       return (
         <div className="alertFullDiv">
-          <div className="alertContainer">
+          <div className={`t${i}-alertContainer alertContainer`}>
             <div className="alertTextImgDiv">
               <div className="alertTextDiv">
                 <h6>{alertOptions[i].message}</h6>

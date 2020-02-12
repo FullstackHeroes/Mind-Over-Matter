@@ -43,8 +43,7 @@ h6 {
   margin-top: 35px;
   min-width: 450px;
   width: 35%;
-  height: 50vh;
-  min-height: 300px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,6 +68,7 @@ h6 {
   width: 90%;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 }
 
 .authSignInBtn {
@@ -94,7 +94,16 @@ h6 {
 
 .authForm {
   width: 90%;
-  height: 70%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.authPreBtnDiv {
+  width: 100%;
+  height: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -112,6 +121,8 @@ h6 {
 .authFormLabel {
   width: 150px;
   margin: 0;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .authInputBox {
@@ -119,6 +130,10 @@ h6 {
   height: 25px;
   padding: 0;
   font-size: 15px;
+}
+
+.authErrorMessage {
+  font-size: 16px;
 }
 
 /* ------------------ NAVBAR ELEMENT ------------------ */
@@ -515,7 +530,7 @@ h6 {
 }
 
 .alertContainer {
-  background-color: rgb(211, 211, 211);
+  /* background-color: rgb(211, 211, 211); */
   width: 600px;
   height: 300px;
   display: flex;
@@ -527,10 +542,24 @@ h6 {
   border-color: black;
   border-style: outset;
   border-radius: 8px;
-  color: rgba(18, 89, 155, 0.925);
-  font-size: 16px;
   font-weight: bold;
   box-shadow: 7px 7px 15px rgba(100, 100, 100, 0.9);
+}
+
+.t0-alertContainer {
+  background-color: rgba(214, 133, 133, 1);
+}
+
+.t1-alertContainer {
+  background-color: rgba(224, 206, 172, 1);
+}
+
+.t2-alertContainer {
+  background-color: rgba(171, 235, 235, 1);
+}
+
+.t3-alertContainer {
+  background-color: rgba(211, 211, 211, 1);
 }
 
 .alertTextImgDiv {
@@ -538,6 +567,8 @@ h6 {
   justify-content: space-evenly;
   align-items: center;
   width: 90%;
+  color: black;
+  font-size: 17px;
 }
 
 .alertTextDiv {

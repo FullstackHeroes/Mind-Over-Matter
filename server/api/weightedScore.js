@@ -66,7 +66,7 @@ const buildIndScoreObj = userWtdObj => {
       minDiff = (currentDate - valDate) / 1000;
 
     // THREE HOUR SNAP COUNT
-    if (minDiff >= (oneHourMilli * 3) / 1000) threeHourSnapCount += ele.count;
+    if ((oneHourMilli * 3) / 1000 >= minDiff) threeHourSnapCount += ele.count;
 
     // TODAY TIMING
     if (valDate >= todayStart) screenMinsToday += ele.screenTime / 60;

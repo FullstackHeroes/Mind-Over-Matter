@@ -5,8 +5,8 @@ import { NavLink } from "react-router-dom";
 export default class ManilaTab extends Component {
   render() {
     return (
-      <div className="manilaTabFullDiv">
-        <div className="manilaTabs">
+      <div className="manilaTabWidth">
+        <div className="manilaTab">
           <NavLink
             to="/Dashboard"
             className="linkText manilaTab"
@@ -14,7 +14,8 @@ export default class ManilaTab extends Component {
             exact>
             Dashboard
           </NavLink>
-
+        </div>
+        <div className="manilaTab">
           <NavLink
             to="/Table"
             className="linkText manilaTab"

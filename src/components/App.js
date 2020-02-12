@@ -22,7 +22,6 @@ class App extends Component {
       <div className="appFullDiv">
         <NavBar />
 
-        <ManilaTab />
         {sentimentDiff && sentimentDiff.length ? (
           <PopUp
             sentimentDiff={sentimentDiff.slice(-1)}
