@@ -381,6 +381,12 @@ h6 {
 .carousel-inner img {
   width: 500;
   height: auto;
+  border-top: 2px;
+  border-left: 2px;
+  border-right: 2px;
+  border-bottom: 2px;
+  border-color: white;
+  border-style: solid;
 }
 .bookTextDiv {
   min-height: 525px;
@@ -529,11 +535,11 @@ h6 {
 
 /*------------------ HELPBAR ELEMENT --------------------*/
 .sidebar {
-  height: 90%;
+  height: calc(100% - 75px);
   width: 0%;
   position: fixed;
   z-index: 2;
-  top: 10%;
+  top: 75px;
   right: 0;
   background-color: #111;
   overflow-x: hidden;
@@ -558,4 +564,29 @@ h6 {
 .sidebarHeader {
   text-align: center;
   color: white;
+}
+
+/*------------------ DOCTOR ELEMENT --------------------*/
+.doctorHeader {
+  text-align: center;
+  color: black;
+}
+
+.doctorForm {
+  text-align: center;
+  color: black;
+}
+
+.doctorsList {
+  position: absolute;
+  border-top: 2px;
+  border-left: 2px;
+  border-right: 2px;
+  border-bottom: 2px;
+  border-color: white;
+  border-style: solid;
+  width: 50%;
+  height: 50%;
+  left: 10%;
+  top: 45%;
 }
