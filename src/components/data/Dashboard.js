@@ -26,7 +26,9 @@ class Dashboard extends Component {
 
     return (
       <div className="dashboardFullDiv">
-        <h3 className="dashboardHeader">Hi, {user.name}!</h3>
+        <h3 className="dashboardHeader">
+          Hi, <strong className="dashboardName">{user.name}</strong>!
+        </h3>
 
         <div className="dashboardRowOne dashboardRow">
           <div className="dashboardTable">
