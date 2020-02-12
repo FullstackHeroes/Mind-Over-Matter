@@ -326,6 +326,10 @@ h6 {
   color: black;
 }
 
+.dashboardName {
+  color: rgba(0, 152, 195, 1);
+}
+
 .userImage {
   max-width: 40px;
   margin: 10px;
