@@ -33,54 +33,56 @@ class AuthForm extends Component {
 
     return (
       <div className={`${formName}-authFormDiv authFormDiv`}>
-        <h3 className="authFormHeader">{displayName}</h3>
+        <h3 className="authFormHeader">{displayName.toUpperCase()}</h3>
 
         <form onSubmit={this.handleSignIn} name={formName} className="authForm">
-          <div className="authInputDiv">
-            <label htmlFor="email" className="authFormLabel">
-              Email:
-            </label>
-            <input name="email" type="email" className="authInputBox" />
-          </div>
-
-          {formName === "signup" ? (
+          <div className="authPreBtnDiv">
             <div className="authInputDiv">
-              <label htmlFor="userName" className="authFormLabel">
-                Name:
+              <label htmlFor="email" className="authFormLabel">
+                Email:
               </label>
-              <input name="userName" type="userName" className="authInputBox" />
+              <input name="email" type="email" className="authInputBox" />
             </div>
-          ) : (
-            ""
-          )}
 
-          <div className="authInputDiv">
-            <label htmlFor="password" className="authFormLabel">
-              Password:
-            </label>
-            <input name="password" type="password" className="authInputBox" />
+            {formName === "signup" ? (
+              <div className="authInputDiv">
+                <label htmlFor="userName" className="authFormLabel">
+                  Name:
+                </label>
+                <input
+                  name="userName"
+                  type="userName"
+                  className="authInputBox"
+                />
+              </div>
+            ) : (
+              ""
+            )}
+
+            <div className="authInputDiv">
+              <label htmlFor="password" className="authFormLabel">
+                Password:
+              </label>
+              <input name="password" type="password" className="authInputBox" />
+            </div>
+
+            {error && error.response && (
+              <div className="authErrorMessage"> {error.response.data} </div>
+            )}
           </div>
-
-          {error && error.response && <div> {error.response.data} </div>}
 
           <div className="authBtnDiv">
             <button type="submit" className="authSignInBtn">
               {displayName}
             </button>
 
-            {/* <button className="authSignInBtn">
-              <a target="_self" href="/auth/google" className="oAuthText">
+            <button type="button" className="authSignInBtn ">
+              <a target="_self" href="/auth/google" className="oAuthText ">
                 Google {displayName}
               </a>
-            </button> */}
+            </button>
           </div>
         </form>
-
-        <a target="_self" href="/auth/google">
-          <button className="authSignInBtn oAuthText">
-            Google {displayName}
-          </button>
-        </a>
       </div>
     );
   }
