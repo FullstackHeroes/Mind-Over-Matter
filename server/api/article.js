@@ -51,6 +51,8 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+module.exports = router;
+
 // ------------------------------ TESTING 1 ------------------------------ //
 // const fs = require("fs");
 // const request = require("request");
