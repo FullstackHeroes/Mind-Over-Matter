@@ -645,13 +645,14 @@ h6 {
 
 .doctorLabel {
   display: flex;
+  justify-content: space-around;
   align-items: center;
-  width: 300px;
+  min-width: 300px;
   margin-top: 25px;
 }
 
 .doctorLabelText {
-  width: 200px;
+  min-width: 200px;
 }
 
 .doctorTableHeaderRow {
