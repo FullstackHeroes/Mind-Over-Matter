@@ -33,7 +33,7 @@ class AuthForm extends Component {
 
     return (
       <div className={`${formName}-authFormDiv authFormDiv`}>
-        <h3 className="authFormHeader">{displayName}</h3>
+        <h3 className="authFormHeader">{displayName.toUpperCase()}</h3>
 
         <form onSubmit={this.handleSignIn} name={formName} className="authForm">
           <div className="authPreBtnDiv">
@@ -76,11 +76,11 @@ class AuthForm extends Component {
               {displayName}
             </button>
 
-            <a target="_self" href="/auth/google">
-              <button type="button" className="authSignInBtn oAuthText">
+            <button type="button" className="authSignInBtn ">
+              <a target="_self" href="/auth/google" className="oAuthText ">
                 Google {displayName}
-              </button>
-            </a>
+              </a>
+            </button>
           </div>
         </form>
       </div>
