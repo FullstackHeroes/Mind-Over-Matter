@@ -187,14 +187,6 @@ export const setFullScoreObj = userId => {
             screenHoursWeek
           })
         );
-        // dispatch(getFullScoreObj(userWtdObj));
-        // dispatch(getNormalizedScore(normalizeScoreArr));
-        // dispatch(getRunningScore(runningScoreArr));
-        // dispatch(getSentimentDiff(sentimentDiffArr));
-        // dispatch(gotThreeHoursnapCount(threeHourSnapCount));
-        // dispatch(gotTodaysScreenTime(screenMinsToday));
-        // dispatch(gotYesterdaysScreenTime(screenMinsYesterday));
-        // dispatch(gotWeeksScreenTime(screenHoursWeek));
       } else dispatch(getFullScoreObj([]));
     } catch (error) {
       console.error(error);
@@ -218,7 +210,7 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
       await axios.post(`/api/weightedScore`, newScoreObj);
 
       newScoreObj.timeStamp = newScoreObj.timeStamp.toISOString();
-      fullScoreObj.push(newScoreObj);
+      fullScoreObj.reverse().push(newScoreObj);
 
       const {
         normalizeScoreArr,
@@ -229,8 +221,6 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
         screenMinsYesterday,
         screenHoursWeek
       } = buildIndScoreObj(fullScoreObj);
-
-      // console.log("HMMM -", fullScoreObj);
 
       dispatch(
         updateAll({
@@ -244,40 +234,6 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
           screenHoursWeek
         })
       );
-
-      // console.log("INSIDE -", newScoreObj, newScoreObj.timeStamp);
-
-      // dispatch(addFullScoreObj(newScoreObj));
-      // dispatch(
-      //   addNormalizedScore({
-      //     normalizeScore,
-      //     timeStamp: newScoreObj.timeStamp,
-      //     userId: newScoreObj.userId
-      //   })
-      // );
-      // dispatch(
-      //   addRunningScore({
-      //     runningScore,
-      //     timeStamp: newScoreObj.timeStamp,
-      //     userId: newScoreObj.userId
-      //   })
-      // );
-      // dispatch(
-      //   addSentimentDiff({
-      //     sentimentDiff,
-      //     timeStamp: newScoreObj.timeStamp,
-      //     userId: newScoreObj.userId
-      //   })
-      // );
-
-      // dispatch(getFullScoreObj(fullScoreObj));
-      // dispatch(getNormalizedScore(normalizeScoreArr));
-      // dispatch(getRunningScore(runningScoreArr));
-      // dispatch(getSentimentDiff(sentimentDiffArr));
-      // dispatch(gotThreeHoursnapCount(threeHourSnapCount));
-      // dispatch(gotTodaysScreenTime(screenMinsToday));
-      // dispatch(gotYesterdaysScreenTime(screenMinsYesterday));
-      // dispatch(gotWeeksScreenTime(screenHoursWeek));
     } catch (error) {
       console.error(error);
     }

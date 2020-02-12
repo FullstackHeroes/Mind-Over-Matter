@@ -38,7 +38,7 @@ router.post("/signup", async (req, res, next) => {
     const user = await User.create({ name, email, password });
 
     const initialArr = [];
-    let count = 10;
+    let count = 15;
 
     while (count) {
       // SET UP TIME OBJECT
