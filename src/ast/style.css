@@ -609,15 +609,27 @@ h6 {
 }
 
 .doctorsList {
-  position: absolute;
+  /* position: absolute; */
   border-top: 2px;
   border-left: 2px;
   border-right: 2px;
   border-bottom: 2px;
-  border-color: white;
+  border-color: black;
   border-style: solid;
   width: 50%;
-  height: 50%;
-  left: 10%;
-  top: 45%;
+  height: 70%;
+  text-align: center;
+  /* left: 10%;
+  top: 45%; */
+}
+
+.doctorBox {
+  color: black;
+  width: 100%;
+  height: 35px;
+  font-size: 10;
+}
+
+.doctorTable {
+  color: black;
 }

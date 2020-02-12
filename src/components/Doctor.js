@@ -1,134 +1,136 @@
-import React from "react";
+import React, { Component } from "react";
 import { render } from "react-dom";
 import HelpBar from "./global/HelpBar";
 import zipcodes from "zipcodes";
 import axios from "axios";
 
-const Doctor = () => (
-  <div className="dashboardFullDiv">
-    <div className="doctorHeader">
-      <h1>Find A Doctor</h1>
-    </div>
-
-    <form className="doctorForm">
-      <label>
-        <small>Enter Your Zip Code</small>
-        <input
-          type="text"
-          id="zipInput"
-          className="form-control"
-          placeholder="Zip Code"
-          maxLength="5"></input>
-      </label>
-      <br></br>
-      <button
-        type="button"
-        className="btn btn-dark"
-        onClick={() => getZipCode()}>
-        Search
-      </button>
-    </form>
-    <br></br>
-
-    <div className="doctorsList">
-      <div className="row">
-        <div className="col-4">
-          <div className="list-group" id="list-tab" role="tablist">
-            <a
-              className="list-group-item list-group-item-action active"
-              id="list-home-list"
-              data-toggle="list"
-              href="#list-home"
-              role="tab"
-              aria-controls="home">
-              Doctor 1
-            </a>
-            <a
-              className="list-group-item list-group-item-action"
-              id="list-profile-list"
-              data-toggle="list"
-              href="#list-profile"
-              role="tab"
-              aria-controls="profile">
-              Doctor 2
-            </a>
-            <a
-              className="list-group-item list-group-item-action"
-              id="list-messages-list"
-              data-toggle="list"
-              href="#list-messages"
-              role="tab"
-              aria-controls="messages">
-              Doctor 3
-            </a>
-            <a
-              className="list-group-item list-group-item-action"
-              id="list-settings-list"
-              data-toggle="list"
-              href="#list-settings"
-              role="tab"
-              aria-controls="settings">
-              Doctor 4
-            </a>
-          </div>
-        </div>
-        <div className="col-8">
-          <div className="tab-content" id="nav-tabContent">
-            <div
-              className="tab-pane fade show active"
-              id="list-home"
-              role="tabpanel"
-              aria-labelledby="list-home-list">
-              Doctor 1 Info
-            </div>
-            <div
-              className="tab-pane fade"
-              id="list-profile"
-              role="tabpanel"
-              aria-labelledby="list-profile-list">
-              Doctor 2 Info
-            </div>
-            <div
-              className="tab-pane fade"
-              id="list-messages"
-              role="tabpanel"
-              aria-labelledby="list-messages-list">
-              Doctor 3 Info
-            </div>
-            <div
-              className="tab-pane fade"
-              id="list-settings"
-              role="tabpanel"
-              aria-labelledby="list-settings-list">
-              Doctor 4 Info
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div></div>
-    <HelpBar />
-  </div>
-);
-
-function getZipCode() {
-  const zipCode = document.getElementById("zipInput").value;
-  var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipCode);
-  if (!isValidZip) {
-    window.alert("Not A Valid Zip Code: ", zipCode);
-  } else {
-    const lonlat = zipcodes.lookup(zipCode);
-    const lat = lonlat.latitude;
-    const lon = lonlat.longitude;
-    getDoctors(lat, lon);
+class Doctor extends Component {
+  constructor() {
+    super();
+    this.state = {
+      zipcode: "",
+      doctorList: []
+    };
+    this.handleZipCode = this.handleZipCode.bind(this);
+    this.getZipCode = this.getZipCode.bind(this);
+    this.getDoctors = this.getDoctors.bind(this);
   }
-}
 
-async function getDoctors(lat, lon) {
-  const { data } = await axios.get(
-    `https://api.betterdoctor.com/2016-03-01/doctors?specialty_uid=psychiatrist%2C%20psychologist&location=${lat}%2C${lon}%2C100&user_location=${lat}%2C${lon}&skip=0&limit=10&user_key=b00def43163e9bcc5fef549144df8432`
-  );
+  handleZipCode = evt => {
+    evt.preventDefault();
+    this.setState({ [evt.target.name]: parseInt(evt.target.value) });
+  };
+
+  getZipCode = async () => {
+    const zipCode = this.state.zipcode;
+    console.log("entered zip code is : ", zipCode);
+    var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipCode);
+    console.log(isValidZip);
+    if (!isValidZip) {
+      window.alert("Not A Valid Zip Code", zipCode);
+    } else {
+      const lonlat = await zipcodes.lookup(zipCode);
+      console.log("lonlat: ", lonlat);
+      const lat = lonlat.latitude;
+      const lon = lonlat.longitude;
+      console.log(lat);
+      console.log(lon);
+      this.getDoctors(lat, lon);
+    }
+  };
+
+  getDoctors = async (lat, lon) => {
+    const res = await axios.get(
+      `https://api.betterdoctor.com/2016-03-01/doctors?specialty_uid=psychiatrist%2C%20psychologist&location=${lat}%2C${lon}%2C100&user_location=${lat}%2C${lon}&skip=0&limit=10&user_key=b00def43163e9bcc5fef549144df8432`
+    );
+    console.log(res);
+    const doctorArr = [];
+
+    for (let i = 0; i < res.data.data.length; i++) {
+      const doctorObj = {};
+      doctorObj.firstName = res.data.data[i].profile.first_name;
+      doctorObj.lastName = res.data.data[i].profile.last_name;
+      doctorObj.street = res.data.data[i].practices[0].visit_address.street;
+      doctorObj.city = res.data.data[i].practices[0].visit_address.city;
+      doctorObj.state = res.data.data[i].practices[0].visit_address.state;
+      doctorObj.zip = res.data.data[i].practices[0].visit_address.zip;
+      doctorObj.phone = res.data.data[i].practices[0].phones[0].number;
+      doctorArr.push(doctorObj);
+    }
+    // console.log(doctorArr);
+    this.setState({ doctorList: doctorArr, zipcode: "" });
+  };
+
+  render() {
+    console.log("RENDER --", this.state.doctorList);
+    return (
+      <div className="dashboardFullDiv">
+        <div className="doctorHeader">
+          <h1>Find A Doctor</h1>
+        </div>
+
+        <form className="doctorForm">
+          <label>
+            <small>Enter Your Zip Code</small>
+            <input
+              type="text"
+              id="zipInput"
+              className="form-control"
+              placeholder="Zip Code"
+              name="zipcode"
+              // value={this.state.zipcode}
+              onChange={this.handleZipCode}
+              maxLength="5"></input>
+          </label>
+          <br></br>
+          <button
+            type="button"
+            className="btn btn-dark"
+            onClick={() => this.getZipCode()}>
+            Search
+          </button>
+        </form>
+
+        <br></br>
+
+        <div>
+          <table className="tableElement">
+            <thead>
+              <tr className="tableHeader">
+                <th className="tableHeaderRow">Name</th>
+                <th className="tableHeaderRow">Street</th>
+                <th className="tableHeaderRow">City</th>
+                <th className="tableHeaderRow">State</th>
+                <th className="tableHeaderRow">Zip</th>
+                <th className="tableHeaderRow">Phone Number</th>
+              </tr>
+            </thead>
+          </table>
+          {this.state.doctorList.map(doctor => {
+            console.log("INSIDE -", doctor);
+            return (
+              <table className="doctorTable">
+                <tbody>
+                  <tr>
+                    <td className="tableDataRow">
+                      {doctor.firstName} {doctor.lastName}
+                    </td>
+                    <td className="tableDataRow">{doctor.street}</td>
+                    <td className="tableDataRow">{doctor.city}</td>
+                    <td className="tableDataRow">{doctor.state}</td>
+                    <td className="tableDataRow">{doctor.zip}</td>
+                    <td className="tableDataRow">{doctor.phone}</td>
+                  </tr>
+                </tbody>
+              </table>
+            );
+          })}
+        </div>
+        <div></div>
+        <HelpBar />
+      </div>
+    );
+  }
 }
 
 export default Doctor;
