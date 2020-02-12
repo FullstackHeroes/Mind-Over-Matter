@@ -114,19 +114,13 @@ const Doctor = () => (
 
 function getZipCode() {
   const zipCode = document.getElementById("zipInput").value;
-  console.log(zipCode);
   var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipCode);
-  console.log(isValidZip);
   if (!isValidZip) {
-    // if (isNaN(zipCode) || zipCode === "") {
-    console.error("isNaN: ", isNaN(zipCode));
     window.alert("Not A Valid Zip Code: ", zipCode);
   } else {
     const lonlat = zipcodes.lookup(zipCode);
     const lat = lonlat.latitude;
     const lon = lonlat.longitude;
-    console.log(lat);
-    console.log(lon);
     getDoctors(lat, lon);
   }
 }
@@ -135,15 +129,6 @@ async function getDoctors(lat, lon) {
   const { data } = await axios.get(
     `https://api.betterdoctor.com/2016-03-01/doctors?specialty_uid=psychiatrist%2C%20psychologist&location=${lat}%2C${lon}%2C100&user_location=${lat}%2C${lon}&skip=0&limit=10&user_key=b00def43163e9bcc5fef549144df8432`
   );
-  console.log(data);
-  console.log("Doctor 1: ", data.data[0]);
-  console.log("First Name: ", data.data[0].profile.first_name);
-  console.log("Last Name: ", data.data[0].profile.last_name);
-  console.log("Street: ", data.data[0].practices[0].visit_address.street);
-  console.log("City: ", data.data[0].practices[0].visit_address.city);
-  console.log("State: ", data.data[0].practices[0].visit_address.state);
-  console.log("Zip: ", data.data[0].practices[0].visit_address.zip);
-  console.log("Phone: ", data.data[0].practices[0].phones[0].number);
 }
 
 export default Doctor;
