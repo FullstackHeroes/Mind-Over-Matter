@@ -4,7 +4,7 @@ import "./ast/style.css";
 // import "bootstrap";
 import $ from "jquery";
 import App from "./components/App";
-// import * as serviceWorker from "./ast/serviceWorker";
+import * as serviceWorker from "./ast/serviceWorker";
 import history from "./history";
 import { Provider } from "react-redux";
 import { Router } from "react-router-dom";
