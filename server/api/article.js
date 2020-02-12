@@ -43,7 +43,6 @@ router.post("/", async (req, res, next) => {
       await Article.bulkCreate(jsonTab);
       const newArticles = await Article.findAll();
       if (!newArticles) return res.sendStatus(404);
-      console.log("INSIDE -", newArticles[0].dataValues);
       res.status(200).json(newArticles);
     } else res.json({ message: "No available articles !" });
   } catch (error) {
