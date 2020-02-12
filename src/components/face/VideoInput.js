@@ -45,7 +45,7 @@ class VideoInput extends Component {
           startDate = dateCreate();
         }
 
-        if (dateCreate() - startDate >= 3000) {
+        if (dateCreate() - startDate >= 1000) {
           this.capture(user.id);
         }
       }, snapInterval);

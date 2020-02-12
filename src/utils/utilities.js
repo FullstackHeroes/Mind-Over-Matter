@@ -41,7 +41,7 @@ export const sentimentSpectrum = {
   },
   neutral: {
     spectrumScore: 5,
-    multiplier: 2
+    multiplier: 4
   },
   disgusted: {
     spectrumScore: 3,

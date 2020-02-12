@@ -24,14 +24,6 @@ class Dashboard extends Component {
       weeksScreenHours
     } = this.props;
 
-    if (fullScoreObj && fullScoreObj.length)
-      console.log(
-        "RENDER !",
-        fullScoreObj
-          .slice(-10)
-          .map(x => ({ timeStamp: x.timeStamp, trueScore: x.trueScore }))
-      );
-
     return (
       <div className="dashboardFullDiv">
         <img className="userImage" src={user.imgUrl} alt="" />
