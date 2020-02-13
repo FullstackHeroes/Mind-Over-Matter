@@ -448,10 +448,39 @@ h6 {
   margin-right: 5%;
 }
 
+.homepageDark {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-right: 105px;
+}
+
 .hpDarkHeader {
   font-size: 35px;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin: 0;
+}
+
+.hpDarkP {
+  font-size: 18px;
+  margin: 0;
+}
+
+.hpDarkEnd {
+  font-size: 22px;
+  font-style: italic;
+  margin: 0;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  padding: 25px 0;
+}
+
+.footerBottom {
+  display: flex;
+  flex-direction: column;
 }
 
 /* ------------------ CHART DIV ELEMENT ------------------ */

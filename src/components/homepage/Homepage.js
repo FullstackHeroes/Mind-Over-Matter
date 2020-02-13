@@ -1,5 +1,6 @@
 import React from "react";
 import Carousel from "./Carousel";
+import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Homepage = () => (
@@ -34,26 +35,35 @@ const Homepage = () => (
 
       <div className="homepageDark">
         <h3 className="hpDarkHeader">How Can We Help?</h3>
+
         <p className="hpDarkP">
           We provide more than just feedback. We present our data findings in
-          digestible pieces such as tables, graphs and charts. We supply
+          digestible pieces such as tables, graphs, and charts. We supply
           educational articles and readings to enable you to take better care of
           yourself. And if the worst does come, we make finding a health
           professional near you easy. We're with you all the way in your journey
-          to better health.
+          to better overall health.
         </p>
+
         <p className="hpDarkEnd">
-          Here at Mind Over Matter, we take care of you.
+          Here at Mind Over Matter, we take care of you without you even
+          knowing.
         </p>
       </div>
     </div>
 
     <div className="footer">
-      <div align="center">
-        <br></br>
-        <h3>Join the mental health revolution! Sign up today!</h3>
-        <h6>
-          Mind Over Matter - A Mental Health Improvement Platform<br></br>
+      <h3 className="footerTitle">
+        Join the mental health revolution! <Link to="/SignIn">Sign up</Link>{" "}
+        today!
+      </h3>
+
+      <div className="footerBottom">
+        <h6 className="footerSum">
+          Mind Over Matter - A Mental Health Improvement Platform
+        </h6>
+
+        <h6 className="footerNames">
           By Emmanuel Kanadilas, James Shen, Kenneth Chen and Robert Costello
         </h6>
       </div>
