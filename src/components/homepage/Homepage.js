@@ -52,9 +52,12 @@ const Homepage = () => (
       </div>
     </div>
 
-    <div className="footer">
+    <div className="footerDiv">
       <h3 className="footerTitle">
-        Join the mental health revolution! <Link to="/SignIn">Sign up</Link>{" "}
+        Join the mental health revolution!{" "}
+        <Link to="/SignIn" className="linkText footerLink">
+          Sign up
+        </Link>{" "}
         today!
       </h3>
 

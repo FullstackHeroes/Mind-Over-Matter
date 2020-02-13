@@ -472,15 +472,24 @@ h6 {
   margin: 0;
 }
 
-.footer {
+.footerDiv {
+  background-color: rgba(234, 234, 234, 1);
+  color: black;
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 25px 0;
+}
+
+.footerLink {
+  font-weight: bold;
 }
 
 .footerBottom {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
 }
 
 /* ------------------ CHART DIV ELEMENT ------------------ */
@@ -624,13 +633,6 @@ h6 {
 }
 
 /*------------------ FOOTER ELEMENT --------------------*/
-.footer {
-  width: 100%;
-  background-color: rgba(234, 234, 234, 1);
-  color: black;
-  text-align: center;
-  height: 10%;
-}
 
 /*------------------ HELP BUTTON ELEMENT --------------------*/
 .helpButton {
