@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { render } from "react-dom";
 import HelpBar from "./global/HelpBar";
 import zipcodes from "zipcodes";
 import axios from "axios";
@@ -14,14 +13,17 @@ class Doctor extends Component {
     this.handleZipCode = this.handleZipCode.bind(this);
     this.getZipCode = this.getZipCode.bind(this);
     this.getDoctors = this.getDoctors.bind(this);
+    this.enterPressed = this.enterPressed.bind(this);
   }
 
   handleZipCode = evt => {
     evt.preventDefault();
-    this.setState({ [evt.target.name]: parseInt(evt.target.value) });
+    if (!isNaN(evt.target.value)) {
+      this.setState({ [evt.target.name]: evt.target.value });
+    }
   };
 
-  getZipCode = async () => {
+  async getZipCode() {
     const zipCode = this.state.zipcode;
 
     var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipCode);
@@ -30,17 +32,19 @@ class Doctor extends Component {
       window.alert("Not A Valid Zip Code", zipCode);
     } else {
       const lonlat = await zipcodes.lookup(zipCode);
-
+      if (!lonlat) {
+        this.setState({ zipcode: "" });
+        return alert("Please enter a valid zipcode");
+      }
       const lat = lonlat.latitude;
       const lon = lonlat.longitude;
-
       this.getDoctors(lat, lon);
     }
-  };
+  }
 
   getDoctors = async (lat, lon) => {
     const res = await axios.get(
-      `https://api.betterdoctor.com/2016-03-01/doctors?specialty_uid=psychiatrist%2C%20psychologist&location=${lat}%2C${lon}%2C100&user_location=${lat}%2C${lon}&skip=0&limit=10&user_key=b00def43163e9bcc5fef549144df8432`
+      `https://api.betterdoctor.com/2016-03-01/doctors?specialty_uid=psychiatrist%2C%20psychologist&location=${lat}%2C${lon}%2C100&user_location=${lat}%2C${lon}&skip=0&limit=10&user_key=${betterDoctorAPIKey}`
     );
     const doctorArr = [];
 
@@ -59,6 +63,15 @@ class Doctor extends Component {
     this.setState({ doctorList: doctorArr, zipcode: "" });
   };
 
+  enterPressed(event) {
+    var code = event.keyCode || event.which;
+
+    if (code === 13) {
+      //13 is the enter keycode
+      event.preventDefault();
+      this.getZipCode();
+    }
+  }
   render() {
     return (
       <div className="dashboardFullDiv">
@@ -77,14 +90,15 @@ class Doctor extends Component {
               name="zipcode"
               value={this.state.zipcode}
               onChange={this.handleZipCode}
+              onKeyPress={this.enterPressed}
               maxLength="5"
             />
           </label>
-          <br></br>
           <button
+            id="zipSubmit"
             type="button"
             className="btn btn-dark"
-            onClick={() => this.getZipCode()}>
+            onClick={this.getZipCode}>
             Search
           </button>
         </form>
