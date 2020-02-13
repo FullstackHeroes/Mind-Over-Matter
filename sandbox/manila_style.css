@@ -139,7 +139,7 @@ h6 {
 /* ------------------ NAVBAR ELEMENT ------------------ */
 .navBarFullDiv {
   position: fixed;
-  z-index: 20;
+  z-index: 2;
   width: 100vw;
   height: 75px;
   background-color: rgba(234, 234, 234, 1);
@@ -182,70 +182,75 @@ h6 {
 
 /* ------------------ Manila Tabs ------------------ */
 
-.manilaContainer {
+/* .appInsideDiv {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  min-height: 100vh;
+padding-top: 90px;  movign this padding to manilaContainer
+  margin-top: 0%;
+  margin-bottom: 0em;
+  padding-bottom: 0%;
+} */
+.manilaContainer {
   padding-top: 90px;
   min-height: 100vh;
   width: 100vw;
   margin-top: 0%;
   margin-bottom: 0em;
   padding-bottom: 0%;
-  flex-wrap: nowrap;
 }
 
 .manilaTabWidth {
   width: 52vw;
-  /* width: 100vw; */
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: row;
   align-items: flex-start;
   background-color: #282c34;
-  margin: 0 5vw;
-  padding-bottom: 0px;
+  height: 37px;
+  margin-left: 5vw;
+  /* justify-content: space-around; */
 }
 
 /* .manilaTabs {
-  width: 100%;
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-around;
+  
+  border-radius: 5px 5px 0px 0px;
+  background-color: rgb(182, 171, 140);
+  border-color: black;
+  border-width: 1px;
+  align-self: flex-start;
 } */
 
 .manilaTab {
-  border-radius: 10px 10px 0px 0px;
+  padding: 0 30px;
+  border-radius: 5px 5px 0px 0px;
   background-color: rgb(182, 171, 140);
-  border-color: rgb(182, 171, 140);
+  border-color: black;
   border-width: 1px;
   align-self: flex-start;
-  border-style: solid;
-  border-width: 1px 1px 8px 1px;
-  margin-bottom: 0px;
-  margin-left: 1px;
-  margin-right: 1px;
-  width: 15%;
-  /* flex: 0 0 4vh; */
-  /* width: 125px; */
-  text-align: center;
-  padding: 5px;
-  padding-top: 0px;
-  padding-bottom: 0px;
 }
 
 .selectedManilaTab {
-  /* flex: 0 0 4vh; */
-  padding-top: 0px;
-  padding-bottom: 0px;
-  padding: 5px;
-  text-align: center;
-  width: 15%;
-  /* width: 125px; */
-  border-radius: 10px 10px 0px 0px;
+  padding: 0 30px;
+  border-radius: 5px 5px 0px 0px;
   background-color: rgb(221, 209, 176);
-  border-color: rgb(221, 209, 176);
+  border-color: rgba(0, 152, 195, 0.8);
   border-width: 1px;
-  border-style: solid;
-  border-width: 1px 1px 8px 1px;
-  margin-bottom: 0px;
 }
+/* 
+.manilaTabFullDiv {
+  position: fixed;
+  width: 100vw;
+  height: 12vh;
+  background-color: #282c34;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: black;
+} */
 
 /* ------------------ VIDEO INPUT ELEMENT ------------------ */
 .cameraDiv {
@@ -293,6 +298,7 @@ h6 {
   justify-content: center;
   width: 100vw;
   min-height: 100vh;
+  /* padding-top: 90px;  */ /* movign this padding to manilaContainer*/
   margin-top: 0%;
   margin-bottom: 0em;
   padding-bottom: 0%;
@@ -304,16 +310,26 @@ h6 {
   flex-direction: row;
   justify-content: space-evenly;
   width: 90vw;
-  min-height: 65vh;
-  padding: 15px;
-  padding-top: 45px;
+  padding: 25px;
   text-align: center;
   border-collapse: collapse;
   border-spacing: 10px;
   background-color: rgb(221, 209, 176);
-  border-radius: 0px 10px 10px 10px;
+  border-radius: 0px 5px 5px 5px;
+  /* margin-top: 100px; */
   scroll-padding-top: 50px;
 }
+
+/* .dashboardFullDiv {
+  display: flex;
+  flex-direction: column;
+  
+  min-height: 60vh;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 25px;
+  align-items: center;
+} */
 
 .tableHeader {
   border-spacing: 0;
@@ -382,31 +398,21 @@ h6 {
 }
 
 /* ------------------ DASHBOARD ELEMENT ------------------ */
-.dashboardTotalDiv {
-  height: 1050px;
-  margin-bottom: 25px;
-}
-
 .dashboardFullDiv {
   background-color: rgb(221, 209, 176);
   display: flex;
   flex-direction: column;
   width: 90vw;
-  min-height: 65vh;
-  height: 100%;
-  padding: 25px;
-  border-radius: 0px 10px 10px 10px;
-  margin-top: 0px;
+  min-height: 60vh;
+  padding: 15px;
+  border-radius: 0px 5px 5px 5px;
+  margin-bottom: 25px;
   align-items: center;
 }
 
 .dashboardHeader {
   text-align: center;
   color: black;
-}
-
-.dashboardName {
-  color: rgba(0, 152, 195, 1);
 }
 
 .userImage {
@@ -444,27 +450,24 @@ h6 {
   font-weight: bold;
 }
 
-.detectionFullDiv {
-  background-color: rgba(245, 245, 245, 0.7);
-  width: 90vw;
-  height: 1050px;
-  border-radius: 5px;
-  padding: 18px;
-  z-index: 10;
-  position: absolute;
-}
-
-.detectionText {
-  z-index: 10;
-  position: fixed;
-  color: orangered;
-  font-size: 15px;
-  font-weight: bold;
-}
-
 /* ------------------ HOMEPAGE ELEMENT ------------------ */
-.carouselFullDiv {
-  padding: 35px 0;
+.homepageText {
+  margin: 60px;
+  text-align: center;
+}
+
+.homepageWhite {
+  background-color: white;
+  color: black;
+  width: 100%;
+}
+
+.bookImage {
+  width: 75vh;
+  max-height: auto;
+  float: left;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .carousel {
@@ -489,84 +492,9 @@ h6 {
   border-color: white;
   border-style: solid;
 }
-
-.homepageWhite {
-  background-color: white;
-  color: black;
-  width: 100%;
-  padding: 25px 50px;
-  text-align: center;
-  display: flex;
-  justify-content: space-evenly;
+.bookTextDiv {
+  min-height: 525px;
 }
-
-.hpWhiteText {
-  width: 43%;
-}
-
-.hpWhiteHeader {
-  font-size: 40px;
-  font-weight: bold;
-  margin-bottom: 12px;
-}
-
-.bookTextFullDiv {
-  padding: 55px 0;
-  display: flex;
-}
-
-.bookImage {
-  width: 350px;
-  height: auto;
-  float: left;
-  margin-left: 5%;
-  margin-right: 5%;
-}
-
-.homepageDark {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-right: 105px;
-}
-
-.hpDarkHeader {
-  font-size: 35px;
-  font-weight: bold;
-  margin: 0;
-}
-
-.hpDarkP {
-  font-size: 18px;
-  margin: 0;
-}
-
-.hpDarkEnd {
-  font-size: 22px;
-  font-style: italic;
-  margin: 0;
-}
-
-.footerDiv {
-  background-color: rgba(234, 234, 234, 1);
-  color: black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 25px 0;
-}
-
-.footerLink {
-  font-weight: bold;
-}
-
-.footerBottom {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 10px;
-}
-
 /* ------------------ CHART DIV ELEMENT ------------------ */
 .chartWrapDiv {
   min-width: 30%;
@@ -644,6 +572,7 @@ h6 {
 }
 
 .alertContainer {
+  /* background-color: rgb(211, 211, 211); */
   width: 600px;
   height: 300px;
   display: flex;
@@ -708,6 +637,13 @@ h6 {
 }
 
 /*------------------ FOOTER ELEMENT --------------------*/
+.footer {
+  width: 100%;
+  background-color: rgba(234, 234, 234, 1);
+  color: black;
+  text-align: center;
+  height: 10%;
+}
 
 /*------------------ HELP BUTTON ELEMENT --------------------*/
 .helpButton {
@@ -717,7 +653,7 @@ h6 {
   display: block;
   height: 75px;
   width: 75px;
-  z-index: 125;
+  z-index: 1;
 }
 
 /*------------------ HELPBAR ELEMENT --------------------*/
@@ -725,7 +661,7 @@ h6 {
   height: calc(100% - 75px);
   width: 0%;
   position: fixed;
-  z-index: 150;
+  z-index: 2;
   top: 75px;
   right: 0;
   background-color: #111;
@@ -765,109 +701,15 @@ h6 {
 }
 
 .doctorsList {
-  position: relative;
+  position: absolute;
   border-top: 2px;
   border-left: 2px;
   border-right: 2px;
   border-bottom: 2px;
-  border-color: black;
+  border-color: white;
   border-style: solid;
-  width: 80vw;
-  height: 70%;
-  text-align: center;
-}
-
-.doctorBox {
-  color: black;
-  width: 100%;
-  height: 35px;
-  font-size: 10;
-}
-
-.doctorTable {
-  color: black;
-}
-
-.doctorTableHeader {
-  border-spacing: 0;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.doctorLabel {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  min-width: 300px;
-  margin-top: 25px;
-}
-
-.doctorLabelText {
-  min-width: 200px;
-}
-
-.doctorTableHeaderRow {
-  font-size: 20px;
-  width: 185px;
-  border-style: solid;
-  border-color: black;
-  border-width: 1px;
-  text-align: center;
-  border-collapse: collapse;
-  border-spacing: 0;
-  background-color: rgba(234, 234, 234, 1);
-  color: black;
-}
-
-.doctorTableDataRow {
-  font-size: 20px;
-  width: 185px;
-  border-style: solid;
-  border-color: black;
-  border-width: 1px;
-  text-align: center;
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-/*------------------ ARTICLE LIST ELEMENT --------------------*/
-.articleListFullDiv {
-  background-color: rgb(221, 209, 176);
-  width: 80vw;
-  border-radius: 0px 10px 10px 10px;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  color: black;
-  margin-bottom: 35px;
-  width: 90vw;
-}
-
-.articleHeader {
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 25px;
-  font-size: 35px;
-}
-
-.articleHeaderSpot {
-  color: rgba(0, 152, 195, 0.8);
-}
-
-.articleFullDiv {
-  margin-bottom: 10px;
-}
-
-.articleListText {
-  color: black;
-}
-
-.articleListText:hover {
-  font-weight: bolder;
-}
-
-.articleCredit {
-  margin-top: 30px;
-  text-align: right;
-  font-size: 16px;
+  width: 50%;
+  height: 50%;
+  left: 10%;
+  top: 45%;
 }

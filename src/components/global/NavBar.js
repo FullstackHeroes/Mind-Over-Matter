@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-// import logo from "../../images/logo.svg";
 import { logout } from "../../store";
 
 class NavBar extends Component {
@@ -35,31 +34,7 @@ class NavBar extends Component {
               className="linkText navBarLink"
               activeClassName="selectedNavLink"
               exact>
-              Dashboard
-            </NavLink>
-
-            <NavLink
-              to="/Table"
-              className="linkText navBarLink"
-              activeClassName="selectedNavLink"
-              exact>
-              Table
-            </NavLink>
-
-            <NavLink
-              to="/Doctor"
-              className="linkText navBarLink"
-              activeClassName="selectedNavLink"
-              exact>
-              Doctors
-            </NavLink>
-
-            <NavLink
-              to="/Article"
-              className="linkText navBarLink"
-              activeClassName="selectedNavLink"
-              exact>
-              Articles
+              Data
             </NavLink>
 
             <a
