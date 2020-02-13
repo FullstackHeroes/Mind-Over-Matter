@@ -180,6 +180,78 @@ h6 {
   border-width: 1px;
 }
 
+/* ------------------ Manila Tabs ------------------ */
+
+/* .appInsideDiv {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  min-height: 100vh;
+padding-top: 90px;  movign this padding to manilaContainer
+  margin-top: 0%;
+  margin-bottom: 0em;
+  padding-bottom: 0%;
+} */
+.manilaContainer {
+  padding-top: 90px;
+  min-height: 100vh;
+  width: 100vw;
+  margin-top: 0%;
+  margin-bottom: 0em;
+  padding-bottom: 0%;
+}
+
+.manilaTabWidth {
+  width: 52vw;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  background-color: #282c34;
+  height: 37px;
+  margin-left: 5vw;
+  /* justify-content: space-around; */
+}
+
+/* .manilaTabs {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-around;
+  
+  border-radius: 5px 5px 0px 0px;
+  background-color: rgb(182, 171, 140);
+  border-color: black;
+  border-width: 1px;
+  align-self: flex-start;
+} */
+
+.manilaTab {
+  padding: 0 30px;
+  border-radius: 5px 5px 0px 0px;
+  background-color: rgb(182, 171, 140);
+  border-color: black;
+  border-width: 1px;
+  align-self: flex-start;
+}
+
+.selectedManilaTab {
+  padding: 0 30px;
+  border-radius: 5px 5px 0px 0px;
+  background-color: rgb(221, 209, 176);
+  border-color: rgba(0, 152, 195, 0.8);
+  border-width: 1px;
+}
+/* 
+.manilaTabFullDiv {
+  position: fixed;
+  width: 100vw;
+  height: 12vh;
+  background-color: #282c34;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: black;
+} */
+
 /* ------------------ VIDEO INPUT ELEMENT ------------------ */
 .cameraDiv {
   width: 0.1px;
