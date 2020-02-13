@@ -1,0 +1,715 @@
+/* ------------------ GLOBAL ELEMENTS ------------------ */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
+}
+
+h3 {
+  margin: 0;
+}
+h6 {
+  margin: 0;
+}
+
+.linkText {
+  text-decoration: none;
+  color: black;
+}
+
+.linkText:hover {
+  text-decoration: underline;
+  color: peru;
+}
+
+/* ----------------- AUTH FORM ELEMENT ----------------- */
+.signInFullDiv {
+  display: flex;
+  justify-content: space-evenly;
+  width: 75vw;
+  color: black;
+}
+
+.authFormDiv {
+  margin-top: 35px;
+  min-width: 450px;
+  width: 35%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.authFormHeader {
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 25px;
+}
+
+.login-authFormDiv {
+  background-color: orange;
+}
+
+.signup-authFormDiv {
+  background-color: lightskyblue;
+}
+
+.authBtnDiv {
+  width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.authSignInBtn {
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 5px;
+  width: 135px;
+  height: 30px;
+}
+
+.authSignInBtn:hover {
+  background-color: lightseagreen;
+}
+
+.oAuthText {
+  color: black;
+}
+
+.oAuthText:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.authForm {
+  width: 90%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.authPreBtnDiv {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.authInputDiv {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.authFormLabel {
+  width: 150px;
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.authInputBox {
+  width: 150px;
+  height: 25px;
+  padding: 0;
+  font-size: 15px;
+}
+
+.authErrorMessage {
+  font-size: 16px;
+}
+
+/* ------------------ NAVBAR ELEMENT ------------------ */
+.navBarFullDiv {
+  position: fixed;
+  z-index: 2;
+  width: 100vw;
+  height: 75px;
+  background-color: rgba(234, 234, 234, 1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: black;
+}
+
+.navBarLeft {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.navBarRight {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 15px;
+}
+
+.navBarHeader {
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.navBarLink {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 0 10px;
+  margin: 0 5px;
+}
+
+.selectedNavLink {
+  border-color: rgba(0, 152, 195, 0.8);
+  border-style: dashed;
+  border-width: 1px;
+}
+
+/* ------------------ Manila Tabs ------------------ */
+
+/* .appInsideDiv {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  min-height: 100vh;
+padding-top: 90px;  movign this padding to manilaContainer
+  margin-top: 0%;
+  margin-bottom: 0em;
+  padding-bottom: 0%;
+} */
+.manilaContainer {
+  padding-top: 90px;
+  min-height: 100vh;
+  width: 100vw;
+  margin-top: 0%;
+  margin-bottom: 0em;
+  padding-bottom: 0%;
+}
+
+.manilaTabWidth {
+  width: 52vw;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  background-color: #282c34;
+  height: 37px;
+  margin-left: 5vw;
+  /* justify-content: space-around; */
+}
+
+/* .manilaTabs {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-around;
+  
+  border-radius: 5px 5px 0px 0px;
+  background-color: rgb(182, 171, 140);
+  border-color: black;
+  border-width: 1px;
+  align-self: flex-start;
+} */
+
+.manilaTab {
+  padding: 0 30px;
+  border-radius: 5px 5px 0px 0px;
+  background-color: rgb(182, 171, 140);
+  border-color: black;
+  border-width: 1px;
+  align-self: flex-start;
+}
+
+.selectedManilaTab {
+  padding: 0 30px;
+  border-radius: 5px 5px 0px 0px;
+  background-color: rgb(221, 209, 176);
+  border-color: rgba(0, 152, 195, 0.8);
+  border-width: 1px;
+}
+/* 
+.manilaTabFullDiv {
+  position: fixed;
+  width: 100vw;
+  height: 12vh;
+  background-color: #282c34;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: black;
+} */
+
+/* ------------------ VIDEO INPUT ELEMENT ------------------ */
+.cameraDiv {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -100;
+}
+
+/* ------------------ MAIN APP ELEMENT ------------------ */
+.appLogo {
+  height: 9vmin;
+  width: 9vmin;
+  pointer-events: none;
+  margin: 0 5px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .appLogo {
+    animation: appLogo-spin infinite 20s linear;
+  }
+}
+
+@keyframes appLogo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.appFullDiv {
+  background-color: #282c34;
+  display: flex;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.appInsideDiv {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  min-height: 100vh;
+  /* padding-top: 90px;  */ /* movign this padding to manilaContainer*/
+  margin-top: 0%;
+  margin-bottom: 0em;
+  padding-bottom: 0%;
+}
+
+/* ------------------ TABLE ELEMENT ------------------ */
+.tableFullDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 90vw;
+  padding: 25px;
+  text-align: center;
+  border-collapse: collapse;
+  border-spacing: 10px;
+  background-color: rgb(221, 209, 176);
+  border-radius: 0px 5px 5px 5px;
+  /* margin-top: 100px; */
+  scroll-padding-top: 50px;
+}
+
+/* .dashboardFullDiv {
+  display: flex;
+  flex-direction: column;
+  
+  min-height: 60vh;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 25px;
+  align-items: center;
+} */
+
+.tableHeader {
+  border-spacing: 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.tableHeaderRow {
+  font-size: 14px;
+  background-color: white;
+  border-style: solid;
+  border-color: black;
+  color: black;
+  border-width: 1px;
+  width: 80px;
+}
+
+.tableData {
+  display: flex;
+  justify-content: space-evenly;
+  color: whitesmoke;
+}
+
+.tableDataRow {
+  background-color: #282c34;
+  font-size: 14px;
+  width: 80px;
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;
+}
+
+.csvFullDiv {
+  background-color: lightgray;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  min-width: 30%;
+  height: 200px;
+  padding: 15px;
+  margin: 0 10px;
+}
+
+.csvHeaderText {
+  color: black;
+  font-weight: bold;
+}
+
+.csvBtn {
+  border-radius: 3px;
+  font-size: 15px;
+  font-weight: bold;
+  height: 35px;
+  width: 200px;
+}
+
+.csvBtn:hover {
+  background-color: lightskyblue;
+}
+
+.csvLinkText {
+  color: black;
+  text-decoration: none;
+}
+
+/* ------------------ DASHBOARD ELEMENT ------------------ */
+.dashboardFullDiv {
+  background-color: rgb(221, 209, 176);
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  min-height: 60vh;
+  padding: 15px;
+  border-radius: 0px 5px 5px 5px;
+  margin-bottom: 25px;
+  align-items: center;
+}
+
+.dashboardHeader {
+  text-align: center;
+  color: black;
+}
+
+.userImage {
+  max-width: 40px;
+  margin: 10px;
+  border-radius: 20px;
+}
+
+.dashboardRow {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.dashboardTable {
+  padding: 20px;
+  background-color: #282c34;
+  margin: 10px;
+  width: 30%;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.dashboardLabel {
+  font-size: 20px;
+}
+
+.dashboardContent {
+  font-size: 35px;
+  font-weight: bold;
+}
+
+/* ------------------ HOMEPAGE ELEMENT ------------------ */
+.homepageText {
+  margin: 60px;
+  text-align: center;
+}
+
+.homepageWhite {
+  background-color: white;
+  color: black;
+  width: 100%;
+}
+
+.bookImage {
+  width: 75vh;
+  max-height: auto;
+  float: left;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.carousel {
+  display: flex;
+  justify-content: center;
+  height: 500;
+}
+
+.carousel-item,
+.carousel-inner {
+  height: 495px;
+  width: 880px;
+}
+
+.carousel-inner img {
+  width: 500;
+  height: auto;
+  border-top: 2px;
+  border-left: 2px;
+  border-right: 2px;
+  border-bottom: 2px;
+  border-color: white;
+  border-style: solid;
+}
+.bookTextDiv {
+  min-height: 525px;
+}
+/* ------------------ CHART DIV ELEMENT ------------------ */
+.chartWrapDiv {
+  min-width: 30%;
+}
+
+/* ------------------ RUNNING LINE CHART ELEMENT ------------------ */
+.RSLineChartArea {
+  background-color: #282c34;
+  border-radius: 3px;
+  margin: 15px 5px;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.runningScoreLine {
+  fill: none;
+  stroke: rgba(0, 152, 195, 0.8);
+  stroke-width: 3px;
+}
+
+.runningScoreLineCircle {
+  fill: lightcoral;
+}
+
+/* ------------------ TRUE LINE CHART ELEMENT ------------------ */
+.TSLineChartArea {
+  background-color: #282c34;
+  border-radius: 3px;
+  margin: 15px 5px;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.trueScoreLine {
+  fill: none;
+  stroke: rgba(0, 152, 195, 0.8);
+  stroke-width: 3px;
+}
+
+.trueScoreLineCircle {
+  fill: rgb(52, 78, 54);
+}
+
+/* ------------------ SENTI STACK CHART ELEMENT ------------------ */
+.SentiStackChartArea {
+  background-color: #282c34;
+  border-radius: 3px;
+  margin: 15px 5px;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.sentiStack {
+  fill: none;
+  stroke: rgba(0, 152, 195, 0.8);
+  stroke-width: 3px;
+}
+
+/* ------------------ ALERT ELEMENT ------------------ */
+.alertFullDiv {
+  background-color: rgba(245, 245, 245, 0.4);
+  min-width: 100vw;
+  min-height: 100vh;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  padding-top: 12vh;
+}
+
+.alertContainer {
+  /* background-color: rgb(211, 211, 211); */
+  width: 600px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  border-width: 3px;
+  border-color: black;
+  border-style: outset;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 7px 7px 15px rgba(100, 100, 100, 0.9);
+}
+
+.t0-alertContainer {
+  background-color: rgba(214, 133, 133, 1);
+}
+
+.t1-alertContainer {
+  background-color: rgba(224, 206, 172, 1);
+}
+
+.t2-alertContainer {
+  background-color: rgba(171, 235, 235, 1);
+}
+
+.t3-alertContainer {
+  background-color: rgba(211, 211, 211, 1);
+}
+
+.alertTextImgDiv {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 90%;
+  color: black;
+  font-size: 17px;
+}
+
+.alertTextDiv {
+  width: 35%;
+}
+
+.alertImg {
+  width: auto;
+  height: 150px;
+}
+
+.alertButton {
+  width: 125px;
+  height: 35px;
+  border-radius: 5px;
+  border-color: black;
+  border-width: 2px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.alertButton:hover {
+  background-color: lightskyblue;
+}
+
+/*------------------ FOOTER ELEMENT --------------------*/
+.footer {
+  width: 100%;
+  background-color: rgba(234, 234, 234, 1);
+  color: black;
+  text-align: center;
+  height: 10%;
+}
+
+/*------------------ HELP BUTTON ELEMENT --------------------*/
+.helpButton {
+  position: fixed;
+  right: 1%;
+  bottom: 2%;
+  display: block;
+  height: 75px;
+  width: 75px;
+  z-index: 1;
+}
+
+/*------------------ HELPBAR ELEMENT --------------------*/
+.sidebar {
+  height: calc(100% - 75px);
+  width: 0%;
+  position: fixed;
+  z-index: 2;
+  top: 75px;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  font-size: 12;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  font-size: 36px;
+}
+
+.sidebarText {
+  margin-left: 15px;
+  margin-right: 15px;
+  color: white;
+}
+
+.sidebarHeader {
+  text-align: center;
+  color: white;
+}
+
+/*------------------ DOCTOR ELEMENT --------------------*/
+.doctorHeader {
+  text-align: center;
+  color: black;
+}
+
+.doctorForm {
+  text-align: center;
+  color: black;
+}
+
+.doctorsList {
+  position: absolute;
+  border-top: 2px;
+  border-left: 2px;
+  border-right: 2px;
+  border-bottom: 2px;
+  border-color: white;
+  border-style: solid;
+  width: 50%;
+  height: 50%;
+  left: 10%;
+  top: 45%;
+}
