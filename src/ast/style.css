@@ -392,23 +392,8 @@ h6 {
 }
 
 /* ------------------ HOMEPAGE ELEMENT ------------------ */
-.homepageText {
-  margin: 60px;
-  text-align: center;
-}
-
-.homepageWhite {
-  background-color: white;
-  color: black;
-  width: 100%;
-}
-
-.bookImage {
-  width: 75vh;
-  max-height: auto;
-  float: left;
-  margin-left: 5%;
-  margin-right: 5%;
+.carouselFullDiv {
+  padding: 35px 0;
 }
 
 .carousel {
@@ -433,9 +418,84 @@ h6 {
   border-color: white;
   border-style: solid;
 }
-.bookTextDiv {
-  min-height: 525px;
+
+.homepageWhite {
+  background-color: white;
+  color: black;
+  width: 100%;
+  padding: 25px 50px;
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
 }
+
+.hpWhiteText {
+  width: 43%;
+}
+
+.hpWhiteHeader {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.bookTextFullDiv {
+  padding: 55px 0;
+  display: flex;
+}
+
+.bookImage {
+  width: 350px;
+  height: auto;
+  float: left;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.homepageDark {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-right: 105px;
+}
+
+.hpDarkHeader {
+  font-size: 35px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.hpDarkP {
+  font-size: 18px;
+  margin: 0;
+}
+
+.hpDarkEnd {
+  font-size: 22px;
+  font-style: italic;
+  margin: 0;
+}
+
+.footerDiv {
+  background-color: rgba(234, 234, 234, 1);
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 0;
+}
+
+.footerLink {
+  font-weight: bold;
+}
+
+.footerBottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+
 /* ------------------ CHART DIV ELEMENT ------------------ */
 .chartWrapDiv {
   min-width: 30%;
@@ -577,13 +637,6 @@ h6 {
 }
 
 /*------------------ FOOTER ELEMENT --------------------*/
-.footer {
-  width: 100%;
-  background-color: rgba(234, 234, 234, 1);
-  color: black;
-  text-align: center;
-  height: 10%;
-}
 
 /*------------------ HELP BUTTON ELEMENT --------------------*/
 .helpButton {
