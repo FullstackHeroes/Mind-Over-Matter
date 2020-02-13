@@ -93,8 +93,8 @@ class SentiStackD3 {
         [0, 0],
         [WIDTH, HEIGHT]
       ])
-      .on("end", d => vis.update(d));
-    // .on("end", vis.update);
+      // .on("end", d => vis.update(d));
+      .on("end", vis.update);
 
     // LEGEND CREATION
     const size = 10;
@@ -123,6 +123,7 @@ class SentiStackD3 {
       .text(d => d)
       .attr("text-anchor", "left")
       .style("alignment-baseline", "middle")
+      .style("font-size", 18)
       .on("mouseover", vis.highlight)
       .on("mouseleave", vis.noHighlight);
 
@@ -174,9 +175,9 @@ class SentiStackD3 {
       .append("path")
       .classed("sentiStack", true)
       .merge(stackChart)
-      .transition()
-      .ease(d3.easeLinear)
-      .duration(1000)
+      // .transition()
+      // .ease(d3.easeLinear)
+      // .duration(1000)
       .attr("class", d => `sentiArea ${d.key}`)
       // .style("fill", d => vis.color(d.key))
       .style("fill", (d, i) => vis.ownColor[i])
