@@ -191,11 +191,13 @@ h6 {
   margin-top: 0%;
   margin-bottom: 0em;
   padding-bottom: 0%;
+  flex-wrap: nowrap;
 }
 
 .manilaTabWidth {
   width: 52vw;
   display: flex;
+  flex-wrap: nowrap;
   flex-direction: row;
   align-items: flex-start;
   background-color: #282c34;
@@ -205,7 +207,6 @@ h6 {
 }
 
 .manilaTab {
-  display: inline-block;
   border-radius: 10px 10px 0px 0px;
   background-color: rgb(182, 171, 140);
   border-color: rgb(182, 171, 140);
@@ -216,14 +217,21 @@ h6 {
   margin-bottom: 0px;
   margin-left: 1px;
   margin-right: 1px;
-  width: 6em;
+  width: 15%;
   text-align: center;
+  padding: 5px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  flex: 0 0 4vh;
 }
 
 .selectedManilaTab {
+  flex: 0 0 4vh;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding: 5px;
   text-align: center;
-  display: inline-block;
-  width: 6em;
+  width: 15%;
   border-radius: 10px 10px 0px 0px;
   background-color: rgb(221, 209, 176);
   border-color: rgb(221, 209, 176);
