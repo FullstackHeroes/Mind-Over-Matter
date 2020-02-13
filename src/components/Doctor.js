@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import HelpBar from "./global/HelpBar";
 import zipcodes from "zipcodes";
 import axios from "axios";
+import secrets from "../../secrets";
 
 class Doctor extends Component {
   constructor() {
