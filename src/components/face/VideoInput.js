@@ -6,7 +6,8 @@ import { sentimentAlgo, dateCreate } from "../../utils/utilities";
 import {
   getTimeInterval,
   setFullScoreObj,
-  postFullScoreObj
+  postFullScoreObj,
+  noDetection
 } from "../../store";
 
 const WIDTH = 420;
@@ -77,7 +78,11 @@ class VideoInput extends Component {
 
               // POST INTO DB AND UPDATE GLOBAL STATE
               this.props.postFullScoreObj(this.props.fullScoreObj, newScoreObj);
-            } else console.error("Oh oh, no current webcam detection");
+            } else {
+              // NOT RECEIVING ANY DETECTIONS
+              this.props.noDetection();
+              console.error("Oh oh, no current webcam detection");
+            }
           }
         );
       }
@@ -128,7 +133,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(getTimeInterval(snapInterval, dbInterval)),
     setFullScoreObj: userId => dispatch(setFullScoreObj(userId)),
     postFullScoreObj: (fullScoreObj, newScoreObj) =>
-      dispatch(postFullScoreObj(fullScoreObj, newScoreObj))
+      dispatch(postFullScoreObj(fullScoreObj, newScoreObj)),
+    noDetection: () => dispatch(noDetection())
   };
 };
 

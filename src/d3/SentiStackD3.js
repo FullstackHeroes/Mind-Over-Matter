@@ -93,8 +93,8 @@ class SentiStackD3 {
         [0, 0],
         [WIDTH, HEIGHT]
       ])
-      .on("end", d => vis.update(d));
-    // .on("end", vis.update);
+      // .on("end", d => vis.update(d));
+      .on("end", vis.update);
 
     // LEGEND CREATION
     const size = 10;
@@ -123,6 +123,7 @@ class SentiStackD3 {
       .text(d => d)
       .attr("text-anchor", "left")
       .style("alignment-baseline", "middle")
+      .style("font-size", 18)
       .on("mouseover", vis.highlight)
       .on("mouseleave", vis.noHighlight);
 
