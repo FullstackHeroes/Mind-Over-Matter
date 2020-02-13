@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   render() {
-    const { user, sentimentDiff, threeHourSnapCount } = this.props;
+    const { user, sentimentDiff, threeHourSnapCount, detected } = this.props;
 
     return (
       <div className="appFullDiv">
@@ -25,6 +25,7 @@ class App extends Component {
           <PopUp
             sentimentDiff={sentimentDiff.slice(-1)}
             threeHourSnapCount={threeHourSnapCount}
+            detected={detected}
           />
         ) : null}
 
@@ -42,7 +43,8 @@ const mapStateToProps = state => {
   return {
     user: state.user,
     sentimentDiff: state.score.sentimentDiff,
-    threeHourSnapCount: state.score.threeHourSnapCount
+    threeHourSnapCount: state.score.threeHourSnapCount,
+    detected: state.score.detected
   };
 };
 
