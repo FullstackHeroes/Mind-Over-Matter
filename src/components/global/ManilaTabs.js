@@ -13,39 +13,31 @@ const ManilaTabHidden = props => {
   ) {
     return (
       <div className="manilaTabWidth">
-        <div className="manilaTabs">
-          <NavLink
-            to="/Dashboard"
-            className="linkText manilaTab"
-            activeClassName="selectedManilaTab"
-            exact>
+        {/* <div className="manilaTabs"> */}
+        <div className=" manilaTab" activeClassName="selectedManilaTab">
+          <NavLink to="/Dashboard" className="linkText" exact>
             Dashboard
           </NavLink>
-          <NavLink
-            to="/Table"
-            className="linkText manilaTab"
-            activeClassName="selectedManilaTab"
-            exact>
+        </div>
+        <div className=" manilaTab" activeClassName="selectedManilaTab">
+          <NavLink to="/Table" className="linkText" exact>
             Table
           </NavLink>
+        </div>
 
-          <NavLink
-            to="/Doctor"
-            className="linkText manilaTab"
-            activeClassName="selectedManilaTab"
-            exact>
+        <div className=" manilaTab" activeClassName="selectedManilaTab">
+          <NavLink to="/Doctor" className="linkText " exact>
             Doctors
           </NavLink>
+        </div>
 
-          <NavLink
-            to="/Article"
-            className="linkText manilaTab"
-            activeClassName="selectedManilaTab"
-            exact>
+        <div className=" manilaTab" activeClassName="selectedManilaTab">
+          <NavLink to="/Article" className="linkText" exact>
             Articles
           </NavLink>
         </div>
       </div>
+      // </div>
     );
   }
   return null;
