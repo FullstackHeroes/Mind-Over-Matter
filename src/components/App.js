@@ -8,6 +8,7 @@ import Routes from "./Routes";
 import VideoInput from "./face/VideoInput";
 import NavBar from "./global/NavBar";
 import PopUp from "./alert/PopUp";
+import ManilaTabVisible from "./global/ManilaTabs";
 
 class App extends Component {
   componentDidMount() {
@@ -27,11 +28,13 @@ class App extends Component {
             threeHourSnapCount={threeHourSnapCount}
           />
         ) : null}
+        <div className="manilaContainer">
+          <ManilaTabVisible />
+          <div className="appInsideDiv">
+            {user && user.id ? <VideoInput /> : null}
 
-        <div className="appInsideDiv">
-          {user && user.id ? <VideoInput /> : null}
-
-          <Routes />
+            <Routes />
+          </div>
         </div>
       </div>
     );
