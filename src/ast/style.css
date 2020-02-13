@@ -392,6 +392,10 @@ h6 {
 }
 
 /* ------------------ HOMEPAGE ELEMENT ------------------ */
+.carouselFullDiv {
+  padding: 35px 0;
+}
+
 .carousel {
   display: flex;
   justify-content: center;
