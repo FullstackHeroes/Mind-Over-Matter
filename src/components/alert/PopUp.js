@@ -9,7 +9,7 @@ class PopUp extends Component {
     this.state = {
       lastAlert: dateCreate(),
       timeAlert: dateCreate(),
-      statusCap: 1000 * 10, // SECONDS
+      statusCap: 1000 * 15, // SECONDS
       timeCap: 1000 * 30, // SECONDS
       timeCountCap: (60000 * 5) / snapIntDefault // COUNT CONVERSION IN MINS
     };
@@ -54,13 +54,14 @@ class PopUp extends Component {
   };
 
   render() {
-    const { sentimentDiff, threeHourSnapCount } = this.props;
+    const { sentimentDiff, threeHourSnapCount, detected } = this.props;
 
     return (
       <div className="popUpFullDiv">
         {sentimentDiff &&
         sentimentDiff.length &&
         threeHourSnapCount &&
+        detected &&
         this.showPopUp
           ? this.showHelp(
               sentimentDiff[0].sentimentDiff * 100,
