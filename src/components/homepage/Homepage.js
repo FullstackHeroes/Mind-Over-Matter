@@ -32,9 +32,9 @@ const Homepage = () => (
         className="bookImage"
         src="https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=375&w=630"></img>
 
-      <div className="homepageText">
-        <h3>How Can We Help?</h3>
-        <p>
+      <div className="homepageDark">
+        <h3 className="hpDarkHeader">How Can We Help?</h3>
+        <p className="hpDarkP">
           We provide more than just feedback. We present our data findings in
           digestible pieces such as tables, graphs and charts. We supply
           educational articles and readings to enable you to take better care of
@@ -42,8 +42,9 @@ const Homepage = () => (
           professional near you easy. We're with you all the way in your journey
           to better health.
         </p>
-        <br></br>
-        <p>Here at Mind Over Matter, we take care of you.</p>
+        <p className="hpDarkEnd">
+          Here at Mind Over Matter, we take care of you.
+        </p>
       </div>
     </div>
 
