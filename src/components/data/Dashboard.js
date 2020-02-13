@@ -25,8 +25,6 @@ class Dashboard extends Component {
       detected
     } = this.props;
 
-    console.log("render -", detected);
-
     return (
       <div className="dashboardTotalDiv">
         {!detected ? (
