@@ -392,25 +392,6 @@ h6 {
 }
 
 /* ------------------ HOMEPAGE ELEMENT ------------------ */
-.homepageText {
-  margin: 60px;
-  text-align: center;
-}
-
-.homepageWhite {
-  background-color: white;
-  color: black;
-  width: 100%;
-}
-
-.bookImage {
-  width: 75vh;
-  max-height: auto;
-  float: left;
-  margin-left: 5%;
-  margin-right: 5%;
-}
-
 .carousel {
   display: flex;
   justify-content: center;
@@ -433,9 +414,40 @@ h6 {
   border-color: white;
   border-style: solid;
 }
-.bookTextDiv {
-  min-height: 525px;
+
+.homepageWhite {
+  background-color: white;
+  color: black;
+  width: 100%;
+  padding: 25px 50px;
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
 }
+
+.hpWhiteText {
+  width: 43%;
+}
+
+.hpWhiteHeader {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.bookTextFullDiv {
+  /* min-height: 525px; */
+  padding: 30px 0;
+}
+
+.bookImage {
+  width: 75vh;
+  max-height: auto;
+  float: left;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
 /* ------------------ CHART DIV ELEMENT ------------------ */
 .chartWrapDiv {
   min-width: 30%;

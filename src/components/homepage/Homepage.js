@@ -1,36 +1,37 @@
 import React from "react";
-import { render } from "react-dom";
 import Carousel from "./Carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Homepage = () => (
-  <div>
+  <div className="homePageFullDiv">
     <Carousel />
+
     <div className="homepageWhite">
-      <div className="homepageText">
-        <br></br>
-        <h3>What Is Mind Over Matter?</h3>
-        <p>
+      <div className="hpWhiteOne hpWhiteText">
+        <h3 className="hpWhiteHeader">What Is Mind Over Matter?</h3>
+        <p className="hpWhiteP">
           Mind Over Matter is a mental health analytics program that analyzes
           your emotional state and mental wellbeing as you progress through your
           day. We record this data and provide feedback to help you improve your
           health.
         </p>
-        <br></br>
-        <h3>Why Should I Use Mind Over Matter?</h3>
-        <p>
+      </div>
+
+      <div className="hpWhiteTwo hpWhiteText">
+        <h3 className="hpWhiteHeader">Why Use Mind Over Matter?</h3>
+        <p className="hpWhiteP">
           Mental health is almost always overlooked and not taken seriously. We
           want to change that. Our purpose is to help those in need and make
           people more aware of their wellbeing.
         </p>
-        <br></br>
       </div>
     </div>
 
-    <div className="bookTextDiv">
+    <div className="bookTextFullDiv">
       <img
         className="bookImage"
         src="https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=375&w=630"></img>
+
       <div className="homepageText">
         <h3>How Can We Help?</h3>
         <p>

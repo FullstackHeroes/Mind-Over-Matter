@@ -1,7 +1,7 @@
 import React from "react";
 
 export default () => (
-  <div>
+  <div className="carouselFullDiv">
     <div id="reviews" className="container-fluid">
       <div
         id="carouselExampleIndicators"
