@@ -54,13 +54,14 @@ class PopUp extends Component {
   };
 
   render() {
-    const { sentimentDiff, threeHourSnapCount } = this.props;
+    const { sentimentDiff, threeHourSnapCount, detected } = this.props;
 
     return (
       <div className="popUpFullDiv">
         {sentimentDiff &&
         sentimentDiff.length &&
         threeHourSnapCount &&
+        detected &&
         this.showPopUp
           ? this.showHelp(
               sentimentDiff[0].sentimentDiff * 100,

@@ -151,7 +151,8 @@ export const updateAll = AllObj => {
     threeHourSnapCount,
     screenMinsToday,
     screenMinsYesterday,
-    screenHoursWeek
+    screenHoursWeek,
+    detected
   } = AllObj;
   return {
     type: UPDATE_ALL,
