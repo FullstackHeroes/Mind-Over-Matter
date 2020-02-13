@@ -28,7 +28,9 @@ class Dashboard extends Component {
     return (
       <div className="dashboardTotalDiv">
         {!detected ? (
-          <div className="detectionFullDiv">No current detection</div>
+          <div className="detectionFullDiv">
+            <p className="detectionText">No current detection</p>
+          </div>
         ) : null}
 
         <div className="dashboardFullDiv">

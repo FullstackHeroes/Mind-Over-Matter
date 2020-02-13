@@ -381,6 +381,11 @@ h6 {
   padding: 18px;
   z-index: 10;
   position: absolute;
+}
+
+.detectionText {
+  z-index: 10;
+  position: fixed;
   color: orangered;
   font-size: 15px;
   font-weight: bold;
