@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-// import logo from "../../images/logo.svg";
 import { logout } from "../../store";
 
 class NavBar extends Component {

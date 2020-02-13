@@ -14,7 +14,6 @@ const ManilaTabHidden = props => {
     return (
       <div className="manilaTabWidth">
         <div className="manilaTabs">
-          {/* <div className="manilaTab" activeClassName="selectedManilaTab"> */}
           <NavLink
             to="/Dashboard"
             className="linkText manilaTab"
@@ -22,8 +21,6 @@ const ManilaTabHidden = props => {
             exact>
             Dashboard
           </NavLink>
-          {/* </div>
-        <div className="manilaTab" activeClassName="selectedManilaTab"> */}
           <NavLink
             to="/Table"
             className="linkText manilaTab"
@@ -49,7 +46,6 @@ const ManilaTabHidden = props => {
           </NavLink>
         </div>
       </div>
-      // </div>
     );
   }
   return null;
