@@ -193,6 +193,8 @@ padding-top: 90px;  movign this padding to manilaContainer
   padding-bottom: 0%;
 } */
 .manilaContainer {
+  display: flex;
+  flex-direction: column;
   padding-top: 90px;
   min-height: 100vh;
   width: 100vw;
@@ -207,8 +209,10 @@ padding-top: 90px;  movign this padding to manilaContainer
   flex-direction: row;
   align-items: flex-start;
   background-color: #282c34;
-  height: 37px;
+  /* height: 37px; */
   margin-left: 5vw;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
   /* justify-content: space-around; */
 }
 
@@ -226,19 +230,27 @@ padding-top: 90px;  movign this padding to manilaContainer
 
 .manilaTab {
   padding: 0 30px;
-  border-radius: 5px 5px 0px 0px;
+  border-radius: 10px 10px 0px 0px;
   background-color: rgb(182, 171, 140);
-  border-color: black;
+  border-color: rgb(182, 171, 140);
   border-width: 1px;
   align-self: flex-start;
+  border-style: solid;
+  border-width: 1px 1px 8px 1px;
+  margin-bottom: 0px;
+  margin-left: 1px;
+  margin-right: 1px;
 }
 
 .selectedManilaTab {
   padding: 0 30px;
-  border-radius: 5px 5px 0px 0px;
+  border-radius: 10px 10px 0px 0px;
   background-color: rgb(221, 209, 176);
-  border-color: rgba(0, 152, 195, 0.8);
+  border-color: rgb(221, 209, 176);
   border-width: 1px;
+  border-style: solid;
+  border-width: 1px 1px 8px 1px;
+  margin-bottom: 0px;
 }
 /* 
 .manilaTabFullDiv {
@@ -298,7 +310,7 @@ padding-top: 90px;  movign this padding to manilaContainer
   justify-content: center;
   width: 100vw;
   min-height: 100vh;
-  padding-top: 90px;
+  /* padding-top: 90px; */
   margin-top: 0%;
   margin-bottom: 0em;
   padding-bottom: 0%;
@@ -306,13 +318,28 @@ padding-top: 90px;  movign this padding to manilaContainer
 
 /* ------------------ TABLE ELEMENT ------------------ */
 .tableFullDiv {
-  display: flex;
+  /* display: flex;
   justify-content: space-evenly;
   width: 80%;
-  padding: 0 15px;
+  padding: 0 25px;
   text-align: center;
   border-collapse: collapse;
   border-spacing: 0;
+  background-color: rgb(221, 209, 176); */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 90vw;
+  min-height: 65vh;
+  padding: 15px;
+  padding-top: 45px;
+  text-align: center;
+  border-collapse: collapse;
+  border-spacing: 10px;
+  background-color: rgb(221, 209, 176);
+  border-radius: 0px 10px 10px 10px;
+  /* margin-top: 100px; */
+  scroll-padding-top: 50px;
 }
 
 .tableHeader {
@@ -338,6 +365,7 @@ padding-top: 90px;  movign this padding to manilaContainer
 }
 
 .tableDataRow {
+  background-color: #282c34;
   font-size: 14px;
   width: 80px;
   border-style: solid;
@@ -393,10 +421,11 @@ padding-top: 90px;  movign this padding to manilaContainer
   display: flex;
   flex-direction: column;
   width: 90vw;
-  /* min-height: 60vh; */
+  min-height: 65vh;
   height: 100%;
-  padding: 15px;
-  border-radius: 5px;
+  padding: 25px;
+  border-radius: 0px 10px 10px 10px;
+  margin-top: 0px;
   /* margin-bottom: 25px; */
   align-items: center;
 }
@@ -786,12 +815,13 @@ padding-top: 90px;  movign this padding to manilaContainer
 .articleListFullDiv {
   background-color: rgb(221, 209, 176);
   width: 80vw;
-  border-radius: 5px;
+  border-radius: 0px 10px 10px 10px;
   display: flex;
   flex-direction: column;
   padding: 20px;
   color: black;
   margin-bottom: 35px;
+  width: 90vw;
 }
 
 .articleHeader {
