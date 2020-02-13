@@ -162,7 +162,8 @@ export const updateAll = AllObj => {
     threeHourSnapCount,
     screenMinsToday,
     screenMinsYesterday,
-    screenHoursWeek
+    screenHoursWeek,
+    detected
   };
 };
 
@@ -198,7 +199,8 @@ export const setFullScoreObj = userId => {
             threeHourSnapCount,
             screenMinsToday,
             screenMinsYesterday,
-            screenHoursWeek
+            screenHoursWeek,
+            detected: false
           })
         );
       } else dispatch(getFullScoreObj([]));
@@ -245,7 +247,8 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
           threeHourSnapCount,
           screenMinsToday,
           screenMinsYesterday,
-          screenHoursWeek
+          screenHoursWeek,
+          detected: true
         })
       );
     } catch (error) {
@@ -327,7 +330,7 @@ const scoreReducer = (state = initialState, action) => {
         screenMinsToday: action.screenMinsToday,
         screenMinsYesterday: action.screenMinsYesterday,
         screenHoursWeek: action.screenHoursWeek,
-        detected: true
+        detected: action.detected
       };
     default:
       return state;

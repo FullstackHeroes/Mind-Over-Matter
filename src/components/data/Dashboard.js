@@ -25,6 +25,8 @@ class Dashboard extends Component {
       detected
     } = this.props;
 
+    console.log("render -", detected);
+
     return (
       <div className="dashboardFullDiv">
         <h3 className="dashboardHeader">
