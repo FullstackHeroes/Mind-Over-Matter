@@ -21,7 +21,8 @@ class Dashboard extends Component {
       sentimentDiff,
       todaysScreenMins,
       yesterdaysScreenMins,
-      weeksScreenHours
+      weeksScreenHours,
+      detected
     } = this.props;
 
     return (
@@ -30,14 +31,18 @@ class Dashboard extends Component {
           Hi, <strong className="dashboardName">{user.name}</strong>!
         </h3>
 
+        {!detected ? <div className="detectionFullDiv">Hm</div> : null}
+
         <div className="dashboardRowOne dashboardRow">
           <div className="dashboardTable">
             <ScreenTimeToday todaysScreenHours={todaysScreenMins} />
             <ScreenTimeYesterday yesterdaysScreenHours={yesterdaysScreenMins} />
           </div>
+
           <div className="dashboardTable">
             <ScreenMinsToday todaysScreenMins={todaysScreenMins} />
           </div>
+
           <div className="dashboardTable">
             <ScreenTimeWeek weeksScreenHours={weeksScreenHours} />
           </div>
@@ -46,6 +51,7 @@ class Dashboard extends Component {
         <div className="dashboardRowTwo dashboardRow">
           <div className="dashboardTable">
             <span className="dashboardLabel">Normalized Score</span>
+
             <span className="dashboardContent">
               {normalizedScore.length
                 ? normalizedScore[
@@ -59,6 +65,7 @@ class Dashboard extends Component {
             <span className="dashboardLabel">
               Running True Score {"&"} Variance
             </span>
+
             <span className="dashboardContent">
               {runningScore.length
                 ? runningScore[runningScore.length - 1].runningScore.toFixed(3)
@@ -75,6 +82,7 @@ class Dashboard extends Component {
 
           <div className="dashboardTable">
             <span className="dashboardLabel">Latest True Score</span>
+
             <span className="dashboardContent">
               {fullScoreObj.length
                 ? fullScoreObj[fullScoreObj.length - 1].trueScore.toFixed(3)
@@ -118,7 +126,8 @@ const mapStateToProps = state => {
     sentimentDiff: state.score.sentimentDiff,
     todaysScreenMins: state.score.screenMinsToday,
     yesterdaysScreenMins: state.score.screenMinsYesterday,
-    weeksScreenHours: state.score.screenHoursWeek
+    weeksScreenHours: state.score.screenHoursWeek,
+    detected: state.score.detected
   };
 };
 

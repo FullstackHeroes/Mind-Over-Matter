@@ -19,7 +19,8 @@ const initialState = {
   threeHourSnapCount: 0,
   screenMinsToday: 0,
   screenMinsYesterday: 0,
-  screenHoursWeek: 0
+  screenHoursWeek: 0,
+  detected: false
 };
 
 // ACTION TYPES
@@ -36,6 +37,7 @@ const ADD_FULL_SCORE_OBJ = "ADD_FULL_SCORE_OBJ";
 const ADD_NORMALIZED_SCORE = "ADD_NORMALIZED_SCORE";
 const ADD_RUNNING_SCORE = "ADD_RUNNING_SCORE";
 const ADD_SENTIMENT_DIFF = "ADD_SENTIMENT_DIFF";
+const UPDATE_DETECTION = "UPDATE_DETECTION";
 const UPDATE_ALL = "UPDATE_ALL";
 
 // ACTION CREATORS
@@ -134,6 +136,12 @@ export const addSentimentDiff = sentimentDiff => {
   };
 };
 
+export const updateDetection = () => {
+  return {
+    type: UPDATE_DETECTION
+  };
+};
+
 export const updateAll = AllObj => {
   const {
     fullScoreObj,
@@ -159,6 +167,12 @@ export const updateAll = AllObj => {
 };
 
 // THUNKY THUNKS
+export const noDetection = () => {
+  return dispatch => {
+    dispatch(updateDetection());
+  };
+};
+
 export const setFullScoreObj = userId => {
   return async dispatch => {
     try {
@@ -297,6 +311,11 @@ const scoreReducer = (state = initialState, action) => {
         ...state,
         sentimentDiff: [...state.sentimentDiff, action.sentimentDiff]
       };
+    case UPDATE_DETECTION:
+      return {
+        ...state,
+        detected: false
+      };
     case UPDATE_ALL:
       return {
         ...state,
@@ -307,7 +326,8 @@ const scoreReducer = (state = initialState, action) => {
         threeHourSnapCount: action.threeHourSnapCount,
         screenMinsToday: action.screenMinsToday,
         screenMinsYesterday: action.screenMinsYesterday,
-        screenHoursWeek: action.screenHoursWeek
+        screenHoursWeek: action.screenHoursWeek,
+        detected: true
       };
     default:
       return state;
