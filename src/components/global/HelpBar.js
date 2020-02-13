@@ -52,7 +52,7 @@ export default () => (
       <form className="sidebarText">
         <div className="form-group">
           <label>
-            <small>Email Alllddress</small>
+            <small>Email Address</small>
           </label>
           <input
             type="email"
