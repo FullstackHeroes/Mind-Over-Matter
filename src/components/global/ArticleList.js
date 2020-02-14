@@ -32,7 +32,7 @@ class ArticleList extends Component {
 
         {articles && articles.length ? (
           <p className="articleCredit">
-            Thanks and credits to <strong>Science Daily</strong>
+            © Thanks and credits to <strong>Science Daily</strong>
           </p>
         ) : null}
       </div>
