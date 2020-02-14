@@ -50,7 +50,8 @@ class Doctor extends Component {
     const doctorArr = [];
 
     for (let i = 0; i < res.data.data.length; i++) {
-      const doctorObj = {};
+      const doctorObj = {},
+        phone = res.data.data[i].practices[0].phones[0].number;
       doctorObj.id = i;
       doctorObj.firstName = res.data.data[i].profile.first_name;
       doctorObj.lastName = res.data.data[i].profile.last_name;
@@ -58,7 +59,10 @@ class Doctor extends Component {
       doctorObj.city = res.data.data[i].practices[0].visit_address.city;
       doctorObj.state = res.data.data[i].practices[0].visit_address.state;
       doctorObj.zip = res.data.data[i].practices[0].visit_address.zip;
-      doctorObj.phone = res.data.data[i].practices[0].phones[0].number;
+      doctorObj.phone = `(${phone.slice(0, 3)}) ${phone.slice(
+        3,
+        6
+      )}-${phone.slice(6)}`;
       doctorArr.push(doctorObj);
     }
     this.setState({ doctorList: doctorArr, zipcode: "" });
