@@ -68,7 +68,7 @@ class Doctor extends Component {
     var code = event.keyCode || event.which;
 
     if (code === 13) {
-      //13 is the enter keycode
+      // 13 IS ENTER BUTTON
       event.preventDefault();
       this.getZipCode();
     }
@@ -76,13 +76,12 @@ class Doctor extends Component {
   render() {
     return (
       <div className="dashboardFullDiv">
-        <div className="doctorHeader">
-          <h1>Find A Doctor</h1>
-        </div>
+        <h1 className="doctorHeader">Find A Doctor</h1>
 
         <form className="doctorForm">
           <label className="doctorLabel">
             <small className="doctorLabelText">Enter Zip Code:</small>
+
             <input
               type="text"
               id="zipInput"
@@ -95,6 +94,7 @@ class Doctor extends Component {
               maxLength="5"
             />
           </label>
+
           <button
             id="zipSubmit"
             type="button"
@@ -119,6 +119,7 @@ class Doctor extends Component {
               </tr>
             </thead>
           </table>
+
           {this.state.doctorList.map(doctor => (
             <table className="doctorTable" key={doctor.id}>
               <tbody>

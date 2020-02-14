@@ -334,7 +334,7 @@ h6 {
 }
 
 .csvFullDiv {
-  background-color: rgb(150, 150, 150);
+  background-color: rgb(165, 165, 165);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -745,6 +745,8 @@ h6 {
 .doctorHeader {
   text-align: center;
   color: black;
+  font-weight: bold;
+  font-size: 35px;
 }
 
 .doctorForm {
@@ -787,7 +789,7 @@ h6 {
   justify-content: space-around;
   align-items: center;
   min-width: 300px;
-  margin-top: 25px;
+  margin: 20px 0;
 }
 
 .doctorLabelText {
