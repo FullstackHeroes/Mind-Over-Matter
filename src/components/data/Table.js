@@ -62,7 +62,7 @@ class Table extends Component {
 
         {user && fullScoreObj && fullScoreObj.length ? (
           <div className="csvFullDiv">
-            <span className="csvHeaderText">Download My Results</span>
+            <span className="csvHeaderText">Download Your Results</span>
 
             <button className="csvBtnLimitHistory csvBtn">
               <CSVLink

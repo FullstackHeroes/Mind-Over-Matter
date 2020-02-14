@@ -211,7 +211,7 @@ h6 {
   background-color: rgb(182, 171, 140);
   border-color: black;
   border-style: solid;
-  border-width: 0px 1px 0px 1px;
+  border-width: 0px 2px 0px 0px;
   width: 15%;
   max-width: 200px;
   height: 32px;
@@ -289,25 +289,22 @@ h6 {
 
 /* ------------------ TABLE ELEMENT ------------------ */
 .tableFullDiv {
+  background-color: rgb(221, 209, 176);
   display: flex;
-  flex-direction: row;
   justify-content: space-evenly;
   width: 90vw;
   min-height: 65vh;
-  padding: 15px;
-  padding-top: 45px;
-  text-align: center;
-  border-collapse: collapse;
-  border-spacing: 10px;
-  background-color: rgb(221, 209, 176);
+  height: 100%;
+  padding: 25px;
+  padding-top: 40px;
   border-radius: 0px 10px 10px 10px;
-  scroll-padding-top: 50px;
 }
 
 .tableHeader {
   border-spacing: 0;
   display: flex;
   justify-content: space-evenly;
+  text-align: center;
 }
 
 .tableHeaderRow {
@@ -324,6 +321,7 @@ h6 {
   display: flex;
   justify-content: space-evenly;
   color: whitesmoke;
+  text-align: center;
 }
 
 .tableDataRow {
@@ -336,8 +334,8 @@ h6 {
 }
 
 .csvFullDiv {
-  background-color: lightgray;
-  border-radius: 3px;
+  background-color: rgb(150, 150, 150);
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -351,6 +349,7 @@ h6 {
 .csvHeaderText {
   color: black;
   font-weight: bold;
+  font-size: 25px;
 }
 
 .csvBtn {
