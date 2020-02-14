@@ -85,23 +85,25 @@ class Doctor extends Component {
             <input
               type="text"
               id="zipInput"
-              className="form-control"
-              placeholder="Zip Code"
+              className="doctorInput"
               name="zipcode"
               value={this.state.zipcode}
               onChange={this.handleZipCode}
               onKeyPress={this.enterPressed}
               maxLength="5"
+              placeholder="Zip Code"
+              onFocus={e => (e.target.placeholder = "")}
+              onBlur={e => (e.target.placeholder = "Zip Code")}
             />
-          </label>
 
-          <button
-            id="zipSubmit"
-            type="button"
-            className="btn btn-dark"
-            onClick={this.getZipCode}>
-            Search
-          </button>
+            <button
+              id="zipSubmit"
+              type="button"
+              className="btn btn-dark"
+              onClick={this.getZipCode}>
+              Search
+            </button>
+          </label>
         </form>
 
         <br></br>
