@@ -14,6 +14,8 @@ export default () => (
             className="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
         </ol>
         <div className="carousel-inner">
           <div className="carousel-item active">
@@ -26,14 +28,28 @@ export default () => (
           <div className="carousel-item">
             <img
               className="img-fluid"
-              src="https://lh3.googleusercontent.com/QpdcMe560Mx5OpEXKNGg8QEgkJmeIe3CKyg1h77Fu_zM9T0UxHbmx71MhEhV7WMS9Q7H7FchPmJ--jcUYOuBBq6TvoLi0INsGJiA-a_izRzEqNW92Ho7FTjhh69w6uReOofYzMi38Sr9GkqlvnvxMXCPvW0gc_9Uj1XUPX78nQW8I7-hpBf6mMMY74e4AWXKzj2L0FPGU0IiyTD2hwobkplM2Hb0G3MnD0URYDwdMyvkDxg158dokjj_4ulGUzYDm95zqYHt3CpLvnqSSwOqpGXuc4MlQzbF1DSMGEGaIkq_T9iEEW_fk10UC8HUa1BTM06q6LlgYvuOfR-ydObEd9WX0xNA0_pr9tzJUp20SmZMgcC4GpDOnhXQ4kAEwayVRGbck8r4zlrTDdwYoqUG8ynPntisOtaZ1mp6OZGOi8qKn5rXI92isZ5xjy7Y1ojsLL5xBw2vCJ453guVA_3_K4ndKL4LZly-b3AufwoZa1o3eHjEuj_f1mJ6fz89a9Tx71AG9eFBEn0pl2AD16zc-7UxvCBHoyPec2xaM5aA-j3tQRkKmj4wDYExihkL0jIQCphRc1uHbXNVBHSpVKCBjIEWKPk-1JF99aNpJgHA8RzplqfPTpX9QU39e_y_lQB-PmJadOXbmd-mIbQMNiRxZuaMuTMGtr-d6VsI2ndVR4jV9cQbODOSYQVE_d3bvIZ6zujlVWqjZtO8qkDVdip3H9Li6PW12eV-RKFnfInxlDnxBbP4=w1919-h946-no"
+              src="https://lh3.googleusercontent.com/fiFW69JO9uoo14caTekUSTqKOrN5V0PHwooKp5zUKwI7KC-3qBPqrE_02HOIw6wplBH-9Kxvd7Fv_U_qRHrMkXCwnf3rZ6rApIsln62ox54oSOl8dmCdUXsKJRQnhXd2FO8oapkDn5jO_3yt2Oa9V-DGkUNPfE8CeT4jer7tifV_wa_48K-7DLNN7NqEXQNzsk0lUhkcGf0-gDvivLe2pPN0UheknvRiXR7-yFpyjZ37RFOmKNnyjkBY194P7CFi4pjyEqol0zcj014--5DzD66DAlNQQOpSx6qD1wOQv66WdX16bfTgyYsZtWmFTDiMR04IzoeG6ty7S3UXkO3qdNl-fLS_QAboBZPnV9FaWiSI075xhRXWjkBXagmnN-Y_2QTEVjGo6lxdBfGyXCn0ZyAACUyxpC-MJYa8G2J_S9KudekAzeAFybq11723T_WIfHb3Vlz7hIbcvCGKcA4ULn093i7SjB74UcB-zJVwds5mj7K985MjkWur4N4gMvg1FaiO6LYhcRYdlDzSM3T1_IxrAeA_xyTBhUwE3IyAiLmvi36ohDKUUss4ZI-qWeosuRxWjwp8tmzDc06bJ71HgLOPvxslPRQ3xOgkbIxYjlIzRM-sID3dIgTnGkfhKLBydIFpFR14EwCsP9yjNoIxKQXWYm80VpvNY2mg2XtEjVR8wi2U2yCNYkwSAu-rOFZQIhd3699ACLdP573kfWccxmpdzjECFz7IkE9bBZgOyoCP2wb1=w1440-h708-no"
               alt="Mind Over Matter"></img>
             <div className="carousel-caption d-md-block"></div>
           </div>
           <div className="carousel-item">
             <img
               className="img-fluid"
-              src="https://lh3.googleusercontent.com/aXp4UUYmxenwa_M7jZa6b7-WflQuT8g8nYkbw6kzvtDF7oWnaULikVOlR69FvsxteKRYBW46NzmfpTJa5tQ3p2yZyUpp5_A21n_xeYgJGNCLm9c2YcsjX1aqQVmPAKtjLtZ6e3RLq0HNGd6AfdTFRZaJtAh-B38zFGVT9PvntOghOOQtiYAj9VuYBf7sYxOjsQ5A0q71qtiSdEePtPcMCRHDDeNIOfMv0n7l4wt25L8Gk3h3cTdlqYV3_FpWq9U_MAcjJ7nvchSjDYFUb3--Z09ii5rCGhfC2ybjmDcXLQ4eNNzjDpetVOZBZ-o-yToGZNMvBhet9I2MiWv50ckB0Hp7Lgr4_H4yfPyEUlDi4zsGOaL67GMyARf8eGkIB7ZX0j2Y0lj3k39jaI85wZz15x60fMdH73pPIWFgi3CMTHiyli_gWYEB4F8kwd0BCVEw0AuH4mZffdM-jaWu_NVKf4YIvzGQrcKIKvCv5fidvYpDK5lNH5rzzQMOnfffGnJ1oNxiOvozmvgv05aYCW2Ao5TpHjW4IqZpE1s5coziGuNZfDJewGR5qkKycceC78YzlfBrrCYJqQYkMBYAMrg3P6iT_C3yzmbL8pt3LyzyEIzIfBFlaNn6S_G9nsV3JpVBItof5eRtzGTV-tx0uUy1r-k1Ix2KG29Y_u7DuqzWQ01RkntBlKu9aha2wjK_CrGqS27AAXc-ah54IokXhWKf03eHrWwaM-drZI135EUh_dFFFAYL=w1919-h946-no"
+              src="https://lh3.googleusercontent.com/u3HmpiP2VDI4soirdkJElO_RKDr_NwDW5GJi-Hs8T7sBtobPrD6WlxMoME6AAzRi0yCADSS5W_7NOk5KzZdOhLL1j0j6KbbLIwKrV6ugtIlvvEGoDxjKLny1036K2VfkjOfR2w8kwrVvnujO7Ws-NMPcOnevrHyv24IJ49mlzNi6aI4nj2q0977FD3oxNsXYZYT6ouS1DL1NxFIzltmHam5KOhKcFILk939sFV4KBV9ujMC7FJWxYe4oy1yqDTKDETZmkfyAOWfunPkUQwjybLJIEQluiB7-b22eG8wW42nc--THP-Jkp3auOf3vKfbHjnJS5E3fQINMr5cLzSJ_8nPPXEWbeH-R89pCKclBLPZ8TBb4vvU0YAIoPapIdRXdmdyh0fUYIrPufRM34-_NG6_CSsKmqJBPdeeRYcNaZ8-IczplTNly3FnjRtzZgf8AgRPKVnkmKzA-9QjpPRN45-K8Hto8yP3YAS_d_cHVMc3Za-mLCtN1u1KlpVo_G6VE0czImy1lt7k1kI9abXvin2LbttHCrNYK9UjgIwYK_frqj_QEnr1kEKuliCKuB-fUxfrRarKmSKvGDMoM3AiApuc2oGIpEUbxaMElVOM9Xw4DZpvcUAa4S1J2X44ft_pJz83xCo8t0CrpdjG2aPjlHaY2VQ2Znuy8GZDPWhWz7ILYpvEmhueOHRzXynle9xiSjD9GMCSYMZyR2-A4-oZtPh2soqLTHGojssfWFSl81DOa9yCs=w1920-h944-no"
+              alt="Mind Over Matter"></img>
+            <div className="carousel-caption d-md-block"></div>
+          </div>
+          <div className="carousel-item">
+            <img
+              className="img-fluid"
+              src="https://lh3.googleusercontent.com/mx0pzKEKC20cDxjwH1gJBJ87ap-5thN8N-yBD7BwQAeQr4iGJUdwXeO7VemDJHWNJ3PTFPphiq9R42Ue9o1mQ5LTDNKu5mro90PjG-eZOvefwrpCkuwgoUVMq_FIg-vuCQ6ABNNE3YXbghq0xwKSgdPtral_F6GT6A0MuOL1xJGY1R18fjF3YY5Z0jMXyVt6nOVMQTCVFbYvT9XPZdSiKlMASk1ePzx147dttrZ9C8m4aNDB8kKhguObtfDVNjv1_fCPwpPoX6eEo6gCEt5GjvgGoY1YXBvlzn47o2z6z7VtFfX1aTPL5AGw9zJb8AezkMYAItxoelm9xv0E2rRTSsgZRaVAddG3BU2wFFRJ_GUNG9iyvc4B2hOMISf0rDwUD_vDReSN-7BEL-73LEDtiYpfeqhuObZQpQfd6YprFRsrAsKGN_MTXv-Mb80NKqdaI0deloOPP-zFxD-GKCGg_9aZsLQOUWECqhXu_YVgtBnA9fRItxjs2vxzy5mhGDHdT8J0gcsq5G6hXz_pVw2QP5B1-9uZ8S5c_3e9HrI_ZpGaLqWOXpwD4_ypSXn_Ch5mXeGFPB2dadyXhYQJeenke5x_cCErcwh--cd-G74-kbgsFFBfVvyF0b3MciT1lj7zy_ayQzlnUO4oa50abNRDnjBJ7Gw4JEh5D2cJhK9njhbN7U40XWnSDYRIaJ344dxL9skUOiK5ddFCIxY3Ag5NrFzLVPX7PZX5zRS9qJQPobEPXSG3=w1920-h944-no"
+              alt="Mind Over Matter"></img>
+            <div className="carousel-caption d-md-block"></div>
+          </div>
+          <div className="carousel-item">
+            <img
+              className="img-fluid"
+              src="https://lh3.googleusercontent.com/8XKBLF3Qzfht4o8Olm27hXsnUkPTYSTys96iQ5X1dilqRIu8n4NLm3UyNd88reVouqPdiRktdq1swDvfwvavAnX48JPR_LfltTz6qviZzGmRh6F1hm7cDxbNOmWL0xnKk16P0y7WCEbcmSC-J_6mtke6CWNlckR8h9Q8yFzl8r2CkqaK8dNUgDh2uHOxWFIDI3GuihPAh71onTs8p2dSWhO5Bc2DX8ubjZ_ss3vGyTnjzBvbtvKdG5lHNyYJgemT4hG5SY2EXso8IOhcxTxgaNUjbDhxGyfsT_I9vem4R1jJfe76cOv4ThXvasXbHlVPAUIPmiUt6rWACt72H2-74gVuFtAsdHAM5gWcn3g5DYNIpuT4CfNHDuDVxcSsodw5u0rXo_9GPNerwKTGj8six5Z8UK6K8b-DdWRLmZuQIEWsj7EGUnhuD01IKnP09odVsvT_aMhR5o9YAU676PIwhw-xTt64vvtBnO3jEgdwNKAJV7jpinVpwiCoAfLw_24dhIWyB0AnAA1JyC404h952RK1ODAQdrnY8WjMVLtGCADdloBrFSqpKPV41miMtjuCAD-WgwMCsgiWRrbU3pIUUwShraClfVJZnNysEUYl-wmLmXZfPHtOOfhLdUgd-VnQmDXlUK9EuWXoM0t4UgYBIdsVSwJs_g5UHeOnEKJDzL240F0yxUjV_T3UO0nYHUdhsOMrn58iEaF2YnR3DyIIGdsJF_v5nm2hcsFKpwy1leC-0Olz=w1920-h733-no"
               alt="Mind Over Matter"></img>
             <div className="carousel-caption d-md-block"></div>
           </div>
