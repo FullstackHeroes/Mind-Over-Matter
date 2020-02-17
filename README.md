@@ -5,4 +5,5 @@ Mind-Over-Matter is a mental health analytics tool that utilizes a custom algori
 Tech Stack: React, Redux, D3, Chart.js, Node.js, Express, PostgreSQL, Face-API, TensorFlow
 
 Deployed: https://mind-over-matter.herokuapp.com/
+
 Github: https://github.com/FullstackHeroes/Mind-Over-Matter
