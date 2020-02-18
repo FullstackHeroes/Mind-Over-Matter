@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import HelpBar from "./global/HelpBar";
 import zipcodes from "zipcodes";
 import axios from "axios";
-import secrets from "../../secrets";
+if (process.env.NODE_ENV !== "production") {
+  require("../../secrets");
+}
 
 class Doctor extends Component {
   constructor() {
@@ -45,7 +47,7 @@ class Doctor extends Component {
 
   getDoctors = async (lat, lon) => {
     const res = await axios.get(
-      `https://api.betterdoctor.com/2016-03-01/doctors?specialty_uid=psychiatrist%2C%20psychologist&location=${lat}%2C${lon}%2C100&user_location=${lat}%2C${lon}&skip=0&limit=10&user_key=${betterDoctorAPIKey}`
+      `https://api.betterdoctor.com/2016-03-01/doctors?specialty_uid=psychiatrist%2C%20psychologist&location=${lat}%2C${lon}%2C100&user_location=${lat}%2C${lon}&skip=0&limit=10&user_key=${process.env.betterDoctorAPIKey}`
     );
     const doctorArr = [];
 
