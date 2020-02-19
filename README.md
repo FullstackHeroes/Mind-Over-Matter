@@ -7,3 +7,5 @@ Tech Stack: React, Redux, D3, Chart.js, Node.js, Express, PostgreSQL, Face-API, 
 Deployed: https://mind-over-matter.herokuapp.com/
 
 Github: https://github.com/FullstackHeroes/Mind-Over-Matter
+
+Youtube: https://www.youtube.com/watch?v=cv-86dIFi20&list=PLx0iOsdUOUmkGPFdAt5kHKxGQw_YseAQI&index=13&t=0s
