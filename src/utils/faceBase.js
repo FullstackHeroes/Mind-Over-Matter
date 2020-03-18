@@ -2,7 +2,8 @@ import * as faceapi from "face-api.js";
 
 export const loadModels = async () => {
   console.log(process.env.NODE_ENV, process.env);
-  const MODEL_URL = process.env.PUBLIC_URL + "/faceModels";
+  // const MODEL_URL = process.env.PUBLIC_URL + "/faceModels";
+  const MODEL_URL = "/faceModels";
   // const MODEL_URL = "/faceModels";
   await faceapi.loadTinyFaceDetectorModel(MODEL_URL);
   await faceapi.loadFaceLandmarkTinyModel(MODEL_URL);
