@@ -1,38 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { CSVLink } from "react-csv";
-import { setFullScoreObj } from "../../store";
 import TableRow from "./TableRow";
 import HelpBar from "../global/HelpBar";
 
 class Table extends Component {
-  // componentDidMount() {
-  //   console.log("MOUNTING?!", this.props);
-  //   const { user } = this.props;
-  //   if (user && user.id) this.props.setFullScoreObj(user.id);
-  // }
-
-  // componentDidUpdate(prevProps) {
-  //   const { fullScoreObj, user } = this.props;
-  //   console.log("UPDATE -", fullScoreObj.length, prevProps.fullScoreObj.length);
-  //   if (fullScoreObj.length !== prevProps.fullScoreObj.length) {
-  //     this.props.setFullScoreObj(user.id);
-  //   }
-  // }
-
-  // shouldComponentUpdate() {
-  //   console.log("SHOULD UPDATE", this.props);
-  //   return true;
-  // }
-
-  // componentDidUpdate(prevProps) {
-  //   console.log(
-  //     "DID UPDATE",
-  //     this.props.fullScoreObj.length,
-  //     prevProps.fullScoreObj.length
-  //   );
-  // }
-
   render() {
     const { fullScoreObj, user } = this.props,
       nameArr = user.name ? user.name.split(" ") : [],
@@ -122,10 +94,4 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setFullScoreObj: userId => dispatch(setFullScoreObj(userId))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Table);
+export default connect(mapStateToProps)(Table);
