@@ -7,8 +7,11 @@ export const loadModels = async () => {
     process.env.PUBLIC_URL,
     process.env,
     process,
+    "PATH",
     path,
-    __dirname
+    __dirname,
+    "LAST",
+    path.join(__dirname, "../public")
   );
   // const MODEL_URL = process.env.PUBLIC_URL + "/faceModels";
   // const MODEL_URL = "/faceModels";
