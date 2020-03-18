@@ -21,11 +21,12 @@ class Routes extends Component {
     return (
       <Switch>
         <Route exact path="/" component={Homepage} />
-        <Route path="/Dashboard" component={Dashboard} />
-        <Route path="/Table" component={Table} />
-        <Route path="/Doctor" component={Doctor} />
-        <Route path="/Article" component={ArticleList} />
+        <Route exact path="/Dashboard" component={Dashboard} />
+        <Route exact path="/Table" component={Table} />
+        <Route exact path="/Doctor" component={Doctor} />
+        <Route exact path="/Article" component={ArticleList} />
         <Route
+          exact
           path="/SignIn"
           render={() => (
             <div className="signInFullDiv">
@@ -39,16 +40,10 @@ class Routes extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    user: state.user
-  };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     loadInitial: () => dispatch(me())
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Routes));
+export default withRouter(connect(null, mapDispatchToProps)(Routes));

@@ -211,12 +211,12 @@ export const setFullScoreObj = userId => {
   };
 };
 
-export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
+export const postFullScoreObj = (oldFullScoreObj, newScoreObj) => {
   return async dispatch => {
     try {
       // CALCULATING NORMALIZE AND RUNNING SCORE WITH UTILITY FUNCTIONS
-      const normalizeScore = calcNormalizeUtility(fullScoreObj),
-        runningScore = calcWeightedTrueScore(fullScoreObj),
+      const normalizeScore = calcNormalizeUtility(oldFullScoreObj),
+        runningScore = calcWeightedTrueScore(oldFullScoreObj),
         sentimentDiff = calcSentimentDiff(runningScore, normalizeScore);
 
       // APPENDING NEW SCORES ONTO OBJECT FOR DB
@@ -227,7 +227,8 @@ export const postFullScoreObj = (fullScoreObj, newScoreObj) => {
       await axios.post(`/api/weightedScore`, newScoreObj);
 
       newScoreObj.timeStamp = newScoreObj.timeStamp.toISOString();
-      fullScoreObj.reverse().push(newScoreObj);
+      const fullScoreObj = oldFullScoreObj.slice().reverse();
+      fullScoreObj.push(newScoreObj);
 
       const {
         normalizeScoreArr,

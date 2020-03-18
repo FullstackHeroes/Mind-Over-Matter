@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setFullScoreObj } from "../../store";
 
 import ChartRSLine from "../chart/ChartRSLine";
 import ChartTSLine from "../chart/ChartTSLine";
@@ -41,6 +40,7 @@ class Dashboard extends Component {
           <div className="dashboardRowOne dashboardRow">
             <div className="dashboardTable">
               <ScreenTimeToday todaysScreenHours={todaysScreenMins} />
+
               <ScreenTimeYesterday
                 yesterdaysScreenHours={yesterdaysScreenMins}
               />
@@ -142,10 +142,4 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setFullScoreObj: userId => dispatch(setFullScoreObj(userId))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps)(Dashboard);
