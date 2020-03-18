@@ -29,8 +29,10 @@ class App extends Component {
             detected={detected}
           />
         ) : null}
+
         <div className="manilaContainer">
           <ManilaTabVisible />
+
           <div className="appInsideDiv">
             {user && user.id ? <VideoInput /> : null}
 

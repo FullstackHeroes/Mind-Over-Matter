@@ -6,17 +6,32 @@ import TableRow from "./TableRow";
 import HelpBar from "../global/HelpBar";
 
 class Table extends Component {
-  async componentDidMount() {
-    const { user } = this.props;
-    if (user && user.id) this.props.setFullScoreObj(user.id);
-  }
+  // componentDidMount() {
+  //   console.log("MOUNTING?!", this.props);
+  //   const { user } = this.props;
+  //   if (user && user.id) this.props.setFullScoreObj(user.id);
+  // }
 
-  componentDidUpdate(prevProps) {
-    const { fullScoreObj, user } = this.props;
-    if (fullScoreObj.length !== prevProps.fullScoreObj.length) {
-      this.props.setFullScoreObj(user.id);
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   const { fullScoreObj, user } = this.props;
+  //   console.log("UPDATE -", fullScoreObj.length, prevProps.fullScoreObj.length);
+  //   if (fullScoreObj.length !== prevProps.fullScoreObj.length) {
+  //     this.props.setFullScoreObj(user.id);
+  //   }
+  // }
+
+  // shouldComponentUpdate() {
+  //   console.log("SHOULD UPDATE", this.props);
+  //   return true;
+  // }
+
+  // componentDidUpdate(prevProps) {
+  //   console.log(
+  //     "DID UPDATE",
+  //     this.props.fullScoreObj.length,
+  //     prevProps.fullScoreObj.length
+  //   );
+  // }
 
   render() {
     const { fullScoreObj, user } = this.props,
@@ -93,6 +108,7 @@ class Table extends Component {
             </button>
           </div>
         ) : null}
+
         <HelpBar />
       </div>
     );
