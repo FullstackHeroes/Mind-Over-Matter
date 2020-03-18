@@ -7,7 +7,7 @@ export const loadModels = async () => {
   // const MODEL_URL = "/faceModels";
   let MODEL_URL;
   if (process.env.NODE_ENV === "development") MODEL_URL = "/faceModels";
-  else MODEL_URL = process + "/faceModels";
+  else MODEL_URL = "/faceModels";
 
   await faceapi.loadTinyFaceDetectorModel(MODEL_URL);
   await faceapi.loadFaceLandmarkTinyModel(MODEL_URL);
