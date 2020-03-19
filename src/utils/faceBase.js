@@ -3,31 +3,11 @@ import * as path from "path";
 
 export const loadModels = async () => {
   try {
-    console.log(
-      process.env.NODE_ENV,
-      process.env.PUBLIC_URL + "/faceModels",
-      process,
-      "PATH",
-      path,
-      __dirname,
-      "LAST",
-      path.join(__dirname, "faceModels")
-    );
-
-    // const MODEL_URL = process.env.PUBLIC_URL + "/faceModels";
-    // const MODEL_URL = "/faceModels";
-    // const MODEL_URL = "/faceModels";
-
     let MODEL_URL;
     if (process.env.NODE_ENV === "development") MODEL_URL = "/faceModels";
-    // else MODEL_URL = path.join(__dirname, "../public/faceModels");
-    else MODEL_URL = path.join(__dirname, "public/faceModels");
+    // else MODEL_URL = path.join(__dirname, "public/faceModels");
+    else MODEL_URL = "/faceModels";
 
-    console.log(MODEL_URL);
-
-    // await faceapi.nets.ssdMobilenetv1.loadFromDisk(
-    //   path.join(__dirname, "faceModels")
-    // );
     await faceapi.loadTinyFaceDetectorModel(MODEL_URL);
     await faceapi.loadFaceLandmarkTinyModel(MODEL_URL);
     await faceapi.loadFaceRecognitionModel(MODEL_URL);
