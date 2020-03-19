@@ -20,6 +20,8 @@ export const loadModels = async () => {
   if (process.env.NODE_ENV === "development") MODEL_URL = "/faceModels";
   else MODEL_URL = __dirname + "../faceModels";
 
+  console.log(MODEL_URL);
+
   await faceapi.loadTinyFaceDetectorModel(MODEL_URL);
   await faceapi.loadFaceLandmarkTinyModel(MODEL_URL);
   await faceapi.loadFaceRecognitionModel(MODEL_URL);
