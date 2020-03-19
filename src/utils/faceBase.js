@@ -2,30 +2,37 @@ import * as faceapi from "face-api.js";
 import * as path from "path";
 
 export const loadModels = async () => {
-  console.log(
-    process.env.NODE_ENV,
-    process.env.PUBLIC_URL,
-    process.env,
-    process,
-    "PATH",
-    path,
-    __dirname,
-    "LAST",
-    path.join(__dirname, "../public/faceModels")
-  );
-  // const MODEL_URL = process.env.PUBLIC_URL + "/faceModels";
-  // const MODEL_URL = "/faceModels";
-  // const MODEL_URL = "/faceModels";
-  let MODEL_URL;
-  if (process.env.NODE_ENV === "development") MODEL_URL = "/faceModels";
-  else MODEL_URL = path.join(__dirname, "../public/faceModels");
+  try {
+    console.log(
+      process.env.NODE_ENV,
+      process.env.PUBLIC_URL,
+      process.env,
+      process,
+      "PATH",
+      path,
+      __dirname,
+      "LAST",
+      path.join(__dirname, "../public/faceModels")
+    );
 
-  console.log(MODEL_URL);
+    // const MODEL_URL = process.env.PUBLIC_URL + "/faceModels";
+    // const MODEL_URL = "/faceModels";
+    // const MODEL_URL = "/faceModels";
 
-  await faceapi.loadTinyFaceDetectorModel(MODEL_URL);
-  await faceapi.loadFaceLandmarkTinyModel(MODEL_URL);
-  await faceapi.loadFaceRecognitionModel(MODEL_URL);
-  await faceapi.loadFaceExpressionModel(MODEL_URL);
+    let MODEL_URL;
+    if (process.env.NODE_ENV === "development") MODEL_URL = "/faceModels";
+    // else MODEL_URL = path.join(__dirname, "../public/faceModels");
+    else MODEL_URL = path.join(__dirname, "../faceModels");
+
+    console.log(MODEL_URL);
+
+    await faceapi.loadTinyFaceDetectorModel(MODEL_URL);
+    await faceapi.loadFaceLandmarkTinyModel(MODEL_URL);
+    await faceapi.loadFaceRecognitionModel(MODEL_URL);
+    await faceapi.loadFaceExpressionModel(MODEL_URL);
+  } catch (error) {
+    console.error("Model Loading -", error);
+  }
 };
 
 export const getFaceDescr = async (blob, inputSize = 512) => {
