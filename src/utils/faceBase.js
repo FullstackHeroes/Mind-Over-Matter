@@ -21,17 +21,17 @@ export const loadModels = async () => {
     let MODEL_URL;
     if (process.env.NODE_ENV === "development") MODEL_URL = "/faceModels";
     // else MODEL_URL = path.join(__dirname, "../public/faceModels");
-    else MODEL_URL = path.join(__dirname, "./faceModels");
+    else MODEL_URL = path.join(__dirname, "faceModels");
 
     console.log(MODEL_URL);
 
-    await faceapi.nets.ssdMobilenetv1.loadFromDisk(
-      path.join(__dirname, "faceModels")
-    );
-    // await faceapi.loadTinyFaceDetectorModel(MODEL_URL);
-    // await faceapi.loadFaceLandmarkTinyModel(MODEL_URL);
-    // await faceapi.loadFaceRecognitionModel(MODEL_URL);
-    // await faceapi.loadFaceExpressionModel(MODEL_URL);
+    // await faceapi.nets.ssdMobilenetv1.loadFromDisk(
+    //   path.join(__dirname, "faceModels")
+    // );
+    await faceapi.loadTinyFaceDetectorModel(MODEL_URL);
+    await faceapi.loadFaceLandmarkTinyModel(MODEL_URL);
+    await faceapi.loadFaceRecognitionModel(MODEL_URL);
+    await faceapi.loadFaceExpressionModel(MODEL_URL);
   } catch (error) {
     console.error("Model Loading -", error);
   }
