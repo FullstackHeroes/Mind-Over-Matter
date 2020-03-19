@@ -11,14 +11,14 @@ export const loadModels = async () => {
     path,
     __dirname,
     "LAST",
-    path.join(__dirname, "../faceModels")
+    path.join(__dirname, "../public/faceModels")
   );
   // const MODEL_URL = process.env.PUBLIC_URL + "/faceModels";
   // const MODEL_URL = "/faceModels";
   // const MODEL_URL = "/faceModels";
   let MODEL_URL;
   if (process.env.NODE_ENV === "development") MODEL_URL = "/faceModels";
-  else MODEL_URL = path.join(__dirname, "../faceModels");
+  else MODEL_URL = path.join(__dirname, "../public/faceModels");
 
   console.log(MODEL_URL);
 
