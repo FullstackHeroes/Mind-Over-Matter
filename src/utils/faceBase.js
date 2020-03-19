@@ -21,7 +21,7 @@ export const loadModels = async () => {
     let MODEL_URL;
     if (process.env.NODE_ENV === "development") MODEL_URL = "/faceModels";
     // else MODEL_URL = path.join(__dirname, "../public/faceModels");
-    else MODEL_URL = path.join(__dirname, "faceModels");
+    else MODEL_URL = path.join(__dirname, "public/faceModels");
 
     console.log(MODEL_URL);
 
