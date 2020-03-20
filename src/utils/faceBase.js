@@ -26,6 +26,8 @@ export const getFaceDescr = async (blob, inputSize = 512) => {
   });
   const useTinyModel = true;
 
+  console.log("BLOB -", blob);
+
   // FETCH IMAGE FROM API
   const img = await faceapi.fetchImage(blob);
 
