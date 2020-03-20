@@ -1,12 +1,8 @@
 import * as faceapi from "face-api.js";
-import * as path from "path";
 
 export const loadModels = async () => {
   try {
-    let MODEL_URL;
-    if (process.env.NODE_ENV === "development") MODEL_URL = "/faceModels";
-    // else MODEL_URL = path.join(__dirname, "public/faceModels");
-    else MODEL_URL = "/faceModels";
+    const MODEL_URL = "/faceModels";
 
     await faceapi.loadTinyFaceDetectorModel(MODEL_URL);
     await faceapi.loadFaceLandmarkTinyModel(MODEL_URL);
@@ -25,8 +21,6 @@ export const getFaceDescr = async (blob, inputSize = 512) => {
     scoreThreshold
   });
   const useTinyModel = true;
-
-  console.log("BLOB -", blob);
 
   // FETCH IMAGE FROM API
   const img = await faceapi.fetchImage(blob);
