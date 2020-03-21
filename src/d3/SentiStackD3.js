@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 import { emotions, d3Height, d3Width } from "../utils/utilities";
 
-const MARGIN = { TOP: 10, BOTTOM: 80, LEFT: 70, RIGHT: 140 };
+const MARGIN = { TOP: 10, BOTTOM: 80, LEFT: 70, RIGHT: 165 };
 const WIDTH = d3Width + 70 - MARGIN.LEFT - MARGIN.RIGHT;
 const HEIGHT = d3Height - MARGIN.TOP - MARGIN.BOTTOM;
 
