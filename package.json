@@ -83,7 +83,7 @@
     "redux-thunk": "^2.3.0",
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
-    "sequelize": "^5.21.3",
+    "sequelize": "^6.28.2",
     "tools": "0.0.0",
     "zipcodes": "^8.0.0"
   },
