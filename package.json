@@ -59,7 +59,7 @@
     "json-loader": "^0.5.7",
     "lodash": "^4.17.21",
     "morgan": "^1.9.1",
-    "npm": "^6.13.7",
+    "npm": "^9.7.2",
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
     "path": "^0.12.7",
