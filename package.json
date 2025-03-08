@@ -36,7 +36,7 @@
     ]
   },
   "dependencies": {
-    "axios": "^0.21.2",
+    "axios": "^1.8.2",
     "bootstrap": "^4.4.1",
     "canvas": "^2.6.1",
     "chalk": "^3.0.0",
