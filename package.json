@@ -60,7 +60,7 @@
     "lodash": "^4.17.21",
     "morgan": "^1.9.1",
     "npm": "^9.7.2",
-    "passport": "^0.4.1",
+    "passport": "^0.6.0",
     "passport-google-oauth": "^2.0.0",
     "path": "^0.12.7",
     "pg": "^7.18.1",
